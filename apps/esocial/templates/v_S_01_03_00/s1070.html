@@ -1,0 +1,1105 @@
+
+{% load esocial_custom_tags %}
+{% with evtTabProcesso=original.evento_json|readjson:'evtTabProcesso' %}
+<form id="form_json">
+
+<div class="row">
+
+<div id="evtTabProcesso__div">
+    <div class="col-md-12">
+        <h4>Evento Tabela de Processos Administrativos/Judiciais.
+Regras de validação:
+REGRA_ENVIO_PROC_FECHAMENTO
+REGRA_EXISTE_INFO_EMPREGADOR
+REGRA_PERMITE_ALT_EXCL_CODSUSP
+REGRA_TABGERAL_ALTERACAO_PERIODO_CONFLITANTE
+REGRA_TABGERAL_EXISTE_REGISTRO_ALTERADO
+REGRA_TABGERAL_EXISTE_REGISTRO_EXCLUIDO
+REGRA_TABGERAL_INCLUSAO_PERIODO_CONFLITANTE
+REGRA_TAB_PERMITE_EXCLUSAO
+REGRA_VALIDA_DT_FUTURA
+REGRA_VALIDA_PROCESSO</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideEvento__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do evento.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpAmb__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Identificação do ambiente</label>
+            <select name="[evtTabProcesso][ideEvento][tpAmb]" id="evtTabProcesso__ideEvento__id__tpAmb_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpamb 1 %}selected{% endifequal %}>1 - Produção</option>
+                <option value="2" {% ifequal original.tpamb 2 %}selected{% endifequal %}>2 - Produção restrita.</option>
+            </select>
+            <input type="hidden" name="[evtTabProcesso][ideEvento][tpAmb]" id="evtTabProcesso__ideEvento__id__tpAmb" value="{{original.tpamb}}">
+        </div>
+    </div>
+</div>
+<div id="procEmi__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Processo de emissão do evento</label>
+            <select name="[evtTabProcesso][ideEvento][procEmi]" id="evtTabProcesso__ideEvento__id__procEmi_disabled" disabled="">
+                <option value="1" {% ifequal original.procemi 1 %}selected{% endifequal %}>1 - Aplicativo do empregador</option>
+                <option value="2" {% ifequal original.procemi 2 %}selected{% endifequal %}>2 - Aplicativo governamental - Empregador Doméstico</option>
+                <option value="3" {% ifequal original.procemi 3 %}selected{% endifequal %}>3 - Aplicativo governamental - Web Geral</option>
+                <option value="4" {% ifequal original.procemi 4 %}selected{% endifequal %}>4 - Aplicativo governamental - Simplificado Pessoa Jurídica</option>
+                <option value="5" {% ifequal original.procemi 5 %}selected{% endifequal %}>5 - Aplicativo governamental - Segurado Especial.</option>
+            </select>
+            <input type="hidden" name="[evtTabProcesso][ideEvento][procEmi]" id="evtTabProcesso__ideEvento__id__procEmi" value="{{original.procemi}}">
+        </div>
+    </div>
+</div>
+<div id="verProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Versão do processo de emissão do evento</label>
+            <input type="text" name="[evtTabProcesso][ideEvento][verProc]" value="{{original.verproc}}" class="vTextField" maxlength="20" id="evtTabProcesso__ideEvento__id__verProc_disabled" disabled="">
+            <input type="hidden" name="[evtTabProcesso][ideEvento][verProc]" id="evtTabProcesso__ideEvento__id__verProc" value="{{original.verproc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideEmpregador__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do empregador.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Preencher com o código correspondente ao tipo de inscrição</label>
+            <select name="[evtTabProcesso][ideEmpregador][tpInsc]" id="evtTabProcesso__ideEmpregador__id__tpInsc_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpinsc 1 %}selected{% endifequal %}>1 - CNPJ</option>
+                <option value="2" {% ifequal original.tpinsc 2 %}selected{% endifequal %}>2 - CPF</option>
+                <option value="3" {% ifequal original.tpinsc 3 %}selected{% endifequal %}>3 - CAEPF (Cadastro de Atividade Econômica de Pessoa Física)</option>
+                <option value="4" {% ifequal original.tpinsc 4 %}selected{% endifequal %}>4 - CNO (Cadastro Nacional de Obra)</option>
+                <option value="5" {% ifequal original.tpinsc 5 %}selected{% endifequal %}>5 - CGC</option>
+                <option value="6" {% ifequal original.tpinsc 6 %}selected{% endifequal %}>6 - CEI</option>
+            </select>
+            <input type="hidden" name="[evtTabProcesso][ideEmpregador][tpInsc]" id="evtTabProcesso__ideEmpregador__id__tpInsc" value="{{original.tpinsc}}">
+        </div>
+    </div>
+</div>
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000</label>
+            <input type="text" id="evtTabProcesso__ideEmpregador__id__nrInsc_disabled" name="[evtTabProcesso][ideEmpregador][nrInsc]" value="{{original.nrinsc}}" class="vTextField" maxlength="15" disabled="">
+            <input type="hidden" name="[evtTabProcesso][ideEmpregador][nrInsc]" id="evtTabProcesso__ideEmpregador__id__nrInsc" value="{{original.nrinsc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="infoProcesso__div">
+    <div class="col-md-12">
+        <h4>Informações do processo.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="inclusao__div">
+    <div class="col-md-12">
+        <h4>Inclusão de novas informações.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideProcesso__div">
+    <div class="col-md-12">
+        <h4>Identificação do processo e período de validade das informações.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de processo<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de processo.
+Valores válidos:
+1 - Administrativo
+2 - Judicial
+4 - Processo FAP de exercício anterior a 2019"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabProcesso__infoProcesso__inclusao__ideProcesso__id__tpProc" name="[evtTabProcesso][infoProcesso][inclusao][ideProcesso][tpProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTabProcesso|readjson:'infoProcesso.inclusao.ideProcesso.tpProc'|to_str '1' %}selected{% endifequal %}>1 - Administrativo</option><option value='2' {% ifequal evtTabProcesso|readjson:'infoProcesso.inclusao.ideProcesso.tpProc'|to_str '2' %}selected{% endifequal %}>2 - Judicial</option><option value='4' {% ifequal evtTabProcesso|readjson:'infoProcesso.inclusao.ideProcesso.tpProc'|to_str '4' %}selected{% endifequal %}>4 - Processo FAP de exercício anterior a 2019</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar o número do processo administrativo/judicial de acordo com o tipo informado em tpProc.
+Validação: Deve ser um número de processo válido e:
+a) Se tpProc = [1], deve possuir 17 (dezessete) ou 21 (vinte e um) algarismos;
+b) Se tpProc = [2], deve possuir 20 (vinte) algarismos;
+c) Se tpProc = [4], deve possuir 16 (dezesseis) algarismos."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__inclusao__ideProcesso__id__nrProc" maxlength="21" value="{{evtTabProcesso|readjson:'infoProcesso.inclusao.ideProcesso.nrProc'}}" name="[evtTabProcesso][infoProcesso][inclusao][ideProcesso][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="iniValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de início da validade das informações prestadas no evento<a data-toggle="tooltip" title="Preencher com o mês e ano de início da validade das informações prestadas no evento, no formato AAAA-MM.
+Validação: Deve ser uma data válida, igual ou posterior à data de início de obrigatoriedade deste evento para o empregador no eSocial, no formato AAAA-MM."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__inclusao__ideProcesso__id__iniValid" maxlength="7" value="{{evtTabProcesso|readjson:'infoProcesso.inclusao.ideProcesso.iniValid'}}" name="[evtTabProcesso][infoProcesso][inclusao][ideProcesso][iniValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fimValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de término da validade das informações<a data-toggle="tooltip" title="Preencher com o mês e ano de término da validade das informações, se houver.
+Validação: Se informado, deve estar no formato AAAA-MM e ser um período igual ou posterior a iniValid."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__inclusao__ideProcesso__id__fimValid" maxlength="7" value="{{evtTabProcesso|readjson:'infoProcesso.inclusao.ideProcesso.fimValid'}}" name="[evtTabProcesso][infoProcesso][inclusao][ideProcesso][fimValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="dadosProc__div">
+    <div class="col-md-12">
+        <h4>Dados do processo.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="indAutoria__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo da autoria da ação judicial<a data-toggle="tooltip" title="Indicativo da autoria da ação judicial.
+Valores válidos:
+1 - Próprio contribuinte
+2 - Outra entidade, empresa ou empregado
+Validação: Preenchimento obrigatório se tpProc = [2]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabProcesso__infoProcesso__inclusao__dadosProc__id__indAutoria" name="[evtTabProcesso][infoProcesso][inclusao][dadosProc][indAutoria]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTabProcesso|readjson:'infoProcesso.inclusao.dadosProc.indAutoria'|to_str '1' %}selected{% endifequal %}>1 - Próprio contribuinte</option><option value='2' {% ifequal evtTabProcesso|readjson:'infoProcesso.inclusao.dadosProc.indAutoria'|to_str '2' %}selected{% endifequal %}>2 - Outra entidade, empresa ou empregado</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="indMatProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo da matéria do processo<a data-toggle="tooltip" title="Indicativo da matéria do processo.
+Valores válidos:
+1 - Exclusivamente tributária ou tributária e FGTS
+7 - Exclusivamente FGTS e/ou Contribuição Social Rescisória (Lei Complementar 110/2001)"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabProcesso__infoProcesso__inclusao__dadosProc__id__indMatProc" name="[evtTabProcesso][infoProcesso][inclusao][dadosProc][indMatProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTabProcesso|readjson:'infoProcesso.inclusao.dadosProc.indMatProc'|to_str '1' %}selected{% endifequal %}>1 - Exclusivamente tributária ou tributária e FGTS</option><option value='7' {% ifequal evtTabProcesso|readjson:'infoProcesso.inclusao.dadosProc.indMatProc'|to_str '7' %}selected{% endifequal %}>7 - Exclusivamente FGTS e/ou Contribuição Social Rescisória (Lei Complementar 110/2001)</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="observacao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Observação relevante sobre o desligamento do trabalhador<a data-toggle="tooltip" title="Observações relacionadas ao processo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__inclusao__dadosProc__id__observacao" maxlength="255" value="{{evtTabProcesso|readjson:'infoProcesso.inclusao.dadosProc.observacao'}}" name="[evtTabProcesso][infoProcesso][inclusao][dadosProc][observacao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dadosProcJud__div">
+    <div class="col-md-12">
+        <h4>Informações complementares do processo judicial.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ufVara__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com a sigla da Unidade da Federação onde está localizada a Vara em que o processo tramitou<a data-toggle="tooltip" title="Identificação da Unidade da Federação - UF da Seção Judiciária.
+Valores válidos: AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT, MS, MG, PA, PB, PR, PE, PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__inclusao__dadosProc__dadosProcJud__id__ufVara" maxlength="2" value="{{evtTabProcesso|readjson:'infoProcesso.inclusao.dadosProc.dadosProcJud.ufVara'}}" name="[evtTabProcesso][infoProcesso][inclusao][dadosProc][dadosProcJud][ufVara]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codMunic__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código do município<a data-toggle="tooltip" title="Preencher com o código do município, conforme tabela do IBGE.
+Validação: Deve ser um código válido e existente na tabela do IBGE."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__inclusao__dadosProc__dadosProcJud__id__codMunic" maxlength="7" value="{{evtTabProcesso|readjson:'infoProcesso.inclusao.dadosProc.dadosProcJud.codMunic'}}" name="[evtTabProcesso][infoProcesso][inclusao][dadosProc][dadosProcJud][codMunic]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="idVara__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de identificação da Vara em que o processo tramitou<a data-toggle="tooltip" title="Código de identificação da Vara."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__inclusao__dadosProc__dadosProcJud__id__idVara" maxlength="4" value="{{evtTabProcesso|readjson:'infoProcesso.inclusao.dadosProc.dadosProcJud.idVara'}}" name="[evtTabProcesso][infoProcesso][inclusao][dadosProc][dadosProcJud][idVara]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% for infoSusp in evtTabProcesso|readjson:'infoProcesso.inclusao.dadosProc.infoSusp' %}
+<div id="infoSusp__div">
+    <div class="col-md-12">
+        <h4>Informações de suspensão de exigibilidade de tributos em virtude de processo administrativo ou judicial.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__inclusao__dadosProc__infoSusp__id__codSusp" maxlength="14" value="{{infoSusp|readjson:'codSusp'}}" name="[evtTabProcesso][infoProcesso][inclusao][dadosProc][infoSusp][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de suspensão da exigibilidade<a data-toggle="tooltip" title="Indicativo de suspensão da exigibilidade.
+Valores válidos:
+01 - Liminar em mandado de segurança
+02 - Depósito judicial do montante integral
+03 - Depósito administrativo do montante integral
+04 - Antecipação de tutela
+05 - Liminar em medida cautelar
+08 - Sentença em mandado de segurança favorável ao contribuinte
+09 - Sentença em ação ordinária favorável ao contribuinte e confirmada pelo TRF
+10 - Acórdão do TRF favorável ao contribuinte
+11 - Acórdão do STJ em recurso especial favorável ao contribuinte
+12 - Acórdão do STF em recurso extraordinário favorável ao contribuinte
+13 - Sentença 1ª instância não transitada em julgado com efeito suspensivo
+14 - Contestação administrativa FAP
+90 - Decisão definitiva a favor do contribuinte
+92 - Sem suspensão da exigibilidade
+Validação: Se tpProc = [1], deve ser preenchido com [03, 14, 92].
+Se tpProc = [2], deve ser preenchido com [01, 02, 04, 05, 08, 09, 10, 11, 12, 13, 90, 92].
+Se tpProc = [4], deve ser preenchido com [14]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabProcesso__infoProcesso__inclusao__dadosProc__infoSusp__id__indSusp" name="[evtTabProcesso][infoProcesso][inclusao][dadosProc][infoSusp][][indSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='01' {% ifequal infoSusp|readjson:'indSusp'|to_str '01' %}selected{% endifequal %}>01 - Liminar em mandado de segurança</option><option value='02' {% ifequal infoSusp|readjson:'indSusp'|to_str '02' %}selected{% endifequal %}>02 - Depósito judicial do montante integral</option><option value='03' {% ifequal infoSusp|readjson:'indSusp'|to_str '03' %}selected{% endifequal %}>03 - Depósito administrativo do montante integral</option><option value='04' {% ifequal infoSusp|readjson:'indSusp'|to_str '04' %}selected{% endifequal %}>04 - Antecipação de tutela</option><option value='05' {% ifequal infoSusp|readjson:'indSusp'|to_str '05' %}selected{% endifequal %}>05 - Liminar em medida cautelar</option><option value='08' {% ifequal infoSusp|readjson:'indSusp'|to_str '08' %}selected{% endifequal %}>08 - Sentença em mandado de segurança favorável ao contribuinte</option><option value='09' {% ifequal infoSusp|readjson:'indSusp'|to_str '09' %}selected{% endifequal %}>09 - Sentença em ação ordinária favorável ao contribuinte e confirmada pelo TRF</option><option value='10' {% ifequal infoSusp|readjson:'indSusp'|to_str '10' %}selected{% endifequal %}>10 - Acórdão do TRF favorável ao contribuinte</option><option value='11' {% ifequal infoSusp|readjson:'indSusp'|to_str '11' %}selected{% endifequal %}>11 - Acórdão do STJ em recurso especial favorável ao contribuinte</option><option value='12' {% ifequal infoSusp|readjson:'indSusp'|to_str '12' %}selected{% endifequal %}>12 - Acórdão do STF em recurso extraordinário favorável ao contribuinte</option><option value='13' {% ifequal infoSusp|readjson:'indSusp'|to_str '13' %}selected{% endifequal %}>13 - Sentença 1ª instância não transitada em julgado com efeito suspensivo</option><option value='14' {% ifequal infoSusp|readjson:'indSusp'|to_str '14' %}selected{% endifequal %}>14 - Contestação administrativa FAP</option><option value='90' {% ifequal infoSusp|readjson:'indSusp'|to_str '90' %}selected{% endifequal %}>90 - Decisão definitiva a favor do contribuinte</option><option value='92' {% ifequal infoSusp|readjson:'indSusp'|to_str '92' %}selected{% endifequal %}>92 - Sem suspensão da exigibilidade</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="dtDecisao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Data da decisão<a data-toggle="tooltip" title="Data da decisão, sentença ou despacho administrativo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__inclusao__dadosProc__infoSusp__id__dtDecisao" value="{{infoSusp|readjson:'dtDecisao'}}" name="[evtTabProcesso][infoProcesso][inclusao][dadosProc][infoSusp][][dtDecisao]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indDeposito__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de depósito do montante integral<a data-toggle="tooltip" title="Indicativo de depósito do montante integral.
+Valores válidos:
+S - Sim
+N - Não
+Validação: Se indSusp = [90], preencher obrigatoriamente com [N].
+Se indSusp = [02, 03] preencher obrigatoriamente com [S]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabProcesso__infoProcesso__inclusao__dadosProc__infoSusp__id__indDeposito" name="[evtTabProcesso][infoProcesso][inclusao][dadosProc][infoSusp][][indDeposito]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='S' {% ifequal infoSusp|readjson:'indDeposito'|to_str 'S' %}selected{% endifequal %}>S - Sim</option><option value='N' {% ifequal infoSusp|readjson:'indDeposito'|to_str 'N' %}selected{% endifequal %}>N - Não</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="infoSusp__div">
+    <div class="col-md-12">
+        <h4>Informações de suspensão de exigibilidade de tributos em virtude de processo administrativo ou judicial.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__inclusao__dadosProc__infoSusp__id__codSusp" maxlength="14" value="{{infoSusp|readjson:'codSusp'}}" name="[evtTabProcesso][infoProcesso][inclusao][dadosProc][infoSusp][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de suspensão da exigibilidade<a data-toggle="tooltip" title="Indicativo de suspensão da exigibilidade.
+Valores válidos:
+01 - Liminar em mandado de segurança
+02 - Depósito judicial do montante integral
+03 - Depósito administrativo do montante integral
+04 - Antecipação de tutela
+05 - Liminar em medida cautelar
+08 - Sentença em mandado de segurança favorável ao contribuinte
+09 - Sentença em ação ordinária favorável ao contribuinte e confirmada pelo TRF
+10 - Acórdão do TRF favorável ao contribuinte
+11 - Acórdão do STJ em recurso especial favorável ao contribuinte
+12 - Acórdão do STF em recurso extraordinário favorável ao contribuinte
+13 - Sentença 1ª instância não transitada em julgado com efeito suspensivo
+14 - Contestação administrativa FAP
+90 - Decisão definitiva a favor do contribuinte
+92 - Sem suspensão da exigibilidade
+Validação: Se tpProc = [1], deve ser preenchido com [03, 14, 92].
+Se tpProc = [2], deve ser preenchido com [01, 02, 04, 05, 08, 09, 10, 11, 12, 13, 90, 92].
+Se tpProc = [4], deve ser preenchido com [14]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabProcesso__infoProcesso__inclusao__dadosProc__infoSusp__id__indSusp" name="[evtTabProcesso][infoProcesso][inclusao][dadosProc][infoSusp][][indSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='01' {% ifequal infoSusp|readjson:'indSusp'|to_str '01' %}selected{% endifequal %}>01 - Liminar em mandado de segurança</option><option value='02' {% ifequal infoSusp|readjson:'indSusp'|to_str '02' %}selected{% endifequal %}>02 - Depósito judicial do montante integral</option><option value='03' {% ifequal infoSusp|readjson:'indSusp'|to_str '03' %}selected{% endifequal %}>03 - Depósito administrativo do montante integral</option><option value='04' {% ifequal infoSusp|readjson:'indSusp'|to_str '04' %}selected{% endifequal %}>04 - Antecipação de tutela</option><option value='05' {% ifequal infoSusp|readjson:'indSusp'|to_str '05' %}selected{% endifequal %}>05 - Liminar em medida cautelar</option><option value='08' {% ifequal infoSusp|readjson:'indSusp'|to_str '08' %}selected{% endifequal %}>08 - Sentença em mandado de segurança favorável ao contribuinte</option><option value='09' {% ifequal infoSusp|readjson:'indSusp'|to_str '09' %}selected{% endifequal %}>09 - Sentença em ação ordinária favorável ao contribuinte e confirmada pelo TRF</option><option value='10' {% ifequal infoSusp|readjson:'indSusp'|to_str '10' %}selected{% endifequal %}>10 - Acórdão do TRF favorável ao contribuinte</option><option value='11' {% ifequal infoSusp|readjson:'indSusp'|to_str '11' %}selected{% endifequal %}>11 - Acórdão do STJ em recurso especial favorável ao contribuinte</option><option value='12' {% ifequal infoSusp|readjson:'indSusp'|to_str '12' %}selected{% endifequal %}>12 - Acórdão do STF em recurso extraordinário favorável ao contribuinte</option><option value='13' {% ifequal infoSusp|readjson:'indSusp'|to_str '13' %}selected{% endifequal %}>13 - Sentença 1ª instância não transitada em julgado com efeito suspensivo</option><option value='14' {% ifequal infoSusp|readjson:'indSusp'|to_str '14' %}selected{% endifequal %}>14 - Contestação administrativa FAP</option><option value='90' {% ifequal infoSusp|readjson:'indSusp'|to_str '90' %}selected{% endifequal %}>90 - Decisão definitiva a favor do contribuinte</option><option value='92' {% ifequal infoSusp|readjson:'indSusp'|to_str '92' %}selected{% endifequal %}>92 - Sem suspensão da exigibilidade</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="dtDecisao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Data da decisão<a data-toggle="tooltip" title="Data da decisão, sentença ou despacho administrativo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__inclusao__dadosProc__infoSusp__id__dtDecisao" value="{{infoSusp|readjson:'dtDecisao'}}" name="[evtTabProcesso][infoProcesso][inclusao][dadosProc][infoSusp][][dtDecisao]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indDeposito__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de depósito do montante integral<a data-toggle="tooltip" title="Indicativo de depósito do montante integral.
+Valores válidos:
+S - Sim
+N - Não
+Validação: Se indSusp = [90], preencher obrigatoriamente com [N].
+Se indSusp = [02, 03] preencher obrigatoriamente com [S]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabProcesso__infoProcesso__inclusao__dadosProc__infoSusp__id__indDeposito" name="[evtTabProcesso][infoProcesso][inclusao][dadosProc][infoSusp][][indDeposito]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='S' {% ifequal infoSusp|readjson:'indDeposito'|to_str 'S' %}selected{% endifequal %}>S - Sim</option><option value='N' {% ifequal infoSusp|readjson:'indDeposito'|to_str 'N' %}selected{% endifequal %}>N - Não</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="alteracao__div">
+    <div class="col-md-12">
+        <h4>Alteração das informações.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideProcesso__div">
+    <div class="col-md-12">
+        <h4>Identificação do processo e período de validade das informações.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de processo<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de processo.
+Valores válidos:
+1 - Administrativo
+2 - Judicial
+4 - Processo FAP de exercício anterior a 2019"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabProcesso__infoProcesso__alteracao__ideProcesso__id__tpProc" name="[evtTabProcesso][infoProcesso][alteracao][ideProcesso][tpProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTabProcesso|readjson:'infoProcesso.alteracao.ideProcesso.tpProc'|to_str '1' %}selected{% endifequal %}>1 - Administrativo</option><option value='2' {% ifequal evtTabProcesso|readjson:'infoProcesso.alteracao.ideProcesso.tpProc'|to_str '2' %}selected{% endifequal %}>2 - Judicial</option><option value='4' {% ifequal evtTabProcesso|readjson:'infoProcesso.alteracao.ideProcesso.tpProc'|to_str '4' %}selected{% endifequal %}>4 - Processo FAP de exercício anterior a 2019</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar o número do processo administrativo/judicial de acordo com o tipo informado em tpProc.
+Validação: Deve ser um número de processo válido e:
+a) Se tpProc = [1], deve possuir 17 (dezessete) ou 21 (vinte e um) algarismos;
+b) Se tpProc = [2], deve possuir 20 (vinte) algarismos;
+c) Se tpProc = [4], deve possuir 16 (dezesseis) algarismos."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__alteracao__ideProcesso__id__nrProc" maxlength="21" value="{{evtTabProcesso|readjson:'infoProcesso.alteracao.ideProcesso.nrProc'}}" name="[evtTabProcesso][infoProcesso][alteracao][ideProcesso][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="iniValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de início da validade das informações prestadas no evento<a data-toggle="tooltip" title="Preencher com o mês e ano de início da validade das informações prestadas no evento, no formato AAAA-MM.
+Validação: Deve ser uma data válida, igual ou posterior à data de início de obrigatoriedade deste evento para o empregador no eSocial, no formato AAAA-MM."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__alteracao__ideProcesso__id__iniValid" maxlength="7" value="{{evtTabProcesso|readjson:'infoProcesso.alteracao.ideProcesso.iniValid'}}" name="[evtTabProcesso][infoProcesso][alteracao][ideProcesso][iniValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fimValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de término da validade das informações<a data-toggle="tooltip" title="Preencher com o mês e ano de término da validade das informações, se houver.
+Validação: Se informado, deve estar no formato AAAA-MM e ser um período igual ou posterior a iniValid."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__alteracao__ideProcesso__id__fimValid" maxlength="7" value="{{evtTabProcesso|readjson:'infoProcesso.alteracao.ideProcesso.fimValid'}}" name="[evtTabProcesso][infoProcesso][alteracao][ideProcesso][fimValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="dadosProc__div">
+    <div class="col-md-12">
+        <h4>Dados do processo.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="indAutoria__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo da autoria da ação judicial<a data-toggle="tooltip" title="Indicativo da autoria da ação judicial.
+Valores válidos:
+1 - Próprio contribuinte
+2 - Outra entidade, empresa ou empregado
+Validação: Preenchimento obrigatório se tpProc = [2]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabProcesso__infoProcesso__alteracao__dadosProc__id__indAutoria" name="[evtTabProcesso][infoProcesso][alteracao][dadosProc][indAutoria]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTabProcesso|readjson:'infoProcesso.alteracao.dadosProc.indAutoria'|to_str '1' %}selected{% endifequal %}>1 - Próprio contribuinte</option><option value='2' {% ifequal evtTabProcesso|readjson:'infoProcesso.alteracao.dadosProc.indAutoria'|to_str '2' %}selected{% endifequal %}>2 - Outra entidade, empresa ou empregado</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="indMatProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo da matéria do processo<a data-toggle="tooltip" title="Indicativo da matéria do processo.
+Valores válidos:
+1 - Exclusivamente tributária ou tributária e FGTS
+7 - Exclusivamente FGTS e/ou Contribuição Social Rescisória (Lei Complementar 110/2001)"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabProcesso__infoProcesso__alteracao__dadosProc__id__indMatProc" name="[evtTabProcesso][infoProcesso][alteracao][dadosProc][indMatProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTabProcesso|readjson:'infoProcesso.alteracao.dadosProc.indMatProc'|to_str '1' %}selected{% endifequal %}>1 - Exclusivamente tributária ou tributária e FGTS</option><option value='7' {% ifequal evtTabProcesso|readjson:'infoProcesso.alteracao.dadosProc.indMatProc'|to_str '7' %}selected{% endifequal %}>7 - Exclusivamente FGTS e/ou Contribuição Social Rescisória (Lei Complementar 110/2001)</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="observacao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Observação relevante sobre o desligamento do trabalhador<a data-toggle="tooltip" title="Observações relacionadas ao processo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__alteracao__dadosProc__id__observacao" maxlength="255" value="{{evtTabProcesso|readjson:'infoProcesso.alteracao.dadosProc.observacao'}}" name="[evtTabProcesso][infoProcesso][alteracao][dadosProc][observacao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dadosProcJud__div">
+    <div class="col-md-12">
+        <h4>Informações complementares do processo judicial.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ufVara__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com a sigla da Unidade da Federação onde está localizada a Vara em que o processo tramitou<a data-toggle="tooltip" title="Identificação da Unidade da Federação - UF da Seção Judiciária.
+Valores válidos: AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT, MS, MG, PA, PB, PR, PE, PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__alteracao__dadosProc__dadosProcJud__id__ufVara" maxlength="2" value="{{evtTabProcesso|readjson:'infoProcesso.alteracao.dadosProc.dadosProcJud.ufVara'}}" name="[evtTabProcesso][infoProcesso][alteracao][dadosProc][dadosProcJud][ufVara]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codMunic__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código do município<a data-toggle="tooltip" title="Preencher com o código do município, conforme tabela do IBGE.
+Validação: Deve ser um código válido e existente na tabela do IBGE."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__alteracao__dadosProc__dadosProcJud__id__codMunic" maxlength="7" value="{{evtTabProcesso|readjson:'infoProcesso.alteracao.dadosProc.dadosProcJud.codMunic'}}" name="[evtTabProcesso][infoProcesso][alteracao][dadosProc][dadosProcJud][codMunic]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="idVara__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de identificação da Vara em que o processo tramitou<a data-toggle="tooltip" title="Código de identificação da Vara."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__alteracao__dadosProc__dadosProcJud__id__idVara" maxlength="4" value="{{evtTabProcesso|readjson:'infoProcesso.alteracao.dadosProc.dadosProcJud.idVara'}}" name="[evtTabProcesso][infoProcesso][alteracao][dadosProc][dadosProcJud][idVara]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% for infoSusp in evtTabProcesso|readjson:'infoProcesso.alteracao.dadosProc.infoSusp' %}
+<div id="infoSusp__div">
+    <div class="col-md-12">
+        <h4>Informações de suspensão de exigibilidade de tributos em virtude de processo administrativo ou judicial.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__alteracao__dadosProc__infoSusp__id__codSusp" maxlength="14" value="{{infoSusp|readjson:'codSusp'}}" name="[evtTabProcesso][infoProcesso][alteracao][dadosProc][infoSusp][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de suspensão da exigibilidade<a data-toggle="tooltip" title="Indicativo de suspensão da exigibilidade.
+Valores válidos:
+01 - Liminar em mandado de segurança
+02 - Depósito judicial do montante integral
+03 - Depósito administrativo do montante integral
+04 - Antecipação de tutela
+05 - Liminar em medida cautelar
+08 - Sentença em mandado de segurança favorável ao contribuinte
+09 - Sentença em ação ordinária favorável ao contribuinte e confirmada pelo TRF
+10 - Acórdão do TRF favorável ao contribuinte
+11 - Acórdão do STJ em recurso especial favorável ao contribuinte
+12 - Acórdão do STF em recurso extraordinário favorável ao contribuinte
+13 - Sentença 1ª instância não transitada em julgado com efeito suspensivo
+14 - Contestação administrativa FAP
+90 - Decisão definitiva a favor do contribuinte
+92 - Sem suspensão da exigibilidade
+Validação: Se tpProc = [1], deve ser preenchido com [03, 14, 92].
+Se tpProc = [2], deve ser preenchido com [01, 02, 04, 05, 08, 09, 10, 11, 12, 13, 90, 92].
+Se tpProc = [4], deve ser preenchido com [14]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabProcesso__infoProcesso__alteracao__dadosProc__infoSusp__id__indSusp" name="[evtTabProcesso][infoProcesso][alteracao][dadosProc][infoSusp][][indSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='01' {% ifequal infoSusp|readjson:'indSusp'|to_str '01' %}selected{% endifequal %}>01 - Liminar em mandado de segurança</option><option value='02' {% ifequal infoSusp|readjson:'indSusp'|to_str '02' %}selected{% endifequal %}>02 - Depósito judicial do montante integral</option><option value='03' {% ifequal infoSusp|readjson:'indSusp'|to_str '03' %}selected{% endifequal %}>03 - Depósito administrativo do montante integral</option><option value='04' {% ifequal infoSusp|readjson:'indSusp'|to_str '04' %}selected{% endifequal %}>04 - Antecipação de tutela</option><option value='05' {% ifequal infoSusp|readjson:'indSusp'|to_str '05' %}selected{% endifequal %}>05 - Liminar em medida cautelar</option><option value='08' {% ifequal infoSusp|readjson:'indSusp'|to_str '08' %}selected{% endifequal %}>08 - Sentença em mandado de segurança favorável ao contribuinte</option><option value='09' {% ifequal infoSusp|readjson:'indSusp'|to_str '09' %}selected{% endifequal %}>09 - Sentença em ação ordinária favorável ao contribuinte e confirmada pelo TRF</option><option value='10' {% ifequal infoSusp|readjson:'indSusp'|to_str '10' %}selected{% endifequal %}>10 - Acórdão do TRF favorável ao contribuinte</option><option value='11' {% ifequal infoSusp|readjson:'indSusp'|to_str '11' %}selected{% endifequal %}>11 - Acórdão do STJ em recurso especial favorável ao contribuinte</option><option value='12' {% ifequal infoSusp|readjson:'indSusp'|to_str '12' %}selected{% endifequal %}>12 - Acórdão do STF em recurso extraordinário favorável ao contribuinte</option><option value='13' {% ifequal infoSusp|readjson:'indSusp'|to_str '13' %}selected{% endifequal %}>13 - Sentença 1ª instância não transitada em julgado com efeito suspensivo</option><option value='14' {% ifequal infoSusp|readjson:'indSusp'|to_str '14' %}selected{% endifequal %}>14 - Contestação administrativa FAP</option><option value='90' {% ifequal infoSusp|readjson:'indSusp'|to_str '90' %}selected{% endifequal %}>90 - Decisão definitiva a favor do contribuinte</option><option value='92' {% ifequal infoSusp|readjson:'indSusp'|to_str '92' %}selected{% endifequal %}>92 - Sem suspensão da exigibilidade</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="dtDecisao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Data da decisão<a data-toggle="tooltip" title="Data da decisão, sentença ou despacho administrativo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__alteracao__dadosProc__infoSusp__id__dtDecisao" value="{{infoSusp|readjson:'dtDecisao'}}" name="[evtTabProcesso][infoProcesso][alteracao][dadosProc][infoSusp][][dtDecisao]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indDeposito__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de depósito do montante integral<a data-toggle="tooltip" title="Indicativo de depósito do montante integral.
+Valores válidos:
+S - Sim
+N - Não
+Validação: Se indSusp = [90], preencher obrigatoriamente com [N].
+Se indSusp = [02, 03] preencher obrigatoriamente com [S]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabProcesso__infoProcesso__alteracao__dadosProc__infoSusp__id__indDeposito" name="[evtTabProcesso][infoProcesso][alteracao][dadosProc][infoSusp][][indDeposito]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='S' {% ifequal infoSusp|readjson:'indDeposito'|to_str 'S' %}selected{% endifequal %}>S - Sim</option><option value='N' {% ifequal infoSusp|readjson:'indDeposito'|to_str 'N' %}selected{% endifequal %}>N - Não</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="infoSusp__div">
+    <div class="col-md-12">
+        <h4>Informações de suspensão de exigibilidade de tributos em virtude de processo administrativo ou judicial.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__alteracao__dadosProc__infoSusp__id__codSusp" maxlength="14" value="{{infoSusp|readjson:'codSusp'}}" name="[evtTabProcesso][infoProcesso][alteracao][dadosProc][infoSusp][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de suspensão da exigibilidade<a data-toggle="tooltip" title="Indicativo de suspensão da exigibilidade.
+Valores válidos:
+01 - Liminar em mandado de segurança
+02 - Depósito judicial do montante integral
+03 - Depósito administrativo do montante integral
+04 - Antecipação de tutela
+05 - Liminar em medida cautelar
+08 - Sentença em mandado de segurança favorável ao contribuinte
+09 - Sentença em ação ordinária favorável ao contribuinte e confirmada pelo TRF
+10 - Acórdão do TRF favorável ao contribuinte
+11 - Acórdão do STJ em recurso especial favorável ao contribuinte
+12 - Acórdão do STF em recurso extraordinário favorável ao contribuinte
+13 - Sentença 1ª instância não transitada em julgado com efeito suspensivo
+14 - Contestação administrativa FAP
+90 - Decisão definitiva a favor do contribuinte
+92 - Sem suspensão da exigibilidade
+Validação: Se tpProc = [1], deve ser preenchido com [03, 14, 92].
+Se tpProc = [2], deve ser preenchido com [01, 02, 04, 05, 08, 09, 10, 11, 12, 13, 90, 92].
+Se tpProc = [4], deve ser preenchido com [14]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabProcesso__infoProcesso__alteracao__dadosProc__infoSusp__id__indSusp" name="[evtTabProcesso][infoProcesso][alteracao][dadosProc][infoSusp][][indSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='01' {% ifequal infoSusp|readjson:'indSusp'|to_str '01' %}selected{% endifequal %}>01 - Liminar em mandado de segurança</option><option value='02' {% ifequal infoSusp|readjson:'indSusp'|to_str '02' %}selected{% endifequal %}>02 - Depósito judicial do montante integral</option><option value='03' {% ifequal infoSusp|readjson:'indSusp'|to_str '03' %}selected{% endifequal %}>03 - Depósito administrativo do montante integral</option><option value='04' {% ifequal infoSusp|readjson:'indSusp'|to_str '04' %}selected{% endifequal %}>04 - Antecipação de tutela</option><option value='05' {% ifequal infoSusp|readjson:'indSusp'|to_str '05' %}selected{% endifequal %}>05 - Liminar em medida cautelar</option><option value='08' {% ifequal infoSusp|readjson:'indSusp'|to_str '08' %}selected{% endifequal %}>08 - Sentença em mandado de segurança favorável ao contribuinte</option><option value='09' {% ifequal infoSusp|readjson:'indSusp'|to_str '09' %}selected{% endifequal %}>09 - Sentença em ação ordinária favorável ao contribuinte e confirmada pelo TRF</option><option value='10' {% ifequal infoSusp|readjson:'indSusp'|to_str '10' %}selected{% endifequal %}>10 - Acórdão do TRF favorável ao contribuinte</option><option value='11' {% ifequal infoSusp|readjson:'indSusp'|to_str '11' %}selected{% endifequal %}>11 - Acórdão do STJ em recurso especial favorável ao contribuinte</option><option value='12' {% ifequal infoSusp|readjson:'indSusp'|to_str '12' %}selected{% endifequal %}>12 - Acórdão do STF em recurso extraordinário favorável ao contribuinte</option><option value='13' {% ifequal infoSusp|readjson:'indSusp'|to_str '13' %}selected{% endifequal %}>13 - Sentença 1ª instância não transitada em julgado com efeito suspensivo</option><option value='14' {% ifequal infoSusp|readjson:'indSusp'|to_str '14' %}selected{% endifequal %}>14 - Contestação administrativa FAP</option><option value='90' {% ifequal infoSusp|readjson:'indSusp'|to_str '90' %}selected{% endifequal %}>90 - Decisão definitiva a favor do contribuinte</option><option value='92' {% ifequal infoSusp|readjson:'indSusp'|to_str '92' %}selected{% endifequal %}>92 - Sem suspensão da exigibilidade</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="dtDecisao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Data da decisão<a data-toggle="tooltip" title="Data da decisão, sentença ou despacho administrativo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__alteracao__dadosProc__infoSusp__id__dtDecisao" value="{{infoSusp|readjson:'dtDecisao'}}" name="[evtTabProcesso][infoProcesso][alteracao][dadosProc][infoSusp][][dtDecisao]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indDeposito__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de depósito do montante integral<a data-toggle="tooltip" title="Indicativo de depósito do montante integral.
+Valores válidos:
+S - Sim
+N - Não
+Validação: Se indSusp = [90], preencher obrigatoriamente com [N].
+Se indSusp = [02, 03] preencher obrigatoriamente com [S]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabProcesso__infoProcesso__alteracao__dadosProc__infoSusp__id__indDeposito" name="[evtTabProcesso][infoProcesso][alteracao][dadosProc][infoSusp][][indDeposito]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='S' {% ifequal infoSusp|readjson:'indDeposito'|to_str 'S' %}selected{% endifequal %}>S - Sim</option><option value='N' {% ifequal infoSusp|readjson:'indDeposito'|to_str 'N' %}selected{% endifequal %}>N - Não</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="novaValidade__div">
+    <div class="col-md-12">
+        <h4>Informação preenchida exclusivamente em caso de alteração do período de validade das informações, apresentando o novo período de validade.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="iniValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de início da validade das informações prestadas no evento<a data-toggle="tooltip" title="Preencher com o mês e ano de início da validade das informações prestadas no evento, no formato AAAA-MM.
+Validação: Deve ser uma data válida, igual ou posterior à data de início de obrigatoriedade deste evento para o empregador no eSocial, no formato AAAA-MM."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__alteracao__novaValidade__id__iniValid" maxlength="7" value="{{evtTabProcesso|readjson:'infoProcesso.alteracao.novaValidade.iniValid'}}" name="[evtTabProcesso][infoProcesso][alteracao][novaValidade][iniValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fimValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de término da validade das informações<a data-toggle="tooltip" title="Preencher com o mês e ano de término da validade das informações, se houver.
+Validação: Se informado, deve estar no formato AAAA-MM e ser um período igual ou posterior a iniValid."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__alteracao__novaValidade__id__fimValid" maxlength="7" value="{{evtTabProcesso|readjson:'infoProcesso.alteracao.novaValidade.fimValid'}}" name="[evtTabProcesso][infoProcesso][alteracao][novaValidade][fimValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="exclusao__div">
+    <div class="col-md-12">
+        <h4>Exclusão das informações.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideProcesso__div">
+    <div class="col-md-12">
+        <h4>Identificação do processo e período de validade das informações.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de processo<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de processo.
+Valores válidos:
+1 - Administrativo
+2 - Judicial
+4 - Processo FAP de exercício anterior a 2019"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabProcesso__infoProcesso__exclusao__ideProcesso__id__tpProc" name="[evtTabProcesso][infoProcesso][exclusao][ideProcesso][tpProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTabProcesso|readjson:'infoProcesso.exclusao.ideProcesso.tpProc'|to_str '1' %}selected{% endifequal %}>1 - Administrativo</option><option value='2' {% ifequal evtTabProcesso|readjson:'infoProcesso.exclusao.ideProcesso.tpProc'|to_str '2' %}selected{% endifequal %}>2 - Judicial</option><option value='4' {% ifequal evtTabProcesso|readjson:'infoProcesso.exclusao.ideProcesso.tpProc'|to_str '4' %}selected{% endifequal %}>4 - Processo FAP de exercício anterior a 2019</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar o número do processo administrativo/judicial de acordo com o tipo informado em tpProc.
+Validação: Deve ser um número de processo válido e:
+a) Se tpProc = [1], deve possuir 17 (dezessete) ou 21 (vinte e um) algarismos;
+b) Se tpProc = [2], deve possuir 20 (vinte) algarismos;
+c) Se tpProc = [4], deve possuir 16 (dezesseis) algarismos."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__exclusao__ideProcesso__id__nrProc" maxlength="21" value="{{evtTabProcesso|readjson:'infoProcesso.exclusao.ideProcesso.nrProc'}}" name="[evtTabProcesso][infoProcesso][exclusao][ideProcesso][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="iniValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de início da validade das informações prestadas no evento<a data-toggle="tooltip" title="Preencher com o mês e ano de início da validade das informações prestadas no evento, no formato AAAA-MM.
+Validação: Deve ser uma data válida, igual ou posterior à data de início de obrigatoriedade deste evento para o empregador no eSocial, no formato AAAA-MM."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__exclusao__ideProcesso__id__iniValid" maxlength="7" value="{{evtTabProcesso|readjson:'infoProcesso.exclusao.ideProcesso.iniValid'}}" name="[evtTabProcesso][infoProcesso][exclusao][ideProcesso][iniValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fimValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de término da validade das informações<a data-toggle="tooltip" title="Preencher com o mês e ano de término da validade das informações, se houver.
+Validação: Se informado, deve estar no formato AAAA-MM e ser um período igual ou posterior a iniValid."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabProcesso__infoProcesso__exclusao__ideProcesso__id__fimValid" maxlength="7" value="{{evtTabProcesso|readjson:'infoProcesso.exclusao.ideProcesso.fimValid'}}" name="[evtTabProcesso][infoProcesso][exclusao][ideProcesso][fimValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+</div>
+
+</form>
+{% endwith %}
+{% if original.is_aberto %}
+<script type="text/javascript">
+function set_evento_json() {
+    var dst = document.getElementById("id_evento_json");
+    var dst_read = document.getElementById("id_evento_json_read");
+    var obj = $('#form_json').serializeJSON({useIntKeysAsArrayIndex: true});
+    dst.value = JSON.stringify(obj);
+    dst_read.value = JSON.stringify(obj);
+};
+$(document).ready(function(){
+    set_evento_json();
+});
+</script>
+{% endif %}

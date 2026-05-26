@@ -1,0 +1,410 @@
+
+{% load esocial_custom_tags %}
+{% with evtIrrf=original.evento_json|readjson:'evtIrrf' %}
+<form id="form_json">
+
+<div class="row">
+
+<div id="evtIrrf__div">
+    <div class="col-md-12">
+        <h4>Evento Imposto de Renda Retido na Fonte Consolidado por Contribuinte.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideEvento__div">
+    <div class="col-md-12">
+        <h4>Identificação do evento de retorno.
+Evento de origem: S-1299.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="perApur__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o mês/ano (formato AAAA-MM) de referência das informações<a data-toggle="tooltip" title="Informar o mês/ano (formato AAAA-MM) de referência das informações."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtIrrf__ideEvento__id__perApur" maxlength="7" value="{{evtIrrf|readjson:'ideEvento.perApur'}}" name="[evtIrrf][ideEvento][perApur]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideEmpregador__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do empregador.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Preencher com o código correspondente ao tipo de inscrição</label>
+            <select name="[evtIrrf][ideEmpregador][tpInsc]" id="evtIrrf__ideEmpregador__id__tpInsc_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpinsc 1 %}selected{% endifequal %}>1 - CNPJ</option>
+                <option value="2" {% ifequal original.tpinsc 2 %}selected{% endifequal %}>2 - CPF</option>
+                <option value="3" {% ifequal original.tpinsc 3 %}selected{% endifequal %}>3 - CAEPF (Cadastro de Atividade Econômica de Pessoa Física)</option>
+                <option value="4" {% ifequal original.tpinsc 4 %}selected{% endifequal %}>4 - CNO (Cadastro Nacional de Obra)</option>
+                <option value="5" {% ifequal original.tpinsc 5 %}selected{% endifequal %}>5 - CGC</option>
+                <option value="6" {% ifequal original.tpinsc 6 %}selected{% endifequal %}>6 - CEI</option>
+            </select>
+            <input type="hidden" name="[evtIrrf][ideEmpregador][tpInsc]" id="evtIrrf__ideEmpregador__id__tpInsc" value="{{original.tpinsc}}">
+        </div>
+    </div>
+</div>
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000</label>
+            <input type="text" id="evtIrrf__ideEmpregador__id__nrInsc_disabled" name="[evtIrrf][ideEmpregador][nrInsc]" value="{{original.nrinsc}}" class="vTextField" maxlength="15" disabled="">
+            <input type="hidden" name="[evtIrrf][ideEmpregador][nrInsc]" id="evtIrrf__ideEmpregador__id__nrInsc" value="{{original.nrinsc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="infoIRRF__div">
+    <div class="col-md-12">
+        <h4>Informações relativas ao Imposto de Renda.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="nrRecArqBase__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o número do recibo do arquivo que deu origem ao presente arquivo de retorno<a data-toggle="tooltip" title="Preencher com o número do recibo do arquivo que deu origem ao presente arquivo de retorno ao empregador.
+Validação: Deve ser um recibo de entrega válido, correspondente ao arquivo que deu origem ao presente arquivo de retorno (S-1299)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtIrrf__infoIRRF__id__nrRecArqBase" maxlength="23" value="{{evtIrrf|readjson:'infoIRRF.nrRecArqBase'}}" name="[evtIrrf][infoIRRF][nrRecArqBase]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indExistInfo__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de existência de FGTS<a data-toggle="tooltip" title="Indicativo de existência de valores de bases ou de tributos.
+Valores válidos:
+1 - Há informações de IRRF
+2 - Há movimento, porém não há informações de IRRF
+3 - Não há movimento no período informado em perApur"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtIrrf__infoIRRF__id__indExistInfo" name="[evtIrrf][infoIRRF][indExistInfo]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtIrrf|readjson:'infoIRRF.indExistInfo'|to_str '1' %}selected{% endifequal %}>1 - Há informações de IRRF</option><option value='2' {% ifequal evtIrrf|readjson:'infoIRRF.indExistInfo'|to_str '2' %}selected{% endifequal %}>2 - Há movimento, porém não há informações de IRRF</option><option value='3' {% ifequal evtIrrf|readjson:'infoIRRF.indExistInfo'|to_str '3' %}selected{% endifequal %}>3 - Não há movimento no período informado em perApur</option>
+            </select>
+        </div>
+    </div>
+</div>
+{% for infoCRMen in evtIrrf|readjson:'infoIRRF.infoCRMen' %}
+<div id="infoCRMen__div">
+    <div class="col-md-12">
+        <h4>Informações consolidadas do IRRF, por Código de Receita - CR mensal.
+Evento de origem: S-5002.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="CRMen__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de Receita - CR relativo ao Imposto de Renda Retido na Fonte sobre rendimentos do trabalho<a data-toggle="tooltip" title="Código de Receita - CR relativo ao Imposto de Renda Retido na Fonte sobre rendimentos do trabalho.
+Valores válidos:
+056107 - IRRF mensal, 13° salário e férias sobre trabalho assalariado no país ou ausente no exterior a serviço do país, exceto se contratado por empregador doméstico ou por segurado especial sujeito a recolhimento unificado
+056108 - IRRF mensal e férias - Empregado doméstico
+056109 - IRRF 13° salário na rescisão de contrato de trabalho - Empregado doméstico
+056110 - IRRF - Empregado doméstico 13º salário
+056111 - IRRF - Empregado/Trabalhador rural - Segurado especial
+056112 - IRRF - Empregado/Trabalhador rural - Segurado especial 13° salário
+056113 - IRRF - Empregado/Trabalhador rural - Segurado especial 13° salário rescisório
+058806 - IRRF sobre rendimento do trabalho sem vínculo empregatício
+061001 - IRRF sobre rendimentos relativos a prestação de serviços de transporte rodoviário internacional de carga, pagos a transportador autônomo PF residente no Paraguai
+353301 - Proventos de aposentadoria, reserva, reforma ou pensão pagos por previdência pública
+356201 - IRRF sobre participação dos trabalhadores em lucros ou resultados - PLR
+188901 - Rendimentos Recebidos Acumuladamente - RRA"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtIrrf__infoIRRF__infoCRMen__id__CRMen" name="[evtIrrf][infoIRRF][infoCRMen][][CRMen]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='056107' {% ifequal infoCRMen|readjson:'CRMen'|to_str '056107' %}selected{% endifequal %}>056107 - IRRF mensal, 13° salário e férias sobre trabalho assalariado no país ou ausente no exterior a serviço do país, exceto se contratado por empregador doméstico ou por segurado especial sujeito a recolhimento unificado</option><option value='056108' {% ifequal infoCRMen|readjson:'CRMen'|to_str '056108' %}selected{% endifequal %}>056108 - IRRF mensal e férias - Empregado doméstico</option><option value='056109' {% ifequal infoCRMen|readjson:'CRMen'|to_str '056109' %}selected{% endifequal %}>056109 - IRRF 13° salário na rescisão de contrato de trabalho - Empregado doméstico</option><option value='056110' {% ifequal infoCRMen|readjson:'CRMen'|to_str '056110' %}selected{% endifequal %}>056110 - IRRF - Empregado doméstico 13º salário</option><option value='056111' {% ifequal infoCRMen|readjson:'CRMen'|to_str '056111' %}selected{% endifequal %}>056111 - IRRF - Empregado/Trabalhador rural - Segurado especial</option><option value='056112' {% ifequal infoCRMen|readjson:'CRMen'|to_str '056112' %}selected{% endifequal %}>056112 - IRRF - Empregado/Trabalhador rural - Segurado especial 13° salário</option><option value='056113' {% ifequal infoCRMen|readjson:'CRMen'|to_str '056113' %}selected{% endifequal %}>056113 - IRRF - Empregado/Trabalhador rural - Segurado especial 13° salário rescisório</option><option value='058806' {% ifequal infoCRMen|readjson:'CRMen'|to_str '058806' %}selected{% endifequal %}>058806 - IRRF sobre rendimento do trabalho sem vínculo empregatício</option><option value='061001' {% ifequal infoCRMen|readjson:'CRMen'|to_str '061001' %}selected{% endifequal %}>061001 - IRRF sobre rendimentos relativos a prestação de serviços de transporte rodoviário internacional de carga, pagos a transportador autônomo PF residente no Paraguai</option><option value='353301' {% ifequal infoCRMen|readjson:'CRMen'|to_str '353301' %}selected{% endifequal %}>353301 - Proventos de aposentadoria, reserva, reforma ou pensão pagos por previdência pública</option><option value='356201' {% ifequal infoCRMen|readjson:'CRMen'|to_str '356201' %}selected{% endifequal %}>356201 - IRRF sobre participação dos trabalhadores em lucros ou resultados - PLR</option><option value='188901' {% ifequal infoCRMen|readjson:'CRMen'|to_str '188901' %}selected{% endifequal %}>188901 - Rendimentos Recebidos Acumuladamente - RRA</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="vrCRMen__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor correspondente ao Código de Receita - CR indicado em CRMen<a data-toggle="tooltip" title="Valor correspondente ao Código de Receita - CR indicado em CRMen."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtIrrf__infoIRRF__infoCRMen__id__vrCRMen" maxlength="14" value="{{infoCRMen|readjson:'vrCRMen'}}" name="[evtIrrf][infoIRRF][infoCRMen][][vrCRMen]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="infoCRMen__div">
+    <div class="col-md-12">
+        <h4>Informações consolidadas do IRRF, por Código de Receita - CR mensal.
+Evento de origem: S-5002.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="CRMen__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de Receita - CR relativo ao Imposto de Renda Retido na Fonte sobre rendimentos do trabalho<a data-toggle="tooltip" title="Código de Receita - CR relativo ao Imposto de Renda Retido na Fonte sobre rendimentos do trabalho.
+Valores válidos:
+056107 - IRRF mensal, 13° salário e férias sobre trabalho assalariado no país ou ausente no exterior a serviço do país, exceto se contratado por empregador doméstico ou por segurado especial sujeito a recolhimento unificado
+056108 - IRRF mensal e férias - Empregado doméstico
+056109 - IRRF 13° salário na rescisão de contrato de trabalho - Empregado doméstico
+056110 - IRRF - Empregado doméstico 13º salário
+056111 - IRRF - Empregado/Trabalhador rural - Segurado especial
+056112 - IRRF - Empregado/Trabalhador rural - Segurado especial 13° salário
+056113 - IRRF - Empregado/Trabalhador rural - Segurado especial 13° salário rescisório
+058806 - IRRF sobre rendimento do trabalho sem vínculo empregatício
+061001 - IRRF sobre rendimentos relativos a prestação de serviços de transporte rodoviário internacional de carga, pagos a transportador autônomo PF residente no Paraguai
+353301 - Proventos de aposentadoria, reserva, reforma ou pensão pagos por previdência pública
+356201 - IRRF sobre participação dos trabalhadores em lucros ou resultados - PLR
+188901 - Rendimentos Recebidos Acumuladamente - RRA"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtIrrf__infoIRRF__infoCRMen__id__CRMen" name="[evtIrrf][infoIRRF][infoCRMen][][CRMen]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='056107' {% ifequal infoCRMen|readjson:'CRMen'|to_str '056107' %}selected{% endifequal %}>056107 - IRRF mensal, 13° salário e férias sobre trabalho assalariado no país ou ausente no exterior a serviço do país, exceto se contratado por empregador doméstico ou por segurado especial sujeito a recolhimento unificado</option><option value='056108' {% ifequal infoCRMen|readjson:'CRMen'|to_str '056108' %}selected{% endifequal %}>056108 - IRRF mensal e férias - Empregado doméstico</option><option value='056109' {% ifequal infoCRMen|readjson:'CRMen'|to_str '056109' %}selected{% endifequal %}>056109 - IRRF 13° salário na rescisão de contrato de trabalho - Empregado doméstico</option><option value='056110' {% ifequal infoCRMen|readjson:'CRMen'|to_str '056110' %}selected{% endifequal %}>056110 - IRRF - Empregado doméstico 13º salário</option><option value='056111' {% ifequal infoCRMen|readjson:'CRMen'|to_str '056111' %}selected{% endifequal %}>056111 - IRRF - Empregado/Trabalhador rural - Segurado especial</option><option value='056112' {% ifequal infoCRMen|readjson:'CRMen'|to_str '056112' %}selected{% endifequal %}>056112 - IRRF - Empregado/Trabalhador rural - Segurado especial 13° salário</option><option value='056113' {% ifequal infoCRMen|readjson:'CRMen'|to_str '056113' %}selected{% endifequal %}>056113 - IRRF - Empregado/Trabalhador rural - Segurado especial 13° salário rescisório</option><option value='058806' {% ifequal infoCRMen|readjson:'CRMen'|to_str '058806' %}selected{% endifequal %}>058806 - IRRF sobre rendimento do trabalho sem vínculo empregatício</option><option value='061001' {% ifequal infoCRMen|readjson:'CRMen'|to_str '061001' %}selected{% endifequal %}>061001 - IRRF sobre rendimentos relativos a prestação de serviços de transporte rodoviário internacional de carga, pagos a transportador autônomo PF residente no Paraguai</option><option value='353301' {% ifequal infoCRMen|readjson:'CRMen'|to_str '353301' %}selected{% endifequal %}>353301 - Proventos de aposentadoria, reserva, reforma ou pensão pagos por previdência pública</option><option value='356201' {% ifequal infoCRMen|readjson:'CRMen'|to_str '356201' %}selected{% endifequal %}>356201 - IRRF sobre participação dos trabalhadores em lucros ou resultados - PLR</option><option value='188901' {% ifequal infoCRMen|readjson:'CRMen'|to_str '188901' %}selected{% endifequal %}>188901 - Rendimentos Recebidos Acumuladamente - RRA</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="vrCRMen__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor correspondente ao Código de Receita - CR indicado em CRMen<a data-toggle="tooltip" title="Valor correspondente ao Código de Receita - CR indicado em CRMen."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtIrrf__infoIRRF__infoCRMen__id__vrCRMen" maxlength="14" value="{{infoCRMen|readjson:'vrCRMen'}}" name="[evtIrrf][infoIRRF][infoCRMen][][vrCRMen]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}{% for infoCRDia in evtIrrf|readjson:'infoIRRF.infoCRDia' %}
+<div id="infoCRDia__div">
+    <div class="col-md-12">
+        <h4>Informações consolidadas do IRRF, por Código de Receita - CR diário.
+Evento de origem: S-5002.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="perApurDia__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Período de apuração diário do Código de Receita - CR<a data-toggle="tooltip" title="Período de apuração diário do Código de Receita - CR."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtIrrf__infoIRRF__infoCRDia__id__perApurDia" maxlength="2" value="{{infoCRDia|readjson:'perApurDia'}}" name="[evtIrrf][infoIRRF][infoCRDia][][perApurDia]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="CRDia__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de Receita - CR relativo ao Imposto de Renda Retido na Fonte sobre rendimentos do trabalho pagos a residente no exterior para fins fiscais<a data-toggle="tooltip" title="Código de Receita - CR relativo ao Imposto de Renda Retido na Fonte sobre rendimentos do trabalho pagos a residente no exterior para fins fiscais.
+Valores válidos:
+047301 - IRRF - Residentes no exterior, para fins fiscais"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtIrrf__infoIRRF__infoCRDia__id__CRDia" name="[evtIrrf][infoIRRF][infoCRDia][][CRDia]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='047301' {% ifequal infoCRDia|readjson:'CRDia'|to_str '047301' %}selected{% endifequal %}>047301 - IRRF - Residentes no exterior, para fins fiscais</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="vrCRDia__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor relativo ao Imposto de Renda Retido na Fonte sobre rendimentos do trabalho pagos a residente<a data-toggle="tooltip" title="Valor relativo ao Imposto de Renda Retido na Fonte sobre rendimentos do trabalho pagos a residente, para fins fiscais, no exterior."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtIrrf__infoIRRF__infoCRDia__id__vrCRDia" maxlength="14" value="{{infoCRDia|readjson:'vrCRDia'}}" name="[evtIrrf][infoIRRF][infoCRDia][][vrCRDia]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="infoCRDia__div">
+    <div class="col-md-12">
+        <h4>Informações consolidadas do IRRF, por Código de Receita - CR diário.
+Evento de origem: S-5002.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="perApurDia__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Período de apuração diário do Código de Receita - CR<a data-toggle="tooltip" title="Período de apuração diário do Código de Receita - CR."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtIrrf__infoIRRF__infoCRDia__id__perApurDia" maxlength="2" value="{{infoCRDia|readjson:'perApurDia'}}" name="[evtIrrf][infoIRRF][infoCRDia][][perApurDia]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="CRDia__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de Receita - CR relativo ao Imposto de Renda Retido na Fonte sobre rendimentos do trabalho pagos a residente no exterior para fins fiscais<a data-toggle="tooltip" title="Código de Receita - CR relativo ao Imposto de Renda Retido na Fonte sobre rendimentos do trabalho pagos a residente no exterior para fins fiscais.
+Valores válidos:
+047301 - IRRF - Residentes no exterior, para fins fiscais"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtIrrf__infoIRRF__infoCRDia__id__CRDia" name="[evtIrrf][infoIRRF][infoCRDia][][CRDia]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='047301' {% ifequal infoCRDia|readjson:'CRDia'|to_str '047301' %}selected{% endifequal %}>047301 - IRRF - Residentes no exterior, para fins fiscais</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="vrCRDia__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor relativo ao Imposto de Renda Retido na Fonte sobre rendimentos do trabalho pagos a residente<a data-toggle="tooltip" title="Valor relativo ao Imposto de Renda Retido na Fonte sobre rendimentos do trabalho pagos a residente, para fins fiscais, no exterior."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtIrrf__infoIRRF__infoCRDia__id__vrCRDia" maxlength="14" value="{{infoCRDia|readjson:'vrCRDia'}}" name="[evtIrrf][infoIRRF][infoCRDia][][vrCRDia]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+</div>
+
+</form>
+{% endwith %}
+{% if original.is_aberto %}
+<script type="text/javascript">
+function set_evento_json() {
+    var dst = document.getElementById("id_evento_json");
+    var dst_read = document.getElementById("id_evento_json_read");
+    var obj = $('#form_json').serializeJSON({useIntKeysAsArrayIndex: true});
+    dst.value = JSON.stringify(obj);
+    dst_read.value = JSON.stringify(obj);
+};
+$(document).ready(function(){
+    set_evento_json();
+});
+</script>
+{% endif %}

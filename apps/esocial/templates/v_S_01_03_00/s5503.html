@@ -1,0 +1,1054 @@
+
+{% load esocial_custom_tags %}
+{% with evtFGTSProcTrab=original.evento_json|readjson:'evtFGTSProcTrab' %}
+<form id="form_json">
+
+<div class="row">
+
+<div id="evtFGTSProcTrab__div">
+    <div class="col-md-12">
+        <h4>Evento Informações do FGTS por Trabalhador em Processo Trabalhista.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideEvento__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do evento.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="nrRecArqBase__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o número do recibo do arquivo que deu origem ao presente arquivo de retorno<a data-toggle="tooltip" title="Preencher com o número do recibo do arquivo que deu origem ao presente arquivo de retorno.
+Validação: Deve ser um recibo de entrega válido, correspondente ao arquivo que deu origem ao presente arquivo de retorno (S-2500 ou S-3500)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__ideEvento__id__nrRecArqBase" maxlength="23" value="{{evtFGTSProcTrab|readjson:'ideEvento.nrRecArqBase'}}" name="[evtFGTSProcTrab][ideEvento][nrRecArqBase]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="perApur__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o mês/ano (formato AAAA-MM) de referência das informações<a data-toggle="tooltip" title="Informar o mês/ano (formato AAAA-MM) de referência das informações.
+Origem: mês/ano do campo dtSent ou dtCCP de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__ideEvento__id__perApur" maxlength="7" value="{{evtFGTSProcTrab|readjson:'ideEvento.perApur'}}" name="[evtFGTSProcTrab][ideEvento][perApur]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideEmpregador__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do empregador ou do contribuinte que prestou a informação.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Preencher com o código correspondente ao tipo de inscrição</label>
+            <select name="[evtFGTSProcTrab][ideEmpregador][tpInsc]" id="evtFGTSProcTrab__ideEmpregador__id__tpInsc_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpinsc 1 %}selected{% endifequal %}>1 - CNPJ</option>
+                <option value="2" {% ifequal original.tpinsc 2 %}selected{% endifequal %}>2 - CPF</option>
+                <option value="3" {% ifequal original.tpinsc 3 %}selected{% endifequal %}>3 - CAEPF (Cadastro de Atividade Econômica de Pessoa Física)</option>
+                <option value="4" {% ifequal original.tpinsc 4 %}selected{% endifequal %}>4 - CNO (Cadastro Nacional de Obra)</option>
+                <option value="5" {% ifequal original.tpinsc 5 %}selected{% endifequal %}>5 - CGC</option>
+                <option value="6" {% ifequal original.tpinsc 6 %}selected{% endifequal %}>6 - CEI</option>
+            </select>
+            <input type="hidden" name="[evtFGTSProcTrab][ideEmpregador][tpInsc]" id="evtFGTSProcTrab__ideEmpregador__id__tpInsc" value="{{original.tpinsc}}">
+        </div>
+    </div>
+</div>
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000</label>
+            <input type="text" id="evtFGTSProcTrab__ideEmpregador__id__nrInsc_disabled" name="[evtFGTSProcTrab][ideEmpregador][nrInsc]" value="{{original.nrinsc}}" class="vTextField" maxlength="15" disabled="">
+            <input type="hidden" name="[evtFGTSProcTrab][ideEmpregador][nrInsc]" id="evtFGTSProcTrab__ideEmpregador__id__nrInsc" value="{{original.nrinsc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideProc__div">
+    <div class="col-md-12">
+        <h4>Identificação do processo.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="origem__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar a origem do processo/demanda<a data-toggle="tooltip" title="Informar a origem do processo/demanda.
+Valores válidos:
+1 - Processo judicial
+2 - Demanda submetida à CCP ou ao NINTER"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtFGTSProcTrab__ideProc__id__origem" name="[evtFGTSProcTrab][ideProc][origem]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtFGTSProcTrab|readjson:'ideProc.origem'|to_str '1' %}selected{% endifequal %}>1 - Processo judicial</option><option value='2' {% ifequal evtFGTSProcTrab|readjson:'ideProc.origem'|to_str '2' %}selected{% endifequal %}>2 - Demanda submetida à CCP ou ao NINTER</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrProcTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número que identifica o processo judicial onde a baixa do vínculo foi determinada<a data-toggle="tooltip" title="Número do processo trabalhista, da ata ou número de identificação da conciliação.
+Validação: a) Se o evento de origem for S-2500, retornar o campo nrProcTrab desse evento;
+b) Se o evento de origem for S-3500, retornar o campo nrProcTrab do evento S-2500 objeto da exclusão."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__ideProc__id__nrProcTrab" maxlength="20" value="{{evtFGTSProcTrab|readjson:'ideProc.nrProcTrab'}}" name="[evtFGTSProcTrab][ideProc][nrProcTrab]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideTrabalhador__div">
+    <div class="col-md-12">
+        <h4>Grupo que apresenta a identificação básica do trabalhador ao qual se refere o evento de retorno.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="cpfTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o número do CPF do trabalhador<a data-toggle="tooltip" title="Preencher com o número do CPF do trabalhador.
+Validação: Deve ser um CPF constante no arquivo gerado pelo empregador no evento de origem."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__ideTrabalhador__id__cpfTrab" maxlength="11" value="{{evtFGTSProcTrab|readjson:'ideTrabalhador.cpfTrab'}}" name="[evtFGTSProcTrab][ideTrabalhador][cpfTrab]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% for infoTrabFGTS in evtFGTSProcTrab|readjson:'infoTrabFGTS' %}
+<div id="infoTrabFGTS__div">
+    <div class="col-md-12">
+        <h4>Informações relativas à matrícula e categoria do trabalhador.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="matricula__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Matrícula atribuída ao trabalhador pela empresa ou<a data-toggle="tooltip" title="Matrícula atribuída ao trabalhador pela empresa ou, no caso de servidor público, a matrícula constante no Sistema de Administração de Recursos Humanos do órgão.
+Evento de origem: S-2500 ou S-3500.
+Validação: a) Se o evento de origem for S-2500, retornar a matricula informada nesse evento;
+b) Se o evento de origem for S-3500, retornar a matrícula informada no evento objeto da exclusão."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__id__matricula" maxlength="30" value="{{infoTrabFGTS|readjson:'matricula'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][matricula]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codCateg__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código da categoria do trabalhador<a data-toggle="tooltip" title="Preencher com o código da categoria do trabalhador, conforme Tabela 01.
+Evento de origem: S-2500 ou S-3500.
+Validação: Informação obrigatória e exclusiva se o campo matricula não for informado. Além disso:
+a) Se o evento de origem for S-2500, retornar o codCateg informado nesse evento;
+b) Se o evento de origem for S-3500, retornar o código de categoria informado no evento objeto da exclusão."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__id__codCateg" maxlength="3" value="{{infoTrabFGTS|readjson:'codCateg'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][codCateg]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="categOrig__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente à categoria de origem do dirigente sindical ou do trabalhador cedido<a data-toggle="tooltip" title="Preencher com o código correspondente à categoria de origem do dirigente sindical ou do trabalhador cedido.
+Origem: campo infoDirigenteSindical/categOrig ou infoTrabCedido/categOrig de S-2300."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__id__categOrig" maxlength="3" value="{{infoTrabFGTS|readjson:'categOrig'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][categOrig]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="infoFGTSProcTrab__div">
+    <div class="col-md-12">
+        <h4>Informações relativas ao FGTS do processo trabalhista.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="totalFGTS__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor total de FGTS a recolher no processo trabalhista<a data-toggle="tooltip" title="Valor total de FGTS a recolher no processo trabalhista.
+Validação: Deve corresponder ao somatório dos valores retornados nos campos dpsFGTSProcTrab, dpsFGTSSefip e dpsFGTSDecAnt abaixo.
+Se o evento de origem for S-3500, retornar 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__id__totalFGTS" maxlength="14" value="{{infoTrabFGTS|readjson:'infoFGTSProcTrab.totalFGTS'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][totalFGTS]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="ideEstab__div">
+    <div class="col-md-12">
+        <h4>Identificação do estabelecimento responsável pelo pagamento ao trabalhador dos valores informados.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de inscrição<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de inscrição do estabelecimento, de acordo com as opções da Tabela 05.
+Valores válidos:
+1 - CNPJ
+3 - CAEPF
+4 - CNO
+Origem: campo ideEstab/tpInsc de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__id__tpInsc" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][tpInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal infoTrabFGTS|readjson:'infoFGTSProcTrab.ideEstab.tpInsc'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='3' {% ifequal infoTrabFGTS|readjson:'infoFGTSProcTrab.ideEstab.tpInsc'|to_str '3' %}selected{% endifequal %}>3 - CAEPF</option><option value='4' {% ifequal infoTrabFGTS|readjson:'infoFGTSProcTrab.ideEstab.tpInsc'|to_str '4' %}selected{% endifequal %}>4 - CNO</option><option value='Origem:' {% ifequal infoTrabFGTS|readjson:'infoFGTSProcTrab.ideEstab.tpInsc'|to_str 'Origem:' %}selected{% endifequal %}>Origem: campo ideEstab/tpInsc de S-2500.</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000<a data-toggle="tooltip" title="Informar o número de inscrição do estabelecimento do contribuinte de acordo com o tipo de inscrição indicado no campo acima.
+Origem: campo ideEstab/nrInsc de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__id__nrInsc" maxlength="14" value="{{infoTrabFGTS|readjson:'infoFGTSProcTrab.ideEstab.nrInsc'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][nrInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+{% for basePerRef in infoTrabFGTS|readjson:'infoFGTSProcTrab.ideEstab.basePerRef' %}
+<div id="basePerRef__div">
+    <div class="col-md-12">
+        <h4>Informações sobre bases de cálculo e valores do FGTS por período de referência.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="perRef__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o mês/ano (formato AAAA-MM) de referência das informações<a data-toggle="tooltip" title="Informar o mês/ano (formato AAAA-MM) de referência das informações.
+Origem: campo perRef de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__perRef" maxlength="7" value="{{basePerRef|readjson:'perRef'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][perRef]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codCateg__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código da categoria do trabalhador<a data-toggle="tooltip" title="Preencher com o código da categoria do trabalhador, conforme Tabela 01.
+Validação: a) Se indContr em S-2500 = [N], retornar o código informado no campo infoContr/codCateg do evento S-2500;
+b) Se indContr em S-2500 = [S]:
+b1) Se indCateg em S-2500 = [N], retornar o código de categoria existente no Registro de Eventos Trabalhistas - RET no último dia da competência de referência;
+b2) Se indCateg em S-2500 = [S] e o mês/ano de dtMudCategAtiv de S-2500 for maior que perRef, retornar o código de categoria existente no RET no último dia da competência de referência;
+b3) Se indCateg em S-2500 = [S] e o mês/ano de dtMudCategAtiv de S-2500 for menor ou igual a perRef, retornar mudCategAtiv/codCateg do evento S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__codCateg" maxlength="3" value="{{basePerRef|readjson:'codCateg'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][codCateg]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="tpValorProcTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Tipo de valor que influi na apuração do FGTS<a data-toggle="tooltip" title="Tipo de valor que influi na apuração do FGTS.
+Valores válidos:
+71 - FGTS Origem Processo Trabalhista: quando codCateg = [101, 102, 104, 105, 106, 111, 201, 202, 301, 302, 303, 304, 306, 307, 309, 310, 312, 721] ou ([401, 410], se categOrig for diferente de [103, 107, 108])
+72 - FGTS Origem Processo Trabalhista - Aprendiz/Contrato Verde e Amarelo: quando codCateg = [103, 107, 108] ou ([401, 410], se categOrig = [103, 107, 108])
+73 - FGTS Origem Processo Trabalhista - Indenização compensatória do empregado doméstico: quando codCateg = [104]"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__tpValorProcTrab" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][tpValorProcTrab]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='71' {% ifequal basePerRef|readjson:'tpValorProcTrab'|to_str '71' %}selected{% endifequal %}>71 - FGTS Origem Processo Trabalhista: quando codCateg = [101, 102, 104, 105, 106, 111, 201, 202, 301, 302, 303, 304, 306, 307, 309, 310, 312, 721] ou ([401, 410], se categOrig for diferente de [103, 107, 108])</option><option value='72' {% ifequal basePerRef|readjson:'tpValorProcTrab'|to_str '72' %}selected{% endifequal %}>72 - FGTS Origem Processo Trabalhista - Aprendiz/Contrato Verde e Amarelo: quando codCateg = [103, 107, 108] ou ([401, 410], se categOrig = [103, 107, 108])</option><option value='73' {% ifequal basePerRef|readjson:'tpValorProcTrab'|to_str '73' %}selected{% endifequal %}>73 - FGTS Origem Processo Trabalhista - Indenização compensatória do empregado doméstico: quando codCateg = [104]</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="remFGTSProcTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da base de cálculo de FGTS ainda não declarada<a data-toggle="tooltip" title="Valor da base de cálculo de FGTS ainda não declarada, reconhecida no processo trabalhista.
+Origem: campo vrBcFGTSProcTrab de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__remFGTSProcTrab" maxlength="14" value="{{basePerRef|readjson:'remFGTSProcTrab'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][remFGTSProcTrab]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dpsFGTSProcTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base reconhecida no processo trabalhista<a data-toggle="tooltip" title="Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base reconhecida no processo trabalhista.
+Validação: Deve ser maior que 0 (zero).
+Deve corresponder à multiplicação de remFGTSProcTrab pela alíquota abaixo:
+a) Se tpValorProcTrab = [71], alíquota de 8%;
+b) Se tpValorProcTrab = [72], alíquota de 2%;
+c) Se tpValorProcTrab = [73], alíquota de 3,2%."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__dpsFGTSProcTrab" maxlength="14" value="{{basePerRef|readjson:'dpsFGTSProcTrab'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][dpsFGTSProcTrab]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="remFGTSSefip__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da base de cálculo declarada anteriormente em SEFIP e ainda não recolhida<a data-toggle="tooltip" title="Valor da base de cálculo declarada anteriormente em SEFIP e ainda não recolhida.
+Origem: campo vrBcFGTSSefip de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__remFGTSSefip" maxlength="14" value="{{basePerRef|readjson:'remFGTSSefip'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][remFGTSSefip]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dpsFGTSSefip__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base já declarada anteriormente em SEFIP<a data-toggle="tooltip" title="Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base já declarada anteriormente em SEFIP.
+Validação: Deve ser maior que 0 (zero).
+Deve corresponder à multiplicação de remFGTSSefip pela alíquota abaixo:
+a) Se tpValorProcTrab = [71], alíquota de 8%;
+b) Se tpValorProcTrab = [72], alíquota de 2%;
+c) Se tpValorProcTrab = [73], alíquota de 3,2%."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__dpsFGTSSefip" maxlength="14" value="{{basePerRef|readjson:'dpsFGTSSefip'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][dpsFGTSSefip]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="remFGTSDecAnt__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da base de cálculo declarada anteriormente no eSocial e ainda não recolhida<a data-toggle="tooltip" title="Valor da base de cálculo declarada anteriormente no eSocial e ainda não recolhida.
+Origem: campo vrBcFGTSDecAnt de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__remFGTSDecAnt" maxlength="14" value="{{basePerRef|readjson:'remFGTSDecAnt'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][remFGTSDecAnt]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dpsFGTSDecAnt__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base já declarada anteriormente no eSocial<a data-toggle="tooltip" title="Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base já declarada anteriormente no eSocial.
+Validação: Deve ser maior que 0 (zero).
+Deve corresponder à multiplicação de remFGTSDecAnt pela alíquota abaixo:
+a) Se tpValorProcTrab = [71], alíquota de 8%;
+b) Se tpValorProcTrab = [72], alíquota de 2%;
+c) Se tpValorProcTrab = [73], alíquota de 3,2%."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__dpsFGTSDecAnt" maxlength="14" value="{{basePerRef|readjson:'dpsFGTSDecAnt'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][dpsFGTSDecAnt]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="basePerRef__div">
+    <div class="col-md-12">
+        <h4>Informações sobre bases de cálculo e valores do FGTS por período de referência.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="perRef__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o mês/ano (formato AAAA-MM) de referência das informações<a data-toggle="tooltip" title="Informar o mês/ano (formato AAAA-MM) de referência das informações.
+Origem: campo perRef de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__perRef" maxlength="7" value="{{basePerRef|readjson:'perRef'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][perRef]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codCateg__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código da categoria do trabalhador<a data-toggle="tooltip" title="Preencher com o código da categoria do trabalhador, conforme Tabela 01.
+Validação: a) Se indContr em S-2500 = [N], retornar o código informado no campo infoContr/codCateg do evento S-2500;
+b) Se indContr em S-2500 = [S]:
+b1) Se indCateg em S-2500 = [N], retornar o código de categoria existente no Registro de Eventos Trabalhistas - RET no último dia da competência de referência;
+b2) Se indCateg em S-2500 = [S] e o mês/ano de dtMudCategAtiv de S-2500 for maior que perRef, retornar o código de categoria existente no RET no último dia da competência de referência;
+b3) Se indCateg em S-2500 = [S] e o mês/ano de dtMudCategAtiv de S-2500 for menor ou igual a perRef, retornar mudCategAtiv/codCateg do evento S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__codCateg" maxlength="3" value="{{basePerRef|readjson:'codCateg'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][codCateg]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="tpValorProcTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Tipo de valor que influi na apuração do FGTS<a data-toggle="tooltip" title="Tipo de valor que influi na apuração do FGTS.
+Valores válidos:
+71 - FGTS Origem Processo Trabalhista: quando codCateg = [101, 102, 104, 105, 106, 111, 201, 202, 301, 302, 303, 304, 306, 307, 309, 310, 312, 721] ou ([401, 410], se categOrig for diferente de [103, 107, 108])
+72 - FGTS Origem Processo Trabalhista - Aprendiz/Contrato Verde e Amarelo: quando codCateg = [103, 107, 108] ou ([401, 410], se categOrig = [103, 107, 108])
+73 - FGTS Origem Processo Trabalhista - Indenização compensatória do empregado doméstico: quando codCateg = [104]"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__tpValorProcTrab" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][tpValorProcTrab]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='71' {% ifequal basePerRef|readjson:'tpValorProcTrab'|to_str '71' %}selected{% endifequal %}>71 - FGTS Origem Processo Trabalhista: quando codCateg = [101, 102, 104, 105, 106, 111, 201, 202, 301, 302, 303, 304, 306, 307, 309, 310, 312, 721] ou ([401, 410], se categOrig for diferente de [103, 107, 108])</option><option value='72' {% ifequal basePerRef|readjson:'tpValorProcTrab'|to_str '72' %}selected{% endifequal %}>72 - FGTS Origem Processo Trabalhista - Aprendiz/Contrato Verde e Amarelo: quando codCateg = [103, 107, 108] ou ([401, 410], se categOrig = [103, 107, 108])</option><option value='73' {% ifequal basePerRef|readjson:'tpValorProcTrab'|to_str '73' %}selected{% endifequal %}>73 - FGTS Origem Processo Trabalhista - Indenização compensatória do empregado doméstico: quando codCateg = [104]</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="remFGTSProcTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da base de cálculo de FGTS ainda não declarada<a data-toggle="tooltip" title="Valor da base de cálculo de FGTS ainda não declarada, reconhecida no processo trabalhista.
+Origem: campo vrBcFGTSProcTrab de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__remFGTSProcTrab" maxlength="14" value="{{basePerRef|readjson:'remFGTSProcTrab'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][remFGTSProcTrab]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dpsFGTSProcTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base reconhecida no processo trabalhista<a data-toggle="tooltip" title="Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base reconhecida no processo trabalhista.
+Validação: Deve ser maior que 0 (zero).
+Deve corresponder à multiplicação de remFGTSProcTrab pela alíquota abaixo:
+a) Se tpValorProcTrab = [71], alíquota de 8%;
+b) Se tpValorProcTrab = [72], alíquota de 2%;
+c) Se tpValorProcTrab = [73], alíquota de 3,2%."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__dpsFGTSProcTrab" maxlength="14" value="{{basePerRef|readjson:'dpsFGTSProcTrab'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][dpsFGTSProcTrab]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="remFGTSSefip__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da base de cálculo declarada anteriormente em SEFIP e ainda não recolhida<a data-toggle="tooltip" title="Valor da base de cálculo declarada anteriormente em SEFIP e ainda não recolhida.
+Origem: campo vrBcFGTSSefip de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__remFGTSSefip" maxlength="14" value="{{basePerRef|readjson:'remFGTSSefip'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][remFGTSSefip]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dpsFGTSSefip__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base já declarada anteriormente em SEFIP<a data-toggle="tooltip" title="Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base já declarada anteriormente em SEFIP.
+Validação: Deve ser maior que 0 (zero).
+Deve corresponder à multiplicação de remFGTSSefip pela alíquota abaixo:
+a) Se tpValorProcTrab = [71], alíquota de 8%;
+b) Se tpValorProcTrab = [72], alíquota de 2%;
+c) Se tpValorProcTrab = [73], alíquota de 3,2%."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__dpsFGTSSefip" maxlength="14" value="{{basePerRef|readjson:'dpsFGTSSefip'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][dpsFGTSSefip]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="remFGTSDecAnt__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da base de cálculo declarada anteriormente no eSocial e ainda não recolhida<a data-toggle="tooltip" title="Valor da base de cálculo declarada anteriormente no eSocial e ainda não recolhida.
+Origem: campo vrBcFGTSDecAnt de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__remFGTSDecAnt" maxlength="14" value="{{basePerRef|readjson:'remFGTSDecAnt'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][remFGTSDecAnt]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dpsFGTSDecAnt__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base já declarada anteriormente no eSocial<a data-toggle="tooltip" title="Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base já declarada anteriormente no eSocial.
+Validação: Deve ser maior que 0 (zero).
+Deve corresponder à multiplicação de remFGTSDecAnt pela alíquota abaixo:
+a) Se tpValorProcTrab = [71], alíquota de 8%;
+b) Se tpValorProcTrab = [72], alíquota de 2%;
+c) Se tpValorProcTrab = [73], alíquota de 3,2%."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__dpsFGTSDecAnt" maxlength="14" value="{{basePerRef|readjson:'dpsFGTSDecAnt'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][dpsFGTSDecAnt]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="infoTrabFGTS__div">
+    <div class="col-md-12">
+        <h4>Informações relativas à matrícula e categoria do trabalhador.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="matricula__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Matrícula atribuída ao trabalhador pela empresa ou<a data-toggle="tooltip" title="Matrícula atribuída ao trabalhador pela empresa ou, no caso de servidor público, a matrícula constante no Sistema de Administração de Recursos Humanos do órgão.
+Evento de origem: S-2500 ou S-3500.
+Validação: a) Se o evento de origem for S-2500, retornar a matricula informada nesse evento;
+b) Se o evento de origem for S-3500, retornar a matrícula informada no evento objeto da exclusão."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__id__matricula" maxlength="30" value="{{infoTrabFGTS|readjson:'matricula'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][matricula]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codCateg__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código da categoria do trabalhador<a data-toggle="tooltip" title="Preencher com o código da categoria do trabalhador, conforme Tabela 01.
+Evento de origem: S-2500 ou S-3500.
+Validação: Informação obrigatória e exclusiva se o campo matricula não for informado. Além disso:
+a) Se o evento de origem for S-2500, retornar o codCateg informado nesse evento;
+b) Se o evento de origem for S-3500, retornar o código de categoria informado no evento objeto da exclusão."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__id__codCateg" maxlength="3" value="{{infoTrabFGTS|readjson:'codCateg'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][codCateg]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="categOrig__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente à categoria de origem do dirigente sindical ou do trabalhador cedido<a data-toggle="tooltip" title="Preencher com o código correspondente à categoria de origem do dirigente sindical ou do trabalhador cedido.
+Origem: campo infoDirigenteSindical/categOrig ou infoTrabCedido/categOrig de S-2300."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__id__categOrig" maxlength="3" value="{{infoTrabFGTS|readjson:'categOrig'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][categOrig]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="infoFGTSProcTrab__div">
+    <div class="col-md-12">
+        <h4>Informações relativas ao FGTS do processo trabalhista.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="totalFGTS__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor total de FGTS a recolher no processo trabalhista<a data-toggle="tooltip" title="Valor total de FGTS a recolher no processo trabalhista.
+Validação: Deve corresponder ao somatório dos valores retornados nos campos dpsFGTSProcTrab, dpsFGTSSefip e dpsFGTSDecAnt abaixo.
+Se o evento de origem for S-3500, retornar 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__id__totalFGTS" maxlength="14" value="{{infoTrabFGTS|readjson:'infoFGTSProcTrab.totalFGTS'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][totalFGTS]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="ideEstab__div">
+    <div class="col-md-12">
+        <h4>Identificação do estabelecimento responsável pelo pagamento ao trabalhador dos valores informados.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de inscrição<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de inscrição do estabelecimento, de acordo com as opções da Tabela 05.
+Valores válidos:
+1 - CNPJ
+3 - CAEPF
+4 - CNO
+Origem: campo ideEstab/tpInsc de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__id__tpInsc" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][tpInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal infoTrabFGTS|readjson:'infoFGTSProcTrab.ideEstab.tpInsc'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='3' {% ifequal infoTrabFGTS|readjson:'infoFGTSProcTrab.ideEstab.tpInsc'|to_str '3' %}selected{% endifequal %}>3 - CAEPF</option><option value='4' {% ifequal infoTrabFGTS|readjson:'infoFGTSProcTrab.ideEstab.tpInsc'|to_str '4' %}selected{% endifequal %}>4 - CNO</option><option value='Origem:' {% ifequal infoTrabFGTS|readjson:'infoFGTSProcTrab.ideEstab.tpInsc'|to_str 'Origem:' %}selected{% endifequal %}>Origem: campo ideEstab/tpInsc de S-2500.</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000<a data-toggle="tooltip" title="Informar o número de inscrição do estabelecimento do contribuinte de acordo com o tipo de inscrição indicado no campo acima.
+Origem: campo ideEstab/nrInsc de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__id__nrInsc" maxlength="14" value="{{infoTrabFGTS|readjson:'infoFGTSProcTrab.ideEstab.nrInsc'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][nrInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+{% for basePerRef in infoTrabFGTS|readjson:'infoFGTSProcTrab.ideEstab.basePerRef' %}
+<div id="basePerRef__div">
+    <div class="col-md-12">
+        <h4>Informações sobre bases de cálculo e valores do FGTS por período de referência.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="perRef__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o mês/ano (formato AAAA-MM) de referência das informações<a data-toggle="tooltip" title="Informar o mês/ano (formato AAAA-MM) de referência das informações.
+Origem: campo perRef de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__perRef" maxlength="7" value="{{basePerRef|readjson:'perRef'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][perRef]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codCateg__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código da categoria do trabalhador<a data-toggle="tooltip" title="Preencher com o código da categoria do trabalhador, conforme Tabela 01.
+Validação: a) Se indContr em S-2500 = [N], retornar o código informado no campo infoContr/codCateg do evento S-2500;
+b) Se indContr em S-2500 = [S]:
+b1) Se indCateg em S-2500 = [N], retornar o código de categoria existente no Registro de Eventos Trabalhistas - RET no último dia da competência de referência;
+b2) Se indCateg em S-2500 = [S] e o mês/ano de dtMudCategAtiv de S-2500 for maior que perRef, retornar o código de categoria existente no RET no último dia da competência de referência;
+b3) Se indCateg em S-2500 = [S] e o mês/ano de dtMudCategAtiv de S-2500 for menor ou igual a perRef, retornar mudCategAtiv/codCateg do evento S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__codCateg" maxlength="3" value="{{basePerRef|readjson:'codCateg'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][codCateg]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="tpValorProcTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Tipo de valor que influi na apuração do FGTS<a data-toggle="tooltip" title="Tipo de valor que influi na apuração do FGTS.
+Valores válidos:
+71 - FGTS Origem Processo Trabalhista: quando codCateg = [101, 102, 104, 105, 106, 111, 201, 202, 301, 302, 303, 304, 306, 307, 309, 310, 312, 721] ou ([401, 410], se categOrig for diferente de [103, 107, 108])
+72 - FGTS Origem Processo Trabalhista - Aprendiz/Contrato Verde e Amarelo: quando codCateg = [103, 107, 108] ou ([401, 410], se categOrig = [103, 107, 108])
+73 - FGTS Origem Processo Trabalhista - Indenização compensatória do empregado doméstico: quando codCateg = [104]"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__tpValorProcTrab" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][tpValorProcTrab]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='71' {% ifequal basePerRef|readjson:'tpValorProcTrab'|to_str '71' %}selected{% endifequal %}>71 - FGTS Origem Processo Trabalhista: quando codCateg = [101, 102, 104, 105, 106, 111, 201, 202, 301, 302, 303, 304, 306, 307, 309, 310, 312, 721] ou ([401, 410], se categOrig for diferente de [103, 107, 108])</option><option value='72' {% ifequal basePerRef|readjson:'tpValorProcTrab'|to_str '72' %}selected{% endifequal %}>72 - FGTS Origem Processo Trabalhista - Aprendiz/Contrato Verde e Amarelo: quando codCateg = [103, 107, 108] ou ([401, 410], se categOrig = [103, 107, 108])</option><option value='73' {% ifequal basePerRef|readjson:'tpValorProcTrab'|to_str '73' %}selected{% endifequal %}>73 - FGTS Origem Processo Trabalhista - Indenização compensatória do empregado doméstico: quando codCateg = [104]</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="remFGTSProcTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da base de cálculo de FGTS ainda não declarada<a data-toggle="tooltip" title="Valor da base de cálculo de FGTS ainda não declarada, reconhecida no processo trabalhista.
+Origem: campo vrBcFGTSProcTrab de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__remFGTSProcTrab" maxlength="14" value="{{basePerRef|readjson:'remFGTSProcTrab'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][remFGTSProcTrab]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dpsFGTSProcTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base reconhecida no processo trabalhista<a data-toggle="tooltip" title="Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base reconhecida no processo trabalhista.
+Validação: Deve ser maior que 0 (zero).
+Deve corresponder à multiplicação de remFGTSProcTrab pela alíquota abaixo:
+a) Se tpValorProcTrab = [71], alíquota de 8%;
+b) Se tpValorProcTrab = [72], alíquota de 2%;
+c) Se tpValorProcTrab = [73], alíquota de 3,2%."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__dpsFGTSProcTrab" maxlength="14" value="{{basePerRef|readjson:'dpsFGTSProcTrab'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][dpsFGTSProcTrab]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="remFGTSSefip__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da base de cálculo declarada anteriormente em SEFIP e ainda não recolhida<a data-toggle="tooltip" title="Valor da base de cálculo declarada anteriormente em SEFIP e ainda não recolhida.
+Origem: campo vrBcFGTSSefip de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__remFGTSSefip" maxlength="14" value="{{basePerRef|readjson:'remFGTSSefip'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][remFGTSSefip]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dpsFGTSSefip__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base já declarada anteriormente em SEFIP<a data-toggle="tooltip" title="Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base já declarada anteriormente em SEFIP.
+Validação: Deve ser maior que 0 (zero).
+Deve corresponder à multiplicação de remFGTSSefip pela alíquota abaixo:
+a) Se tpValorProcTrab = [71], alíquota de 8%;
+b) Se tpValorProcTrab = [72], alíquota de 2%;
+c) Se tpValorProcTrab = [73], alíquota de 3,2%."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__dpsFGTSSefip" maxlength="14" value="{{basePerRef|readjson:'dpsFGTSSefip'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][dpsFGTSSefip]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="remFGTSDecAnt__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da base de cálculo declarada anteriormente no eSocial e ainda não recolhida<a data-toggle="tooltip" title="Valor da base de cálculo declarada anteriormente no eSocial e ainda não recolhida.
+Origem: campo vrBcFGTSDecAnt de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__remFGTSDecAnt" maxlength="14" value="{{basePerRef|readjson:'remFGTSDecAnt'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][remFGTSDecAnt]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dpsFGTSDecAnt__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base já declarada anteriormente no eSocial<a data-toggle="tooltip" title="Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base já declarada anteriormente no eSocial.
+Validação: Deve ser maior que 0 (zero).
+Deve corresponder à multiplicação de remFGTSDecAnt pela alíquota abaixo:
+a) Se tpValorProcTrab = [71], alíquota de 8%;
+b) Se tpValorProcTrab = [72], alíquota de 2%;
+c) Se tpValorProcTrab = [73], alíquota de 3,2%."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__dpsFGTSDecAnt" maxlength="14" value="{{basePerRef|readjson:'dpsFGTSDecAnt'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][dpsFGTSDecAnt]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="basePerRef__div">
+    <div class="col-md-12">
+        <h4>Informações sobre bases de cálculo e valores do FGTS por período de referência.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="perRef__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o mês/ano (formato AAAA-MM) de referência das informações<a data-toggle="tooltip" title="Informar o mês/ano (formato AAAA-MM) de referência das informações.
+Origem: campo perRef de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__perRef" maxlength="7" value="{{basePerRef|readjson:'perRef'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][perRef]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codCateg__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código da categoria do trabalhador<a data-toggle="tooltip" title="Preencher com o código da categoria do trabalhador, conforme Tabela 01.
+Validação: a) Se indContr em S-2500 = [N], retornar o código informado no campo infoContr/codCateg do evento S-2500;
+b) Se indContr em S-2500 = [S]:
+b1) Se indCateg em S-2500 = [N], retornar o código de categoria existente no Registro de Eventos Trabalhistas - RET no último dia da competência de referência;
+b2) Se indCateg em S-2500 = [S] e o mês/ano de dtMudCategAtiv de S-2500 for maior que perRef, retornar o código de categoria existente no RET no último dia da competência de referência;
+b3) Se indCateg em S-2500 = [S] e o mês/ano de dtMudCategAtiv de S-2500 for menor ou igual a perRef, retornar mudCategAtiv/codCateg do evento S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__codCateg" maxlength="3" value="{{basePerRef|readjson:'codCateg'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][codCateg]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="tpValorProcTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Tipo de valor que influi na apuração do FGTS<a data-toggle="tooltip" title="Tipo de valor que influi na apuração do FGTS.
+Valores válidos:
+71 - FGTS Origem Processo Trabalhista: quando codCateg = [101, 102, 104, 105, 106, 111, 201, 202, 301, 302, 303, 304, 306, 307, 309, 310, 312, 721] ou ([401, 410], se categOrig for diferente de [103, 107, 108])
+72 - FGTS Origem Processo Trabalhista - Aprendiz/Contrato Verde e Amarelo: quando codCateg = [103, 107, 108] ou ([401, 410], se categOrig = [103, 107, 108])
+73 - FGTS Origem Processo Trabalhista - Indenização compensatória do empregado doméstico: quando codCateg = [104]"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__tpValorProcTrab" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][tpValorProcTrab]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='71' {% ifequal basePerRef|readjson:'tpValorProcTrab'|to_str '71' %}selected{% endifequal %}>71 - FGTS Origem Processo Trabalhista: quando codCateg = [101, 102, 104, 105, 106, 111, 201, 202, 301, 302, 303, 304, 306, 307, 309, 310, 312, 721] ou ([401, 410], se categOrig for diferente de [103, 107, 108])</option><option value='72' {% ifequal basePerRef|readjson:'tpValorProcTrab'|to_str '72' %}selected{% endifequal %}>72 - FGTS Origem Processo Trabalhista - Aprendiz/Contrato Verde e Amarelo: quando codCateg = [103, 107, 108] ou ([401, 410], se categOrig = [103, 107, 108])</option><option value='73' {% ifequal basePerRef|readjson:'tpValorProcTrab'|to_str '73' %}selected{% endifequal %}>73 - FGTS Origem Processo Trabalhista - Indenização compensatória do empregado doméstico: quando codCateg = [104]</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="remFGTSProcTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da base de cálculo de FGTS ainda não declarada<a data-toggle="tooltip" title="Valor da base de cálculo de FGTS ainda não declarada, reconhecida no processo trabalhista.
+Origem: campo vrBcFGTSProcTrab de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__remFGTSProcTrab" maxlength="14" value="{{basePerRef|readjson:'remFGTSProcTrab'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][remFGTSProcTrab]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dpsFGTSProcTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base reconhecida no processo trabalhista<a data-toggle="tooltip" title="Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base reconhecida no processo trabalhista.
+Validação: Deve ser maior que 0 (zero).
+Deve corresponder à multiplicação de remFGTSProcTrab pela alíquota abaixo:
+a) Se tpValorProcTrab = [71], alíquota de 8%;
+b) Se tpValorProcTrab = [72], alíquota de 2%;
+c) Se tpValorProcTrab = [73], alíquota de 3,2%."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__dpsFGTSProcTrab" maxlength="14" value="{{basePerRef|readjson:'dpsFGTSProcTrab'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][dpsFGTSProcTrab]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="remFGTSSefip__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da base de cálculo declarada anteriormente em SEFIP e ainda não recolhida<a data-toggle="tooltip" title="Valor da base de cálculo declarada anteriormente em SEFIP e ainda não recolhida.
+Origem: campo vrBcFGTSSefip de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__remFGTSSefip" maxlength="14" value="{{basePerRef|readjson:'remFGTSSefip'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][remFGTSSefip]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dpsFGTSSefip__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base já declarada anteriormente em SEFIP<a data-toggle="tooltip" title="Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base já declarada anteriormente em SEFIP.
+Validação: Deve ser maior que 0 (zero).
+Deve corresponder à multiplicação de remFGTSSefip pela alíquota abaixo:
+a) Se tpValorProcTrab = [71], alíquota de 8%;
+b) Se tpValorProcTrab = [72], alíquota de 2%;
+c) Se tpValorProcTrab = [73], alíquota de 3,2%."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__dpsFGTSSefip" maxlength="14" value="{{basePerRef|readjson:'dpsFGTSSefip'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][dpsFGTSSefip]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="remFGTSDecAnt__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da base de cálculo declarada anteriormente no eSocial e ainda não recolhida<a data-toggle="tooltip" title="Valor da base de cálculo declarada anteriormente no eSocial e ainda não recolhida.
+Origem: campo vrBcFGTSDecAnt de S-2500."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__remFGTSDecAnt" maxlength="14" value="{{basePerRef|readjson:'remFGTSDecAnt'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][remFGTSDecAnt]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dpsFGTSDecAnt__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base já declarada anteriormente no eSocial<a data-toggle="tooltip" title="Valor histórico do FGTS a ser depositado na conta vinculada do trabalhador sobre base já declarada anteriormente no eSocial.
+Validação: Deve ser maior que 0 (zero).
+Deve corresponder à multiplicação de remFGTSDecAnt pela alíquota abaixo:
+a) Se tpValorProcTrab = [71], alíquota de 8%;
+b) Se tpValorProcTrab = [72], alíquota de 2%;
+c) Se tpValorProcTrab = [73], alíquota de 3,2%."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtFGTSProcTrab__infoTrabFGTS__infoFGTSProcTrab__ideEstab__basePerRef__id__dpsFGTSDecAnt" maxlength="14" value="{{basePerRef|readjson:'dpsFGTSDecAnt'}}" name="[evtFGTSProcTrab][infoTrabFGTS][][infoFGTSProcTrab][ideEstab][basePerRef][][dpsFGTSDecAnt]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>
+</div>
+
+</form>
+{% endwith %}
+{% if original.is_aberto %}
+<script type="text/javascript">
+function set_evento_json() {
+    var dst = document.getElementById("id_evento_json");
+    var dst_read = document.getElementById("id_evento_json_read");
+    var obj = $('#form_json').serializeJSON({useIntKeysAsArrayIndex: true});
+    dst.value = JSON.stringify(obj);
+    dst_read.value = JSON.stringify(obj);
+};
+$(document).ready(function(){
+    set_evento_json();
+});
+</script>
+{% endif %}

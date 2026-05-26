@@ -1,0 +1,1208 @@
+
+{% load esocial_custom_tags %}
+{% with evtTabLotacao=original.evento_json|readjson:'evtTabLotacao' %}
+<form id="form_json">
+
+<div class="row">
+
+<div id="evtTabLotacao__div">
+    <div class="col-md-12">
+        <h4>Evento Tabela de Lotações Tributárias.
+Regras de validação:
+REGRA_ENVIO_PROC_FECHAMENTO
+REGRA_EXISTE_INFO_EMPREGADOR
+REGRA_TABGERAL_ALTERACAO_PERIODO_CONFLITANTE
+REGRA_TABGERAL_EXISTE_REGISTRO_ALTERADO
+REGRA_TABGERAL_EXISTE_REGISTRO_EXCLUIDO
+REGRA_TABGERAL_INCLUSAO_PERIODO_CONFLITANTE
+REGRA_TABLOTACAO_VALIDA_FPASTERCEIROS
+REGRA_TAB_PERMITE_EXCLUSAO
+REGRA_VALIDA_DT_FUTURA</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideEvento__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do evento.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpAmb__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Identificação do ambiente</label>
+            <select name="[evtTabLotacao][ideEvento][tpAmb]" id="evtTabLotacao__ideEvento__id__tpAmb_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpamb 1 %}selected{% endifequal %}>1 - Produção</option>
+                <option value="2" {% ifequal original.tpamb 2 %}selected{% endifequal %}>2 - Produção restrita.</option>
+            </select>
+            <input type="hidden" name="[evtTabLotacao][ideEvento][tpAmb]" id="evtTabLotacao__ideEvento__id__tpAmb" value="{{original.tpamb}}">
+        </div>
+    </div>
+</div>
+<div id="procEmi__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Processo de emissão do evento</label>
+            <select name="[evtTabLotacao][ideEvento][procEmi]" id="evtTabLotacao__ideEvento__id__procEmi_disabled" disabled="">
+                <option value="1" {% ifequal original.procemi 1 %}selected{% endifequal %}>1 - Aplicativo do empregador</option>
+                <option value="2" {% ifequal original.procemi 2 %}selected{% endifequal %}>2 - Aplicativo governamental - Empregador Doméstico</option>
+                <option value="3" {% ifequal original.procemi 3 %}selected{% endifequal %}>3 - Aplicativo governamental - Web Geral</option>
+                <option value="4" {% ifequal original.procemi 4 %}selected{% endifequal %}>4 - Aplicativo governamental - Simplificado Pessoa Jurídica</option>
+                <option value="5" {% ifequal original.procemi 5 %}selected{% endifequal %}>5 - Aplicativo governamental - Segurado Especial.</option>
+            </select>
+            <input type="hidden" name="[evtTabLotacao][ideEvento][procEmi]" id="evtTabLotacao__ideEvento__id__procEmi" value="{{original.procemi}}">
+        </div>
+    </div>
+</div>
+<div id="verProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Versão do processo de emissão do evento</label>
+            <input type="text" name="[evtTabLotacao][ideEvento][verProc]" value="{{original.verproc}}" class="vTextField" maxlength="20" id="evtTabLotacao__ideEvento__id__verProc_disabled" disabled="">
+            <input type="hidden" name="[evtTabLotacao][ideEvento][verProc]" id="evtTabLotacao__ideEvento__id__verProc" value="{{original.verproc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideEmpregador__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do empregador.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Preencher com o código correspondente ao tipo de inscrição</label>
+            <select name="[evtTabLotacao][ideEmpregador][tpInsc]" id="evtTabLotacao__ideEmpregador__id__tpInsc_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpinsc 1 %}selected{% endifequal %}>1 - CNPJ</option>
+                <option value="2" {% ifequal original.tpinsc 2 %}selected{% endifequal %}>2 - CPF</option>
+                <option value="3" {% ifequal original.tpinsc 3 %}selected{% endifequal %}>3 - CAEPF (Cadastro de Atividade Econômica de Pessoa Física)</option>
+                <option value="4" {% ifequal original.tpinsc 4 %}selected{% endifequal %}>4 - CNO (Cadastro Nacional de Obra)</option>
+                <option value="5" {% ifequal original.tpinsc 5 %}selected{% endifequal %}>5 - CGC</option>
+                <option value="6" {% ifequal original.tpinsc 6 %}selected{% endifequal %}>6 - CEI</option>
+            </select>
+            <input type="hidden" name="[evtTabLotacao][ideEmpregador][tpInsc]" id="evtTabLotacao__ideEmpregador__id__tpInsc" value="{{original.tpinsc}}">
+        </div>
+    </div>
+</div>
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000</label>
+            <input type="text" id="evtTabLotacao__ideEmpregador__id__nrInsc_disabled" name="[evtTabLotacao][ideEmpregador][nrInsc]" value="{{original.nrinsc}}" class="vTextField" maxlength="15" disabled="">
+            <input type="hidden" name="[evtTabLotacao][ideEmpregador][nrInsc]" id="evtTabLotacao__ideEmpregador__id__nrInsc" value="{{original.nrinsc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="infoLotacao__div">
+    <div class="col-md-12">
+        <h4>Identificação da operação (inclusão, alteração ou exclusão) e das informações da lotação.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="inclusao__div">
+    <div class="col-md-12">
+        <h4>Inclusão de novas informações.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideLotacao__div">
+    <div class="col-md-12">
+        <h4>Identificação da lotação e período de validade das informações.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codLotacao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador para a lotação tributária<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador para a lotação tributária.
+Validação: O código atribuído não pode conter a expressão 'eSocial' nas 7 primeiras posições.
+Regra de validação:
+REGRA_CARACTERE_ESPECIAL"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__inclusao__ideLotacao__id__codLotacao" maxlength="30" value="{{evtTabLotacao|readjson:'infoLotacao.inclusao.ideLotacao.codLotacao'}}" name="[evtTabLotacao][infoLotacao][inclusao][ideLotacao][codLotacao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="iniValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de início da validade das informações prestadas no evento<a data-toggle="tooltip" title="Preencher com o mês e ano de início da validade das informações prestadas no evento, no formato AAAA-MM.
+Validação: Deve ser uma data válida, igual ou posterior à data de início de obrigatoriedade deste evento para o empregador no eSocial, no formato AAAA-MM."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__inclusao__ideLotacao__id__iniValid" maxlength="7" value="{{evtTabLotacao|readjson:'infoLotacao.inclusao.ideLotacao.iniValid'}}" name="[evtTabLotacao][infoLotacao][inclusao][ideLotacao][iniValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fimValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de término da validade das informações<a data-toggle="tooltip" title="Preencher com o mês e ano de término da validade das informações, se houver.
+Validação: Se informado, deve estar no formato AAAA-MM e ser um período igual ou posterior a iniValid."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__inclusao__ideLotacao__id__fimValid" maxlength="7" value="{{evtTabLotacao|readjson:'infoLotacao.inclusao.ideLotacao.fimValid'}}" name="[evtTabLotacao][infoLotacao][inclusao][ideLotacao][fimValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="dadosLotacao__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das informações da lotação.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpLotacao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de lotação<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de lotação.
+Validação: Deve ser um código válido e existente na Tabela 10, bem como compatível com a classificação tributária indicada no evento S-1000, conforme Tabela 12."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__inclusao__dadosLotacao__id__tpLotacao" maxlength="2" value="{{evtTabLotacao|readjson:'infoLotacao.inclusao.dadosLotacao.tpLotacao'}}" name="[evtTabLotacao][infoLotacao][inclusao][dadosLotacao][tpLotacao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de inscrição<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de inscrição, conforme Tabela 05.
+Valores válidos:
+1 - CNPJ
+2 - CPF
+4 - CNO
+Validação: O campo não deve ser preenchido se tpLotacao for igual a [01, 10, 21, 24, 90, 91]. Nos demais casos, observar conteúdo exigido para o campo dadosLotacao/nrInsc, conforme Tabela 10."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabLotacao__infoLotacao__inclusao__dadosLotacao__id__tpInsc" name="[evtTabLotacao][infoLotacao][inclusao][dadosLotacao][tpInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTabLotacao|readjson:'infoLotacao.inclusao.dadosLotacao.tpInsc'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='2' {% ifequal evtTabLotacao|readjson:'infoLotacao.inclusao.dadosLotacao.tpInsc'|to_str '2' %}selected{% endifequal %}>2 - CPF</option><option value='4' {% ifequal evtTabLotacao|readjson:'infoLotacao.inclusao.dadosLotacao.tpInsc'|to_str '4' %}selected{% endifequal %}>4 - CNO</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000<a data-toggle="tooltip" title="Preencher com o número de inscrição (CNPJ, CPF, CNO) ao qual pertence a lotação tributária.
+Validação: a) Deve ser preenchido de acordo com o conteúdo exigido, conforme especificado no campo dadosLotacao/tpInsc e na Tabela 10;
+b) Deve ser um identificador válido, constante das bases da RFB."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__inclusao__dadosLotacao__id__nrInsc" maxlength="14" value="{{evtTabLotacao|readjson:'infoLotacao.inclusao.dadosLotacao.nrInsc'}}" name="[evtTabLotacao][infoLotacao][inclusao][dadosLotacao][nrInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fpasLotacao__div">
+    <div class="col-md-12">
+        <h4>Informações de FPAS e Terceiros relativos à lotação tributária.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="fpas__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código relativo ao FPAS<a data-toggle="tooltip" title="Preencher com o código relativo ao FPAS.
+Validação: Deve ser um código FPAS válido, conforme Tabela 04."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__inclusao__dadosLotacao__fpasLotacao__id__fpas" maxlength="3" value="{{evtTabLotacao|readjson:'infoLotacao.inclusao.dadosLotacao.fpasLotacao.fpas'}}" name="[evtTabLotacao][infoLotacao][inclusao][dadosLotacao][fpasLotacao][fpas]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codTercs__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código de Terceiros<a data-toggle="tooltip" title="Preencher com o código de Terceiros, já considerando a existência de eventuais convênios para recolhimento direto. Ex.: Se o contribuinte está enquadrado com FPAS [507], cujo código cheio de Terceiros é [0079], se possuir convênio com SENAI deve informar o código [0075].
+Validação: Se a classificação tributária em S-1000 for igual a [01, 02, 03, 04], informar [0000]. Nos demais casos, o código de Terceiros informado deve ser compatível com o código de FPAS informado, conforme Tabela 04."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__inclusao__dadosLotacao__fpasLotacao__id__codTercs" maxlength="4" value="{{evtTabLotacao|readjson:'infoLotacao.inclusao.dadosLotacao.fpasLotacao.codTercs'}}" name="[evtTabLotacao][infoLotacao][inclusao][dadosLotacao][fpasLotacao][codTercs]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codTercsSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código combinado dos Terceiros para os quais o recolhimento está suspenso em virtude de processos judiciais<a data-toggle="tooltip" title="Informar o código combinado dos Terceiros para os quais o recolhimento está suspenso em virtude de processos judiciais. Ex.: Se o contribuinte possui decisões de processos para suspensão de recolhimentos ao SESI (0008) e ao SEBRAE (0064), deve informar o código combinado das duas entidades, ou seja, [0072].
+Validação: Deve ser um código consistente com a Tabela 04.
+Deve haver pelo menos um processo em procJudTerceiro para cada código de Terceiro cujo recolhimento esteja suspenso."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__inclusao__dadosLotacao__fpasLotacao__id__codTercsSusp" maxlength="4" value="{{evtTabLotacao|readjson:'infoLotacao.inclusao.dadosLotacao.fpasLotacao.codTercsSusp'}}" name="[evtTabLotacao][infoLotacao][inclusao][dadosLotacao][fpasLotacao][codTercsSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="infoProcJudTerceiros__div">
+    <div class="col-md-12">
+        <h4>Informações sobre a existência de processos judiciais, com sentença/decisão favorável ao contribuinte, relativos às contribuições destinadas a Outras Entidades e Fundos.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+{% for procJudTerceiro in evtTabLotacao|readjson:'infoLotacao.inclusao.dadosLotacao.fpasLotacao.infoProcJudTerceiros.procJudTerceiro' %}
+<div id="procJudTerceiro__div">
+    <div class="col-md-12">
+        <h4>Identificação do processo judicial.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codTerc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código de Terceiro<a data-toggle="tooltip" title="Informar o código de Terceiro.
+Validação: Deve ser um código de Terceiro válido e compatível com o FPAS/Terceiros informado no grupo superior, conforme Tabela 04."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__inclusao__dadosLotacao__fpasLotacao__infoProcJudTerceiros__procJudTerceiro__id__codTerc" maxlength="4" value="{{procJudTerceiro|readjson:'codTerc'}}" name="[evtTabLotacao][infoLotacao][inclusao][dadosLotacao][fpasLotacao][infoProcJudTerceiros][procJudTerceiro][][codTerc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nrProcJud__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de processo judicial cadastrado<a data-toggle="tooltip" title="Informar um número de processo judicial cadastrado através do evento S-1070, cujo indMatProc seja igual a [1].
+Validação: Deve ser um número de processo judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__inclusao__dadosLotacao__fpasLotacao__infoProcJudTerceiros__procJudTerceiro__id__nrProcJud" maxlength="20" value="{{procJudTerceiro|readjson:'nrProcJud'}}" name="[evtTabLotacao][infoLotacao][inclusao][dadosLotacao][fpasLotacao][infoProcJudTerceiros][procJudTerceiro][][nrProcJud]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador em S-1070.
+Validação: A informação prestada deve estar de acordo com o que foi informado em S-1070."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__inclusao__dadosLotacao__fpasLotacao__infoProcJudTerceiros__procJudTerceiro__id__codSusp" maxlength="14" value="{{procJudTerceiro|readjson:'codSusp'}}" name="[evtTabLotacao][infoLotacao][inclusao][dadosLotacao][fpasLotacao][infoProcJudTerceiros][procJudTerceiro][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="procJudTerceiro__div">
+    <div class="col-md-12">
+        <h4>Identificação do processo judicial.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codTerc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código de Terceiro<a data-toggle="tooltip" title="Informar o código de Terceiro.
+Validação: Deve ser um código de Terceiro válido e compatível com o FPAS/Terceiros informado no grupo superior, conforme Tabela 04."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__inclusao__dadosLotacao__fpasLotacao__infoProcJudTerceiros__procJudTerceiro__id__codTerc" maxlength="4" value="{{procJudTerceiro|readjson:'codTerc'}}" name="[evtTabLotacao][infoLotacao][inclusao][dadosLotacao][fpasLotacao][infoProcJudTerceiros][procJudTerceiro][][codTerc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nrProcJud__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de processo judicial cadastrado<a data-toggle="tooltip" title="Informar um número de processo judicial cadastrado através do evento S-1070, cujo indMatProc seja igual a [1].
+Validação: Deve ser um número de processo judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__inclusao__dadosLotacao__fpasLotacao__infoProcJudTerceiros__procJudTerceiro__id__nrProcJud" maxlength="20" value="{{procJudTerceiro|readjson:'nrProcJud'}}" name="[evtTabLotacao][infoLotacao][inclusao][dadosLotacao][fpasLotacao][infoProcJudTerceiros][procJudTerceiro][][nrProcJud]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador em S-1070.
+Validação: A informação prestada deve estar de acordo com o que foi informado em S-1070."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__inclusao__dadosLotacao__fpasLotacao__infoProcJudTerceiros__procJudTerceiro__id__codSusp" maxlength="14" value="{{procJudTerceiro|readjson:'codSusp'}}" name="[evtTabLotacao][infoLotacao][inclusao][dadosLotacao][fpasLotacao][infoProcJudTerceiros][procJudTerceiro][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="infoEmprParcial__div">
+    <div class="col-md-12">
+        <h4>Informação complementar que apresenta identificação do contratante de obra de construção civil sob regime de empreitada parcial ou subempreitada.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInscContrat__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Tipo de inscrição do contratante<a data-toggle="tooltip" title="Tipo de inscrição do contratante.
+Valores válidos:
+1 - CNPJ
+2 - CPF"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabLotacao__infoLotacao__inclusao__dadosLotacao__infoEmprParcial__id__tpInscContrat" name="[evtTabLotacao][infoLotacao][inclusao][dadosLotacao][infoEmprParcial][tpInscContrat]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTabLotacao|readjson:'infoLotacao.inclusao.dadosLotacao.infoEmprParcial.tpInscContrat'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='2' {% ifequal evtTabLotacao|readjson:'infoLotacao.inclusao.dadosLotacao.infoEmprParcial.tpInscContrat'|to_str '2' %}selected{% endifequal %}>2 - CPF</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInscContrat__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número de inscrição (CNPJ/CPF) do contratante<a data-toggle="tooltip" title="Número de inscrição (CNPJ/CPF) do contratante.
+Validação: Deve ser um número de CNPJ ou CPF válido, conforme definido em tpInscContrat."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__inclusao__dadosLotacao__infoEmprParcial__id__nrInscContrat" maxlength="14" value="{{evtTabLotacao|readjson:'infoLotacao.inclusao.dadosLotacao.infoEmprParcial.nrInscContrat'}}" name="[evtTabLotacao][infoLotacao][inclusao][dadosLotacao][infoEmprParcial][nrInscContrat]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="tpInscProp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Tipo de inscrição do proprietário do CNO<a data-toggle="tooltip" title="Tipo de inscrição do proprietário do CNO.
+Valores válidos:
+1 - CNPJ
+2 - CPF
+Validação: Preenchimento obrigatório e exclusivo quando o proprietário não for encontrado no CNO."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabLotacao__infoLotacao__inclusao__dadosLotacao__infoEmprParcial__id__tpInscProp" name="[evtTabLotacao][infoLotacao][inclusao][dadosLotacao][infoEmprParcial][tpInscProp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTabLotacao|readjson:'infoLotacao.inclusao.dadosLotacao.infoEmprParcial.tpInscProp'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='2' {% ifequal evtTabLotacao|readjson:'infoLotacao.inclusao.dadosLotacao.infoEmprParcial.tpInscProp'|to_str '2' %}selected{% endifequal %}>2 - CPF</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInscProp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o número de inscrição (CNPJ/CPF) do proprietário do CNO<a data-toggle="tooltip" title="Preencher com o número de inscrição (CNPJ/CPF) do proprietário do CNO.
+Validação: Preenchimento obrigatório e exclusivo se tpInscProp for informado. Deve ser um número de CNPJ ou CPF válido, conforme indicado em tpInscProp."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__inclusao__dadosLotacao__infoEmprParcial__id__nrInscProp" maxlength="14" value="{{evtTabLotacao|readjson:'infoLotacao.inclusao.dadosLotacao.infoEmprParcial.nrInscProp'}}" name="[evtTabLotacao][infoLotacao][inclusao][dadosLotacao][infoEmprParcial][nrInscProp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="dadosOpPort__div">
+    <div class="col-md-12">
+        <h4>Informações do operador portuário.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="aliqRat__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar a alíquota RAT<a data-toggle="tooltip" title="Preencher com a alíquota definida na legislação vigente para a atividade (CNAE) preponderante.
+Valores válidos: 1, 2, 3"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__inclusao__dadosLotacao__dadosOpPort__id__aliqRat" maxlength="1" value="{{evtTabLotacao|readjson:'infoLotacao.inclusao.dadosLotacao.dadosOpPort.aliqRat'}}" name="[evtTabLotacao][infoLotacao][inclusao][dadosLotacao][dadosOpPort][aliqRat]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fap__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Fator Acidentário de Prevenção - FAP<a data-toggle="tooltip" title="Fator Acidentário de Prevenção - FAP.
+Validação: Deve ser um número maior ou igual a 0,5000 e menor ou igual a 2,0000, de acordo com o estabelecido pelo órgão governamental competente."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__inclusao__dadosLotacao__dadosOpPort__id__fap" maxlength="5" value="{{evtTabLotacao|readjson:'infoLotacao.inclusao.dadosLotacao.dadosOpPort.fap'}}" name="[evtTabLotacao][infoLotacao][inclusao][dadosLotacao][dadosOpPort][fap]" onchange="set_evento_json()" class="form-control esocial-valor-4" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="alteracao__div">
+    <div class="col-md-12">
+        <h4>Alteração das informações.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideLotacao__div">
+    <div class="col-md-12">
+        <h4>Identificação da lotação e período de validade das informações.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codLotacao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador para a lotação tributária<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador para a lotação tributária.
+Validação: O código atribuído não pode conter a expressão 'eSocial' nas 7 primeiras posições.
+Regra de validação:
+REGRA_CARACTERE_ESPECIAL"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__ideLotacao__id__codLotacao" maxlength="30" value="{{evtTabLotacao|readjson:'infoLotacao.alteracao.ideLotacao.codLotacao'}}" name="[evtTabLotacao][infoLotacao][alteracao][ideLotacao][codLotacao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="iniValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de início da validade das informações prestadas no evento<a data-toggle="tooltip" title="Preencher com o mês e ano de início da validade das informações prestadas no evento, no formato AAAA-MM.
+Validação: Deve ser uma data válida, igual ou posterior à data de início de obrigatoriedade deste evento para o empregador no eSocial, no formato AAAA-MM."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__ideLotacao__id__iniValid" maxlength="7" value="{{evtTabLotacao|readjson:'infoLotacao.alteracao.ideLotacao.iniValid'}}" name="[evtTabLotacao][infoLotacao][alteracao][ideLotacao][iniValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fimValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de término da validade das informações<a data-toggle="tooltip" title="Preencher com o mês e ano de término da validade das informações, se houver.
+Validação: Se informado, deve estar no formato AAAA-MM e ser um período igual ou posterior a iniValid."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__ideLotacao__id__fimValid" maxlength="7" value="{{evtTabLotacao|readjson:'infoLotacao.alteracao.ideLotacao.fimValid'}}" name="[evtTabLotacao][infoLotacao][alteracao][ideLotacao][fimValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="dadosLotacao__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das informações da lotação.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpLotacao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de lotação<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de lotação.
+Validação: Deve ser um código válido e existente na Tabela 10, bem como compatível com a classificação tributária indicada no evento S-1000, conforme Tabela 12."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__dadosLotacao__id__tpLotacao" maxlength="2" value="{{evtTabLotacao|readjson:'infoLotacao.alteracao.dadosLotacao.tpLotacao'}}" name="[evtTabLotacao][infoLotacao][alteracao][dadosLotacao][tpLotacao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de inscrição<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de inscrição, conforme Tabela 05.
+Valores válidos:
+1 - CNPJ
+2 - CPF
+4 - CNO
+Validação: O campo não deve ser preenchido se tpLotacao for igual a [01, 10, 21, 24, 90, 91]. Nos demais casos, observar conteúdo exigido para o campo dadosLotacao/nrInsc, conforme Tabela 10."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabLotacao__infoLotacao__alteracao__dadosLotacao__id__tpInsc" name="[evtTabLotacao][infoLotacao][alteracao][dadosLotacao][tpInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTabLotacao|readjson:'infoLotacao.alteracao.dadosLotacao.tpInsc'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='2' {% ifequal evtTabLotacao|readjson:'infoLotacao.alteracao.dadosLotacao.tpInsc'|to_str '2' %}selected{% endifequal %}>2 - CPF</option><option value='4' {% ifequal evtTabLotacao|readjson:'infoLotacao.alteracao.dadosLotacao.tpInsc'|to_str '4' %}selected{% endifequal %}>4 - CNO</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000<a data-toggle="tooltip" title="Preencher com o número de inscrição (CNPJ, CPF, CNO) ao qual pertence a lotação tributária.
+Validação: a) Deve ser preenchido de acordo com o conteúdo exigido, conforme especificado no campo dadosLotacao/tpInsc e na Tabela 10;
+b) Deve ser um identificador válido, constante das bases da RFB."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__dadosLotacao__id__nrInsc" maxlength="14" value="{{evtTabLotacao|readjson:'infoLotacao.alteracao.dadosLotacao.nrInsc'}}" name="[evtTabLotacao][infoLotacao][alteracao][dadosLotacao][nrInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fpasLotacao__div">
+    <div class="col-md-12">
+        <h4>Informações de FPAS e Terceiros relativos à lotação tributária.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="fpas__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código relativo ao FPAS<a data-toggle="tooltip" title="Preencher com o código relativo ao FPAS.
+Validação: Deve ser um código FPAS válido, conforme Tabela 04."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__dadosLotacao__fpasLotacao__id__fpas" maxlength="3" value="{{evtTabLotacao|readjson:'infoLotacao.alteracao.dadosLotacao.fpasLotacao.fpas'}}" name="[evtTabLotacao][infoLotacao][alteracao][dadosLotacao][fpasLotacao][fpas]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codTercs__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código de Terceiros<a data-toggle="tooltip" title="Preencher com o código de Terceiros, já considerando a existência de eventuais convênios para recolhimento direto. Ex.: Se o contribuinte está enquadrado com FPAS [507], cujo código cheio de Terceiros é [0079], se possuir convênio com SENAI deve informar o código [0075].
+Validação: Se a classificação tributária em S-1000 for igual a [01, 02, 03, 04], informar [0000]. Nos demais casos, o código de Terceiros informado deve ser compatível com o código de FPAS informado, conforme Tabela 04."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__dadosLotacao__fpasLotacao__id__codTercs" maxlength="4" value="{{evtTabLotacao|readjson:'infoLotacao.alteracao.dadosLotacao.fpasLotacao.codTercs'}}" name="[evtTabLotacao][infoLotacao][alteracao][dadosLotacao][fpasLotacao][codTercs]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codTercsSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código combinado dos Terceiros para os quais o recolhimento está suspenso em virtude de processos judiciais<a data-toggle="tooltip" title="Informar o código combinado dos Terceiros para os quais o recolhimento está suspenso em virtude de processos judiciais. Ex.: Se o contribuinte possui decisões de processos para suspensão de recolhimentos ao SESI (0008) e ao SEBRAE (0064), deve informar o código combinado das duas entidades, ou seja, [0072].
+Validação: Deve ser um código consistente com a Tabela 04.
+Deve haver pelo menos um processo em procJudTerceiro para cada código de Terceiro cujo recolhimento esteja suspenso."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__dadosLotacao__fpasLotacao__id__codTercsSusp" maxlength="4" value="{{evtTabLotacao|readjson:'infoLotacao.alteracao.dadosLotacao.fpasLotacao.codTercsSusp'}}" name="[evtTabLotacao][infoLotacao][alteracao][dadosLotacao][fpasLotacao][codTercsSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="infoProcJudTerceiros__div">
+    <div class="col-md-12">
+        <h4>Informações sobre a existência de processos judiciais, com sentença/decisão favorável ao contribuinte, relativos às contribuições destinadas a Outras Entidades e Fundos.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+{% for procJudTerceiro in evtTabLotacao|readjson:'infoLotacao.alteracao.dadosLotacao.fpasLotacao.infoProcJudTerceiros.procJudTerceiro' %}
+<div id="procJudTerceiro__div">
+    <div class="col-md-12">
+        <h4>Identificação do processo judicial.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codTerc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código de Terceiro<a data-toggle="tooltip" title="Informar o código de Terceiro.
+Validação: Deve ser um código de Terceiro válido e compatível com o FPAS/Terceiros informado no grupo superior, conforme Tabela 04."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__dadosLotacao__fpasLotacao__infoProcJudTerceiros__procJudTerceiro__id__codTerc" maxlength="4" value="{{procJudTerceiro|readjson:'codTerc'}}" name="[evtTabLotacao][infoLotacao][alteracao][dadosLotacao][fpasLotacao][infoProcJudTerceiros][procJudTerceiro][][codTerc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nrProcJud__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de processo judicial cadastrado<a data-toggle="tooltip" title="Informar um número de processo judicial cadastrado através do evento S-1070, cujo indMatProc seja igual a [1].
+Validação: Deve ser um número de processo judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__dadosLotacao__fpasLotacao__infoProcJudTerceiros__procJudTerceiro__id__nrProcJud" maxlength="20" value="{{procJudTerceiro|readjson:'nrProcJud'}}" name="[evtTabLotacao][infoLotacao][alteracao][dadosLotacao][fpasLotacao][infoProcJudTerceiros][procJudTerceiro][][nrProcJud]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador em S-1070.
+Validação: A informação prestada deve estar de acordo com o que foi informado em S-1070."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__dadosLotacao__fpasLotacao__infoProcJudTerceiros__procJudTerceiro__id__codSusp" maxlength="14" value="{{procJudTerceiro|readjson:'codSusp'}}" name="[evtTabLotacao][infoLotacao][alteracao][dadosLotacao][fpasLotacao][infoProcJudTerceiros][procJudTerceiro][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="procJudTerceiro__div">
+    <div class="col-md-12">
+        <h4>Identificação do processo judicial.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codTerc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código de Terceiro<a data-toggle="tooltip" title="Informar o código de Terceiro.
+Validação: Deve ser um código de Terceiro válido e compatível com o FPAS/Terceiros informado no grupo superior, conforme Tabela 04."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__dadosLotacao__fpasLotacao__infoProcJudTerceiros__procJudTerceiro__id__codTerc" maxlength="4" value="{{procJudTerceiro|readjson:'codTerc'}}" name="[evtTabLotacao][infoLotacao][alteracao][dadosLotacao][fpasLotacao][infoProcJudTerceiros][procJudTerceiro][][codTerc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nrProcJud__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de processo judicial cadastrado<a data-toggle="tooltip" title="Informar um número de processo judicial cadastrado através do evento S-1070, cujo indMatProc seja igual a [1].
+Validação: Deve ser um número de processo judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__dadosLotacao__fpasLotacao__infoProcJudTerceiros__procJudTerceiro__id__nrProcJud" maxlength="20" value="{{procJudTerceiro|readjson:'nrProcJud'}}" name="[evtTabLotacao][infoLotacao][alteracao][dadosLotacao][fpasLotacao][infoProcJudTerceiros][procJudTerceiro][][nrProcJud]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador em S-1070.
+Validação: A informação prestada deve estar de acordo com o que foi informado em S-1070."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__dadosLotacao__fpasLotacao__infoProcJudTerceiros__procJudTerceiro__id__codSusp" maxlength="14" value="{{procJudTerceiro|readjson:'codSusp'}}" name="[evtTabLotacao][infoLotacao][alteracao][dadosLotacao][fpasLotacao][infoProcJudTerceiros][procJudTerceiro][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="infoEmprParcial__div">
+    <div class="col-md-12">
+        <h4>Informação complementar que apresenta identificação do contratante de obra de construção civil sob regime de empreitada parcial ou subempreitada.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInscContrat__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Tipo de inscrição do contratante<a data-toggle="tooltip" title="Tipo de inscrição do contratante.
+Valores válidos:
+1 - CNPJ
+2 - CPF"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabLotacao__infoLotacao__alteracao__dadosLotacao__infoEmprParcial__id__tpInscContrat" name="[evtTabLotacao][infoLotacao][alteracao][dadosLotacao][infoEmprParcial][tpInscContrat]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTabLotacao|readjson:'infoLotacao.alteracao.dadosLotacao.infoEmprParcial.tpInscContrat'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='2' {% ifequal evtTabLotacao|readjson:'infoLotacao.alteracao.dadosLotacao.infoEmprParcial.tpInscContrat'|to_str '2' %}selected{% endifequal %}>2 - CPF</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInscContrat__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número de inscrição (CNPJ/CPF) do contratante<a data-toggle="tooltip" title="Número de inscrição (CNPJ/CPF) do contratante.
+Validação: Deve ser um número de CNPJ ou CPF válido, conforme definido em tpInscContrat."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__dadosLotacao__infoEmprParcial__id__nrInscContrat" maxlength="14" value="{{evtTabLotacao|readjson:'infoLotacao.alteracao.dadosLotacao.infoEmprParcial.nrInscContrat'}}" name="[evtTabLotacao][infoLotacao][alteracao][dadosLotacao][infoEmprParcial][nrInscContrat]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="tpInscProp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Tipo de inscrição do proprietário do CNO<a data-toggle="tooltip" title="Tipo de inscrição do proprietário do CNO.
+Valores válidos:
+1 - CNPJ
+2 - CPF
+Validação: Preenchimento obrigatório e exclusivo quando o proprietário não for encontrado no CNO."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabLotacao__infoLotacao__alteracao__dadosLotacao__infoEmprParcial__id__tpInscProp" name="[evtTabLotacao][infoLotacao][alteracao][dadosLotacao][infoEmprParcial][tpInscProp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTabLotacao|readjson:'infoLotacao.alteracao.dadosLotacao.infoEmprParcial.tpInscProp'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='2' {% ifequal evtTabLotacao|readjson:'infoLotacao.alteracao.dadosLotacao.infoEmprParcial.tpInscProp'|to_str '2' %}selected{% endifequal %}>2 - CPF</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInscProp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o número de inscrição (CNPJ/CPF) do proprietário do CNO<a data-toggle="tooltip" title="Preencher com o número de inscrição (CNPJ/CPF) do proprietário do CNO.
+Validação: Preenchimento obrigatório e exclusivo se tpInscProp for informado. Deve ser um número de CNPJ ou CPF válido, conforme indicado em tpInscProp."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__dadosLotacao__infoEmprParcial__id__nrInscProp" maxlength="14" value="{{evtTabLotacao|readjson:'infoLotacao.alteracao.dadosLotacao.infoEmprParcial.nrInscProp'}}" name="[evtTabLotacao][infoLotacao][alteracao][dadosLotacao][infoEmprParcial][nrInscProp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="dadosOpPort__div">
+    <div class="col-md-12">
+        <h4>Informações do operador portuário.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="aliqRat__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar a alíquota RAT<a data-toggle="tooltip" title="Preencher com a alíquota definida na legislação vigente para a atividade (CNAE) preponderante.
+Valores válidos: 1, 2, 3"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__dadosLotacao__dadosOpPort__id__aliqRat" maxlength="1" value="{{evtTabLotacao|readjson:'infoLotacao.alteracao.dadosLotacao.dadosOpPort.aliqRat'}}" name="[evtTabLotacao][infoLotacao][alteracao][dadosLotacao][dadosOpPort][aliqRat]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fap__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Fator Acidentário de Prevenção - FAP<a data-toggle="tooltip" title="Fator Acidentário de Prevenção - FAP.
+Validação: Deve ser um número maior ou igual a 0,5000 e menor ou igual a 2,0000, de acordo com o estabelecido pelo órgão governamental competente."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__dadosLotacao__dadosOpPort__id__fap" maxlength="5" value="{{evtTabLotacao|readjson:'infoLotacao.alteracao.dadosLotacao.dadosOpPort.fap'}}" name="[evtTabLotacao][infoLotacao][alteracao][dadosLotacao][dadosOpPort][fap]" onchange="set_evento_json()" class="form-control esocial-valor-4" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="novaValidade__div">
+    <div class="col-md-12">
+        <h4>Informação preenchida exclusivamente em caso de alteração do período de validade das informações, apresentando o novo período de validade.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="iniValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de início da validade das informações prestadas no evento<a data-toggle="tooltip" title="Preencher com o mês e ano de início da validade das informações prestadas no evento, no formato AAAA-MM.
+Validação: Deve ser uma data válida, igual ou posterior à data de início de obrigatoriedade deste evento para o empregador no eSocial, no formato AAAA-MM."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__novaValidade__id__iniValid" maxlength="7" value="{{evtTabLotacao|readjson:'infoLotacao.alteracao.novaValidade.iniValid'}}" name="[evtTabLotacao][infoLotacao][alteracao][novaValidade][iniValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fimValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de término da validade das informações<a data-toggle="tooltip" title="Preencher com o mês e ano de término da validade das informações, se houver.
+Validação: Se informado, deve estar no formato AAAA-MM e ser um período igual ou posterior a iniValid."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__alteracao__novaValidade__id__fimValid" maxlength="7" value="{{evtTabLotacao|readjson:'infoLotacao.alteracao.novaValidade.fimValid'}}" name="[evtTabLotacao][infoLotacao][alteracao][novaValidade][fimValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="exclusao__div">
+    <div class="col-md-12">
+        <h4>Exclusão das informações.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideLotacao__div">
+    <div class="col-md-12">
+        <h4>Identificação da lotação e período de validade das informações.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codLotacao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador para a lotação tributária<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador para a lotação tributária.
+Validação: O código atribuído não pode conter a expressão 'eSocial' nas 7 primeiras posições.
+Regra de validação:
+REGRA_CARACTERE_ESPECIAL"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__exclusao__ideLotacao__id__codLotacao" maxlength="30" value="{{evtTabLotacao|readjson:'infoLotacao.exclusao.ideLotacao.codLotacao'}}" name="[evtTabLotacao][infoLotacao][exclusao][ideLotacao][codLotacao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="iniValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de início da validade das informações prestadas no evento<a data-toggle="tooltip" title="Preencher com o mês e ano de início da validade das informações prestadas no evento, no formato AAAA-MM.
+Validação: Deve ser uma data válida, igual ou posterior à data de início de obrigatoriedade deste evento para o empregador no eSocial, no formato AAAA-MM."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__exclusao__ideLotacao__id__iniValid" maxlength="7" value="{{evtTabLotacao|readjson:'infoLotacao.exclusao.ideLotacao.iniValid'}}" name="[evtTabLotacao][infoLotacao][exclusao][ideLotacao][iniValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fimValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de término da validade das informações<a data-toggle="tooltip" title="Preencher com o mês e ano de término da validade das informações, se houver.
+Validação: Se informado, deve estar no formato AAAA-MM e ser um período igual ou posterior a iniValid."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabLotacao__infoLotacao__exclusao__ideLotacao__id__fimValid" maxlength="7" value="{{evtTabLotacao|readjson:'infoLotacao.exclusao.ideLotacao.fimValid'}}" name="[evtTabLotacao][infoLotacao][exclusao][ideLotacao][fimValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+</div>
+
+</form>
+{% endwith %}
+{% if original.is_aberto %}
+<script type="text/javascript">
+function set_evento_json() {
+    var dst = document.getElementById("id_evento_json");
+    var dst_read = document.getElementById("id_evento_json_read");
+    var obj = $('#form_json').serializeJSON({useIntKeysAsArrayIndex: true});
+    dst.value = JSON.stringify(obj);
+    dst_read.value = JSON.stringify(obj);
+};
+$(document).ready(function(){
+    set_evento_json();
+});
+</script>
+{% endif %}

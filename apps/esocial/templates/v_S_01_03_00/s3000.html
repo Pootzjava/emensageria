@@ -1,0 +1,293 @@
+
+{% load esocial_custom_tags %}
+{% with evtExclusao=original.evento_json|readjson:'evtExclusao' %}
+<form id="form_json">
+
+<div class="row">
+
+<div id="evtExclusao__div">
+    <div class="col-md-12">
+        <h4>Evento Exclusão de Eventos.
+Regras de validação:
+REGRA_ENVIO_PROC_FECHAMENTO
+REGRA_EVE_EXCLUSAO_VALIDA_NRRECIBO
+REGRA_EXISTE_INFO_EMPREGADOR
+REGRA_EXTEMP_DOMESTICO
+REGRA_MESMO_PROCEMI
+REGRA_VALIDA_EMPREGADOR</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideEvento__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do evento.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpAmb__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Identificação do ambiente</label>
+            <select name="[evtExclusao][ideEvento][tpAmb]" id="evtExclusao__ideEvento__id__tpAmb_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpamb 1 %}selected{% endifequal %}>1 - Produção</option>
+                <option value="2" {% ifequal original.tpamb 2 %}selected{% endifequal %}>2 - Produção restrita.</option>
+            </select>
+            <input type="hidden" name="[evtExclusao][ideEvento][tpAmb]" id="evtExclusao__ideEvento__id__tpAmb" value="{{original.tpamb}}">
+        </div>
+    </div>
+</div>
+<div id="procEmi__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Processo de emissão do evento</label>
+            <select name="[evtExclusao][ideEvento][procEmi]" id="evtExclusao__ideEvento__id__procEmi_disabled" disabled="">
+                <option value="1" {% ifequal original.procemi 1 %}selected{% endifequal %}>1 - Aplicativo do empregador</option>
+                <option value="2" {% ifequal original.procemi 2 %}selected{% endifequal %}>2 - Aplicativo governamental - Empregador Doméstico</option>
+                <option value="3" {% ifequal original.procemi 3 %}selected{% endifequal %}>3 - Aplicativo governamental - Web Geral</option>
+                <option value="4" {% ifequal original.procemi 4 %}selected{% endifequal %}>4 - Aplicativo governamental - Simplificado Pessoa Jurídica</option>
+                <option value="5" {% ifequal original.procemi 5 %}selected{% endifequal %}>5 - Aplicativo governamental - Segurado Especial.</option>
+            </select>
+            <input type="hidden" name="[evtExclusao][ideEvento][procEmi]" id="evtExclusao__ideEvento__id__procEmi" value="{{original.procemi}}">
+        </div>
+    </div>
+</div>
+<div id="verProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Versão do processo de emissão do evento</label>
+            <input type="text" name="[evtExclusao][ideEvento][verProc]" value="{{original.verproc}}" class="vTextField" maxlength="20" id="evtExclusao__ideEvento__id__verProc_disabled" disabled="">
+            <input type="hidden" name="[evtExclusao][ideEvento][verProc]" id="evtExclusao__ideEvento__id__verProc" value="{{original.verproc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideEmpregador__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do empregador.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Preencher com o código correspondente ao tipo de inscrição</label>
+            <select name="[evtExclusao][ideEmpregador][tpInsc]" id="evtExclusao__ideEmpregador__id__tpInsc_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpinsc 1 %}selected{% endifequal %}>1 - CNPJ</option>
+                <option value="2" {% ifequal original.tpinsc 2 %}selected{% endifequal %}>2 - CPF</option>
+                <option value="3" {% ifequal original.tpinsc 3 %}selected{% endifequal %}>3 - CAEPF (Cadastro de Atividade Econômica de Pessoa Física)</option>
+                <option value="4" {% ifequal original.tpinsc 4 %}selected{% endifequal %}>4 - CNO (Cadastro Nacional de Obra)</option>
+                <option value="5" {% ifequal original.tpinsc 5 %}selected{% endifequal %}>5 - CGC</option>
+                <option value="6" {% ifequal original.tpinsc 6 %}selected{% endifequal %}>6 - CEI</option>
+            </select>
+            <input type="hidden" name="[evtExclusao][ideEmpregador][tpInsc]" id="evtExclusao__ideEmpregador__id__tpInsc" value="{{original.tpinsc}}">
+        </div>
+    </div>
+</div>
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000</label>
+            <input type="text" id="evtExclusao__ideEmpregador__id__nrInsc_disabled" name="[evtExclusao][ideEmpregador][nrInsc]" value="{{original.nrinsc}}" class="vTextField" maxlength="15" disabled="">
+            <input type="hidden" name="[evtExclusao][ideEmpregador][nrInsc]" id="evtExclusao__ideEmpregador__id__nrInsc" value="{{original.nrinsc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="infoExclusao__div">
+    <div class="col-md-12">
+        <h4>Grupo que identifica o evento objeto da exclusão.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpEvento__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o tipo de evento (S-2500 ou S-2501)<a data-toggle="tooltip" title="Preencher com o tipo de evento. Ex.: S-1200, S-2200, etc."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtExclusao__infoExclusao__id__tpEvento" maxlength="6" value="{{evtExclusao|readjson:'infoExclusao.tpEvento'}}" name="[evtExclusao][infoExclusao][tpEvento]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nrRecEvt__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o número do recibo do evento que será excluído<a data-toggle="tooltip" title="Preencher com o número do recibo do evento que será excluído.
+Validação: O recibo deve ser relativo ao mesmo tipo de evento indicado em tpEvento e o respectivo evento não deve constar como excluído ou retificado. Além disso, no caso de exclusão de eventos em que existe a identificação do trabalhador, o evento que está sendo excluído deve referir-se ao mesmo trabalhador identificado por cpfTrab."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtExclusao__infoExclusao__id__nrRecEvt" maxlength="23" value="{{evtExclusao|readjson:'infoExclusao.nrRecEvt'}}" name="[evtExclusao][infoExclusao][nrRecEvt]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="ideTrabalhador__div">
+    <div class="col-md-12">
+        <h4>Grupo que identifica a qual trabalhador se refere o evento a ser excluído.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="cpfTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o número do CPF do trabalhador<a data-toggle="tooltip" title="Preencher com o número do CPF do trabalhador ou do beneficiário.
+Validação: O CPF indicado deve existir na base de dados do RET."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtExclusao__infoExclusao__ideTrabalhador__id__cpfTrab" maxlength="11" value="{{evtExclusao|readjson:'infoExclusao.ideTrabalhador.cpfTrab'}}" name="[evtExclusao][infoExclusao][ideTrabalhador][cpfTrab]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideFolhaPagto__div">
+    <div class="col-md-12">
+        <h4>Grupo que identifica a qual período de apuração pertence o evento que será excluído.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="indApuracao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de período de apuração<a data-toggle="tooltip" title="Indicativo de período de apuração.
+Valores válidos:
+1 - Mensal
+2 - Anual (13° salário)
+Validação: Preenchimento obrigatório e exclusivo se tpEvento = [S-1200, S-1202, S-1207, S-1280, S-1300]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtExclusao__infoExclusao__ideFolhaPagto__id__indApuracao" name="[evtExclusao][infoExclusao][ideFolhaPagto][indApuracao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtExclusao|readjson:'infoExclusao.ideFolhaPagto.indApuracao'|to_str '1' %}selected{% endifequal %}>1 - Mensal</option><option value='2' {% ifequal evtExclusao|readjson:'infoExclusao.ideFolhaPagto.indApuracao'|to_str '2' %}selected{% endifequal %}>2 - Anual (13° salário)</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="perApur__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o mês/ano (formato AAAA-MM) de referência das informações<a data-toggle="tooltip" title="Informar o mês/ano (formato AAAA-MM) ou apenas o ano (formato AAAA) de referência das informações.
+Validação: Deve ser um mês/ano ou ano válido, posterior à implementação do eSocial. Somente pode ser informado ano (formato AAAA) se indApuracao = [2]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtExclusao__infoExclusao__ideFolhaPagto__id__perApur" maxlength="7" value="{{evtExclusao|readjson:'infoExclusao.ideFolhaPagto.perApur'}}" name="[evtExclusao][infoExclusao][ideFolhaPagto][perApur]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+</div>
+
+</form>
+{% endwith %}
+{% if original.is_aberto %}
+<script type="text/javascript">
+function set_evento_json() {
+    var dst = document.getElementById("id_evento_json");
+    var dst_read = document.getElementById("id_evento_json_read");
+    var obj = $('#form_json').serializeJSON({useIntKeysAsArrayIndex: true});
+    dst.value = JSON.stringify(obj);
+    dst_read.value = JSON.stringify(obj);
+};
+$(document).ready(function(){
+    set_evento_json();
+});
+</script>
+{% endif %}

@@ -1,0 +1,280 @@
+
+{% load esocial_custom_tags %}
+{% with evtReativBen=original.evento_json|readjson:'evtReativBen' %}
+<form id="form_json">
+
+<div class="row">
+
+<div id="evtReativBen__div">
+    <div class="col-md-12">
+        <h4>Evento Reativação de Benefício - Entes Públicos.
+Regras de validação:
+REGRA_ENVIO_PROC_FECHAMENTO
+REGRA_EVENTOS_EXTEMP
+REGRA_EXISTE_EVENTO_BENEFICIO_TERMINO
+REGRA_EXISTE_INFO_EMPREGADOR
+REGRA_EXTEMP_REATIVACAO
+REGRA_REATIVACAO_EXCLUSAO_EVENTO
+REGRA_RETIFICA_MESMO_BENEFICIO
+REGRA_VALIDA_CNPJ</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideEvento__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do evento.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="indRetif__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informe [1] para arquivo original ou [2] para arquivo de retificação<a data-toggle="tooltip" title="Informe [1] para arquivo original ou [2] para arquivo de retificação.
+Valores válidos:
+1 - Original
+2 - Retificação"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtReativBen__ideEvento__id__indRetif" name="[evtReativBen][ideEvento][indRetif]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtReativBen|readjson:'ideEvento.indRetif'|to_str '1' %}selected{% endifequal %}>1 - Original</option><option value='2' {% ifequal evtReativBen|readjson:'ideEvento.indRetif'|to_str '2' %}selected{% endifequal %}>2 - Retificação</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrRecibo__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o número do recibo do arquivo a ser retificado<a data-toggle="tooltip" title="Preencher com o número do recibo do arquivo a ser retificado.
+Validação: O preenchimento é obrigatório se indRetif = [2].
+Deve ser um recibo de entrega válido, correspondente ao arquivo que está sendo retificado."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtReativBen__ideEvento__id__nrRecibo" maxlength="23" value="{{evtReativBen|readjson:'ideEvento.nrRecibo'}}" name="[evtReativBen][ideEvento][nrRecibo]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="tpAmb__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Identificação do ambiente</label>
+            <select name="[evtReativBen][ideEvento][tpAmb]" id="evtReativBen__ideEvento__id__tpAmb_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpamb 1 %}selected{% endifequal %}>1 - Produção</option>
+                <option value="2" {% ifequal original.tpamb 2 %}selected{% endifequal %}>2 - Produção restrita.</option>
+            </select>
+            <input type="hidden" name="[evtReativBen][ideEvento][tpAmb]" id="evtReativBen__ideEvento__id__tpAmb" value="{{original.tpamb}}">
+        </div>
+    </div>
+</div>
+<div id="procEmi__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Processo de emissão do evento</label>
+            <select name="[evtReativBen][ideEvento][procEmi]" id="evtReativBen__ideEvento__id__procEmi_disabled" disabled="">
+                <option value="1" {% ifequal original.procemi 1 %}selected{% endifequal %}>1 - Aplicativo do empregador</option>
+                <option value="2" {% ifequal original.procemi 2 %}selected{% endifequal %}>2 - Aplicativo governamental - Empregador Doméstico</option>
+                <option value="3" {% ifequal original.procemi 3 %}selected{% endifequal %}>3 - Aplicativo governamental - Web Geral</option>
+                <option value="4" {% ifequal original.procemi 4 %}selected{% endifequal %}>4 - Aplicativo governamental - Simplificado Pessoa Jurídica</option>
+                <option value="5" {% ifequal original.procemi 5 %}selected{% endifequal %}>5 - Aplicativo governamental - Segurado Especial.</option>
+            </select>
+            <input type="hidden" name="[evtReativBen][ideEvento][procEmi]" id="evtReativBen__ideEvento__id__procEmi" value="{{original.procemi}}">
+        </div>
+    </div>
+</div>
+<div id="verProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Versão do processo de emissão do evento</label>
+            <input type="text" name="[evtReativBen][ideEvento][verProc]" value="{{original.verproc}}" class="vTextField" maxlength="20" id="evtReativBen__ideEvento__id__verProc_disabled" disabled="">
+            <input type="hidden" name="[evtReativBen][ideEvento][verProc]" id="evtReativBen__ideEvento__id__verProc" value="{{original.verproc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideEmpregador__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do empregador.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Preencher com o código correspondente ao tipo de inscrição</label>
+            <select name="[evtReativBen][ideEmpregador][tpInsc]" id="evtReativBen__ideEmpregador__id__tpInsc_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpinsc 1 %}selected{% endifequal %}>1 - CNPJ</option>
+                <option value="2" {% ifequal original.tpinsc 2 %}selected{% endifequal %}>2 - CPF</option>
+                <option value="3" {% ifequal original.tpinsc 3 %}selected{% endifequal %}>3 - CAEPF (Cadastro de Atividade Econômica de Pessoa Física)</option>
+                <option value="4" {% ifequal original.tpinsc 4 %}selected{% endifequal %}>4 - CNO (Cadastro Nacional de Obra)</option>
+                <option value="5" {% ifequal original.tpinsc 5 %}selected{% endifequal %}>5 - CGC</option>
+                <option value="6" {% ifequal original.tpinsc 6 %}selected{% endifequal %}>6 - CEI</option>
+            </select>
+            <input type="hidden" name="[evtReativBen][ideEmpregador][tpInsc]" id="evtReativBen__ideEmpregador__id__tpInsc" value="{{original.tpinsc}}">
+        </div>
+    </div>
+</div>
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000</label>
+            <input type="text" id="evtReativBen__ideEmpregador__id__nrInsc_disabled" name="[evtReativBen][ideEmpregador][nrInsc]" value="{{original.nrinsc}}" class="vTextField" maxlength="15" disabled="">
+            <input type="hidden" name="[evtReativBen][ideEmpregador][nrInsc]" id="evtReativBen__ideEmpregador__id__nrInsc" value="{{original.nrinsc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideBeneficio__div">
+    <div class="col-md-12">
+        <h4>Identificação do beneficiário e do benefício.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="cpfBenef__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número de inscrição no CPF do dependente<a data-toggle="tooltip" title="Informar o CPF do beneficiário."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtReativBen__ideBeneficio__id__cpfBenef" maxlength="11" value="{{evtReativBen|readjson:'ideBeneficio.cpfBenef'}}" name="[evtReativBen][ideBeneficio][cpfBenef]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nrBeneficio__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número do benefício<a data-toggle="tooltip" title="Número do benefício."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtReativBen__ideBeneficio__id__nrBeneficio" maxlength="20" value="{{evtReativBen|readjson:'ideBeneficio.nrBeneficio'}}" name="[evtReativBen][ideBeneficio][nrBeneficio]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="infoReativ__div">
+    <div class="col-md-12">
+        <h4>Informações da reativação do benefício.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="dtEfetReativ__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar a data da efetiva reativação do benefício<a data-toggle="tooltip" title="Informar a data da efetiva reativação do benefício.
+Validação: Deve ser posterior à data de cessação do benefício e igual ou anterior à data atual."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtReativBen__infoReativ__id__dtEfetReativ" value="{{evtReativBen|readjson:'infoReativ.dtEfetReativ'}}" name="[evtReativBen][infoReativ][dtEfetReativ]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dtEfeito__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Data de início dos efeitos financeiros da reativação do benefício<a data-toggle="tooltip" title="Data de início dos efeitos financeiros da reativação do benefício.
+Validação: Deve ser uma data igual ou anterior à data da efetiva reativação do benefício e posterior à data de sua cessação."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtReativBen__infoReativ__id__dtEfeito" value="{{evtReativBen|readjson:'infoReativ.dtEfeito'}}" name="[evtReativBen][infoReativ][dtEfeito]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+</div>
+
+</form>
+{% endwith %}
+{% if original.is_aberto %}
+<script type="text/javascript">
+function set_evento_json() {
+    var dst = document.getElementById("id_evento_json");
+    var dst_read = document.getElementById("id_evento_json_read");
+    var obj = $('#form_json').serializeJSON({useIntKeysAsArrayIndex: true});
+    dst.value = JSON.stringify(obj);
+    dst_read.value = JSON.stringify(obj);
+};
+$(document).ready(function(){
+    set_evento_json();
+});
+</script>
+{% endif %}

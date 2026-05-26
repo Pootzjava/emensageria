@@ -1,0 +1,2439 @@
+
+{% load esocial_custom_tags %}
+{% with evtTSVTermino=original.evento_json|readjson:'evtTSVTermino' %}
+<form id="form_json">
+
+<div class="row">
+
+<div id="evtTSVTermino__div">
+    <div class="col-md-12">
+        <h4>Evento Trabalhador Sem Vínculo de Emprego/Estatutário - Término.
+Regras de validação:
+REGRA_ENVIO_PROC_FECHAMENTO
+REGRA_EVENTOS_EXTEMP
+REGRA_EVENTO_POSTERIOR_CAT_OBITO
+REGRA_EVE_FOPAG_SIMPLIFICADO
+REGRA_EXISTE_INFO_EMPREGADOR
+REGRA_GERAL_VALIDA_DADOS_TABCONTRIB
+REGRA_MESMO_PROCEMI
+REGRA_MUDANCA_CPF
+REGRA_REMUN_IND_RETIFICACAO
+REGRA_REMUN_PERMITE_EXCLUSAO
+REGRA_RETIFICA_MESMO_VINCULO
+REGRA_RUBRICA_COMPATIVEL_CATEGORIA
+REGRA_TSV_ATIVO_NA_DTEVENTO
+REGRA_VALIDA_EMPREGADOR
+REGRA_VALIDA_PERIODO_APURACAO</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideEvento__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do evento.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="indRetif__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informe [1] para arquivo original ou [2] para arquivo de retificação<a data-toggle="tooltip" title="Informe [1] para arquivo original ou [2] para arquivo de retificação.
+Valores válidos:
+1 - Original
+2 - Retificação"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__ideEvento__id__indRetif" name="[evtTSVTermino][ideEvento][indRetif]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTSVTermino|readjson:'ideEvento.indRetif'|to_str '1' %}selected{% endifequal %}>1 - Original</option><option value='2' {% ifequal evtTSVTermino|readjson:'ideEvento.indRetif'|to_str '2' %}selected{% endifequal %}>2 - Retificação</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrRecibo__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o número do recibo do arquivo a ser retificado<a data-toggle="tooltip" title="Preencher com o número do recibo do arquivo a ser retificado.
+Validação: O preenchimento é obrigatório se indRetif = [2].
+Deve ser um recibo de entrega válido, correspondente ao arquivo que está sendo retificado."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__ideEvento__id__nrRecibo" maxlength="23" value="{{evtTSVTermino|readjson:'ideEvento.nrRecibo'}}" name="[evtTSVTermino][ideEvento][nrRecibo]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indGuia__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo do tipo de guia<a data-toggle="tooltip" title="Indicativo do tipo de guia.
+Valores válidos:
+1 - Documento de Arrecadação do eSocial - DAE"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__ideEvento__id__indGuia" name="[evtTSVTermino][ideEvento][indGuia]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTSVTermino|readjson:'ideEvento.indGuia'|to_str '1' %}selected{% endifequal %}>1 - Documento de Arrecadação do eSocial - DAE</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="tpAmb__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Identificação do ambiente</label>
+            <select name="[evtTSVTermino][ideEvento][tpAmb]" id="evtTSVTermino__ideEvento__id__tpAmb_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpamb 1 %}selected{% endifequal %}>1 - Produção</option>
+                <option value="2" {% ifequal original.tpamb 2 %}selected{% endifequal %}>2 - Produção restrita.</option>
+            </select>
+            <input type="hidden" name="[evtTSVTermino][ideEvento][tpAmb]" id="evtTSVTermino__ideEvento__id__tpAmb" value="{{original.tpamb}}">
+        </div>
+    </div>
+</div>
+<div id="procEmi__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Processo de emissão do evento</label>
+            <select name="[evtTSVTermino][ideEvento][procEmi]" id="evtTSVTermino__ideEvento__id__procEmi_disabled" disabled="">
+                <option value="1" {% ifequal original.procemi 1 %}selected{% endifequal %}>1 - Aplicativo do empregador</option>
+                <option value="2" {% ifequal original.procemi 2 %}selected{% endifequal %}>2 - Aplicativo governamental - Empregador Doméstico</option>
+                <option value="3" {% ifequal original.procemi 3 %}selected{% endifequal %}>3 - Aplicativo governamental - Web Geral</option>
+                <option value="4" {% ifequal original.procemi 4 %}selected{% endifequal %}>4 - Aplicativo governamental - Simplificado Pessoa Jurídica</option>
+                <option value="5" {% ifequal original.procemi 5 %}selected{% endifequal %}>5 - Aplicativo governamental - Segurado Especial.</option>
+            </select>
+            <input type="hidden" name="[evtTSVTermino][ideEvento][procEmi]" id="evtTSVTermino__ideEvento__id__procEmi" value="{{original.procemi}}">
+        </div>
+    </div>
+</div>
+<div id="verProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Versão do processo de emissão do evento</label>
+            <input type="text" name="[evtTSVTermino][ideEvento][verProc]" value="{{original.verproc}}" class="vTextField" maxlength="20" id="evtTSVTermino__ideEvento__id__verProc_disabled" disabled="">
+            <input type="hidden" name="[evtTSVTermino][ideEvento][verProc]" id="evtTSVTermino__ideEvento__id__verProc" value="{{original.verproc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideEmpregador__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do empregador.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Preencher com o código correspondente ao tipo de inscrição</label>
+            <select name="[evtTSVTermino][ideEmpregador][tpInsc]" id="evtTSVTermino__ideEmpregador__id__tpInsc_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpinsc 1 %}selected{% endifequal %}>1 - CNPJ</option>
+                <option value="2" {% ifequal original.tpinsc 2 %}selected{% endifequal %}>2 - CPF</option>
+                <option value="3" {% ifequal original.tpinsc 3 %}selected{% endifequal %}>3 - CAEPF (Cadastro de Atividade Econômica de Pessoa Física)</option>
+                <option value="4" {% ifequal original.tpinsc 4 %}selected{% endifequal %}>4 - CNO (Cadastro Nacional de Obra)</option>
+                <option value="5" {% ifequal original.tpinsc 5 %}selected{% endifequal %}>5 - CGC</option>
+                <option value="6" {% ifequal original.tpinsc 6 %}selected{% endifequal %}>6 - CEI</option>
+            </select>
+            <input type="hidden" name="[evtTSVTermino][ideEmpregador][tpInsc]" id="evtTSVTermino__ideEmpregador__id__tpInsc" value="{{original.tpinsc}}">
+        </div>
+    </div>
+</div>
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000</label>
+            <input type="text" id="evtTSVTermino__ideEmpregador__id__nrInsc_disabled" name="[evtTSVTermino][ideEmpregador][nrInsc]" value="{{original.nrinsc}}" class="vTextField" maxlength="15" disabled="">
+            <input type="hidden" name="[evtTSVTermino][ideEmpregador][nrInsc]" id="evtTSVTermino__ideEmpregador__id__nrInsc" value="{{original.nrinsc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideTrabSemVinculo__div">
+    <div class="col-md-12">
+        <h4>Identificação do Trabalhador Sem Vínculo de Emprego/Estatutário - TSVE.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="cpfTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o número do CPF do trabalhador<a data-toggle="tooltip" title="Preencher com o número do CPF do trabalhador."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__ideTrabSemVinculo__id__cpfTrab" maxlength="11" value="{{evtTSVTermino|readjson:'ideTrabSemVinculo.cpfTrab'}}" name="[evtTSVTermino][ideTrabSemVinculo][cpfTrab]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="matricula__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Matrícula atribuída ao trabalhador pela empresa ou<a data-toggle="tooltip" title="Matrícula atribuída ao trabalhador pela empresa.
+Validação: Deve corresponder à matrícula informada pelo empregador no evento S-2300 do respectivo contrato. Não preencher no caso de TSVE sem informação de matrícula no evento S-2300."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__ideTrabSemVinculo__id__matricula" maxlength="30" value="{{evtTSVTermino|readjson:'ideTrabSemVinculo.matricula'}}" name="[evtTSVTermino][ideTrabSemVinculo][matricula]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codCateg__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código da categoria do trabalhador<a data-toggle="tooltip" title="Preencher com o código da categoria do trabalhador.
+Informar somente no caso de TSVE sem informação de matrícula no evento S-2300.
+Validação: Informação obrigatória e exclusiva se não houver preenchimento de matricula. Se informado, deve ser um código válido e existente na Tabela 01."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__ideTrabSemVinculo__id__codCateg" maxlength="3" value="{{evtTSVTermino|readjson:'ideTrabSemVinculo.codCateg'}}" name="[evtTSVTermino][ideTrabSemVinculo][codCateg]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="infoTSVTermino__div">
+    <div class="col-md-12">
+        <h4>TSVE - Término.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="dtTerm__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Data do término do contrato por prazo determinado<a data-toggle="tooltip" title="Data do término.
+Validação: Deve ser uma data igual ou anterior à data atual acrescida de 10 (dez) dias."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__id__dtTerm" value="{{evtTSVTermino|readjson:'infoTSVTermino.dtTerm'}}" name="[evtTSVTermino][infoTSVTermino][dtTerm]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="mtvDesligTSV__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de motivo do término do TSVE<a data-toggle="tooltip" title="Motivo do término.
+Valores válidos:
+01 - Exoneração do diretor não empregado sem justa causa, por deliberação da assembleia, dos sócios cotistas ou da autoridade competente
+02 - Término de mandato do diretor não empregado que não tenha sido reconduzido ao cargo
+03 - Exoneração a pedido de diretor não empregado
+04 - Exoneração do diretor não empregado por culpa recíproca ou força maior
+05 - Morte do diretor não empregado
+06 - Exoneração do diretor não empregado por falência, encerramento ou supressão de parte da empresa
+07 - Mudança de CPF
+99 - Outros
+Validação: Informação obrigatória se o código de categoria no Registro de Eventos Trabalhistas - RET for igual a [721] ou se o grupo mudancaCPF estiver preenchido. Não preencher nas demais situações."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__id__mtvDesligTSV" name="[evtTSVTermino][infoTSVTermino][mtvDesligTSV]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='01' {% ifequal evtTSVTermino|readjson:'infoTSVTermino.mtvDesligTSV'|to_str '01' %}selected{% endifequal %}>01 - Exoneração do diretor não empregado sem justa causa, por deliberação da assembleia, dos sócios cotistas ou da autoridade competente</option><option value='02' {% ifequal evtTSVTermino|readjson:'infoTSVTermino.mtvDesligTSV'|to_str '02' %}selected{% endifequal %}>02 - Término de mandato do diretor não empregado que não tenha sido reconduzido ao cargo</option><option value='03' {% ifequal evtTSVTermino|readjson:'infoTSVTermino.mtvDesligTSV'|to_str '03' %}selected{% endifequal %}>03 - Exoneração a pedido de diretor não empregado</option><option value='04' {% ifequal evtTSVTermino|readjson:'infoTSVTermino.mtvDesligTSV'|to_str '04' %}selected{% endifequal %}>04 - Exoneração do diretor não empregado por culpa recíproca ou força maior</option><option value='05' {% ifequal evtTSVTermino|readjson:'infoTSVTermino.mtvDesligTSV'|to_str '05' %}selected{% endifequal %}>05 - Morte do diretor não empregado</option><option value='06' {% ifequal evtTSVTermino|readjson:'infoTSVTermino.mtvDesligTSV'|to_str '06' %}selected{% endifequal %}>06 - Exoneração do diretor não empregado por falência, encerramento ou supressão de parte da empresa</option><option value='07' {% ifequal evtTSVTermino|readjson:'infoTSVTermino.mtvDesligTSV'|to_str '07' %}selected{% endifequal %}>07 - Mudança de CPF</option><option value='99' {% ifequal evtTSVTermino|readjson:'infoTSVTermino.mtvDesligTSV'|to_str '99' %}selected{% endifequal %}>99 - Outros</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="pensAlim__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de pensão alimentícia para fins de retenção de FGTS<a data-toggle="tooltip" title="Indicativo de pensão alimentícia para fins de retenção de FGTS.
+Valores válidos:
+0 - Não existe pensão alimentícia
+1 - Percentual de pensão alimentícia
+2 - Valor de pensão alimentícia
+3 - Percentual e valor de pensão alimentícia
+Validação: Informação obrigatória se o código de categoria no RET for igual a [201, 202, 721] e se dtTerm for posterior a 21/04/2019.
+Informação opcional se o código de categoria no RET for igual a [201, 202, 721] e se dtTerm for igual ou anterior a 21/04/2019.
+Não preencher nas demais situações."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__id__pensAlim" name="[evtTSVTermino][infoTSVTermino][pensAlim]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='0' {% ifequal evtTSVTermino|readjson:'infoTSVTermino.pensAlim'|to_str '0' %}selected{% endifequal %}>0 - Não existe pensão alimentícia</option><option value='1' {% ifequal evtTSVTermino|readjson:'infoTSVTermino.pensAlim'|to_str '1' %}selected{% endifequal %}>1 - Percentual de pensão alimentícia</option><option value='2' {% ifequal evtTSVTermino|readjson:'infoTSVTermino.pensAlim'|to_str '2' %}selected{% endifequal %}>2 - Valor de pensão alimentícia</option><option value='3' {% ifequal evtTSVTermino|readjson:'infoTSVTermino.pensAlim'|to_str '3' %}selected{% endifequal %}>3 - Percentual e valor de pensão alimentícia</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="percAliment__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Percentual a ser destinado a pensão alimentícia<a data-toggle="tooltip" title="Percentual a ser destinado a pensão alimentícia.
+Validação: Deve ser maior que 0 (zero) e menor ou igual a 100 (cem).
+Informação obrigatória e exclusiva se pensAlim = [1, 3]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__id__percAliment" maxlength="5" value="{{evtTSVTermino|readjson:'infoTSVTermino.percAliment'}}" name="[evtTSVTermino][infoTSVTermino][percAliment]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrAlim__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da pensão alimentícia<a data-toggle="tooltip" title="Valor da pensão alimentícia.
+Validação: Deve ser maior que 0 (zero).
+Informação obrigatória e exclusiva se pensAlim = [2, 3]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__id__vrAlim" maxlength="14" value="{{evtTSVTermino|readjson:'infoTSVTermino.vrAlim'}}" name="[evtTSVTermino][infoTSVTermino][vrAlim]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nrProcTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número que identifica o processo judicial onde a baixa do vínculo foi determinada<a data-toggle="tooltip" title="Número que identifica o processo trabalhista, quando o término de TSVE se der por decisão judicial.
+Validação: Se preenchido, deve ser um processo judicial válido, com 20 (vinte) algarismos."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__id__nrProcTrab" maxlength="20" value="{{evtTSVTermino|readjson:'infoTSVTermino.nrProcTrab'}}" name="[evtTSVTermino][infoTSVTermino][nrProcTrab]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="mudancaCPF__div">
+    <div class="col-md-12">
+        <h4>Informação do novo CPF do trabalhador.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="novoCPF__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o novo CPF do beneficiário<a data-toggle="tooltip" title="Preencher com o novo CPF do trabalhador.
+Validação: Deve ser um CPF válido e diferente do CPF do empregador e do antigo CPF do trabalhador."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__mudancaCPF__id__novoCPF" maxlength="11" value="{{evtTSVTermino|readjson:'infoTSVTermino.mudancaCPF.novoCPF'}}" name="[evtTSVTermino][infoTSVTermino][mudancaCPF][novoCPF]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="verbasResc__div">
+    <div class="col-md-12">
+        <h4>Grupo onde são prestadas as informações relativas às verbas rescisórias do diretor não empregado, com FGTS.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+{% for dmDev in evtTSVTermino|readjson:'infoTSVTermino.verbasResc.dmDev' %}
+<div id="dmDev__div">
+    <div class="col-md-12">
+        <h4>Identificação de cada um dos demonstrativos de valores devidos ao trabalhador.
+Regra de validação:
+REGRA_DEMONSTRATIVO</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideDmDev__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Identificador atribuído pela fonte pagadora para o demonstrativo de valores devidos ao trabalhador<a data-toggle="tooltip" title="Identificador atribuído pela empresa para o demonstrativo de valores devidos ao trabalhador relativo a verbas rescisórias.
+Validação: Deve ser um identificador único dentro da mesma competência (mês/ano da data de término) para cada um dos demonstrativos do trabalhador.
+Regra de validação:
+REGRA_CARACTERE_ESPECIAL"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__id__ideDmDev" maxlength="30" value="{{dmDev|readjson:'ideDmDev'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideDmDev]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indRRA__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de Rendimentos Recebidos Acumuladamente - RRA<a data-toggle="tooltip" title="Indicativo de Rendimentos Recebidos Acumuladamente - RRA.
+Somente preencher este campo se for um demonstrativo de RRA.
+Valores válidos:
+S - Sim"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__id__indRRA" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][indRRA]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='S' {% ifequal dmDev|readjson:'indRRA'|to_str 'S' %}selected{% endifequal %}>S - Sim</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="infoRRA__div">
+    <div class="col-md-12">
+        <h4>Informações complementares relativas a Rendimentos Recebidos Acumuladamente - RRA.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpProcRRA__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de processo<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de processo.
+Valores válidos:
+1 - Administrativo
+2 - Judicial"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__id__tpProcRRA" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][tpProcRRA]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal dmDev|readjson:'infoRRA.tpProcRRA'|to_str '1' %}selected{% endifequal %}>1 - Administrativo</option><option value='2' {% ifequal dmDev|readjson:'infoRRA.tpProcRRA'|to_str '2' %}selected{% endifequal %}>2 - Judicial</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrProcRRA__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo/requerimento administrativo/judicial<a data-toggle="tooltip" title="Informar o número do processo/requerimento administrativo/judicial.
+Validação: Informação obrigatória se tpProcRRA = [2] e opcional se tpProcRRA = [1]. Deve ser número de processo válido e:
+a) Se tpProcRRA = [1], deve possuir 17 (dezessete) ou 21 (vinte e um) algarismos;
+b) Se tpProcRRA = [2], deve possuir 20 (vinte) algarismos."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__id__nrProcRRA" maxlength="21" value="{{dmDev|readjson:'infoRRA.nrProcRRA'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][nrProcRRA]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="descRRA__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Descrição dos Rendimentos Recebidos Acumuladamente - RRA<a data-toggle="tooltip" title="Descrição dos Rendimentos Recebidos Acumuladamente - RRA."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__id__descRRA" maxlength="50" value="{{dmDev|readjson:'infoRRA.descRRA'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][descRRA]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="qtdMesesRRA__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número de meses relativo aos Rendimentos Recebidos Acumuladamente - RRA<a data-toggle="tooltip" title="Número de meses relativo aos Rendimentos Recebidos Acumuladamente - RRA."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__id__qtdMesesRRA" maxlength="4" value="{{dmDev|readjson:'infoRRA.qtdMesesRRA'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][qtdMesesRRA]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="despProcJud__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das despesas com processo judicial.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="vlrDespCustas__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor das despesas com custas judiciais<a data-toggle="tooltip" title="Preencher com o valor das despesas com custas judiciais."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__despProcJud__id__vlrDespCustas" maxlength="14" value="{{dmDev|readjson:'infoRRA.despProcJud.vlrDespCustas'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][despProcJud][vlrDespCustas]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vlrDespAdvogados__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor total das despesas com advogado(s)<a data-toggle="tooltip" title="Preencher com o valor total das despesas com advogado(s)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__despProcJud__id__vlrDespAdvogados" maxlength="14" value="{{dmDev|readjson:'infoRRA.despProcJud.vlrDespAdvogados'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][despProcJud][vlrDespAdvogados]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% for ideAdv in dmDev|readjson:'infoRRA.ideAdv' %}
+<div id="ideAdv__div">
+    <div class="col-md-12">
+        <h4>Identificação dos advogados.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de inscrição<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de inscrição, conforme Tabela 05.
+Valores válidos:
+1 - CNPJ
+2 - CPF"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__ideAdv__id__tpInsc" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][ideAdv][][tpInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideAdv|readjson:'tpInsc'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='2' {% ifequal ideAdv|readjson:'tpInsc'|to_str '2' %}selected{% endifequal %}>2 - CPF</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000<a data-toggle="tooltip" title="Informar o número de inscrição do advogado.
+Validação: Deve ser um número de inscrição válido, de acordo com o tipo de inscrição indicado no campo ideAdv/tpInsc, considerando as particularidades aplicadas à informação de CNPJ de órgão público em S-1000.
+Se ideAdv/tpInsc = [1], deve possuir 14 (catorze) algarismos e, no caso de declarante pessoa jurídica, ser diferente do CNPJ base do empregador (exceto se ideEmpregador/nrInsc tiver 14 (catorze) algarismos).
+Se ideAdv/tpInsc = [2], deve possuir 11 (onze) algarismos e, no caso de declarante pessoa física, ser diferente do CPF do empregador."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__ideAdv__id__nrInsc" maxlength="14" value="{{ideAdv|readjson:'nrInsc'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][ideAdv][][nrInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vlrAdv__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da despesa com o advogado<a data-toggle="tooltip" title="Valor da despesa com o advogado, se houver."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__ideAdv__id__vlrAdv" maxlength="14" value="{{ideAdv|readjson:'vlrAdv'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][ideAdv][][vlrAdv]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="ideAdv__div">
+    <div class="col-md-12">
+        <h4>Identificação dos advogados.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de inscrição<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de inscrição, conforme Tabela 05.
+Valores válidos:
+1 - CNPJ
+2 - CPF"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__ideAdv__id__tpInsc" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][ideAdv][][tpInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideAdv|readjson:'tpInsc'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='2' {% ifequal ideAdv|readjson:'tpInsc'|to_str '2' %}selected{% endifequal %}>2 - CPF</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000<a data-toggle="tooltip" title="Informar o número de inscrição do advogado.
+Validação: Deve ser um número de inscrição válido, de acordo com o tipo de inscrição indicado no campo ideAdv/tpInsc, considerando as particularidades aplicadas à informação de CNPJ de órgão público em S-1000.
+Se ideAdv/tpInsc = [1], deve possuir 14 (catorze) algarismos e, no caso de declarante pessoa jurídica, ser diferente do CNPJ base do empregador (exceto se ideEmpregador/nrInsc tiver 14 (catorze) algarismos).
+Se ideAdv/tpInsc = [2], deve possuir 11 (onze) algarismos e, no caso de declarante pessoa física, ser diferente do CPF do empregador."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__ideAdv__id__nrInsc" maxlength="14" value="{{ideAdv|readjson:'nrInsc'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][ideAdv][][nrInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vlrAdv__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da despesa com o advogado<a data-toggle="tooltip" title="Valor da despesa com o advogado, se houver."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__ideAdv__id__vlrAdv" maxlength="14" value="{{ideAdv|readjson:'vlrAdv'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][ideAdv][][vlrAdv]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>{% for ideEstabLot in dmDev|readjson:'ideEstabLot' %}
+<div id="ideEstabLot__div">
+    <div class="col-md-12">
+        <h4>Identificação do estabelecimento e da lotação nos quais o trabalhador possui remuneração no período de apuração.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de inscrição<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de inscrição do estabelecimento, de acordo com as opções da Tabela 05.
+Valores válidos:
+1 - CNPJ
+4 - CNO"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__id__tpInsc" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][tpInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideEstabLot|readjson:'tpInsc'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='4' {% ifequal ideEstabLot|readjson:'tpInsc'|to_str '4' %}selected{% endifequal %}>4 - CNO</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000<a data-toggle="tooltip" title="Informar o número de inscrição do estabelecimento do contribuinte de acordo com o tipo de inscrição indicado no campo ideEstabLot/tpInsc.
+Validação: A inscrição informada deve ser compatível com ideEstabLot/tpInsc."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__id__nrInsc" maxlength="14" value="{{ideEstabLot|readjson:'nrInsc'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][nrInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codLotacao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador para a lotação tributária<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador para a lotação tributária."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__id__codLotacao" maxlength="30" value="{{ideEstabLot|readjson:'codLotacao'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][codLotacao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+{% for detVerbas in ideEstabLot|readjson:'detVerbas' %}
+<div id="detVerbas__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das verbas rescisórias devidas ao trabalhador. Deve haver pelo menos uma rubrica de folha, mesmo que o valor líquido a ser pago ao trabalhador seja 0 (zero) em função de descontos.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento ou o código da rubrica constante da Tabela de Rubricas Padrão.
+Validação: Não pode ser utilizada rubrica:
+a) cujo codIncCP em S-1010 seja igual a [25, 26, 51];
+b) cuja natRubr em S-1010 seja igual a [1801, 9220], desde que mês/ano de dtTerm >= [2021-07]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__codRubr" maxlength="30" value="{{detVerbas|readjson:'codRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][codRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="ideTabRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr<a data-toggle="tooltip" title="Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__ideTabRubr" maxlength="8" value="{{detVerbas|readjson:'ideTabRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][ideTabRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="qtdRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar a quantidade de referência para apuração (em horas<a data-toggle="tooltip" title="Informar a quantidade de referência para apuração (em horas, cotas, meses, etc.). Ex.: Quantidade de horas extras trabalhadas relacionada com uma rubrica de hora extra, quantidade de dias trabalhados relacionada com uma rubrica de salário, etc.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__qtdRubr" maxlength="12" value="{{detVerbas|readjson:'qtdRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][qtdRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fatorRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o fator<a data-toggle="tooltip" title="Informar o fator, percentual, etc. da rubrica, quando necessário. Ex.: Adicional de horas extras 50%, relacionado a uma rubrica de horas extras: Fator = 50.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__fatorRubr" maxlength="5" value="{{detVerbas|readjson:'fatorRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][fatorRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor total da rubrica<a data-toggle="tooltip" title="Valor total da rubrica.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__vrRubr" maxlength="14" value="{{detVerbas|readjson:'vrRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][vrRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indApurIR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de tipo de apuração de IR<a data-toggle="tooltip" title="Indicativo de tipo de apuração de IR.
+Valores válidos:
+0 - Normal (apuração sob a folha de pagamento declarada no eSocial)
+1 - Situação especial de apuração de IR
+Validação: Informação obrigatória e exclusiva se mês/ano de dtTerm >= [2021-07]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__indApurIR" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][indApurIR]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='0' {% ifequal detVerbas|readjson:'indApurIR'|to_str '0' %}selected{% endifequal %}>0 - Normal (apuração sob a folha de pagamento declarada no eSocial)</option><option value='1' {% ifequal detVerbas|readjson:'indApurIR'|to_str '1' %}selected{% endifequal %}>1 - Situação especial de apuração de IR</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="detVerbas__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das verbas rescisórias devidas ao trabalhador. Deve haver pelo menos uma rubrica de folha, mesmo que o valor líquido a ser pago ao trabalhador seja 0 (zero) em função de descontos.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento ou o código da rubrica constante da Tabela de Rubricas Padrão.
+Validação: Não pode ser utilizada rubrica:
+a) cujo codIncCP em S-1010 seja igual a [25, 26, 51];
+b) cuja natRubr em S-1010 seja igual a [1801, 9220], desde que mês/ano de dtTerm >= [2021-07]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__codRubr" maxlength="30" value="{{detVerbas|readjson:'codRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][codRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="ideTabRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr<a data-toggle="tooltip" title="Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__ideTabRubr" maxlength="8" value="{{detVerbas|readjson:'ideTabRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][ideTabRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="qtdRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar a quantidade de referência para apuração (em horas<a data-toggle="tooltip" title="Informar a quantidade de referência para apuração (em horas, cotas, meses, etc.). Ex.: Quantidade de horas extras trabalhadas relacionada com uma rubrica de hora extra, quantidade de dias trabalhados relacionada com uma rubrica de salário, etc.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__qtdRubr" maxlength="12" value="{{detVerbas|readjson:'qtdRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][qtdRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fatorRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o fator<a data-toggle="tooltip" title="Informar o fator, percentual, etc. da rubrica, quando necessário. Ex.: Adicional de horas extras 50%, relacionado a uma rubrica de horas extras: Fator = 50.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__fatorRubr" maxlength="5" value="{{detVerbas|readjson:'fatorRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][fatorRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor total da rubrica<a data-toggle="tooltip" title="Valor total da rubrica.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__vrRubr" maxlength="14" value="{{detVerbas|readjson:'vrRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][vrRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indApurIR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de tipo de apuração de IR<a data-toggle="tooltip" title="Indicativo de tipo de apuração de IR.
+Valores válidos:
+0 - Normal (apuração sob a folha de pagamento declarada no eSocial)
+1 - Situação especial de apuração de IR
+Validação: Informação obrigatória e exclusiva se mês/ano de dtTerm >= [2021-07]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__indApurIR" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][indApurIR]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='0' {% ifequal detVerbas|readjson:'indApurIR'|to_str '0' %}selected{% endifequal %}>0 - Normal (apuração sob a folha de pagamento declarada no eSocial)</option><option value='1' {% ifequal detVerbas|readjson:'indApurIR'|to_str '1' %}selected{% endifequal %}>1 - Situação especial de apuração de IR</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+<div id="infoSimples__div">
+    <div class="col-md-12">
+        <h4>Informação relativa a empresas enquadradas no regime de tributação Simples Nacional.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="indSimples__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicador de contribuição substituída<a data-toggle="tooltip" title="Indicador de contribuição substituída.
+Valores válidos:
+1 - Contribuição substituída integralmente
+2 - Contribuição não substituída
+3 - Contribuição não substituída concomitante com contribuição substituída"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__infoSimples__id__indSimples" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][infoSimples][indSimples]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideEstabLot|readjson:'infoSimples.indSimples'|to_str '1' %}selected{% endifequal %}>1 - Contribuição substituída integralmente</option><option value='2' {% ifequal ideEstabLot|readjson:'infoSimples.indSimples'|to_str '2' %}selected{% endifequal %}>2 - Contribuição não substituída</option><option value='3' {% ifequal ideEstabLot|readjson:'infoSimples.indSimples'|to_str '3' %}selected{% endifequal %}>3 - Contribuição não substituída concomitante com contribuição substituída</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="ideEstabLot__div">
+    <div class="col-md-12">
+        <h4>Identificação do estabelecimento e da lotação nos quais o trabalhador possui remuneração no período de apuração.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de inscrição<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de inscrição do estabelecimento, de acordo com as opções da Tabela 05.
+Valores válidos:
+1 - CNPJ
+4 - CNO"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__id__tpInsc" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][tpInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideEstabLot|readjson:'tpInsc'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='4' {% ifequal ideEstabLot|readjson:'tpInsc'|to_str '4' %}selected{% endifequal %}>4 - CNO</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000<a data-toggle="tooltip" title="Informar o número de inscrição do estabelecimento do contribuinte de acordo com o tipo de inscrição indicado no campo ideEstabLot/tpInsc.
+Validação: A inscrição informada deve ser compatível com ideEstabLot/tpInsc."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__id__nrInsc" maxlength="14" value="{{ideEstabLot|readjson:'nrInsc'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][nrInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codLotacao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador para a lotação tributária<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador para a lotação tributária."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__id__codLotacao" maxlength="30" value="{{ideEstabLot|readjson:'codLotacao'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][codLotacao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+{% for detVerbas in ideEstabLot|readjson:'detVerbas' %}
+<div id="detVerbas__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das verbas rescisórias devidas ao trabalhador. Deve haver pelo menos uma rubrica de folha, mesmo que o valor líquido a ser pago ao trabalhador seja 0 (zero) em função de descontos.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento ou o código da rubrica constante da Tabela de Rubricas Padrão.
+Validação: Não pode ser utilizada rubrica:
+a) cujo codIncCP em S-1010 seja igual a [25, 26, 51];
+b) cuja natRubr em S-1010 seja igual a [1801, 9220], desde que mês/ano de dtTerm >= [2021-07]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__codRubr" maxlength="30" value="{{detVerbas|readjson:'codRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][codRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="ideTabRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr<a data-toggle="tooltip" title="Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__ideTabRubr" maxlength="8" value="{{detVerbas|readjson:'ideTabRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][ideTabRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="qtdRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar a quantidade de referência para apuração (em horas<a data-toggle="tooltip" title="Informar a quantidade de referência para apuração (em horas, cotas, meses, etc.). Ex.: Quantidade de horas extras trabalhadas relacionada com uma rubrica de hora extra, quantidade de dias trabalhados relacionada com uma rubrica de salário, etc.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__qtdRubr" maxlength="12" value="{{detVerbas|readjson:'qtdRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][qtdRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fatorRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o fator<a data-toggle="tooltip" title="Informar o fator, percentual, etc. da rubrica, quando necessário. Ex.: Adicional de horas extras 50%, relacionado a uma rubrica de horas extras: Fator = 50.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__fatorRubr" maxlength="5" value="{{detVerbas|readjson:'fatorRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][fatorRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor total da rubrica<a data-toggle="tooltip" title="Valor total da rubrica.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__vrRubr" maxlength="14" value="{{detVerbas|readjson:'vrRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][vrRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indApurIR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de tipo de apuração de IR<a data-toggle="tooltip" title="Indicativo de tipo de apuração de IR.
+Valores válidos:
+0 - Normal (apuração sob a folha de pagamento declarada no eSocial)
+1 - Situação especial de apuração de IR
+Validação: Informação obrigatória e exclusiva se mês/ano de dtTerm >= [2021-07]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__indApurIR" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][indApurIR]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='0' {% ifequal detVerbas|readjson:'indApurIR'|to_str '0' %}selected{% endifequal %}>0 - Normal (apuração sob a folha de pagamento declarada no eSocial)</option><option value='1' {% ifequal detVerbas|readjson:'indApurIR'|to_str '1' %}selected{% endifequal %}>1 - Situação especial de apuração de IR</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="detVerbas__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das verbas rescisórias devidas ao trabalhador. Deve haver pelo menos uma rubrica de folha, mesmo que o valor líquido a ser pago ao trabalhador seja 0 (zero) em função de descontos.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento ou o código da rubrica constante da Tabela de Rubricas Padrão.
+Validação: Não pode ser utilizada rubrica:
+a) cujo codIncCP em S-1010 seja igual a [25, 26, 51];
+b) cuja natRubr em S-1010 seja igual a [1801, 9220], desde que mês/ano de dtTerm >= [2021-07]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__codRubr" maxlength="30" value="{{detVerbas|readjson:'codRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][codRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="ideTabRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr<a data-toggle="tooltip" title="Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__ideTabRubr" maxlength="8" value="{{detVerbas|readjson:'ideTabRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][ideTabRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="qtdRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar a quantidade de referência para apuração (em horas<a data-toggle="tooltip" title="Informar a quantidade de referência para apuração (em horas, cotas, meses, etc.). Ex.: Quantidade de horas extras trabalhadas relacionada com uma rubrica de hora extra, quantidade de dias trabalhados relacionada com uma rubrica de salário, etc.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__qtdRubr" maxlength="12" value="{{detVerbas|readjson:'qtdRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][qtdRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fatorRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o fator<a data-toggle="tooltip" title="Informar o fator, percentual, etc. da rubrica, quando necessário. Ex.: Adicional de horas extras 50%, relacionado a uma rubrica de horas extras: Fator = 50.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__fatorRubr" maxlength="5" value="{{detVerbas|readjson:'fatorRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][fatorRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor total da rubrica<a data-toggle="tooltip" title="Valor total da rubrica.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__vrRubr" maxlength="14" value="{{detVerbas|readjson:'vrRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][vrRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indApurIR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de tipo de apuração de IR<a data-toggle="tooltip" title="Indicativo de tipo de apuração de IR.
+Valores válidos:
+0 - Normal (apuração sob a folha de pagamento declarada no eSocial)
+1 - Situação especial de apuração de IR
+Validação: Informação obrigatória e exclusiva se mês/ano de dtTerm >= [2021-07]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__indApurIR" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][indApurIR]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='0' {% ifequal detVerbas|readjson:'indApurIR'|to_str '0' %}selected{% endifequal %}>0 - Normal (apuração sob a folha de pagamento declarada no eSocial)</option><option value='1' {% ifequal detVerbas|readjson:'indApurIR'|to_str '1' %}selected{% endifequal %}>1 - Situação especial de apuração de IR</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+<div id="infoSimples__div">
+    <div class="col-md-12">
+        <h4>Informação relativa a empresas enquadradas no regime de tributação Simples Nacional.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="indSimples__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicador de contribuição substituída<a data-toggle="tooltip" title="Indicador de contribuição substituída.
+Valores válidos:
+1 - Contribuição substituída integralmente
+2 - Contribuição não substituída
+3 - Contribuição não substituída concomitante com contribuição substituída"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__infoSimples__id__indSimples" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][infoSimples][indSimples]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideEstabLot|readjson:'infoSimples.indSimples'|to_str '1' %}selected{% endifequal %}>1 - Contribuição substituída integralmente</option><option value='2' {% ifequal ideEstabLot|readjson:'infoSimples.indSimples'|to_str '2' %}selected{% endifequal %}>2 - Contribuição não substituída</option><option value='3' {% ifequal ideEstabLot|readjson:'infoSimples.indSimples'|to_str '3' %}selected{% endifequal %}>3 - Contribuição não substituída concomitante com contribuição substituída</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="dmDev__div">
+    <div class="col-md-12">
+        <h4>Identificação de cada um dos demonstrativos de valores devidos ao trabalhador.
+Regra de validação:
+REGRA_DEMONSTRATIVO</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideDmDev__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Identificador atribuído pela fonte pagadora para o demonstrativo de valores devidos ao trabalhador<a data-toggle="tooltip" title="Identificador atribuído pela empresa para o demonstrativo de valores devidos ao trabalhador relativo a verbas rescisórias.
+Validação: Deve ser um identificador único dentro da mesma competência (mês/ano da data de término) para cada um dos demonstrativos do trabalhador.
+Regra de validação:
+REGRA_CARACTERE_ESPECIAL"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__id__ideDmDev" maxlength="30" value="{{dmDev|readjson:'ideDmDev'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideDmDev]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indRRA__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de Rendimentos Recebidos Acumuladamente - RRA<a data-toggle="tooltip" title="Indicativo de Rendimentos Recebidos Acumuladamente - RRA.
+Somente preencher este campo se for um demonstrativo de RRA.
+Valores válidos:
+S - Sim"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__id__indRRA" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][indRRA]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='S' {% ifequal dmDev|readjson:'indRRA'|to_str 'S' %}selected{% endifequal %}>S - Sim</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="infoRRA__div">
+    <div class="col-md-12">
+        <h4>Informações complementares relativas a Rendimentos Recebidos Acumuladamente - RRA.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpProcRRA__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de processo<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de processo.
+Valores válidos:
+1 - Administrativo
+2 - Judicial"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__id__tpProcRRA" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][tpProcRRA]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal dmDev|readjson:'infoRRA.tpProcRRA'|to_str '1' %}selected{% endifequal %}>1 - Administrativo</option><option value='2' {% ifequal dmDev|readjson:'infoRRA.tpProcRRA'|to_str '2' %}selected{% endifequal %}>2 - Judicial</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrProcRRA__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo/requerimento administrativo/judicial<a data-toggle="tooltip" title="Informar o número do processo/requerimento administrativo/judicial.
+Validação: Informação obrigatória se tpProcRRA = [2] e opcional se tpProcRRA = [1]. Deve ser número de processo válido e:
+a) Se tpProcRRA = [1], deve possuir 17 (dezessete) ou 21 (vinte e um) algarismos;
+b) Se tpProcRRA = [2], deve possuir 20 (vinte) algarismos."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__id__nrProcRRA" maxlength="21" value="{{dmDev|readjson:'infoRRA.nrProcRRA'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][nrProcRRA]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="descRRA__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Descrição dos Rendimentos Recebidos Acumuladamente - RRA<a data-toggle="tooltip" title="Descrição dos Rendimentos Recebidos Acumuladamente - RRA."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__id__descRRA" maxlength="50" value="{{dmDev|readjson:'infoRRA.descRRA'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][descRRA]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="qtdMesesRRA__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número de meses relativo aos Rendimentos Recebidos Acumuladamente - RRA<a data-toggle="tooltip" title="Número de meses relativo aos Rendimentos Recebidos Acumuladamente - RRA."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__id__qtdMesesRRA" maxlength="4" value="{{dmDev|readjson:'infoRRA.qtdMesesRRA'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][qtdMesesRRA]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="despProcJud__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das despesas com processo judicial.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="vlrDespCustas__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor das despesas com custas judiciais<a data-toggle="tooltip" title="Preencher com o valor das despesas com custas judiciais."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__despProcJud__id__vlrDespCustas" maxlength="14" value="{{dmDev|readjson:'infoRRA.despProcJud.vlrDespCustas'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][despProcJud][vlrDespCustas]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vlrDespAdvogados__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor total das despesas com advogado(s)<a data-toggle="tooltip" title="Preencher com o valor total das despesas com advogado(s)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__despProcJud__id__vlrDespAdvogados" maxlength="14" value="{{dmDev|readjson:'infoRRA.despProcJud.vlrDespAdvogados'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][despProcJud][vlrDespAdvogados]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% for ideAdv in dmDev|readjson:'infoRRA.ideAdv' %}
+<div id="ideAdv__div">
+    <div class="col-md-12">
+        <h4>Identificação dos advogados.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de inscrição<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de inscrição, conforme Tabela 05.
+Valores válidos:
+1 - CNPJ
+2 - CPF"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__ideAdv__id__tpInsc" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][ideAdv][][tpInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideAdv|readjson:'tpInsc'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='2' {% ifequal ideAdv|readjson:'tpInsc'|to_str '2' %}selected{% endifequal %}>2 - CPF</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000<a data-toggle="tooltip" title="Informar o número de inscrição do advogado.
+Validação: Deve ser um número de inscrição válido, de acordo com o tipo de inscrição indicado no campo ideAdv/tpInsc, considerando as particularidades aplicadas à informação de CNPJ de órgão público em S-1000.
+Se ideAdv/tpInsc = [1], deve possuir 14 (catorze) algarismos e, no caso de declarante pessoa jurídica, ser diferente do CNPJ base do empregador (exceto se ideEmpregador/nrInsc tiver 14 (catorze) algarismos).
+Se ideAdv/tpInsc = [2], deve possuir 11 (onze) algarismos e, no caso de declarante pessoa física, ser diferente do CPF do empregador."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__ideAdv__id__nrInsc" maxlength="14" value="{{ideAdv|readjson:'nrInsc'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][ideAdv][][nrInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vlrAdv__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da despesa com o advogado<a data-toggle="tooltip" title="Valor da despesa com o advogado, se houver."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__ideAdv__id__vlrAdv" maxlength="14" value="{{ideAdv|readjson:'vlrAdv'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][ideAdv][][vlrAdv]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="ideAdv__div">
+    <div class="col-md-12">
+        <h4>Identificação dos advogados.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de inscrição<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de inscrição, conforme Tabela 05.
+Valores válidos:
+1 - CNPJ
+2 - CPF"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__ideAdv__id__tpInsc" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][ideAdv][][tpInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideAdv|readjson:'tpInsc'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='2' {% ifequal ideAdv|readjson:'tpInsc'|to_str '2' %}selected{% endifequal %}>2 - CPF</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000<a data-toggle="tooltip" title="Informar o número de inscrição do advogado.
+Validação: Deve ser um número de inscrição válido, de acordo com o tipo de inscrição indicado no campo ideAdv/tpInsc, considerando as particularidades aplicadas à informação de CNPJ de órgão público em S-1000.
+Se ideAdv/tpInsc = [1], deve possuir 14 (catorze) algarismos e, no caso de declarante pessoa jurídica, ser diferente do CNPJ base do empregador (exceto se ideEmpregador/nrInsc tiver 14 (catorze) algarismos).
+Se ideAdv/tpInsc = [2], deve possuir 11 (onze) algarismos e, no caso de declarante pessoa física, ser diferente do CPF do empregador."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__ideAdv__id__nrInsc" maxlength="14" value="{{ideAdv|readjson:'nrInsc'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][ideAdv][][nrInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vlrAdv__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da despesa com o advogado<a data-toggle="tooltip" title="Valor da despesa com o advogado, se houver."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__infoRRA__ideAdv__id__vlrAdv" maxlength="14" value="{{ideAdv|readjson:'vlrAdv'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][infoRRA][ideAdv][][vlrAdv]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>{% for ideEstabLot in dmDev|readjson:'ideEstabLot' %}
+<div id="ideEstabLot__div">
+    <div class="col-md-12">
+        <h4>Identificação do estabelecimento e da lotação nos quais o trabalhador possui remuneração no período de apuração.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de inscrição<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de inscrição do estabelecimento, de acordo com as opções da Tabela 05.
+Valores válidos:
+1 - CNPJ
+4 - CNO"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__id__tpInsc" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][tpInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideEstabLot|readjson:'tpInsc'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='4' {% ifequal ideEstabLot|readjson:'tpInsc'|to_str '4' %}selected{% endifequal %}>4 - CNO</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000<a data-toggle="tooltip" title="Informar o número de inscrição do estabelecimento do contribuinte de acordo com o tipo de inscrição indicado no campo ideEstabLot/tpInsc.
+Validação: A inscrição informada deve ser compatível com ideEstabLot/tpInsc."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__id__nrInsc" maxlength="14" value="{{ideEstabLot|readjson:'nrInsc'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][nrInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codLotacao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador para a lotação tributária<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador para a lotação tributária."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__id__codLotacao" maxlength="30" value="{{ideEstabLot|readjson:'codLotacao'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][codLotacao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+{% for detVerbas in ideEstabLot|readjson:'detVerbas' %}
+<div id="detVerbas__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das verbas rescisórias devidas ao trabalhador. Deve haver pelo menos uma rubrica de folha, mesmo que o valor líquido a ser pago ao trabalhador seja 0 (zero) em função de descontos.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento ou o código da rubrica constante da Tabela de Rubricas Padrão.
+Validação: Não pode ser utilizada rubrica:
+a) cujo codIncCP em S-1010 seja igual a [25, 26, 51];
+b) cuja natRubr em S-1010 seja igual a [1801, 9220], desde que mês/ano de dtTerm >= [2021-07]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__codRubr" maxlength="30" value="{{detVerbas|readjson:'codRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][codRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="ideTabRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr<a data-toggle="tooltip" title="Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__ideTabRubr" maxlength="8" value="{{detVerbas|readjson:'ideTabRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][ideTabRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="qtdRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar a quantidade de referência para apuração (em horas<a data-toggle="tooltip" title="Informar a quantidade de referência para apuração (em horas, cotas, meses, etc.). Ex.: Quantidade de horas extras trabalhadas relacionada com uma rubrica de hora extra, quantidade de dias trabalhados relacionada com uma rubrica de salário, etc.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__qtdRubr" maxlength="12" value="{{detVerbas|readjson:'qtdRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][qtdRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fatorRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o fator<a data-toggle="tooltip" title="Informar o fator, percentual, etc. da rubrica, quando necessário. Ex.: Adicional de horas extras 50%, relacionado a uma rubrica de horas extras: Fator = 50.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__fatorRubr" maxlength="5" value="{{detVerbas|readjson:'fatorRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][fatorRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor total da rubrica<a data-toggle="tooltip" title="Valor total da rubrica.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__vrRubr" maxlength="14" value="{{detVerbas|readjson:'vrRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][vrRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indApurIR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de tipo de apuração de IR<a data-toggle="tooltip" title="Indicativo de tipo de apuração de IR.
+Valores válidos:
+0 - Normal (apuração sob a folha de pagamento declarada no eSocial)
+1 - Situação especial de apuração de IR
+Validação: Informação obrigatória e exclusiva se mês/ano de dtTerm >= [2021-07]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__indApurIR" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][indApurIR]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='0' {% ifequal detVerbas|readjson:'indApurIR'|to_str '0' %}selected{% endifequal %}>0 - Normal (apuração sob a folha de pagamento declarada no eSocial)</option><option value='1' {% ifequal detVerbas|readjson:'indApurIR'|to_str '1' %}selected{% endifequal %}>1 - Situação especial de apuração de IR</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="detVerbas__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das verbas rescisórias devidas ao trabalhador. Deve haver pelo menos uma rubrica de folha, mesmo que o valor líquido a ser pago ao trabalhador seja 0 (zero) em função de descontos.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento ou o código da rubrica constante da Tabela de Rubricas Padrão.
+Validação: Não pode ser utilizada rubrica:
+a) cujo codIncCP em S-1010 seja igual a [25, 26, 51];
+b) cuja natRubr em S-1010 seja igual a [1801, 9220], desde que mês/ano de dtTerm >= [2021-07]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__codRubr" maxlength="30" value="{{detVerbas|readjson:'codRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][codRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="ideTabRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr<a data-toggle="tooltip" title="Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__ideTabRubr" maxlength="8" value="{{detVerbas|readjson:'ideTabRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][ideTabRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="qtdRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar a quantidade de referência para apuração (em horas<a data-toggle="tooltip" title="Informar a quantidade de referência para apuração (em horas, cotas, meses, etc.). Ex.: Quantidade de horas extras trabalhadas relacionada com uma rubrica de hora extra, quantidade de dias trabalhados relacionada com uma rubrica de salário, etc.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__qtdRubr" maxlength="12" value="{{detVerbas|readjson:'qtdRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][qtdRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fatorRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o fator<a data-toggle="tooltip" title="Informar o fator, percentual, etc. da rubrica, quando necessário. Ex.: Adicional de horas extras 50%, relacionado a uma rubrica de horas extras: Fator = 50.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__fatorRubr" maxlength="5" value="{{detVerbas|readjson:'fatorRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][fatorRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor total da rubrica<a data-toggle="tooltip" title="Valor total da rubrica.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__vrRubr" maxlength="14" value="{{detVerbas|readjson:'vrRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][vrRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indApurIR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de tipo de apuração de IR<a data-toggle="tooltip" title="Indicativo de tipo de apuração de IR.
+Valores válidos:
+0 - Normal (apuração sob a folha de pagamento declarada no eSocial)
+1 - Situação especial de apuração de IR
+Validação: Informação obrigatória e exclusiva se mês/ano de dtTerm >= [2021-07]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__indApurIR" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][indApurIR]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='0' {% ifequal detVerbas|readjson:'indApurIR'|to_str '0' %}selected{% endifequal %}>0 - Normal (apuração sob a folha de pagamento declarada no eSocial)</option><option value='1' {% ifequal detVerbas|readjson:'indApurIR'|to_str '1' %}selected{% endifequal %}>1 - Situação especial de apuração de IR</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+<div id="infoSimples__div">
+    <div class="col-md-12">
+        <h4>Informação relativa a empresas enquadradas no regime de tributação Simples Nacional.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="indSimples__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicador de contribuição substituída<a data-toggle="tooltip" title="Indicador de contribuição substituída.
+Valores válidos:
+1 - Contribuição substituída integralmente
+2 - Contribuição não substituída
+3 - Contribuição não substituída concomitante com contribuição substituída"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__infoSimples__id__indSimples" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][infoSimples][indSimples]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideEstabLot|readjson:'infoSimples.indSimples'|to_str '1' %}selected{% endifequal %}>1 - Contribuição substituída integralmente</option><option value='2' {% ifequal ideEstabLot|readjson:'infoSimples.indSimples'|to_str '2' %}selected{% endifequal %}>2 - Contribuição não substituída</option><option value='3' {% ifequal ideEstabLot|readjson:'infoSimples.indSimples'|to_str '3' %}selected{% endifequal %}>3 - Contribuição não substituída concomitante com contribuição substituída</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="ideEstabLot__div">
+    <div class="col-md-12">
+        <h4>Identificação do estabelecimento e da lotação nos quais o trabalhador possui remuneração no período de apuração.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de inscrição<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de inscrição do estabelecimento, de acordo com as opções da Tabela 05.
+Valores válidos:
+1 - CNPJ
+4 - CNO"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__id__tpInsc" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][tpInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideEstabLot|readjson:'tpInsc'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='4' {% ifequal ideEstabLot|readjson:'tpInsc'|to_str '4' %}selected{% endifequal %}>4 - CNO</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000<a data-toggle="tooltip" title="Informar o número de inscrição do estabelecimento do contribuinte de acordo com o tipo de inscrição indicado no campo ideEstabLot/tpInsc.
+Validação: A inscrição informada deve ser compatível com ideEstabLot/tpInsc."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__id__nrInsc" maxlength="14" value="{{ideEstabLot|readjson:'nrInsc'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][nrInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codLotacao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador para a lotação tributária<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador para a lotação tributária."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__id__codLotacao" maxlength="30" value="{{ideEstabLot|readjson:'codLotacao'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][codLotacao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+{% for detVerbas in ideEstabLot|readjson:'detVerbas' %}
+<div id="detVerbas__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das verbas rescisórias devidas ao trabalhador. Deve haver pelo menos uma rubrica de folha, mesmo que o valor líquido a ser pago ao trabalhador seja 0 (zero) em função de descontos.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento ou o código da rubrica constante da Tabela de Rubricas Padrão.
+Validação: Não pode ser utilizada rubrica:
+a) cujo codIncCP em S-1010 seja igual a [25, 26, 51];
+b) cuja natRubr em S-1010 seja igual a [1801, 9220], desde que mês/ano de dtTerm >= [2021-07]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__codRubr" maxlength="30" value="{{detVerbas|readjson:'codRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][codRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="ideTabRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr<a data-toggle="tooltip" title="Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__ideTabRubr" maxlength="8" value="{{detVerbas|readjson:'ideTabRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][ideTabRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="qtdRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar a quantidade de referência para apuração (em horas<a data-toggle="tooltip" title="Informar a quantidade de referência para apuração (em horas, cotas, meses, etc.). Ex.: Quantidade de horas extras trabalhadas relacionada com uma rubrica de hora extra, quantidade de dias trabalhados relacionada com uma rubrica de salário, etc.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__qtdRubr" maxlength="12" value="{{detVerbas|readjson:'qtdRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][qtdRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fatorRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o fator<a data-toggle="tooltip" title="Informar o fator, percentual, etc. da rubrica, quando necessário. Ex.: Adicional de horas extras 50%, relacionado a uma rubrica de horas extras: Fator = 50.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__fatorRubr" maxlength="5" value="{{detVerbas|readjson:'fatorRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][fatorRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor total da rubrica<a data-toggle="tooltip" title="Valor total da rubrica.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__vrRubr" maxlength="14" value="{{detVerbas|readjson:'vrRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][vrRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indApurIR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de tipo de apuração de IR<a data-toggle="tooltip" title="Indicativo de tipo de apuração de IR.
+Valores válidos:
+0 - Normal (apuração sob a folha de pagamento declarada no eSocial)
+1 - Situação especial de apuração de IR
+Validação: Informação obrigatória e exclusiva se mês/ano de dtTerm >= [2021-07]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__indApurIR" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][indApurIR]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='0' {% ifequal detVerbas|readjson:'indApurIR'|to_str '0' %}selected{% endifequal %}>0 - Normal (apuração sob a folha de pagamento declarada no eSocial)</option><option value='1' {% ifequal detVerbas|readjson:'indApurIR'|to_str '1' %}selected{% endifequal %}>1 - Situação especial de apuração de IR</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="detVerbas__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das verbas rescisórias devidas ao trabalhador. Deve haver pelo menos uma rubrica de folha, mesmo que o valor líquido a ser pago ao trabalhador seja 0 (zero) em função de descontos.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento ou o código da rubrica constante da Tabela de Rubricas Padrão.
+Validação: Não pode ser utilizada rubrica:
+a) cujo codIncCP em S-1010 seja igual a [25, 26, 51];
+b) cuja natRubr em S-1010 seja igual a [1801, 9220], desde que mês/ano de dtTerm >= [2021-07]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__codRubr" maxlength="30" value="{{detVerbas|readjson:'codRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][codRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="ideTabRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr<a data-toggle="tooltip" title="Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__ideTabRubr" maxlength="8" value="{{detVerbas|readjson:'ideTabRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][ideTabRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="qtdRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar a quantidade de referência para apuração (em horas<a data-toggle="tooltip" title="Informar a quantidade de referência para apuração (em horas, cotas, meses, etc.). Ex.: Quantidade de horas extras trabalhadas relacionada com uma rubrica de hora extra, quantidade de dias trabalhados relacionada com uma rubrica de salário, etc.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__qtdRubr" maxlength="12" value="{{detVerbas|readjson:'qtdRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][qtdRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fatorRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o fator<a data-toggle="tooltip" title="Informar o fator, percentual, etc. da rubrica, quando necessário. Ex.: Adicional de horas extras 50%, relacionado a uma rubrica de horas extras: Fator = 50.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__fatorRubr" maxlength="5" value="{{detVerbas|readjson:'fatorRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][fatorRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor total da rubrica<a data-toggle="tooltip" title="Valor total da rubrica.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__vrRubr" maxlength="14" value="{{detVerbas|readjson:'vrRubr'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][vrRubr]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indApurIR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de tipo de apuração de IR<a data-toggle="tooltip" title="Indicativo de tipo de apuração de IR.
+Valores válidos:
+0 - Normal (apuração sob a folha de pagamento declarada no eSocial)
+1 - Situação especial de apuração de IR
+Validação: Informação obrigatória e exclusiva se mês/ano de dtTerm >= [2021-07]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__detVerbas__id__indApurIR" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][detVerbas][][indApurIR]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='0' {% ifequal detVerbas|readjson:'indApurIR'|to_str '0' %}selected{% endifequal %}>0 - Normal (apuração sob a folha de pagamento declarada no eSocial)</option><option value='1' {% ifequal detVerbas|readjson:'indApurIR'|to_str '1' %}selected{% endifequal %}>1 - Situação especial de apuração de IR</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+<div id="infoSimples__div">
+    <div class="col-md-12">
+        <h4>Informação relativa a empresas enquadradas no regime de tributação Simples Nacional.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="indSimples__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicador de contribuição substituída<a data-toggle="tooltip" title="Indicador de contribuição substituída.
+Valores válidos:
+1 - Contribuição substituída integralmente
+2 - Contribuição não substituída
+3 - Contribuição não substituída concomitante com contribuição substituída"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__dmDev__ideEstabLot__infoSimples__id__indSimples" name="[evtTSVTermino][infoTSVTermino][verbasResc][dmDev][][ideEstabLot][][infoSimples][indSimples]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideEstabLot|readjson:'infoSimples.indSimples'|to_str '1' %}selected{% endifequal %}>1 - Contribuição substituída integralmente</option><option value='2' {% ifequal ideEstabLot|readjson:'infoSimples.indSimples'|to_str '2' %}selected{% endifequal %}>2 - Contribuição não substituída</option><option value='3' {% ifequal ideEstabLot|readjson:'infoSimples.indSimples'|to_str '3' %}selected{% endifequal %}>3 - Contribuição não substituída concomitante com contribuição substituída</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}{% for procJudTrab in evtTSVTermino|readjson:'infoTSVTermino.verbasResc.procJudTrab' %}
+<div id="procJudTrab__div">
+    <div class="col-md-12">
+        <h4>Informações sobre a existência de processos judiciais do trabalhador com decisão favorável quanto à não incidência de contribuições sociais e/ou Imposto de Renda.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpTrib__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Abrangência da decisão<a data-toggle="tooltip" title="Abrangência da decisão.
+Valores válidos:
+1 - IRRF
+2 - Contribuições sociais do trabalhador"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__procJudTrab__id__tpTrib" name="[evtTSVTermino][infoTSVTermino][verbasResc][procJudTrab][][tpTrib]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal procJudTrab|readjson:'tpTrib'|to_str '1' %}selected{% endifequal %}>1 - IRRF</option><option value='2' {% ifequal procJudTrab|readjson:'tpTrib'|to_str '2' %}selected{% endifequal %}>2 - Contribuições sociais do trabalhador</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrProcJud__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de processo judicial cadastrado<a data-toggle="tooltip" title="Informar um número de processo judicial cadastrado através do evento S-1070, cujo indMatProc seja igual a [1].
+Validação: Deve ser um número de processo judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__procJudTrab__id__nrProcJud" maxlength="20" value="{{procJudTrab|readjson:'nrProcJud'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][procJudTrab][][nrProcJud]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador em S-1070.
+Validação: A informação prestada deve estar de acordo com o que foi informado em S-1070."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__procJudTrab__id__codSusp" maxlength="14" value="{{procJudTrab|readjson:'codSusp'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][procJudTrab][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="procJudTrab__div">
+    <div class="col-md-12">
+        <h4>Informações sobre a existência de processos judiciais do trabalhador com decisão favorável quanto à não incidência de contribuições sociais e/ou Imposto de Renda.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpTrib__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Abrangência da decisão<a data-toggle="tooltip" title="Abrangência da decisão.
+Valores válidos:
+1 - IRRF
+2 - Contribuições sociais do trabalhador"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__procJudTrab__id__tpTrib" name="[evtTSVTermino][infoTSVTermino][verbasResc][procJudTrab][][tpTrib]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal procJudTrab|readjson:'tpTrib'|to_str '1' %}selected{% endifequal %}>1 - IRRF</option><option value='2' {% ifequal procJudTrab|readjson:'tpTrib'|to_str '2' %}selected{% endifequal %}>2 - Contribuições sociais do trabalhador</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrProcJud__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de processo judicial cadastrado<a data-toggle="tooltip" title="Informar um número de processo judicial cadastrado através do evento S-1070, cujo indMatProc seja igual a [1].
+Validação: Deve ser um número de processo judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__procJudTrab__id__nrProcJud" maxlength="20" value="{{procJudTrab|readjson:'nrProcJud'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][procJudTrab][][nrProcJud]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador em S-1070.
+Validação: A informação prestada deve estar de acordo com o que foi informado em S-1070."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__procJudTrab__id__codSusp" maxlength="14" value="{{procJudTrab|readjson:'codSusp'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][procJudTrab][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+<div id="infoMV__div">
+    <div class="col-md-12">
+        <h4>Grupo preenchido exclusivamente em caso de trabalhador que possua outros vínculos/atividades nos quais já tenha ocorrido desconto de contribuição previdenciária.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="indMV__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicador de desconto da contribuição previdenciária do trabalhador<a data-toggle="tooltip" title="Indicador de desconto da contribuição previdenciária do trabalhador.
+Valores válidos:
+1 - O declarante aplica a(s) alíquota(s) de desconto do segurado sobre a remuneração por ele informada (o percentual da(s) alíquota(s) será(ão) obtido(s) considerando a remuneração total do trabalhador)
+2 - O declarante aplica a(s) alíquota(s) de desconto do segurado sobre a diferença entre o limite máximo do salário de contribuição e a remuneração de outra(s) empresa(s) para as quais o trabalhador informou que houve o desconto
+3 - O declarante não realiza desconto do segurado, uma vez que houve desconto sobre o limite máximo de salário de contribuição em outra(s) empresa(s)"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__infoMV__id__indMV" name="[evtTSVTermino][infoTSVTermino][verbasResc][infoMV][indMV]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTSVTermino|readjson:'infoTSVTermino.verbasResc.infoMV.indMV'|to_str '1' %}selected{% endifequal %}>1 - O declarante aplica a(s) alíquota(s) de desconto do segurado sobre a remuneração por ele informada (o percentual da(s) alíquota(s) será(ão) obtido(s) considerando a remuneração total do trabalhador)</option><option value='2' {% ifequal evtTSVTermino|readjson:'infoTSVTermino.verbasResc.infoMV.indMV'|to_str '2' %}selected{% endifequal %}>2 - O declarante aplica a(s) alíquota(s) de desconto do segurado sobre a diferença entre o limite máximo do salário de contribuição e a remuneração de outra(s) empresa(s) para as quais o trabalhador informou que houve o desconto</option><option value='3' {% ifequal evtTSVTermino|readjson:'infoTSVTermino.verbasResc.infoMV.indMV'|to_str '3' %}selected{% endifequal %}>3 - O declarante não realiza desconto do segurado, uma vez que houve desconto sobre o limite máximo de salário de contribuição em outra(s) empresa(s)</option>
+            </select>
+        </div>
+    </div>
+</div>
+{% for remunOutrEmpr in evtTSVTermino|readjson:'infoTSVTermino.verbasResc.infoMV.remunOutrEmpr' %}
+<div id="remunOutrEmpr__div">
+    <div class="col-md-12">
+        <h4>Informações relativas ao trabalhador que possui vínculo empregatício com outra(s) empresa(s) e/ou que exerce outras atividades como contribuinte individual, detalhando as empresas que efetuaram (ou efetuarão) desconto da contribuição.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de inscrição<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de inscrição, conforme Tabela 05.
+Valores válidos:
+1 - CNPJ
+2 - CPF"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__infoMV__remunOutrEmpr__id__tpInsc" name="[evtTSVTermino][infoTSVTermino][verbasResc][infoMV][remunOutrEmpr][][tpInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal remunOutrEmpr|readjson:'tpInsc'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='2' {% ifequal remunOutrEmpr|readjson:'tpInsc'|to_str '2' %}selected{% endifequal %}>2 - CPF</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000<a data-toggle="tooltip" title="Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo remunOutrEmpr/tpInsc.
+Validação: a) Se remunOutrEmpr/tpInsc = [1], deve ser um CNPJ válido, diferente do CNPJ base indicado no evento de Informações do Empregador (S-1000) e dos estabelecimentos informados através do evento S-1005.
+b) Se remunOutrEmpr/tpInsc = [2], deve ser um CPF válido e diferente do CPF do trabalhador e ainda, caso o empregador seja pessoa física, diferente do CPF do empregador."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__infoMV__remunOutrEmpr__id__nrInsc" maxlength="14" value="{{remunOutrEmpr|readjson:'nrInsc'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][infoMV][remunOutrEmpr][][nrInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codCateg__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código da categoria do trabalhador<a data-toggle="tooltip" title="Preencher com o código da categoria do trabalhador na qual houve a remuneração.
+Validação: Deve ser um código válido e existente na Tabela 01."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__infoMV__remunOutrEmpr__id__codCateg" maxlength="3" value="{{remunOutrEmpr|readjson:'codCateg'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][infoMV][remunOutrEmpr][][codCateg]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vlrRemunOE__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor da remuneração recebida pelo trabalhador na outra empresa/atividade<a data-toggle="tooltip" title="Preencher com o valor da remuneração recebida pelo trabalhador na outra empresa/atividade, sobre a qual houve desconto/recolhimento da contribuição do segurado.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__infoMV__remunOutrEmpr__id__vlrRemunOE" maxlength="14" value="{{remunOutrEmpr|readjson:'vlrRemunOE'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][infoMV][remunOutrEmpr][][vlrRemunOE]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="remunOutrEmpr__div">
+    <div class="col-md-12">
+        <h4>Informações relativas ao trabalhador que possui vínculo empregatício com outra(s) empresa(s) e/ou que exerce outras atividades como contribuinte individual, detalhando as empresas que efetuaram (ou efetuarão) desconto da contribuição.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de inscrição<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de inscrição, conforme Tabela 05.
+Valores válidos:
+1 - CNPJ
+2 - CPF"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__verbasResc__infoMV__remunOutrEmpr__id__tpInsc" name="[evtTSVTermino][infoTSVTermino][verbasResc][infoMV][remunOutrEmpr][][tpInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal remunOutrEmpr|readjson:'tpInsc'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='2' {% ifequal remunOutrEmpr|readjson:'tpInsc'|to_str '2' %}selected{% endifequal %}>2 - CPF</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000<a data-toggle="tooltip" title="Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo remunOutrEmpr/tpInsc.
+Validação: a) Se remunOutrEmpr/tpInsc = [1], deve ser um CNPJ válido, diferente do CNPJ base indicado no evento de Informações do Empregador (S-1000) e dos estabelecimentos informados através do evento S-1005.
+b) Se remunOutrEmpr/tpInsc = [2], deve ser um CPF válido e diferente do CPF do trabalhador e ainda, caso o empregador seja pessoa física, diferente do CPF do empregador."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__infoMV__remunOutrEmpr__id__nrInsc" maxlength="14" value="{{remunOutrEmpr|readjson:'nrInsc'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][infoMV][remunOutrEmpr][][nrInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codCateg__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código da categoria do trabalhador<a data-toggle="tooltip" title="Preencher com o código da categoria do trabalhador na qual houve a remuneração.
+Validação: Deve ser um código válido e existente na Tabela 01."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__infoMV__remunOutrEmpr__id__codCateg" maxlength="3" value="{{remunOutrEmpr|readjson:'codCateg'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][infoMV][remunOutrEmpr][][codCateg]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vlrRemunOE__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor da remuneração recebida pelo trabalhador na outra empresa/atividade<a data-toggle="tooltip" title="Preencher com o valor da remuneração recebida pelo trabalhador na outra empresa/atividade, sobre a qual houve desconto/recolhimento da contribuição do segurado.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__verbasResc__infoMV__remunOutrEmpr__id__vlrRemunOE" maxlength="14" value="{{remunOutrEmpr|readjson:'vlrRemunOE'}}" name="[evtTSVTermino][infoTSVTermino][verbasResc][infoMV][remunOutrEmpr][][vlrRemunOE]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="remunAposTerm__div">
+    <div class="col-md-12">
+        <h4>Informações sobre a "quarentena" remunerada de trabalhador desligado ou outra situação de término com data anterior.
+O grupo deve ser preenchido apenas no caso do trabalhador que recebe remuneração após o desligamento por estar impossibilitado de exercer atividade remunerada ou no caso de término reconhecido judicialmente com data anterior a competências com remunerações já informadas no eSocial.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="indRemun__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de situação de remuneração após o término<a data-toggle="tooltip" title="Indicativo de situação de remuneração após o término.
+Valores válidos:
+1 - Quarentena
+2 - Término reconhecido judicialmente com data anterior a competências com remunerações já informadas no eSocial
+Validação: Informação obrigatória se dtTerm >= [2023-01-16]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTSVTermino__infoTSVTermino__remunAposTerm__id__indRemun" name="[evtTSVTermino][infoTSVTermino][remunAposTerm][indRemun]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTSVTermino|readjson:'infoTSVTermino.remunAposTerm.indRemun'|to_str '1' %}selected{% endifequal %}>1 - Quarentena</option><option value='2' {% ifequal evtTSVTermino|readjson:'infoTSVTermino.remunAposTerm.indRemun'|to_str '2' %}selected{% endifequal %}>2 - Término reconhecido judicialmente com data anterior a competências com remunerações já informadas no eSocial</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="dtFimRemun__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com a data final da quarentena a que está sujeito o trabalhador<a data-toggle="tooltip" title="Preencher com a data final da quarentena a que está sujeito o trabalhador. No caso de término reconhecido judicialmente com data anterior a competências com remunerações já informadas no eSocial, informar o último dia trabalhado.
+Validação: Deve ser uma data posterior a dtTerm."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTSVTermino__infoTSVTermino__remunAposTerm__id__dtFimRemun" value="{{evtTSVTermino|readjson:'infoTSVTermino.remunAposTerm.dtFimRemun'}}" name="[evtTSVTermino][infoTSVTermino][remunAposTerm][dtFimRemun]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+</div>
+
+</form>
+{% endwith %}
+{% if original.is_aberto %}
+<script type="text/javascript">
+function set_evento_json() {
+    var dst = document.getElementById("id_evento_json");
+    var dst_read = document.getElementById("id_evento_json_read");
+    var obj = $('#form_json').serializeJSON({useIntKeysAsArrayIndex: true});
+    dst.value = JSON.stringify(obj);
+    dst_read.value = JSON.stringify(obj);
+};
+$(document).ready(function(){
+    set_evento_json();
+});
+</script>
+{% endif %}

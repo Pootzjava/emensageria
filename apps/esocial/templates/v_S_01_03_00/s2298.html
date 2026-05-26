@@ -1,0 +1,325 @@
+
+{% load esocial_custom_tags %}
+{% with evtReintegr=original.evento_json|readjson:'evtReintegr' %}
+<form id="form_json">
+
+<div class="row">
+
+<div id="evtReintegr__div">
+    <div class="col-md-12">
+        <h4>Evento Reintegração/Outros Provimentos.
+Regras de validação:
+REGRA_EMPREGADO_DOMESTICO
+REGRA_ENVIO_PROC_FECHAMENTO
+REGRA_EVENTOS_EXTEMP
+REGRA_EVENTO_POSTERIOR_CAT_OBITO
+REGRA_EXISTE_EVENTO_DESLIGAMENTO
+REGRA_EXISTE_INFO_EMPREGADOR
+REGRA_EXTEMP_REINTEGRACAO
+REGRA_MESMO_PROCEMI
+REGRA_REINTEG_EXCLUSAO_EVENTO
+REGRA_RETIFICA_MESMO_VINCULO
+REGRA_VALIDA_EMPREGADOR</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideEvento__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do evento.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="indRetif__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informe [1] para arquivo original ou [2] para arquivo de retificação<a data-toggle="tooltip" title="Informe [1] para arquivo original ou [2] para arquivo de retificação.
+Valores válidos:
+1 - Original
+2 - Retificação"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtReintegr__ideEvento__id__indRetif" name="[evtReintegr][ideEvento][indRetif]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtReintegr|readjson:'ideEvento.indRetif'|to_str '1' %}selected{% endifequal %}>1 - Original</option><option value='2' {% ifequal evtReintegr|readjson:'ideEvento.indRetif'|to_str '2' %}selected{% endifequal %}>2 - Retificação</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrRecibo__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o número do recibo do arquivo a ser retificado<a data-toggle="tooltip" title="Preencher com o número do recibo do arquivo a ser retificado.
+Validação: O preenchimento é obrigatório se indRetif = [2].
+Deve ser um recibo de entrega válido, correspondente ao arquivo que está sendo retificado."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtReintegr__ideEvento__id__nrRecibo" maxlength="23" value="{{evtReintegr|readjson:'ideEvento.nrRecibo'}}" name="[evtReintegr][ideEvento][nrRecibo]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="tpAmb__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Identificação do ambiente</label>
+            <select name="[evtReintegr][ideEvento][tpAmb]" id="evtReintegr__ideEvento__id__tpAmb_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpamb 1 %}selected{% endifequal %}>1 - Produção</option>
+                <option value="2" {% ifequal original.tpamb 2 %}selected{% endifequal %}>2 - Produção restrita.</option>
+            </select>
+            <input type="hidden" name="[evtReintegr][ideEvento][tpAmb]" id="evtReintegr__ideEvento__id__tpAmb" value="{{original.tpamb}}">
+        </div>
+    </div>
+</div>
+<div id="procEmi__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Processo de emissão do evento</label>
+            <select name="[evtReintegr][ideEvento][procEmi]" id="evtReintegr__ideEvento__id__procEmi_disabled" disabled="">
+                <option value="1" {% ifequal original.procemi 1 %}selected{% endifequal %}>1 - Aplicativo do empregador</option>
+                <option value="2" {% ifequal original.procemi 2 %}selected{% endifequal %}>2 - Aplicativo governamental - Empregador Doméstico</option>
+                <option value="3" {% ifequal original.procemi 3 %}selected{% endifequal %}>3 - Aplicativo governamental - Web Geral</option>
+                <option value="4" {% ifequal original.procemi 4 %}selected{% endifequal %}>4 - Aplicativo governamental - Simplificado Pessoa Jurídica</option>
+                <option value="5" {% ifequal original.procemi 5 %}selected{% endifequal %}>5 - Aplicativo governamental - Segurado Especial.</option>
+            </select>
+            <input type="hidden" name="[evtReintegr][ideEvento][procEmi]" id="evtReintegr__ideEvento__id__procEmi" value="{{original.procemi}}">
+        </div>
+    </div>
+</div>
+<div id="verProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Versão do processo de emissão do evento</label>
+            <input type="text" name="[evtReintegr][ideEvento][verProc]" value="{{original.verproc}}" class="vTextField" maxlength="20" id="evtReintegr__ideEvento__id__verProc_disabled" disabled="">
+            <input type="hidden" name="[evtReintegr][ideEvento][verProc]" id="evtReintegr__ideEvento__id__verProc" value="{{original.verproc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideEmpregador__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do empregador.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Preencher com o código correspondente ao tipo de inscrição</label>
+            <select name="[evtReintegr][ideEmpregador][tpInsc]" id="evtReintegr__ideEmpregador__id__tpInsc_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpinsc 1 %}selected{% endifequal %}>1 - CNPJ</option>
+                <option value="2" {% ifequal original.tpinsc 2 %}selected{% endifequal %}>2 - CPF</option>
+                <option value="3" {% ifequal original.tpinsc 3 %}selected{% endifequal %}>3 - CAEPF (Cadastro de Atividade Econômica de Pessoa Física)</option>
+                <option value="4" {% ifequal original.tpinsc 4 %}selected{% endifequal %}>4 - CNO (Cadastro Nacional de Obra)</option>
+                <option value="5" {% ifequal original.tpinsc 5 %}selected{% endifequal %}>5 - CGC</option>
+                <option value="6" {% ifequal original.tpinsc 6 %}selected{% endifequal %}>6 - CEI</option>
+            </select>
+            <input type="hidden" name="[evtReintegr][ideEmpregador][tpInsc]" id="evtReintegr__ideEmpregador__id__tpInsc" value="{{original.tpinsc}}">
+        </div>
+    </div>
+</div>
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000</label>
+            <input type="text" id="evtReintegr__ideEmpregador__id__nrInsc_disabled" name="[evtReintegr][ideEmpregador][nrInsc]" value="{{original.nrinsc}}" class="vTextField" maxlength="15" disabled="">
+            <input type="hidden" name="[evtReintegr][ideEmpregador][nrInsc]" id="evtReintegr__ideEmpregador__id__nrInsc" value="{{original.nrinsc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideVinculo__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do trabalhador e do vínculo.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="cpfTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o número do CPF do trabalhador<a data-toggle="tooltip" title="Preencher com o número do CPF do trabalhador."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtReintegr__ideVinculo__id__cpfTrab" maxlength="11" value="{{evtReintegr|readjson:'ideVinculo.cpfTrab'}}" name="[evtReintegr][ideVinculo][cpfTrab]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="matricula__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Matrícula atribuída ao trabalhador pela empresa ou<a data-toggle="tooltip" title="Matrícula atribuída ao trabalhador pela empresa ou, no caso de servidor público, a matrícula constante no Sistema de Administração de Recursos Humanos do órgão.
+Validação: Deve corresponder à matrícula informada pelo empregador no evento S-2200 do respectivo vínculo trabalhista."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtReintegr__ideVinculo__id__matricula" maxlength="30" value="{{evtReintegr|readjson:'ideVinculo.matricula'}}" name="[evtReintegr][ideVinculo][matricula]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="infoReintegr__div">
+    <div class="col-md-12">
+        <h4>Informações da reintegração.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpReint__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Tipo de reintegração/outro provimento<a data-toggle="tooltip" title="Tipo de reintegração/outro provimento.
+Valores válidos:
+1 - Reintegração por decisão judicial
+2 - Reintegração por anistia legal
+3 - Reversão de servidor público
+4 - Recondução de servidor público
+5 - Reinclusão de militar
+6 - Revisão de reforma de militar
+9 - Outros
+Validação: Os tipos [3, 4, 5, 6] só podem ser informados se a natureza jurídica do declarante for Administração Pública (grupo [1])."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtReintegr__infoReintegr__id__tpReint" name="[evtReintegr][infoReintegr][tpReint]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtReintegr|readjson:'infoReintegr.tpReint'|to_str '1' %}selected{% endifequal %}>1 - Reintegração por decisão judicial</option><option value='2' {% ifequal evtReintegr|readjson:'infoReintegr.tpReint'|to_str '2' %}selected{% endifequal %}>2 - Reintegração por anistia legal</option><option value='3' {% ifequal evtReintegr|readjson:'infoReintegr.tpReint'|to_str '3' %}selected{% endifequal %}>3 - Reversão de servidor público</option><option value='4' {% ifequal evtReintegr|readjson:'infoReintegr.tpReint'|to_str '4' %}selected{% endifequal %}>4 - Recondução de servidor público</option><option value='5' {% ifequal evtReintegr|readjson:'infoReintegr.tpReint'|to_str '5' %}selected{% endifequal %}>5 - Reinclusão de militar</option><option value='6' {% ifequal evtReintegr|readjson:'infoReintegr.tpReint'|to_str '6' %}selected{% endifequal %}>6 - Revisão de reforma de militar</option><option value='9' {% ifequal evtReintegr|readjson:'infoReintegr.tpReint'|to_str '9' %}selected{% endifequal %}>9 - Outros</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrProcJud__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de processo judicial cadastrado<a data-toggle="tooltip" title="Em caso de reintegração por determinação judicial, preencher com o número do processo.
+Validação: Informação obrigatória e exclusiva se tpReint = [1].
+Se preenchido, deve ser um processo judicial válido, com 20 (vinte) algarismos."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtReintegr__infoReintegr__id__nrProcJud" maxlength="20" value="{{evtReintegr|readjson:'infoReintegr.nrProcJud'}}" name="[evtReintegr][infoReintegr][nrProcJud]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nrLeiAnistia__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar a lei de anistia<a data-toggle="tooltip" title="Informar a lei de anistia, descrevendo seu número e ano de publicação.
+Validação: Preenchimento obrigatório e exclusivo se tpReint = [2]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtReintegr__infoReintegr__id__nrLeiAnistia" maxlength="13" value="{{evtReintegr|readjson:'infoReintegr.nrLeiAnistia'}}" name="[evtReintegr][infoReintegr][nrLeiAnistia]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dtEfetRetorno__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar a data do efetivo retorno ao trabalho<a data-toggle="tooltip" title="Informar a data do efetivo retorno ao trabalho.
+Validação: Deve ser uma data válida, posterior à data de desligamento do trabalhador. Não pode ser posterior a 30 (trinta) dias da data atual."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtReintegr__infoReintegr__id__dtEfetRetorno" value="{{evtReintegr|readjson:'infoReintegr.dtEfetRetorno'}}" name="[evtReintegr][infoReintegr][dtEfetRetorno]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dtEfeito__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Data de início dos efeitos financeiros da reativação do benefício<a data-toggle="tooltip" title="Informar a data de início dos efeitos financeiros da reintegração.
+Validação: Deve ser uma data igual ou anterior à data do efetivo retorno ao trabalho e posterior à data do desligamento."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtReintegr__infoReintegr__id__dtEfeito" value="{{evtReintegr|readjson:'infoReintegr.dtEfeito'}}" name="[evtReintegr][infoReintegr][dtEfeito]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+</div>
+
+</form>
+{% endwith %}
+{% if original.is_aberto %}
+<script type="text/javascript">
+function set_evento_json() {
+    var dst = document.getElementById("id_evento_json");
+    var dst_read = document.getElementById("id_evento_json_read");
+    var obj = $('#form_json').serializeJSON({useIntKeysAsArrayIndex: true});
+    dst.value = JSON.stringify(obj);
+    dst_read.value = JSON.stringify(obj);
+};
+$(document).ready(function(){
+    set_evento_json();
+});
+</script>
+{% endif %}

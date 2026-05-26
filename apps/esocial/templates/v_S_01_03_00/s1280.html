@@ -1,0 +1,433 @@
+
+{% load esocial_custom_tags %}
+{% with evtInfoComplPer=original.evento_json|readjson:'evtInfoComplPer' %}
+<form id="form_json">
+
+<div class="row">
+
+<div id="evtInfoComplPer__div">
+    <div class="col-md-12">
+        <h4>Evento Informações Complementares aos Eventos Periódicos.
+Regras de validação:
+REGRA_ENVIO_PROC_FECHAMENTO
+REGRA_EVENTOS_EXTEMP
+REGRA_EVE_FOPAG_IND_RETIFICACAO
+REGRA_EVE_FOPAG_INFO_COMPAT_CLASSTRIB
+REGRA_EVE_FOPAG_PERMITE_EXCLUSAO
+REGRA_EVE_FOPAG_SIMPLIFICADO
+REGRA_EXISTE_INFO_EMPREGADOR
+REGRA_MESMO_PROCEMI
+REGRA_REMUN_ANUAL_DEZEMBRO
+REGRA_VALIDA_EMPREGADOR</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideEvento__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do evento.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="indRetif__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informe [1] para arquivo original ou [2] para arquivo de retificação<a data-toggle="tooltip" title="Informe [1] para arquivo original ou [2] para arquivo de retificação.
+Valores válidos:
+1 - Original
+2 - Retificação"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtInfoComplPer__ideEvento__id__indRetif" name="[evtInfoComplPer][ideEvento][indRetif]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtInfoComplPer|readjson:'ideEvento.indRetif'|to_str '1' %}selected{% endifequal %}>1 - Original</option><option value='2' {% ifequal evtInfoComplPer|readjson:'ideEvento.indRetif'|to_str '2' %}selected{% endifequal %}>2 - Retificação</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrRecibo__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o número do recibo do arquivo a ser retificado<a data-toggle="tooltip" title="Preencher com o número do recibo do arquivo a ser retificado.
+Validação: O preenchimento é obrigatório se indRetif = [2].
+Deve ser um recibo de entrega válido, correspondente ao arquivo que está sendo retificado."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtInfoComplPer__ideEvento__id__nrRecibo" maxlength="23" value="{{evtInfoComplPer|readjson:'ideEvento.nrRecibo'}}" name="[evtInfoComplPer][ideEvento][nrRecibo]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indApuracao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de período de apuração<a data-toggle="tooltip" title="Indicativo de período de apuração.
+Valores válidos:
+1 - Mensal
+2 - Anual (13° salário)"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtInfoComplPer__ideEvento__id__indApuracao" name="[evtInfoComplPer][ideEvento][indApuracao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtInfoComplPer|readjson:'ideEvento.indApuracao'|to_str '1' %}selected{% endifequal %}>1 - Mensal</option><option value='2' {% ifequal evtInfoComplPer|readjson:'ideEvento.indApuracao'|to_str '2' %}selected{% endifequal %}>2 - Anual (13° salário)</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="perApur__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o mês/ano (formato AAAA-MM) de referência das informações<a data-toggle="tooltip" title="Informar o mês/ano (formato AAAA-MM) de referência das informações, se indApuracao for igual a [1], ou apenas o ano (formato AAAA), se indApuracao for igual a [2].
+Validação: Deve ser um mês/ano ou ano válido, igual ou posterior ao início da obrigatoriedade dos eventos periódicos para o empregador."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtInfoComplPer__ideEvento__id__perApur" maxlength="7" value="{{evtInfoComplPer|readjson:'ideEvento.perApur'}}" name="[evtInfoComplPer][ideEvento][perApur]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indGuia__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo do tipo de guia<a data-toggle="tooltip" title="Indicativo do tipo de guia.
+Valores válidos:
+1 - Documento de Arrecadação do eSocial - DAE"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtInfoComplPer__ideEvento__id__indGuia" name="[evtInfoComplPer][ideEvento][indGuia]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtInfoComplPer|readjson:'ideEvento.indGuia'|to_str '1' %}selected{% endifequal %}>1 - Documento de Arrecadação do eSocial - DAE</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="tpAmb__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Identificação do ambiente</label>
+            <select name="[evtInfoComplPer][ideEvento][tpAmb]" id="evtInfoComplPer__ideEvento__id__tpAmb_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpamb 1 %}selected{% endifequal %}>1 - Produção</option>
+                <option value="2" {% ifequal original.tpamb 2 %}selected{% endifequal %}>2 - Produção restrita.</option>
+            </select>
+            <input type="hidden" name="[evtInfoComplPer][ideEvento][tpAmb]" id="evtInfoComplPer__ideEvento__id__tpAmb" value="{{original.tpamb}}">
+        </div>
+    </div>
+</div>
+<div id="procEmi__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Processo de emissão do evento</label>
+            <select name="[evtInfoComplPer][ideEvento][procEmi]" id="evtInfoComplPer__ideEvento__id__procEmi_disabled" disabled="">
+                <option value="1" {% ifequal original.procemi 1 %}selected{% endifequal %}>1 - Aplicativo do empregador</option>
+                <option value="2" {% ifequal original.procemi 2 %}selected{% endifequal %}>2 - Aplicativo governamental - Empregador Doméstico</option>
+                <option value="3" {% ifequal original.procemi 3 %}selected{% endifequal %}>3 - Aplicativo governamental - Web Geral</option>
+                <option value="4" {% ifequal original.procemi 4 %}selected{% endifequal %}>4 - Aplicativo governamental - Simplificado Pessoa Jurídica</option>
+                <option value="5" {% ifequal original.procemi 5 %}selected{% endifequal %}>5 - Aplicativo governamental - Segurado Especial.</option>
+            </select>
+            <input type="hidden" name="[evtInfoComplPer][ideEvento][procEmi]" id="evtInfoComplPer__ideEvento__id__procEmi" value="{{original.procemi}}">
+        </div>
+    </div>
+</div>
+<div id="verProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Versão do processo de emissão do evento</label>
+            <input type="text" name="[evtInfoComplPer][ideEvento][verProc]" value="{{original.verproc}}" class="vTextField" maxlength="20" id="evtInfoComplPer__ideEvento__id__verProc_disabled" disabled="">
+            <input type="hidden" name="[evtInfoComplPer][ideEvento][verProc]" id="evtInfoComplPer__ideEvento__id__verProc" value="{{original.verproc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideEmpregador__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do empregador.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Preencher com o código correspondente ao tipo de inscrição</label>
+            <select name="[evtInfoComplPer][ideEmpregador][tpInsc]" id="evtInfoComplPer__ideEmpregador__id__tpInsc_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpinsc 1 %}selected{% endifequal %}>1 - CNPJ</option>
+                <option value="2" {% ifequal original.tpinsc 2 %}selected{% endifequal %}>2 - CPF</option>
+                <option value="3" {% ifequal original.tpinsc 3 %}selected{% endifequal %}>3 - CAEPF (Cadastro de Atividade Econômica de Pessoa Física)</option>
+                <option value="4" {% ifequal original.tpinsc 4 %}selected{% endifequal %}>4 - CNO (Cadastro Nacional de Obra)</option>
+                <option value="5" {% ifequal original.tpinsc 5 %}selected{% endifequal %}>5 - CGC</option>
+                <option value="6" {% ifequal original.tpinsc 6 %}selected{% endifequal %}>6 - CEI</option>
+            </select>
+            <input type="hidden" name="[evtInfoComplPer][ideEmpregador][tpInsc]" id="evtInfoComplPer__ideEmpregador__id__tpInsc" value="{{original.tpinsc}}">
+        </div>
+    </div>
+</div>
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000</label>
+            <input type="text" id="evtInfoComplPer__ideEmpregador__id__nrInsc_disabled" name="[evtInfoComplPer][ideEmpregador][nrInsc]" value="{{original.nrinsc}}" class="vTextField" maxlength="15" disabled="">
+            <input type="hidden" name="[evtInfoComplPer][ideEmpregador][nrInsc]" id="evtInfoComplPer__ideEmpregador__id__nrInsc" value="{{original.nrinsc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="infoSubstPatr__div">
+    <div class="col-md-12">
+        <h4>Grupo preenchido exclusivamente por empresa enquadrada nos arts. 7º a 9º da Lei 12.546/2011, conforme classificação tributária indicada no evento S-1000.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="indSubstPatr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de substituição da contribuição previdenciária patronal<a data-toggle="tooltip" title="Indicativo de substituição da contribuição previdenciária patronal.
+Valores válidos:
+1 - Integralmente substituída
+2 - Parcialmente substituída"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtInfoComplPer__infoSubstPatr__id__indSubstPatr" name="[evtInfoComplPer][infoSubstPatr][indSubstPatr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtInfoComplPer|readjson:'infoSubstPatr.indSubstPatr'|to_str '1' %}selected{% endifequal %}>1 - Integralmente substituída</option><option value='2' {% ifequal evtInfoComplPer|readjson:'infoSubstPatr.indSubstPatr'|to_str '2' %}selected{% endifequal %}>2 - Parcialmente substituída</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="percRedContrib__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Percentual de redução da contribuição prevista na Lei 12<a data-toggle="tooltip" title="Percentual não substituído pela contribuição prevista na Lei 12.546/2011.
+Informar 0 (zero) se indSubstPatr = [1]. Caso contrário, preencher com o percentual correspondente à razão entre a receita de atividades não relacionadas nos arts. 7º e 8º da Lei 12.546/2011 e a receita bruta total.
+Validação: Se indSubstPatr = [1], informar 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtInfoComplPer__infoSubstPatr__id__percRedContrib" maxlength="5" value="{{evtInfoComplPer|readjson:'infoSubstPatr.percRedContrib'}}" name="[evtInfoComplPer][infoSubstPatr][percRedContrib]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% for infoSubstPatrOpPort in evtInfoComplPer|readjson:'infoSubstPatrOpPort' %}
+<div id="infoSubstPatrOpPort__div">
+    <div class="col-md-12">
+        <h4>Grupo preenchido exclusivamente pelo Órgão Gestor de Mão de Obra - OGMO (classTrib em S-1000 = [09]), listando apenas seus códigos de lotação com operadores portuários enquadrados nos arts. 7º a 9º da Lei 12.546/2011.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codLotacao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador para a lotação tributária<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador para a lotação tributária.
+Validação: Deve ser um código válido e existente na Tabela de Lotações Tributárias (S-1020), com tpLotacao = [08]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtInfoComplPer__infoSubstPatrOpPort__id__codLotacao" maxlength="30" value="{{infoSubstPatrOpPort|readjson:'codLotacao'}}" name="[evtInfoComplPer][infoSubstPatrOpPort][][codLotacao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="infoSubstPatrOpPort__div">
+    <div class="col-md-12">
+        <h4>Grupo preenchido exclusivamente pelo Órgão Gestor de Mão de Obra - OGMO (classTrib em S-1000 = [09]), listando apenas seus códigos de lotação com operadores portuários enquadrados nos arts. 7º a 9º da Lei 12.546/2011.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codLotacao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador para a lotação tributária<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador para a lotação tributária.
+Validação: Deve ser um código válido e existente na Tabela de Lotações Tributárias (S-1020), com tpLotacao = [08]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtInfoComplPer__infoSubstPatrOpPort__id__codLotacao" maxlength="30" value="{{infoSubstPatrOpPort|readjson:'codLotacao'}}" name="[evtInfoComplPer][infoSubstPatrOpPort][][codLotacao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+<div id="infoAtivConcom__div">
+    <div class="col-md-12">
+        <h4>Grupo preenchido por empresa enquadrada no regime de tributação Simples Nacional com tributação previdenciária substituída e não substituída.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="fatorMes__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informe o fator a ser utilizado para cálculo da contribuição patronal do mês dos trabalhadores envolvidos na execução das atividades enquadradas no Anexo IV em conjunto com as dos Anexos I a III e V da Lei Complementar 123/2006<a data-toggle="tooltip" title="Informe o fator a ser utilizado para cálculo da contribuição patronal do mês dos trabalhadores envolvidos na execução das atividades enquadradas no Anexo IV em conjunto com as dos Anexos I a III e V da Lei Complementar 123/2006."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtInfoComplPer__infoAtivConcom__id__fatorMes" maxlength="5" value="{{evtInfoComplPer|readjson:'infoAtivConcom.fatorMes'}}" name="[evtInfoComplPer][infoAtivConcom][fatorMes]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fator13__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informe o fator a ser utilizado para cálculo da contribuição patronal do décimo terceiro dos trabalhadores envolvidos na execução das atividades enquadradas no Anexo IV em conjunto com as dos Anexos I a III e V da Lei Complementar 123/2006<a data-toggle="tooltip" title="Informe o fator a ser utilizado para cálculo da contribuição patronal do décimo terceiro dos trabalhadores envolvidos na execução das atividades enquadradas no Anexo IV em conjunto com as dos Anexos I a III e V da Lei Complementar 123/2006."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtInfoComplPer__infoAtivConcom__id__fator13" maxlength="5" value="{{evtInfoComplPer|readjson:'infoAtivConcom.fator13'}}" name="[evtInfoComplPer][infoAtivConcom][fator13]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="infoPercTransf11096__div">
+    <div class="col-md-12">
+        <h4>Grupo preenchido por entidade que tenha se transformado em sociedade de fins lucrativos nos termos e no prazo da Lei 11.096/2005.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="percTransf__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Percentual de contribuição social - Lei 11<a data-toggle="tooltip" title="Informe o percentual de contribuição social devida em caso de transformação em sociedade de fins lucrativos - Lei 11.096/2005.
+Valores válidos:
+1 - 0,2000
+2 - 0,4000
+3 - 0,6000
+4 - 0,8000
+5 - 1,0000"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtInfoComplPer__infoPercTransf11096__id__percTransf" name="[evtInfoComplPer][infoPercTransf11096][percTransf]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtInfoComplPer|readjson:'infoPercTransf11096.percTransf'|to_str '1' %}selected{% endifequal %}>1 - 0,2000</option><option value='2' {% ifequal evtInfoComplPer|readjson:'infoPercTransf11096.percTransf'|to_str '2' %}selected{% endifequal %}>2 - 0,4000</option><option value='3' {% ifequal evtInfoComplPer|readjson:'infoPercTransf11096.percTransf'|to_str '3' %}selected{% endifequal %}>3 - 0,6000</option><option value='4' {% ifequal evtInfoComplPer|readjson:'infoPercTransf11096.percTransf'|to_str '4' %}selected{% endifequal %}>4 - 0,8000</option><option value='5' {% ifequal evtInfoComplPer|readjson:'infoPercTransf11096.percTransf'|to_str '5' %}selected{% endifequal %}>5 - 1,0000</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+</div>
+
+</form>
+{% endwith %}
+{% if original.is_aberto %}
+<script type="text/javascript">
+function set_evento_json() {
+    var dst = document.getElementById("id_evento_json");
+    var dst_read = document.getElementById("id_evento_json_read");
+    var obj = $('#form_json').serializeJSON({useIntKeysAsArrayIndex: true});
+    dst.value = JSON.stringify(obj);
+    dst_read.value = JSON.stringify(obj);
+};
+$(document).ready(function(){
+    set_evento_json();
+});
+</script>
+{% endif %}

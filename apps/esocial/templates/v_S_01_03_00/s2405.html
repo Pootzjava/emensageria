@@ -1,0 +1,806 @@
+
+{% load esocial_custom_tags %}
+{% with evtCdBenefAlt=original.evento_json|readjson:'evtCdBenefAlt' %}
+<form id="form_json">
+
+<div class="row">
+
+<div id="evtCdBenefAlt__div">
+    <div class="col-md-12">
+        <h4>Evento Cadastro de Beneficiário - Entes Públicos - Alteração.
+Regras de validação:
+REGRA_ENVIO_PROC_FECHAMENTO
+REGRA_EVENTOS_EXTEMP
+REGRA_EVENTO_EXT_SEM_IMPACTO_FOPAG
+REGRA_EXISTE_INFO_EMPREGADOR
+REGRA_VALIDA_TRABALHADOR_BASE_CPF</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideEvento__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do evento.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="indRetif__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informe [1] para arquivo original ou [2] para arquivo de retificação<a data-toggle="tooltip" title="Informe [1] para arquivo original ou [2] para arquivo de retificação.
+Valores válidos:
+1 - Original
+2 - Retificação"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtCdBenefAlt__ideEvento__id__indRetif" name="[evtCdBenefAlt][ideEvento][indRetif]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtCdBenefAlt|readjson:'ideEvento.indRetif'|to_str '1' %}selected{% endifequal %}>1 - Original</option><option value='2' {% ifequal evtCdBenefAlt|readjson:'ideEvento.indRetif'|to_str '2' %}selected{% endifequal %}>2 - Retificação</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrRecibo__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o número do recibo do arquivo a ser retificado<a data-toggle="tooltip" title="Preencher com o número do recibo do arquivo a ser retificado.
+Validação: O preenchimento é obrigatório se indRetif = [2].
+Deve ser um recibo de entrega válido, correspondente ao arquivo que está sendo retificado."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__ideEvento__id__nrRecibo" maxlength="23" value="{{evtCdBenefAlt|readjson:'ideEvento.nrRecibo'}}" name="[evtCdBenefAlt][ideEvento][nrRecibo]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="tpAmb__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Identificação do ambiente</label>
+            <select name="[evtCdBenefAlt][ideEvento][tpAmb]" id="evtCdBenefAlt__ideEvento__id__tpAmb_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpamb 1 %}selected{% endifequal %}>1 - Produção</option>
+                <option value="2" {% ifequal original.tpamb 2 %}selected{% endifequal %}>2 - Produção restrita.</option>
+            </select>
+            <input type="hidden" name="[evtCdBenefAlt][ideEvento][tpAmb]" id="evtCdBenefAlt__ideEvento__id__tpAmb" value="{{original.tpamb}}">
+        </div>
+    </div>
+</div>
+<div id="procEmi__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Processo de emissão do evento</label>
+            <select name="[evtCdBenefAlt][ideEvento][procEmi]" id="evtCdBenefAlt__ideEvento__id__procEmi_disabled" disabled="">
+                <option value="1" {% ifequal original.procemi 1 %}selected{% endifequal %}>1 - Aplicativo do empregador</option>
+                <option value="2" {% ifequal original.procemi 2 %}selected{% endifequal %}>2 - Aplicativo governamental - Empregador Doméstico</option>
+                <option value="3" {% ifequal original.procemi 3 %}selected{% endifequal %}>3 - Aplicativo governamental - Web Geral</option>
+                <option value="4" {% ifequal original.procemi 4 %}selected{% endifequal %}>4 - Aplicativo governamental - Simplificado Pessoa Jurídica</option>
+                <option value="5" {% ifequal original.procemi 5 %}selected{% endifequal %}>5 - Aplicativo governamental - Segurado Especial.</option>
+            </select>
+            <input type="hidden" name="[evtCdBenefAlt][ideEvento][procEmi]" id="evtCdBenefAlt__ideEvento__id__procEmi" value="{{original.procemi}}">
+        </div>
+    </div>
+</div>
+<div id="verProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Versão do processo de emissão do evento</label>
+            <input type="text" name="[evtCdBenefAlt][ideEvento][verProc]" value="{{original.verproc}}" class="vTextField" maxlength="20" id="evtCdBenefAlt__ideEvento__id__verProc_disabled" disabled="">
+            <input type="hidden" name="[evtCdBenefAlt][ideEvento][verProc]" id="evtCdBenefAlt__ideEvento__id__verProc" value="{{original.verproc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideEmpregador__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do empregador.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Preencher com o código correspondente ao tipo de inscrição</label>
+            <select name="[evtCdBenefAlt][ideEmpregador][tpInsc]" id="evtCdBenefAlt__ideEmpregador__id__tpInsc_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpinsc 1 %}selected{% endifequal %}>1 - CNPJ</option>
+                <option value="2" {% ifequal original.tpinsc 2 %}selected{% endifequal %}>2 - CPF</option>
+                <option value="3" {% ifequal original.tpinsc 3 %}selected{% endifequal %}>3 - CAEPF (Cadastro de Atividade Econômica de Pessoa Física)</option>
+                <option value="4" {% ifequal original.tpinsc 4 %}selected{% endifequal %}>4 - CNO (Cadastro Nacional de Obra)</option>
+                <option value="5" {% ifequal original.tpinsc 5 %}selected{% endifequal %}>5 - CGC</option>
+                <option value="6" {% ifequal original.tpinsc 6 %}selected{% endifequal %}>6 - CEI</option>
+            </select>
+            <input type="hidden" name="[evtCdBenefAlt][ideEmpregador][tpInsc]" id="evtCdBenefAlt__ideEmpregador__id__tpInsc" value="{{original.tpinsc}}">
+        </div>
+    </div>
+</div>
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000</label>
+            <input type="text" id="evtCdBenefAlt__ideEmpregador__id__nrInsc_disabled" name="[evtCdBenefAlt][ideEmpregador][nrInsc]" value="{{original.nrinsc}}" class="vTextField" maxlength="15" disabled="">
+            <input type="hidden" name="[evtCdBenefAlt][ideEmpregador][nrInsc]" id="evtCdBenefAlt__ideEmpregador__id__nrInsc" value="{{original.nrinsc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideBenef__div">
+    <div class="col-md-12">
+        <h4>Identificação do beneficiário.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="cpfBenef__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número de inscrição no CPF do dependente<a data-toggle="tooltip" title="Informar o CPF do beneficiário.
+Validação: Deve ser um CPF válido e cadastrado pelo órgão público declarante por meio do evento S-2400."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__ideBenef__id__cpfBenef" maxlength="11" value="{{evtCdBenefAlt|readjson:'ideBenef.cpfBenef'}}" name="[evtCdBenefAlt][ideBenef][cpfBenef]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="alteracao__div">
+    <div class="col-md-12">
+        <h4>Alteração de dados do beneficiário.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="dtAlteracao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com a data de alteração<a data-toggle="tooltip" title="Preencher com a data de alteração.
+Validação: Deve ser posterior à data de início informada no evento S-2400 e igual ou anterior à data atual."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__id__dtAlteracao" value="{{evtCdBenefAlt|readjson:'alteracao.dtAlteracao'}}" name="[evtCdBenefAlt][alteracao][dtAlteracao]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dadosBenef__div">
+    <div class="col-md-12">
+        <h4>Dados do beneficiário.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="nmBenefic__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o nome do beneficiário<a data-toggle="tooltip" title="Informar o nome do beneficiário."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__id__nmBenefic" maxlength="70" value="{{evtCdBenefAlt|readjson:'alteracao.dadosBenef.nmBenefic'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][nmBenefic]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="sexo__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Sexo do beneficiário<a data-toggle="tooltip" title="Sexo do beneficiário.
+Valores válidos:
+M - Masculino
+F - Feminino"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtCdBenefAlt__alteracao__dadosBenef__id__sexo" name="[evtCdBenefAlt][alteracao][dadosBenef][sexo]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='M' {% ifequal evtCdBenefAlt|readjson:'alteracao.dadosBenef.sexo'|to_str 'M' %}selected{% endifequal %}>M - Masculino</option><option value='F' {% ifequal evtCdBenefAlt|readjson:'alteracao.dadosBenef.sexo'|to_str 'F' %}selected{% endifequal %}>F - Feminino</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="racaCor__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Etnia e raça do beneficiário<a data-toggle="tooltip" title="Etnia e raça do beneficiário, conforme sua autoclassificação (art. 39, § 8º, da Lei 12.288/2010).
+Valores válidos:
+1 - Branca
+2 - Preta
+3 - Parda
+4 - Amarela
+5 - Indígena
+6 - Não informado
+Validação: Se dtAlteracao for igual ou posterior a [2023-07-01], retornar alerta caso seja informado o valor [6]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtCdBenefAlt__alteracao__dadosBenef__id__racaCor" name="[evtCdBenefAlt][alteracao][dadosBenef][racaCor]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtCdBenefAlt|readjson:'alteracao.dadosBenef.racaCor'|to_str '1' %}selected{% endifequal %}>1 - Branca</option><option value='2' {% ifequal evtCdBenefAlt|readjson:'alteracao.dadosBenef.racaCor'|to_str '2' %}selected{% endifequal %}>2 - Preta</option><option value='3' {% ifequal evtCdBenefAlt|readjson:'alteracao.dadosBenef.racaCor'|to_str '3' %}selected{% endifequal %}>3 - Parda</option><option value='4' {% ifequal evtCdBenefAlt|readjson:'alteracao.dadosBenef.racaCor'|to_str '4' %}selected{% endifequal %}>4 - Amarela</option><option value='5' {% ifequal evtCdBenefAlt|readjson:'alteracao.dadosBenef.racaCor'|to_str '5' %}selected{% endifequal %}>5 - Indígena</option><option value='6' {% ifequal evtCdBenefAlt|readjson:'alteracao.dadosBenef.racaCor'|to_str '6' %}selected{% endifequal %}>6 - Não informado</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="estCiv__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Estado civil do beneficiário<a data-toggle="tooltip" title="Estado civil do beneficiário.
+Valores válidos:
+1 - Solteiro
+2 - Casado
+3 - Divorciado
+4 - Separado
+5 - Viúvo"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtCdBenefAlt__alteracao__dadosBenef__id__estCiv" name="[evtCdBenefAlt][alteracao][dadosBenef][estCiv]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtCdBenefAlt|readjson:'alteracao.dadosBenef.estCiv'|to_str '1' %}selected{% endifequal %}>1 - Solteiro</option><option value='2' {% ifequal evtCdBenefAlt|readjson:'alteracao.dadosBenef.estCiv'|to_str '2' %}selected{% endifequal %}>2 - Casado</option><option value='3' {% ifequal evtCdBenefAlt|readjson:'alteracao.dadosBenef.estCiv'|to_str '3' %}selected{% endifequal %}>3 - Divorciado</option><option value='4' {% ifequal evtCdBenefAlt|readjson:'alteracao.dadosBenef.estCiv'|to_str '4' %}selected{% endifequal %}>4 - Separado</option><option value='5' {% ifequal evtCdBenefAlt|readjson:'alteracao.dadosBenef.estCiv'|to_str '5' %}selected{% endifequal %}>5 - Viúvo</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="incFisMen__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar se o dependente é pessoa com doença incapacitante<a data-toggle="tooltip" title="Informar se o beneficiário é pessoa com doença incapacitante que isenta da contribuição previdenciária, total ou parcialmente, reconhecida administrativa ou judicialmente, na forma da lei.
+Valores válidos:
+S - Sim
+N - Não"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtCdBenefAlt__alteracao__dadosBenef__id__incFisMen" name="[evtCdBenefAlt][alteracao][dadosBenef][incFisMen]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='S' {% ifequal evtCdBenefAlt|readjson:'alteracao.dadosBenef.incFisMen'|to_str 'S' %}selected{% endifequal %}>S - Sim</option><option value='N' {% ifequal evtCdBenefAlt|readjson:'alteracao.dadosBenef.incFisMen'|to_str 'N' %}selected{% endifequal %}>N - Não</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="endereco__div">
+    <div class="col-md-12">
+        <h4>Grupo de informações do endereço do beneficiário.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="brasil__div">
+    <div class="col-md-12">
+        <h4>Endereço no Brasil.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpLograd__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Tipo de logradouro<a data-toggle="tooltip" title="Tipo de logradouro.
+Validação: Se informado, deve ser um código válido e existente na Tabela 20."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__endereco__brasil__id__tpLograd" maxlength="4" value="{{evtCdBenefAlt|readjson:'alteracao.dadosBenef.endereco.brasil.tpLograd'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][endereco][brasil][tpLograd]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dscLograd__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Descrição do logradouro<a data-toggle="tooltip" title="Descrição do logradouro."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__endereco__brasil__id__dscLograd" maxlength="100" value="{{evtCdBenefAlt|readjson:'alteracao.dadosBenef.endereco.brasil.dscLograd'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][endereco][brasil][dscLograd]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nrLograd__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número do logradouro<a data-toggle="tooltip" title="Número do logradouro.
+Se não houver número a ser informado, preencher com "S/N"."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__endereco__brasil__id__nrLograd" maxlength="10" value="{{evtCdBenefAlt|readjson:'alteracao.dadosBenef.endereco.brasil.nrLograd'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][endereco][brasil][nrLograd]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="complemento__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Complemento do logradouro<a data-toggle="tooltip" title="Complemento do logradouro."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__endereco__brasil__id__complemento" maxlength="30" value="{{evtCdBenefAlt|readjson:'alteracao.dadosBenef.endereco.brasil.complemento'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][endereco][brasil][complemento]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="bairro__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Nome do bairro/distrito<a data-toggle="tooltip" title="Nome do bairro/distrito."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__endereco__brasil__id__bairro" maxlength="90" value="{{evtCdBenefAlt|readjson:'alteracao.dadosBenef.endereco.brasil.bairro'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][endereco][brasil][bairro]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="cep__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de Endereçamento Postal - CEP<a data-toggle="tooltip" title="Código de Endereçamento Postal - CEP.
+Validação: Deve ser preenchido apenas com números, com 8 (oito) posições."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__endereco__brasil__id__cep" maxlength="8" value="{{evtCdBenefAlt|readjson:'alteracao.dadosBenef.endereco.brasil.cep'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][endereco][brasil][cep]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codMunic__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código do município<a data-toggle="tooltip" title="Preencher com o código do município, conforme tabela do IBGE.
+Validação: Deve ser um código válido e existente na tabela do IBGE."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__endereco__brasil__id__codMunic" maxlength="7" value="{{evtCdBenefAlt|readjson:'alteracao.dadosBenef.endereco.brasil.codMunic'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][endereco][brasil][codMunic]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="uf__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com a sigla da Unidade da Federação - UF<a data-toggle="tooltip" title="Preencher com a sigla da Unidade da Federação - UF.
+Valores válidos: AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT, MS, MG, PA, PB, PR, PE, PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__endereco__brasil__id__uf" maxlength="2" value="{{evtCdBenefAlt|readjson:'alteracao.dadosBenef.endereco.brasil.uf'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][endereco][brasil][uf]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="exterior__div">
+    <div class="col-md-12">
+        <h4>Endereço no exterior.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="paisResid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código do país<a data-toggle="tooltip" title="Preencher com o código do país.
+Validação: Deve ser um código válido e existente na Tabela 06."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__endereco__exterior__id__paisResid" maxlength="3" value="{{evtCdBenefAlt|readjson:'alteracao.dadosBenef.endereco.exterior.paisResid'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][endereco][exterior][paisResid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dscLograd__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Descrição do logradouro<a data-toggle="tooltip" title="Descrição do logradouro."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__endereco__exterior__id__dscLograd" maxlength="100" value="{{evtCdBenefAlt|readjson:'alteracao.dadosBenef.endereco.exterior.dscLograd'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][endereco][exterior][dscLograd]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nrLograd__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número do logradouro<a data-toggle="tooltip" title="Número do logradouro.
+Se não houver número a ser informado, preencher com "S/N"."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__endereco__exterior__id__nrLograd" maxlength="10" value="{{evtCdBenefAlt|readjson:'alteracao.dadosBenef.endereco.exterior.nrLograd'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][endereco][exterior][nrLograd]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="complemento__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Complemento do logradouro<a data-toggle="tooltip" title="Complemento do logradouro."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__endereco__exterior__id__complemento" maxlength="30" value="{{evtCdBenefAlt|readjson:'alteracao.dadosBenef.endereco.exterior.complemento'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][endereco][exterior][complemento]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="bairro__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Nome do bairro/distrito<a data-toggle="tooltip" title="Nome do bairro/distrito."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__endereco__exterior__id__bairro" maxlength="90" value="{{evtCdBenefAlt|readjson:'alteracao.dadosBenef.endereco.exterior.bairro'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][endereco][exterior][bairro]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nmCid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Nome da cidade<a data-toggle="tooltip" title="Nome da cidade."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__endereco__exterior__id__nmCid" maxlength="50" value="{{evtCdBenefAlt|readjson:'alteracao.dadosBenef.endereco.exterior.nmCid'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][endereco][exterior][nmCid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codPostal__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de Endereçamento Postal<a data-toggle="tooltip" title="Código de Endereçamento Postal."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__endereco__exterior__id__codPostal" maxlength="12" value="{{evtCdBenefAlt|readjson:'alteracao.dadosBenef.endereco.exterior.codPostal'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][endereco][exterior][codPostal]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>{% for dependente in evtCdBenefAlt|readjson:'alteracao.dadosBenef.dependente' %}
+<div id="dependente__div">
+    <div class="col-md-12">
+        <h4>Informações dos dependentes.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpDep__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Relação de dependência<a data-toggle="tooltip" title="Tipo de dependente.
+Validação: Preenchimento obrigatório se depIRRF = [S].
+Deve ser um código válido e existente na Tabela 07."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__dependente__id__tpDep" maxlength="2" value="{{dependente|readjson:'tpDep'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][dependente][][tpDep]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nmDep__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Nome do dependente<a data-toggle="tooltip" title="Nome do dependente."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__dependente__id__nmDep" maxlength="70" value="{{dependente|readjson:'nmDep'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][dependente][][nmDep]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dtNascto__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com a data de nascimento<a data-toggle="tooltip" title="Preencher com a data de nascimento.
+Validação: Deve ser maior ou igual que 01/01/1890 e menor ou igual à data atual."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__dependente__id__dtNascto" value="{{dependente|readjson:'dtNascto'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][dependente][][dtNascto]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="cpfDep__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número de inscrição no CPF do dependente do plano de saúde<a data-toggle="tooltip" title="Número de inscrição no CPF.
+Validação: Deve ser um número de CPF válido, observando o que segue:
+a) O preenchimento é obrigatório se depIRRF = [S];
+b) Não pode haver mais de um dependente com o mesmo número de CPF."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__dependente__id__cpfDep" maxlength="11" value="{{dependente|readjson:'cpfDep'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][dependente][][cpfDep]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="sexoDep__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Sexo do dependente<a data-toggle="tooltip" title="Sexo do dependente.
+Valores válidos:
+M - Masculino
+F - Feminino"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtCdBenefAlt__alteracao__dadosBenef__dependente__id__sexoDep" name="[evtCdBenefAlt][alteracao][dadosBenef][dependente][][sexoDep]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='M' {% ifequal dependente|readjson:'sexoDep'|to_str 'M' %}selected{% endifequal %}>M - Masculino</option><option value='F' {% ifequal dependente|readjson:'sexoDep'|to_str 'F' %}selected{% endifequal %}>F - Feminino</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="depIRRF__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Este campo somente é informado em caso de dependente do trabalhador para fins de dedução de seu rendimento tributável pelo Imposto de Renda<a data-toggle="tooltip" title="Informar se é dependente do beneficiário para fins de dedução de seu rendimento tributável pelo Imposto de Renda.
+Valores válidos:
+S - Sim
+N - Não"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtCdBenefAlt__alteracao__dadosBenef__dependente__id__depIRRF" name="[evtCdBenefAlt][alteracao][dadosBenef][dependente][][depIRRF]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='S' {% ifequal dependente|readjson:'depIRRF'|to_str 'S' %}selected{% endifequal %}>S - Sim</option><option value='N' {% ifequal dependente|readjson:'depIRRF'|to_str 'N' %}selected{% endifequal %}>N - Não</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="incFisMen__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar se o dependente é pessoa com doença incapacitante<a data-toggle="tooltip" title="Informar se o dependente é pessoa com doença incapacitante, na forma da lei.
+Valores válidos:
+S - Sim
+N - Não"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtCdBenefAlt__alteracao__dadosBenef__dependente__id__incFisMen" name="[evtCdBenefAlt][alteracao][dadosBenef][dependente][][incFisMen]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='S' {% ifequal dependente|readjson:'incFisMen'|to_str 'S' %}selected{% endifequal %}>S - Sim</option><option value='N' {% ifequal dependente|readjson:'incFisMen'|to_str 'N' %}selected{% endifequal %}>N - Não</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="descrDep__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar a descrição da dependência<a data-toggle="tooltip" title="Informar a descrição da dependência.
+Validação: Informação obrigatória e exclusiva se tpDep = [99]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__dependente__id__descrDep" maxlength="100" value="{{dependente|readjson:'descrDep'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][dependente][][descrDep]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="dependente__div">
+    <div class="col-md-12">
+        <h4>Informações dos dependentes.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpDep__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Relação de dependência<a data-toggle="tooltip" title="Tipo de dependente.
+Validação: Preenchimento obrigatório se depIRRF = [S].
+Deve ser um código válido e existente na Tabela 07."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__dependente__id__tpDep" maxlength="2" value="{{dependente|readjson:'tpDep'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][dependente][][tpDep]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nmDep__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Nome do dependente<a data-toggle="tooltip" title="Nome do dependente."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__dependente__id__nmDep" maxlength="70" value="{{dependente|readjson:'nmDep'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][dependente][][nmDep]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dtNascto__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com a data de nascimento<a data-toggle="tooltip" title="Preencher com a data de nascimento.
+Validação: Deve ser maior ou igual que 01/01/1890 e menor ou igual à data atual."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__dependente__id__dtNascto" value="{{dependente|readjson:'dtNascto'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][dependente][][dtNascto]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="cpfDep__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número de inscrição no CPF do dependente do plano de saúde<a data-toggle="tooltip" title="Número de inscrição no CPF.
+Validação: Deve ser um número de CPF válido, observando o que segue:
+a) O preenchimento é obrigatório se depIRRF = [S];
+b) Não pode haver mais de um dependente com o mesmo número de CPF."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__dependente__id__cpfDep" maxlength="11" value="{{dependente|readjson:'cpfDep'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][dependente][][cpfDep]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="sexoDep__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Sexo do dependente<a data-toggle="tooltip" title="Sexo do dependente.
+Valores válidos:
+M - Masculino
+F - Feminino"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtCdBenefAlt__alteracao__dadosBenef__dependente__id__sexoDep" name="[evtCdBenefAlt][alteracao][dadosBenef][dependente][][sexoDep]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='M' {% ifequal dependente|readjson:'sexoDep'|to_str 'M' %}selected{% endifequal %}>M - Masculino</option><option value='F' {% ifequal dependente|readjson:'sexoDep'|to_str 'F' %}selected{% endifequal %}>F - Feminino</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="depIRRF__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Este campo somente é informado em caso de dependente do trabalhador para fins de dedução de seu rendimento tributável pelo Imposto de Renda<a data-toggle="tooltip" title="Informar se é dependente do beneficiário para fins de dedução de seu rendimento tributável pelo Imposto de Renda.
+Valores válidos:
+S - Sim
+N - Não"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtCdBenefAlt__alteracao__dadosBenef__dependente__id__depIRRF" name="[evtCdBenefAlt][alteracao][dadosBenef][dependente][][depIRRF]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='S' {% ifequal dependente|readjson:'depIRRF'|to_str 'S' %}selected{% endifequal %}>S - Sim</option><option value='N' {% ifequal dependente|readjson:'depIRRF'|to_str 'N' %}selected{% endifequal %}>N - Não</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="incFisMen__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar se o dependente é pessoa com doença incapacitante<a data-toggle="tooltip" title="Informar se o dependente é pessoa com doença incapacitante, na forma da lei.
+Valores válidos:
+S - Sim
+N - Não"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtCdBenefAlt__alteracao__dadosBenef__dependente__id__incFisMen" name="[evtCdBenefAlt][alteracao][dadosBenef][dependente][][incFisMen]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='S' {% ifequal dependente|readjson:'incFisMen'|to_str 'S' %}selected{% endifequal %}>S - Sim</option><option value='N' {% ifequal dependente|readjson:'incFisMen'|to_str 'N' %}selected{% endifequal %}>N - Não</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="descrDep__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar a descrição da dependência<a data-toggle="tooltip" title="Informar a descrição da dependência.
+Validação: Informação obrigatória e exclusiva se tpDep = [99]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtCdBenefAlt__alteracao__dadosBenef__dependente__id__descrDep" maxlength="100" value="{{dependente|readjson:'descrDep'}}" name="[evtCdBenefAlt][alteracao][dadosBenef][dependente][][descrDep]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+</div>
+
+</form>
+{% endwith %}
+{% if original.is_aberto %}
+<script type="text/javascript">
+function set_evento_json() {
+    var dst = document.getElementById("id_evento_json");
+    var dst_read = document.getElementById("id_evento_json_read");
+    var obj = $('#form_json').serializeJSON({useIntKeysAsArrayIndex: true});
+    dst.value = JSON.stringify(obj);
+    dst_read.value = JSON.stringify(obj);
+};
+$(document).ready(function(){
+    set_evento_json();
+});
+</script>
+{% endif %}

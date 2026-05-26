@@ -1,0 +1,1472 @@
+
+{% load esocial_custom_tags %}
+{% with evtTabRubrica=original.evento_json|readjson:'evtTabRubrica' %}
+<form id="form_json">
+
+<div class="row">
+
+<div id="evtTabRubrica__div">
+    <div class="col-md-12">
+        <h4>Evento Tabela de Rubricas.
+Regras de validação:
+REGRA_ENVIO_PROC_FECHAMENTO
+REGRA_EXISTE_INFO_EMPREGADOR
+REGRA_TABGERAL_ALTERACAO_PERIODO_CONFLITANTE
+REGRA_TABGERAL_EXISTE_REGISTRO_ALTERADO
+REGRA_TABGERAL_EXISTE_REGISTRO_EXCLUIDO
+REGRA_TABGERAL_INCLUSAO_PERIODO_CONFLITANTE
+REGRA_TABRUBR_INCLUSAO
+REGRA_TAB_PERMITE_EXCLUSAO
+REGRA_VALIDA_DT_FUTURA</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideEvento__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do evento.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpAmb__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Identificação do ambiente</label>
+            <select name="[evtTabRubrica][ideEvento][tpAmb]" id="evtTabRubrica__ideEvento__id__tpAmb_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpamb 1 %}selected{% endifequal %}>1 - Produção</option>
+                <option value="2" {% ifequal original.tpamb 2 %}selected{% endifequal %}>2 - Produção restrita.</option>
+            </select>
+            <input type="hidden" name="[evtTabRubrica][ideEvento][tpAmb]" id="evtTabRubrica__ideEvento__id__tpAmb" value="{{original.tpamb}}">
+        </div>
+    </div>
+</div>
+<div id="procEmi__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Processo de emissão do evento</label>
+            <select name="[evtTabRubrica][ideEvento][procEmi]" id="evtTabRubrica__ideEvento__id__procEmi_disabled" disabled="">
+                <option value="1" {% ifequal original.procemi 1 %}selected{% endifequal %}>1 - Aplicativo do empregador</option>
+                <option value="2" {% ifequal original.procemi 2 %}selected{% endifequal %}>2 - Aplicativo governamental - Empregador Doméstico</option>
+                <option value="3" {% ifequal original.procemi 3 %}selected{% endifequal %}>3 - Aplicativo governamental - Web Geral</option>
+                <option value="4" {% ifequal original.procemi 4 %}selected{% endifequal %}>4 - Aplicativo governamental - Simplificado Pessoa Jurídica</option>
+                <option value="5" {% ifequal original.procemi 5 %}selected{% endifequal %}>5 - Aplicativo governamental - Segurado Especial.</option>
+            </select>
+            <input type="hidden" name="[evtTabRubrica][ideEvento][procEmi]" id="evtTabRubrica__ideEvento__id__procEmi" value="{{original.procemi}}">
+        </div>
+    </div>
+</div>
+<div id="verProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Versão do processo de emissão do evento</label>
+            <input type="text" name="[evtTabRubrica][ideEvento][verProc]" value="{{original.verproc}}" class="vTextField" maxlength="20" id="evtTabRubrica__ideEvento__id__verProc_disabled" disabled="">
+            <input type="hidden" name="[evtTabRubrica][ideEvento][verProc]" id="evtTabRubrica__ideEvento__id__verProc" value="{{original.verproc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideEmpregador__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do empregador.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Preencher com o código correspondente ao tipo de inscrição</label>
+            <select name="[evtTabRubrica][ideEmpregador][tpInsc]" id="evtTabRubrica__ideEmpregador__id__tpInsc_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpinsc 1 %}selected{% endifequal %}>1 - CNPJ</option>
+                <option value="2" {% ifequal original.tpinsc 2 %}selected{% endifequal %}>2 - CPF</option>
+                <option value="3" {% ifequal original.tpinsc 3 %}selected{% endifequal %}>3 - CAEPF (Cadastro de Atividade Econômica de Pessoa Física)</option>
+                <option value="4" {% ifequal original.tpinsc 4 %}selected{% endifequal %}>4 - CNO (Cadastro Nacional de Obra)</option>
+                <option value="5" {% ifequal original.tpinsc 5 %}selected{% endifequal %}>5 - CGC</option>
+                <option value="6" {% ifequal original.tpinsc 6 %}selected{% endifequal %}>6 - CEI</option>
+            </select>
+            <input type="hidden" name="[evtTabRubrica][ideEmpregador][tpInsc]" id="evtTabRubrica__ideEmpregador__id__tpInsc" value="{{original.tpinsc}}">
+        </div>
+    </div>
+</div>
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000</label>
+            <input type="text" id="evtTabRubrica__ideEmpregador__id__nrInsc_disabled" name="[evtTabRubrica][ideEmpregador][nrInsc]" value="{{original.nrinsc}}" class="vTextField" maxlength="15" disabled="">
+            <input type="hidden" name="[evtTabRubrica][ideEmpregador][nrInsc]" id="evtTabRubrica__ideEmpregador__id__nrInsc" value="{{original.nrinsc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="infoRubrica__div">
+    <div class="col-md-12">
+        <h4>Identificação da operação (inclusão, alteração ou exclusão) e das informações da rubrica.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="inclusao__div">
+    <div class="col-md-12">
+        <h4>Inclusão de novas informações.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideRubrica__div">
+    <div class="col-md-12">
+        <h4>Identificação da rubrica e período de validade das informações.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento.
+Validação: O código não pode conter a expressão 'eSocial' nas 7 (sete) primeiras posições.
+Regra de validação:
+REGRA_CARACTERE_ESPECIAL"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__inclusao__ideRubrica__id__codRubr" maxlength="30" value="{{evtTabRubrica|readjson:'infoRubrica.inclusao.ideRubrica.codRubr'}}" name="[evtTabRubrica][infoRubrica][inclusao][ideRubrica][codRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="ideTabRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr<a data-toggle="tooltip" title="Preencher com o identificador da Tabela de Rubricas no âmbito do empregador.
+Validação: O identificador não pode conter a expressão 'eSocial' nas 7 (sete) primeiras posições.
+Regra de validação:
+REGRA_CARACTERE_ESPECIAL"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__inclusao__ideRubrica__id__ideTabRubr" maxlength="8" value="{{evtTabRubrica|readjson:'infoRubrica.inclusao.ideRubrica.ideTabRubr'}}" name="[evtTabRubrica][infoRubrica][inclusao][ideRubrica][ideTabRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="iniValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de início da validade das informações prestadas no evento<a data-toggle="tooltip" title="Preencher com o mês e ano de início da validade das informações prestadas no evento, no formato AAAA-MM.
+Validação: Deve ser uma data válida, igual ou posterior à data de início de obrigatoriedade deste evento para o empregador no eSocial, no formato AAAA-MM."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__inclusao__ideRubrica__id__iniValid" maxlength="7" value="{{evtTabRubrica|readjson:'infoRubrica.inclusao.ideRubrica.iniValid'}}" name="[evtTabRubrica][infoRubrica][inclusao][ideRubrica][iniValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fimValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de término da validade das informações<a data-toggle="tooltip" title="Preencher com o mês e ano de término da validade das informações, se houver.
+Validação: Se informado, deve estar no formato AAAA-MM e ser um período igual ou posterior a iniValid."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__inclusao__ideRubrica__id__fimValid" maxlength="7" value="{{evtTabRubrica|readjson:'infoRubrica.inclusao.ideRubrica.fimValid'}}" name="[evtTabRubrica][infoRubrica][inclusao][ideRubrica][fimValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="dadosRubrica__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das informações da rubrica.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="dscRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar a descrição (nome) da rubrica no sistema de folha de pagamento da empresa<a data-toggle="tooltip" title="Informar a descrição (nome) da rubrica no sistema de folha de pagamento da empresa."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__id__dscRubr" maxlength="100" value="{{evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.dscRubr'}}" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][dscRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="natRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código de classificação da rubrica<a data-toggle="tooltip" title="Informar o código de classificação da rubrica.
+Validação: Deve ser um código válido e existente na Tabela 03."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__id__natRubr" maxlength="4" value="{{evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.natRubr'}}" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][natRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="tpRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Tipo de rubrica<a data-toggle="tooltip" title="Tipo de rubrica.
+Valores válidos:
+1 - Vencimento, provento ou pensão
+2 - Desconto
+3 - Informativa
+4 - Informativa dedutora"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__id__tpRubr" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][tpRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.tpRubr'|to_str '1' %}selected{% endifequal %}>1 - Vencimento, provento ou pensão</option><option value='2' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.tpRubr'|to_str '2' %}selected{% endifequal %}>2 - Desconto</option><option value='3' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.tpRubr'|to_str '3' %}selected{% endifequal %}>3 - Informativa</option><option value='4' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.tpRubr'|to_str '4' %}selected{% endifequal %}>4 - Informativa dedutora</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="codIncCP__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de incidência tributária da rubrica para a Previdência Social<a data-toggle="tooltip" title="Código de incidência tributária da rubrica para a Previdência Social.
+Valores válidos:
+00 - Não é base de cálculo
+01 - Não é base de cálculo em função de acordos internacionais de previdência social
+
+Base de cálculo das contribuições sociais - Salário de contribuição:
+11 - Mensal
+12 - 13º salário
+13 - Exclusiva do empregador - Mensal
+14 - Exclusiva do empregador - 13° salário
+15 - Exclusiva do segurado - Mensal
+16 - Exclusiva do segurado - 13° salário
+21 - Salário-maternidade mensal, pago pelo empregador
+22 - Salário-maternidade 13º salário, pago pelo empregador
+25 - Salário-maternidade mensal, pago pelo INSS
+26 - Salário-maternidade 13° salário, pago pelo INSS
+
+Contribuição descontada do segurado sobre salário de contribuição:
+31 - Mensal
+32 - 13º salário
+34 - SEST
+35 - SENAT
+
+Outros:
+51 - Salário-família
+
+Suspensão de incidência sobre salário de contribuição em decorrência de decisão judicial:
+91 - Mensal
+92 - 13º salário
+93 - Salário-maternidade
+94 - Salário-maternidade 13º salário
+95 - Exclusiva do empregador - Mensal
+96 - Exclusiva do empregador - 13º salário
+97 - Exclusiva do empregador - Salário-maternidade
+98 - Exclusiva do empregador - Salário-maternidade 13º salário
+Validação: Para utilização de código [91, 92, 93, 94, 95, 96, 97, 98], é necessária a existência de grupo com informações relativas ao processo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__id__codIncCP" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][codIncCP]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='00' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '00' %}selected{% endifequal %}>00 - Não é base de cálculo</option><option value='01' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '01' %}selected{% endifequal %}>01 - Não é base de cálculo em função de acordos internacionais de previdência social  Base de cálculo das contribuições sociais - Salário de contribuição:</option><option value='11' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '11' %}selected{% endifequal %}>11 - Mensal</option><option value='12' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '12' %}selected{% endifequal %}>12 - 13º salário</option><option value='13' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '13' %}selected{% endifequal %}>13 - Exclusiva do empregador - Mensal</option><option value='14' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '14' %}selected{% endifequal %}>14 - Exclusiva do empregador - 13° salário</option><option value='15' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '15' %}selected{% endifequal %}>15 - Exclusiva do segurado - Mensal</option><option value='16' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '16' %}selected{% endifequal %}>16 - Exclusiva do segurado - 13° salário</option><option value='21' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '21' %}selected{% endifequal %}>21 - Salário-maternidade mensal, pago pelo empregador</option><option value='22' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '22' %}selected{% endifequal %}>22 - Salário-maternidade 13º salário, pago pelo empregador</option><option value='25' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '25' %}selected{% endifequal %}>25 - Salário-maternidade mensal, pago pelo INSS</option><option value='26' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '26' %}selected{% endifequal %}>26 - Salário-maternidade 13° salário, pago pelo INSS  Contribuição descontada do segurado sobre salário de contribuição:</option><option value='31' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '31' %}selected{% endifequal %}>31 - Mensal</option><option value='32' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '32' %}selected{% endifequal %}>32 - 13º salário</option><option value='34' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '34' %}selected{% endifequal %}>34 - SEST</option><option value='35' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '35' %}selected{% endifequal %}>35 - SENAT  Outros:</option><option value='51' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '51' %}selected{% endifequal %}>51 - Salário-família  Suspensão de incidência sobre salário de contribuição em decorrência de decisão judicial:</option><option value='91' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '91' %}selected{% endifequal %}>91 - Mensal</option><option value='92' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '92' %}selected{% endifequal %}>92 - 13º salário</option><option value='93' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '93' %}selected{% endifequal %}>93 - Salário-maternidade</option><option value='94' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '94' %}selected{% endifequal %}>94 - Salário-maternidade 13º salário</option><option value='95' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '95' %}selected{% endifequal %}>95 - Exclusiva do empregador - Mensal</option><option value='96' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '96' %}selected{% endifequal %}>96 - Exclusiva do empregador - 13º salário</option><option value='97' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '97' %}selected{% endifequal %}>97 - Exclusiva do empregador - Salário-maternidade</option><option value='98' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCP'|to_str '98' %}selected{% endifequal %}>98 - Exclusiva do empregador - Salário-maternidade 13º salário</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="codIncIRRF__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de incidência tributária da rubrica para o Imposto de Renda Retido na Fonte - IRRF<a data-toggle="tooltip" title="Código de incidência tributária da rubrica para o Imposto de Renda Retido na Fonte - IRRF.
+Validação: Deve ser um código válido e existente na Tabela 21.
+Para utilização de código [9X] ou [9XXX], é necessária a existência de grupo com informações relativas ao processo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__id__codIncIRRF" maxlength="4" value="{{evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncIRRF'}}" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][codIncIRRF]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codIncFGTS__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de incidência da rubrica para o Fundo de Garantia do Tempo de Serviço - FGTS<a data-toggle="tooltip" title="Código de incidência da rubrica para o Fundo de Garantia do Tempo de Serviço - FGTS.
+Valores válidos:
+00 - Não é base de cálculo do FGTS
+11 - Base de cálculo do FGTS mensal
+12 - Base de cálculo do FGTS 13° salário
+21 - Base de cálculo do FGTS aviso prévio indenizado
+91 - Incidência suspensa em decorrência de decisão judicial - FGTS mensal
+92 - Incidência suspensa em decorrência de decisão judicial - FGTS 13º salário
+93 - Incidência suspensa em decorrência de decisão judicial - FGTS aviso prévio indenizado
+Validação: Para utilização de código [91, 92, 93], é necessária a existência de grupo com informações relativas ao processo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__id__codIncFGTS" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][codIncFGTS]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='00' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncFGTS'|to_str '00' %}selected{% endifequal %}>00 - Não é base de cálculo do FGTS</option><option value='11' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncFGTS'|to_str '11' %}selected{% endifequal %}>11 - Base de cálculo do FGTS mensal</option><option value='12' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncFGTS'|to_str '12' %}selected{% endifequal %}>12 - Base de cálculo do FGTS 13° salário</option><option value='21' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncFGTS'|to_str '21' %}selected{% endifequal %}>21 - Base de cálculo do FGTS aviso prévio indenizado</option><option value='91' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncFGTS'|to_str '91' %}selected{% endifequal %}>91 - Incidência suspensa em decorrência de decisão judicial - FGTS mensal</option><option value='92' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncFGTS'|to_str '92' %}selected{% endifequal %}>92 - Incidência suspensa em decorrência de decisão judicial - FGTS 13º salário</option><option value='93' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncFGTS'|to_str '93' %}selected{% endifequal %}>93 - Incidência suspensa em decorrência de decisão judicial - FGTS aviso prévio indenizado</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="codIncCPRP__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de incidência da rubrica para as contribuições do Regime Próprio de Previdência Social - RPPS ou do Sistema de Proteção Social dos Militares das Forças Armadas - SPSMFA<a data-toggle="tooltip" title="Código de incidência da rubrica para as contribuições do Regime Próprio de Previdência Social - RPPS ou do Sistema de Proteção Social dos Militares das Forças Armadas - SPSMFA.
+Valores válidos:
+00 - Não é base de cálculo de contribuições devidas
+11 - Base de cálculo de contribuições devidas
+12 - Base de cálculo de contribuições devidas - 13º salário
+31 - Contribuição descontada do segurado ou beneficiário
+32 - Contribuição descontada do segurado ou beneficiário - 13º salário
+91 - Suspensão de incidência em decorrência de decisão judicial
+92 - Suspensão de incidência em decorrência de decisão judicial - 13º salário"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__id__codIncCPRP" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][codIncCPRP]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='00' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCPRP'|to_str '00' %}selected{% endifequal %}>00 - Não é base de cálculo de contribuições devidas</option><option value='11' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCPRP'|to_str '11' %}selected{% endifequal %}>11 - Base de cálculo de contribuições devidas</option><option value='12' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCPRP'|to_str '12' %}selected{% endifequal %}>12 - Base de cálculo de contribuições devidas - 13º salário</option><option value='31' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCPRP'|to_str '31' %}selected{% endifequal %}>31 - Contribuição descontada do segurado ou beneficiário</option><option value='32' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCPRP'|to_str '32' %}selected{% endifequal %}>32 - Contribuição descontada do segurado ou beneficiário - 13º salário</option><option value='91' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCPRP'|to_str '91' %}selected{% endifequal %}>91 - Suspensão de incidência em decorrência de decisão judicial</option><option value='92' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.codIncCPRP'|to_str '92' %}selected{% endifequal %}>92 - Suspensão de incidência em decorrência de decisão judicial - 13º salário</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="tetoRemun__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar se a rubrica compõe o teto remuneratório específico (art<a data-toggle="tooltip" title="Informar se a rubrica compõe o teto remuneratório específico (art. 37, XI, da CF/1988).
+Valores válidos:
+S - Sim
+N - Não
+Validação: Preenchimento obrigatório se a natureza jurídica do declarante for Administração Pública (grupo [1])."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__id__tetoRemun" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][tetoRemun]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='S' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.tetoRemun'|to_str 'S' %}selected{% endifequal %}>S - Sim</option><option value='N' {% ifequal evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.tetoRemun'|to_str 'N' %}selected{% endifequal %}>N - Não</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="observacao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Observação relevante sobre o desligamento do trabalhador<a data-toggle="tooltip" title="Observações relacionadas à rubrica ou à sua utilização."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__id__observacao" maxlength="255" value="{{evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.observacao'}}" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][observacao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+{% for ideProcessoCP in evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.ideProcessoCP' %}
+<div id="ideProcessoCP__div">
+    <div class="col-md-12">
+        <h4>Caso a empresa possua processo administrativo ou judicial com decisão/sentença favorável, determinando a não incidência de contribuição previdenciária relativa à rubrica identificada no evento, as informações deverão ser incluídas neste grupo, e o detalhamento do processo deverá ser efetuado através de evento específico na Tabela de Processos (S-1070).</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de processo<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de processo.
+Valores válidos:
+1 - Administrativo
+2 - Judicial"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__ideProcessoCP__id__tpProc" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][ideProcessoCP][][tpProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideProcessoCP|readjson:'tpProc'|to_str '1' %}selected{% endifequal %}>1 - Administrativo</option><option value='2' {% ifequal ideProcessoCP|readjson:'tpProc'|to_str '2' %}selected{% endifequal %}>2 - Judicial</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar um número de processo cadastrado através do evento S-1070, cujo indMatProc seja igual a [1].
+Validação: Deve ser um número de processo administrativo ou judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__ideProcessoCP__id__nrProc" maxlength="21" value="{{ideProcessoCP|readjson:'nrProc'}}" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][ideProcessoCP][][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="extDecisao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Extensão da decisão/sentença<a data-toggle="tooltip" title="Extensão da decisão/sentença.
+Valores válidos:
+1 - Contribuição previdenciária patronal
+2 - Contribuição previdenciária patronal + descontada dos segurados"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__ideProcessoCP__id__extDecisao" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][ideProcessoCP][][extDecisao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideProcessoCP|readjson:'extDecisao'|to_str '1' %}selected{% endifequal %}>1 - Contribuição previdenciária patronal</option><option value='2' {% ifequal ideProcessoCP|readjson:'extDecisao'|to_str '2' %}selected{% endifequal %}>2 - Contribuição previdenciária patronal + descontada dos segurados</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador em S-1070.
+Validação: A informação prestada deve estar de acordo com o que foi informado em S-1070."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__ideProcessoCP__id__codSusp" maxlength="14" value="{{ideProcessoCP|readjson:'codSusp'}}" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][ideProcessoCP][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="ideProcessoCP__div">
+    <div class="col-md-12">
+        <h4>Caso a empresa possua processo administrativo ou judicial com decisão/sentença favorável, determinando a não incidência de contribuição previdenciária relativa à rubrica identificada no evento, as informações deverão ser incluídas neste grupo, e o detalhamento do processo deverá ser efetuado através de evento específico na Tabela de Processos (S-1070).</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de processo<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de processo.
+Valores válidos:
+1 - Administrativo
+2 - Judicial"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__ideProcessoCP__id__tpProc" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][ideProcessoCP][][tpProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideProcessoCP|readjson:'tpProc'|to_str '1' %}selected{% endifequal %}>1 - Administrativo</option><option value='2' {% ifequal ideProcessoCP|readjson:'tpProc'|to_str '2' %}selected{% endifequal %}>2 - Judicial</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar um número de processo cadastrado através do evento S-1070, cujo indMatProc seja igual a [1].
+Validação: Deve ser um número de processo administrativo ou judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__ideProcessoCP__id__nrProc" maxlength="21" value="{{ideProcessoCP|readjson:'nrProc'}}" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][ideProcessoCP][][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="extDecisao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Extensão da decisão/sentença<a data-toggle="tooltip" title="Extensão da decisão/sentença.
+Valores válidos:
+1 - Contribuição previdenciária patronal
+2 - Contribuição previdenciária patronal + descontada dos segurados"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__ideProcessoCP__id__extDecisao" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][ideProcessoCP][][extDecisao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideProcessoCP|readjson:'extDecisao'|to_str '1' %}selected{% endifequal %}>1 - Contribuição previdenciária patronal</option><option value='2' {% ifequal ideProcessoCP|readjson:'extDecisao'|to_str '2' %}selected{% endifequal %}>2 - Contribuição previdenciária patronal + descontada dos segurados</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador em S-1070.
+Validação: A informação prestada deve estar de acordo com o que foi informado em S-1070."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__ideProcessoCP__id__codSusp" maxlength="14" value="{{ideProcessoCP|readjson:'codSusp'}}" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][ideProcessoCP][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}{% for ideProcessoIRRF in evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.ideProcessoIRRF' %}
+<div id="ideProcessoIRRF__div">
+    <div class="col-md-12">
+        <h4>Caso a empresa possua processo judicial com decisão/sentença favorável, determinando a não incidência de imposto de renda relativo à rubrica identificada no evento, as informações deverão ser incluídas neste grupo, e o detalhamento do processo deverá ser efetuado através de evento específico na Tabela de Processos (S-1070).</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar um número de processo judicial cadastrado através do evento S-1070, cujo indMatProc seja igual a [1].
+Validação: Deve ser um número de processo judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__ideProcessoIRRF__id__nrProc" maxlength="20" value="{{ideProcessoIRRF|readjson:'nrProc'}}" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][ideProcessoIRRF][][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador em S-1070.
+Validação: A informação prestada deve estar de acordo com o que foi informado em S-1070."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__ideProcessoIRRF__id__codSusp" maxlength="14" value="{{ideProcessoIRRF|readjson:'codSusp'}}" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][ideProcessoIRRF][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="ideProcessoIRRF__div">
+    <div class="col-md-12">
+        <h4>Caso a empresa possua processo judicial com decisão/sentença favorável, determinando a não incidência de imposto de renda relativo à rubrica identificada no evento, as informações deverão ser incluídas neste grupo, e o detalhamento do processo deverá ser efetuado através de evento específico na Tabela de Processos (S-1070).</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar um número de processo judicial cadastrado através do evento S-1070, cujo indMatProc seja igual a [1].
+Validação: Deve ser um número de processo judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__ideProcessoIRRF__id__nrProc" maxlength="20" value="{{ideProcessoIRRF|readjson:'nrProc'}}" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][ideProcessoIRRF][][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador em S-1070.
+Validação: A informação prestada deve estar de acordo com o que foi informado em S-1070."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__ideProcessoIRRF__id__codSusp" maxlength="14" value="{{ideProcessoIRRF|readjson:'codSusp'}}" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][ideProcessoIRRF][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}{% for ideProcessoFGTS in evtTabRubrica|readjson:'infoRubrica.inclusao.dadosRubrica.ideProcessoFGTS' %}
+<div id="ideProcessoFGTS__div">
+    <div class="col-md-12">
+        <h4>Caso a empresa possua processo judicial com decisão/sentença favorável, determinando a não incidência de FGTS relativo à rubrica identificada no evento, as informações deverão ser incluídas neste grupo, e o detalhamento do processo deverá ser efetuado através de evento específico na Tabela de Processos (S-1070).</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar um número de processo judicial cadastrado através do evento S-1070, cujo indMatProc seja igual a [1, 7].
+Validação: Deve ser um número de processo judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1, 7]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__ideProcessoFGTS__id__nrProc" maxlength="20" value="{{ideProcessoFGTS|readjson:'nrProc'}}" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][ideProcessoFGTS][][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="ideProcessoFGTS__div">
+    <div class="col-md-12">
+        <h4>Caso a empresa possua processo judicial com decisão/sentença favorável, determinando a não incidência de FGTS relativo à rubrica identificada no evento, as informações deverão ser incluídas neste grupo, e o detalhamento do processo deverá ser efetuado através de evento específico na Tabela de Processos (S-1070).</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar um número de processo judicial cadastrado através do evento S-1070, cujo indMatProc seja igual a [1, 7].
+Validação: Deve ser um número de processo judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1, 7]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__inclusao__dadosRubrica__ideProcessoFGTS__id__nrProc" maxlength="20" value="{{ideProcessoFGTS|readjson:'nrProc'}}" name="[evtTabRubrica][infoRubrica][inclusao][dadosRubrica][ideProcessoFGTS][][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="alteracao__div">
+    <div class="col-md-12">
+        <h4>Alteração das informações.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideRubrica__div">
+    <div class="col-md-12">
+        <h4>Identificação da rubrica e período de validade das informações.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento.
+Validação: O código não pode conter a expressão 'eSocial' nas 7 (sete) primeiras posições.
+Regra de validação:
+REGRA_CARACTERE_ESPECIAL"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__ideRubrica__id__codRubr" maxlength="30" value="{{evtTabRubrica|readjson:'infoRubrica.alteracao.ideRubrica.codRubr'}}" name="[evtTabRubrica][infoRubrica][alteracao][ideRubrica][codRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="ideTabRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr<a data-toggle="tooltip" title="Preencher com o identificador da Tabela de Rubricas no âmbito do empregador.
+Validação: O identificador não pode conter a expressão 'eSocial' nas 7 (sete) primeiras posições.
+Regra de validação:
+REGRA_CARACTERE_ESPECIAL"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__ideRubrica__id__ideTabRubr" maxlength="8" value="{{evtTabRubrica|readjson:'infoRubrica.alteracao.ideRubrica.ideTabRubr'}}" name="[evtTabRubrica][infoRubrica][alteracao][ideRubrica][ideTabRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="iniValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de início da validade das informações prestadas no evento<a data-toggle="tooltip" title="Preencher com o mês e ano de início da validade das informações prestadas no evento, no formato AAAA-MM.
+Validação: Deve ser uma data válida, igual ou posterior à data de início de obrigatoriedade deste evento para o empregador no eSocial, no formato AAAA-MM."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__ideRubrica__id__iniValid" maxlength="7" value="{{evtTabRubrica|readjson:'infoRubrica.alteracao.ideRubrica.iniValid'}}" name="[evtTabRubrica][infoRubrica][alteracao][ideRubrica][iniValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fimValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de término da validade das informações<a data-toggle="tooltip" title="Preencher com o mês e ano de término da validade das informações, se houver.
+Validação: Se informado, deve estar no formato AAAA-MM e ser um período igual ou posterior a iniValid."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__ideRubrica__id__fimValid" maxlength="7" value="{{evtTabRubrica|readjson:'infoRubrica.alteracao.ideRubrica.fimValid'}}" name="[evtTabRubrica][infoRubrica][alteracao][ideRubrica][fimValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="dadosRubrica__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das informações da rubrica.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="dscRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar a descrição (nome) da rubrica no sistema de folha de pagamento da empresa<a data-toggle="tooltip" title="Informar a descrição (nome) da rubrica no sistema de folha de pagamento da empresa."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__id__dscRubr" maxlength="100" value="{{evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.dscRubr'}}" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][dscRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="natRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código de classificação da rubrica<a data-toggle="tooltip" title="Informar o código de classificação da rubrica.
+Validação: Deve ser um código válido e existente na Tabela 03."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__id__natRubr" maxlength="4" value="{{evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.natRubr'}}" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][natRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="tpRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Tipo de rubrica<a data-toggle="tooltip" title="Tipo de rubrica.
+Valores válidos:
+1 - Vencimento, provento ou pensão
+2 - Desconto
+3 - Informativa
+4 - Informativa dedutora"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__id__tpRubr" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][tpRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.tpRubr'|to_str '1' %}selected{% endifequal %}>1 - Vencimento, provento ou pensão</option><option value='2' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.tpRubr'|to_str '2' %}selected{% endifequal %}>2 - Desconto</option><option value='3' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.tpRubr'|to_str '3' %}selected{% endifequal %}>3 - Informativa</option><option value='4' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.tpRubr'|to_str '4' %}selected{% endifequal %}>4 - Informativa dedutora</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="codIncCP__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de incidência tributária da rubrica para a Previdência Social<a data-toggle="tooltip" title="Código de incidência tributária da rubrica para a Previdência Social.
+Valores válidos:
+00 - Não é base de cálculo
+01 - Não é base de cálculo em função de acordos internacionais de previdência social
+
+Base de cálculo das contribuições sociais - Salário de contribuição:
+11 - Mensal
+12 - 13º salário
+13 - Exclusiva do empregador - Mensal
+14 - Exclusiva do empregador - 13° salário
+15 - Exclusiva do segurado - Mensal
+16 - Exclusiva do segurado - 13° salário
+21 - Salário-maternidade mensal, pago pelo empregador
+22 - Salário-maternidade 13º salário, pago pelo empregador
+25 - Salário-maternidade mensal, pago pelo INSS
+26 - Salário-maternidade 13° salário, pago pelo INSS
+
+Contribuição descontada do segurado sobre salário de contribuição:
+31 - Mensal
+32 - 13º salário
+34 - SEST
+35 - SENAT
+
+Outros:
+51 - Salário-família
+
+Suspensão de incidência sobre salário de contribuição em decorrência de decisão judicial:
+91 - Mensal
+92 - 13º salário
+93 - Salário-maternidade
+94 - Salário-maternidade 13º salário
+95 - Exclusiva do empregador - Mensal
+96 - Exclusiva do empregador - 13º salário
+97 - Exclusiva do empregador - Salário-maternidade
+98 - Exclusiva do empregador - Salário-maternidade 13º salário
+Validação: Para utilização de código [91, 92, 93, 94, 95, 96, 97, 98], é necessária a existência de grupo com informações relativas ao processo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__id__codIncCP" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][codIncCP]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='00' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '00' %}selected{% endifequal %}>00 - Não é base de cálculo</option><option value='01' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '01' %}selected{% endifequal %}>01 - Não é base de cálculo em função de acordos internacionais de previdência social  Base de cálculo das contribuições sociais - Salário de contribuição:</option><option value='11' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '11' %}selected{% endifequal %}>11 - Mensal</option><option value='12' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '12' %}selected{% endifequal %}>12 - 13º salário</option><option value='13' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '13' %}selected{% endifequal %}>13 - Exclusiva do empregador - Mensal</option><option value='14' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '14' %}selected{% endifequal %}>14 - Exclusiva do empregador - 13° salário</option><option value='15' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '15' %}selected{% endifequal %}>15 - Exclusiva do segurado - Mensal</option><option value='16' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '16' %}selected{% endifequal %}>16 - Exclusiva do segurado - 13° salário</option><option value='21' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '21' %}selected{% endifequal %}>21 - Salário-maternidade mensal, pago pelo empregador</option><option value='22' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '22' %}selected{% endifequal %}>22 - Salário-maternidade 13º salário, pago pelo empregador</option><option value='25' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '25' %}selected{% endifequal %}>25 - Salário-maternidade mensal, pago pelo INSS</option><option value='26' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '26' %}selected{% endifequal %}>26 - Salário-maternidade 13° salário, pago pelo INSS  Contribuição descontada do segurado sobre salário de contribuição:</option><option value='31' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '31' %}selected{% endifequal %}>31 - Mensal</option><option value='32' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '32' %}selected{% endifequal %}>32 - 13º salário</option><option value='34' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '34' %}selected{% endifequal %}>34 - SEST</option><option value='35' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '35' %}selected{% endifequal %}>35 - SENAT  Outros:</option><option value='51' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '51' %}selected{% endifequal %}>51 - Salário-família  Suspensão de incidência sobre salário de contribuição em decorrência de decisão judicial:</option><option value='91' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '91' %}selected{% endifequal %}>91 - Mensal</option><option value='92' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '92' %}selected{% endifequal %}>92 - 13º salário</option><option value='93' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '93' %}selected{% endifequal %}>93 - Salário-maternidade</option><option value='94' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '94' %}selected{% endifequal %}>94 - Salário-maternidade 13º salário</option><option value='95' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '95' %}selected{% endifequal %}>95 - Exclusiva do empregador - Mensal</option><option value='96' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '96' %}selected{% endifequal %}>96 - Exclusiva do empregador - 13º salário</option><option value='97' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '97' %}selected{% endifequal %}>97 - Exclusiva do empregador - Salário-maternidade</option><option value='98' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCP'|to_str '98' %}selected{% endifequal %}>98 - Exclusiva do empregador - Salário-maternidade 13º salário</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="codIncIRRF__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de incidência tributária da rubrica para o Imposto de Renda Retido na Fonte - IRRF<a data-toggle="tooltip" title="Código de incidência tributária da rubrica para o Imposto de Renda Retido na Fonte - IRRF.
+Validação: Deve ser um código válido e existente na Tabela 21.
+Para utilização de código [9X] ou [9XXX], é necessária a existência de grupo com informações relativas ao processo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__id__codIncIRRF" maxlength="4" value="{{evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncIRRF'}}" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][codIncIRRF]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codIncFGTS__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de incidência da rubrica para o Fundo de Garantia do Tempo de Serviço - FGTS<a data-toggle="tooltip" title="Código de incidência da rubrica para o Fundo de Garantia do Tempo de Serviço - FGTS.
+Valores válidos:
+00 - Não é base de cálculo do FGTS
+11 - Base de cálculo do FGTS mensal
+12 - Base de cálculo do FGTS 13° salário
+21 - Base de cálculo do FGTS aviso prévio indenizado
+91 - Incidência suspensa em decorrência de decisão judicial - FGTS mensal
+92 - Incidência suspensa em decorrência de decisão judicial - FGTS 13º salário
+93 - Incidência suspensa em decorrência de decisão judicial - FGTS aviso prévio indenizado
+Validação: Para utilização de código [91, 92, 93], é necessária a existência de grupo com informações relativas ao processo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__id__codIncFGTS" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][codIncFGTS]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='00' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncFGTS'|to_str '00' %}selected{% endifequal %}>00 - Não é base de cálculo do FGTS</option><option value='11' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncFGTS'|to_str '11' %}selected{% endifequal %}>11 - Base de cálculo do FGTS mensal</option><option value='12' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncFGTS'|to_str '12' %}selected{% endifequal %}>12 - Base de cálculo do FGTS 13° salário</option><option value='21' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncFGTS'|to_str '21' %}selected{% endifequal %}>21 - Base de cálculo do FGTS aviso prévio indenizado</option><option value='91' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncFGTS'|to_str '91' %}selected{% endifequal %}>91 - Incidência suspensa em decorrência de decisão judicial - FGTS mensal</option><option value='92' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncFGTS'|to_str '92' %}selected{% endifequal %}>92 - Incidência suspensa em decorrência de decisão judicial - FGTS 13º salário</option><option value='93' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncFGTS'|to_str '93' %}selected{% endifequal %}>93 - Incidência suspensa em decorrência de decisão judicial - FGTS aviso prévio indenizado</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="codIncCPRP__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de incidência da rubrica para as contribuições do Regime Próprio de Previdência Social - RPPS ou do Sistema de Proteção Social dos Militares das Forças Armadas - SPSMFA<a data-toggle="tooltip" title="Código de incidência da rubrica para as contribuições do Regime Próprio de Previdência Social - RPPS ou do Sistema de Proteção Social dos Militares das Forças Armadas - SPSMFA.
+Valores válidos:
+00 - Não é base de cálculo de contribuições devidas
+11 - Base de cálculo de contribuições devidas
+12 - Base de cálculo de contribuições devidas - 13º salário
+31 - Contribuição descontada do segurado ou beneficiário
+32 - Contribuição descontada do segurado ou beneficiário - 13º salário
+91 - Suspensão de incidência em decorrência de decisão judicial
+92 - Suspensão de incidência em decorrência de decisão judicial - 13º salário"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__id__codIncCPRP" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][codIncCPRP]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='00' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCPRP'|to_str '00' %}selected{% endifequal %}>00 - Não é base de cálculo de contribuições devidas</option><option value='11' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCPRP'|to_str '11' %}selected{% endifequal %}>11 - Base de cálculo de contribuições devidas</option><option value='12' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCPRP'|to_str '12' %}selected{% endifequal %}>12 - Base de cálculo de contribuições devidas - 13º salário</option><option value='31' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCPRP'|to_str '31' %}selected{% endifequal %}>31 - Contribuição descontada do segurado ou beneficiário</option><option value='32' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCPRP'|to_str '32' %}selected{% endifequal %}>32 - Contribuição descontada do segurado ou beneficiário - 13º salário</option><option value='91' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCPRP'|to_str '91' %}selected{% endifequal %}>91 - Suspensão de incidência em decorrência de decisão judicial</option><option value='92' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.codIncCPRP'|to_str '92' %}selected{% endifequal %}>92 - Suspensão de incidência em decorrência de decisão judicial - 13º salário</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="tetoRemun__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar se a rubrica compõe o teto remuneratório específico (art<a data-toggle="tooltip" title="Informar se a rubrica compõe o teto remuneratório específico (art. 37, XI, da CF/1988).
+Valores válidos:
+S - Sim
+N - Não
+Validação: Preenchimento obrigatório se a natureza jurídica do declarante for Administração Pública (grupo [1])."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__id__tetoRemun" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][tetoRemun]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='S' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.tetoRemun'|to_str 'S' %}selected{% endifequal %}>S - Sim</option><option value='N' {% ifequal evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.tetoRemun'|to_str 'N' %}selected{% endifequal %}>N - Não</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="observacao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Observação relevante sobre o desligamento do trabalhador<a data-toggle="tooltip" title="Observações relacionadas à rubrica ou à sua utilização."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__id__observacao" maxlength="255" value="{{evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.observacao'}}" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][observacao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+{% for ideProcessoCP in evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.ideProcessoCP' %}
+<div id="ideProcessoCP__div">
+    <div class="col-md-12">
+        <h4>Caso a empresa possua processo administrativo ou judicial com decisão/sentença favorável, determinando a não incidência de contribuição previdenciária relativa à rubrica identificada no evento, as informações deverão ser incluídas neste grupo, e o detalhamento do processo deverá ser efetuado através de evento específico na Tabela de Processos (S-1070).</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de processo<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de processo.
+Valores válidos:
+1 - Administrativo
+2 - Judicial"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__ideProcessoCP__id__tpProc" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][ideProcessoCP][][tpProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideProcessoCP|readjson:'tpProc'|to_str '1' %}selected{% endifequal %}>1 - Administrativo</option><option value='2' {% ifequal ideProcessoCP|readjson:'tpProc'|to_str '2' %}selected{% endifequal %}>2 - Judicial</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar um número de processo cadastrado através do evento S-1070, cujo indMatProc seja igual a [1].
+Validação: Deve ser um número de processo administrativo ou judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__ideProcessoCP__id__nrProc" maxlength="21" value="{{ideProcessoCP|readjson:'nrProc'}}" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][ideProcessoCP][][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="extDecisao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Extensão da decisão/sentença<a data-toggle="tooltip" title="Extensão da decisão/sentença.
+Valores válidos:
+1 - Contribuição previdenciária patronal
+2 - Contribuição previdenciária patronal + descontada dos segurados"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__ideProcessoCP__id__extDecisao" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][ideProcessoCP][][extDecisao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideProcessoCP|readjson:'extDecisao'|to_str '1' %}selected{% endifequal %}>1 - Contribuição previdenciária patronal</option><option value='2' {% ifequal ideProcessoCP|readjson:'extDecisao'|to_str '2' %}selected{% endifequal %}>2 - Contribuição previdenciária patronal + descontada dos segurados</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador em S-1070.
+Validação: A informação prestada deve estar de acordo com o que foi informado em S-1070."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__ideProcessoCP__id__codSusp" maxlength="14" value="{{ideProcessoCP|readjson:'codSusp'}}" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][ideProcessoCP][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="ideProcessoCP__div">
+    <div class="col-md-12">
+        <h4>Caso a empresa possua processo administrativo ou judicial com decisão/sentença favorável, determinando a não incidência de contribuição previdenciária relativa à rubrica identificada no evento, as informações deverão ser incluídas neste grupo, e o detalhamento do processo deverá ser efetuado através de evento específico na Tabela de Processos (S-1070).</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de processo<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de processo.
+Valores válidos:
+1 - Administrativo
+2 - Judicial"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__ideProcessoCP__id__tpProc" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][ideProcessoCP][][tpProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideProcessoCP|readjson:'tpProc'|to_str '1' %}selected{% endifequal %}>1 - Administrativo</option><option value='2' {% ifequal ideProcessoCP|readjson:'tpProc'|to_str '2' %}selected{% endifequal %}>2 - Judicial</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar um número de processo cadastrado através do evento S-1070, cujo indMatProc seja igual a [1].
+Validação: Deve ser um número de processo administrativo ou judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__ideProcessoCP__id__nrProc" maxlength="21" value="{{ideProcessoCP|readjson:'nrProc'}}" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][ideProcessoCP][][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="extDecisao__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Extensão da decisão/sentença<a data-toggle="tooltip" title="Extensão da decisão/sentença.
+Valores válidos:
+1 - Contribuição previdenciária patronal
+2 - Contribuição previdenciária patronal + descontada dos segurados"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__ideProcessoCP__id__extDecisao" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][ideProcessoCP][][extDecisao]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideProcessoCP|readjson:'extDecisao'|to_str '1' %}selected{% endifequal %}>1 - Contribuição previdenciária patronal</option><option value='2' {% ifequal ideProcessoCP|readjson:'extDecisao'|to_str '2' %}selected{% endifequal %}>2 - Contribuição previdenciária patronal + descontada dos segurados</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador em S-1070.
+Validação: A informação prestada deve estar de acordo com o que foi informado em S-1070."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__ideProcessoCP__id__codSusp" maxlength="14" value="{{ideProcessoCP|readjson:'codSusp'}}" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][ideProcessoCP][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}{% for ideProcessoIRRF in evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.ideProcessoIRRF' %}
+<div id="ideProcessoIRRF__div">
+    <div class="col-md-12">
+        <h4>Caso a empresa possua processo judicial com decisão/sentença favorável, determinando a não incidência de imposto de renda relativo à rubrica identificada no evento, as informações deverão ser incluídas neste grupo, e o detalhamento do processo deverá ser efetuado através de evento específico na Tabela de Processos (S-1070).</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar um número de processo judicial cadastrado através do evento S-1070, cujo indMatProc seja igual a [1].
+Validação: Deve ser um número de processo judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__ideProcessoIRRF__id__nrProc" maxlength="20" value="{{ideProcessoIRRF|readjson:'nrProc'}}" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][ideProcessoIRRF][][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador em S-1070.
+Validação: A informação prestada deve estar de acordo com o que foi informado em S-1070."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__ideProcessoIRRF__id__codSusp" maxlength="14" value="{{ideProcessoIRRF|readjson:'codSusp'}}" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][ideProcessoIRRF][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="ideProcessoIRRF__div">
+    <div class="col-md-12">
+        <h4>Caso a empresa possua processo judicial com decisão/sentença favorável, determinando a não incidência de imposto de renda relativo à rubrica identificada no evento, as informações deverão ser incluídas neste grupo, e o detalhamento do processo deverá ser efetuado através de evento específico na Tabela de Processos (S-1070).</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar um número de processo judicial cadastrado através do evento S-1070, cujo indMatProc seja igual a [1].
+Validação: Deve ser um número de processo judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__ideProcessoIRRF__id__nrProc" maxlength="20" value="{{ideProcessoIRRF|readjson:'nrProc'}}" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][ideProcessoIRRF][][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador em S-1070.
+Validação: A informação prestada deve estar de acordo com o que foi informado em S-1070."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__ideProcessoIRRF__id__codSusp" maxlength="14" value="{{ideProcessoIRRF|readjson:'codSusp'}}" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][ideProcessoIRRF][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}{% for ideProcessoFGTS in evtTabRubrica|readjson:'infoRubrica.alteracao.dadosRubrica.ideProcessoFGTS' %}
+<div id="ideProcessoFGTS__div">
+    <div class="col-md-12">
+        <h4>Caso a empresa possua processo judicial com decisão/sentença favorável, determinando a não incidência de FGTS relativo à rubrica identificada no evento, as informações deverão ser incluídas neste grupo, e o detalhamento do processo deverá ser efetuado através de evento específico na Tabela de Processos (S-1070).</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar um número de processo judicial cadastrado através do evento S-1070, cujo indMatProc seja igual a [1, 7].
+Validação: Deve ser um número de processo judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1, 7]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__ideProcessoFGTS__id__nrProc" maxlength="20" value="{{ideProcessoFGTS|readjson:'nrProc'}}" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][ideProcessoFGTS][][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="ideProcessoFGTS__div">
+    <div class="col-md-12">
+        <h4>Caso a empresa possua processo judicial com decisão/sentença favorável, determinando a não incidência de FGTS relativo à rubrica identificada no evento, as informações deverão ser incluídas neste grupo, e o detalhamento do processo deverá ser efetuado através de evento específico na Tabela de Processos (S-1070).</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar um número de processo judicial cadastrado através do evento S-1070, cujo indMatProc seja igual a [1, 7].
+Validação: Deve ser um número de processo judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1, 7]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__dadosRubrica__ideProcessoFGTS__id__nrProc" maxlength="20" value="{{ideProcessoFGTS|readjson:'nrProc'}}" name="[evtTabRubrica][infoRubrica][alteracao][dadosRubrica][ideProcessoFGTS][][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="novaValidade__div">
+    <div class="col-md-12">
+        <h4>Informação preenchida exclusivamente em caso de alteração do período de validade das informações, apresentando o novo período de validade.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="iniValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de início da validade das informações prestadas no evento<a data-toggle="tooltip" title="Preencher com o mês e ano de início da validade das informações prestadas no evento, no formato AAAA-MM.
+Validação: Deve ser uma data válida, igual ou posterior à data de início de obrigatoriedade deste evento para o empregador no eSocial, no formato AAAA-MM."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__novaValidade__id__iniValid" maxlength="7" value="{{evtTabRubrica|readjson:'infoRubrica.alteracao.novaValidade.iniValid'}}" name="[evtTabRubrica][infoRubrica][alteracao][novaValidade][iniValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fimValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de término da validade das informações<a data-toggle="tooltip" title="Preencher com o mês e ano de término da validade das informações, se houver.
+Validação: Se informado, deve estar no formato AAAA-MM e ser um período igual ou posterior a iniValid."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__alteracao__novaValidade__id__fimValid" maxlength="7" value="{{evtTabRubrica|readjson:'infoRubrica.alteracao.novaValidade.fimValid'}}" name="[evtTabRubrica][infoRubrica][alteracao][novaValidade][fimValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="exclusao__div">
+    <div class="col-md-12">
+        <h4>Exclusão das informações.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideRubrica__div">
+    <div class="col-md-12">
+        <h4>Identificação da rubrica e período de validade das informações.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="codRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento<a data-toggle="tooltip" title="Informar o código atribuído pelo empregador que identifica a rubrica em sua folha de pagamento.
+Validação: O código não pode conter a expressão 'eSocial' nas 7 (sete) primeiras posições.
+Regra de validação:
+REGRA_CARACTERE_ESPECIAL"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__exclusao__ideRubrica__id__codRubr" maxlength="30" value="{{evtTabRubrica|readjson:'infoRubrica.exclusao.ideRubrica.codRubr'}}" name="[evtTabRubrica][infoRubrica][exclusao][ideRubrica][codRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="ideTabRubr__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o identificador da Tabela de Rubricas para a rubrica definida em codRubr<a data-toggle="tooltip" title="Preencher com o identificador da Tabela de Rubricas no âmbito do empregador.
+Validação: O identificador não pode conter a expressão 'eSocial' nas 7 (sete) primeiras posições.
+Regra de validação:
+REGRA_CARACTERE_ESPECIAL"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__exclusao__ideRubrica__id__ideTabRubr" maxlength="8" value="{{evtTabRubrica|readjson:'infoRubrica.exclusao.ideRubrica.ideTabRubr'}}" name="[evtTabRubrica][infoRubrica][exclusao][ideRubrica][ideTabRubr]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="iniValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de início da validade das informações prestadas no evento<a data-toggle="tooltip" title="Preencher com o mês e ano de início da validade das informações prestadas no evento, no formato AAAA-MM.
+Validação: Deve ser uma data válida, igual ou posterior à data de início de obrigatoriedade deste evento para o empregador no eSocial, no formato AAAA-MM."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__exclusao__ideRubrica__id__iniValid" maxlength="7" value="{{evtTabRubrica|readjson:'infoRubrica.exclusao.ideRubrica.iniValid'}}" name="[evtTabRubrica][infoRubrica][exclusao][ideRubrica][iniValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="fimValid__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o mês e ano de término da validade das informações<a data-toggle="tooltip" title="Preencher com o mês e ano de término da validade das informações, se houver.
+Validação: Se informado, deve estar no formato AAAA-MM e ser um período igual ou posterior a iniValid."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTabRubrica__infoRubrica__exclusao__ideRubrica__id__fimValid" maxlength="7" value="{{evtTabRubrica|readjson:'infoRubrica.exclusao.ideRubrica.fimValid'}}" name="[evtTabRubrica][infoRubrica][exclusao][ideRubrica][fimValid]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+</div>
+
+</form>
+{% endwith %}
+{% if original.is_aberto %}
+<script type="text/javascript">
+function set_evento_json() {
+    var dst = document.getElementById("id_evento_json");
+    var dst_read = document.getElementById("id_evento_json_read");
+    var obj = $('#form_json').serializeJSON({useIntKeysAsArrayIndex: true});
+    dst.value = JSON.stringify(obj);
+    dst_read.value = JSON.stringify(obj);
+};
+$(document).ready(function(){
+    set_evento_json();
+});
+</script>
+{% endif %}
