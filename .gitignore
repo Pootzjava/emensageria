@@ -1,32 +1,9 @@
 ```
 # Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.venv/
-.ENV
-.env
-.env.*
-.env.local
-.env.production
-.env.development
-.env.test
-.env.staging
-.env.build
-.coverage
-coverage/
-htmlcov/
-.pytest_cache/
-.mypy_cache/
-.tox/
-nox/
-.hypothesis/
-
-# Distribution / packaging
+*.py[cod]
+*$py.class
+*.so
 .Python
 build/
 develop-eggs/
@@ -44,22 +21,48 @@ wheels/
 .installed.cfg
 *.egg
 
-# IDE
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# Django specific
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+.env
+
+# IDE and editor files
 .vscode/
 .idea/
 *.swp
 *.swo
-*.tmp
-
-# OS
+*~
 .DS_Store
 Thumbs.db
 
-# Logs
-*.log
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+*.coveragerc
 
-# Web service and XML related
-*.xml.bak
-*.xml.backup
-*.wsdl
+# Testing
+.pytest_cache/
+.mypy_cache/
+.hypothesis/
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+.venv/
+.ENV/
+bin/
 ```

@@ -1347,3 +1347,115 @@ class EventosHistorico(BaseModelEsocial):
         verbose_name_plural = 'Histórico dos Eventos'
         ordering = [
             'id', ]
+
+
+# =============================================================================
+# MODELOS PARA API E FILA DE PROCESSAMENTO (eSocial v1.3+)
+# =============================================================================
+
+class Event(models.Model):
+    """
+    Modelo para eventos eSocial com suporte a fila de processamento
+    
+    Armazena eventos antes, durante e após o envio ao eSocial.
+    """
+    STATUS_CHOICES = [
+        ('CREATED', 'Criado'),
+        ('VALIDATING', 'Validando'),
+        ('SIGNING', 'Assinando'),
+        ('QUEUED', 'Em fila'),
+        ('SENDING', 'Enviando'),
+        ('SENT', 'Enviado'),
+        ('ERROR', 'Erro'),
+        ('CANCELLED', 'Cancelado'),
+    ]
+    
+    event_id = models.CharField(max_length=50, unique=True)
+    event_type = models.CharField(max_length=20)
+    version = models.CharField(max_length=20, default='v_S_01_03_00')
+    xml_content = models.TextField()
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='CREATED')
+    error_message = models.TextField(blank=True, null=True)
+    retry_count = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    sent_at = models.DateTimeField(blank=True, null=True)
+    
+    class Meta:
+        db_table = 'esocial_event'
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.event_type} - {self.event_id}"
+
+
+class Batch(models.Model):
+    """
+    Modelo para lotes de eventos eSocial
+    
+    Permite agrupar múltiplos eventos para envio em lote.
+    """
+    STATUS_CHOICES = [
+        ('CREATED', 'Criado'),
+        ('PROCESSING', 'Processando'),
+        ('SENT', 'Enviado'),
+        ('PARTIAL', 'Parcial'),
+        ('ERROR', 'Erro'),
+    ]
+    
+    batch_id = models.CharField(max_length=50, unique=True)
+    events = models.ManyToManyField(Event, related_name='batches', blank=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='CREATED')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    sent_at = models.DateTimeField(blank=True, null=True)
+    
+    class Meta:
+        db_table = 'esocial_batch'
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"Lote {self.batch_id}"
+
+
+class Receipt(models.Model):
+    """
+    Modelo para recibos de eventos enviados ao eSocial
+    """
+    event = models.OneToOneField(Event, on_delete=models.CASCADE, related_name='receipt')
+    receipt_number = models.CharField(max_length=50)
+    received_at = models.DateTimeField()
+    protocol = models.CharField(max_length=50)
+    xml_response = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        db_table = 'esocial_receipt'
+        ordering = ['-received_at']
+    
+    def __str__(self):
+        return f"Recibo {self.receipt_number} - {self.event.event_id}"
+
+
+class WebhookSubscription(models.Model):
+    """
+    Modelo para inscrições de webhooks
+    
+    Notifica sistemas externos sobre mudanças de status de eventos.
+    """
+    url = models.URLField(max_length=500)
+    events = models.JSONField(default=list, help_text="Lista de tipos de evento para notificar")
+    is_active = models.BooleanField(default=True)
+    secret_token = models.CharField(max_length=64, blank=True)
+    last_triggered_at = models.DateTimeField(blank=True, null=True)
+    success_count = models.IntegerField(default=0)
+    failure_count = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'esocial_webhook_subscription'
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"Webhook {self.url}"
