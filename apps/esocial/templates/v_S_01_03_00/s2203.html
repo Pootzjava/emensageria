@@ -1,0 +1,107 @@
+{% extends "esocial/base.html" %}
+{% load static %}
+
+{% block title %}S2203 - Monitoramento da Saúde do Trabalhador (Toxicológico) (v1.3){% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>S2203 - Monitoramento da Saúde do Trabalhador (Toxicológico)</h1>
+    <p>Versão do Layout: v_S_01_03_00</p>
+    
+    <form method="post" action="{% url 'esocial:enviar_evento' %}">
+        {% csrf_token %}
+        
+        <fieldset>
+            <legend>Identificação do Evento</legend>
+            <div class="form-group">
+                <label for="tpAmb">Tipo de Ambiente:</label>
+                <select name="tpAmb" id="tpAmb" required>
+                    <option value="">Selecione...</option>
+                    <option value="1">Produção</option>
+                    <option value="2">Produção Restrita</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="procEmi">Processo de Emissão:</label>
+                <select name="procEmi" id="procEmi" required>
+                    <option value="">Selecione...</option>
+                    <option value="1">Aplicativo do empregador</option>
+                    <option value="2">Aplicativo governamental - Doméstico</option>
+                    <option value="3">Aplicativo governamental - Web Geral</option>
+                    <option value="4">Aplicativo governamental - Simplificado Pessoa Jurídica</option>
+                    <option value="5">Aplicativo governamental - Segurado Especial</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="verProc">Versão do Processo:</label>
+                <input type="text" name="verProc" id="verProc" value="1.3.0" required>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Identificação do Empregador</legend>
+            <div class="form-group">
+                <label for="tpInsc">Tipo de Inscrição:</label>
+                <select name="tpInsc" id="tpInsc" required>
+                    <option value="">Selecione...</option>
+                    <option value="1">CNPJ</option>
+                    <option value="2">CPF</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nrInsc">Número de Inscrição:</label>
+                <input type="text" name="nrInsc" id="nrInsc" required maxlength="14">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Informações do Evento</legend>
+            <div class="form-group">
+                <label for="evtToxic">Evttoxic:</label>
+                <input type="text" name="evtToxic" id="evtToxic">
+            </div>
+            <div class="form-group">
+                <label for="cpfTrab">Cpftrab:</label>
+                <input type="text" name="cpfTrab" id="cpfTrab">
+            </div>
+            <div class="form-group">
+                <label for="matricula">Matricula:</label>
+                <input type="text" name="matricula" id="matricula">
+            </div>
+            <div class="form-group">
+                <label for="toxicologico">Toxicologico:</label>
+                <input type="text" name="toxicologico" id="toxicologico">
+            </div>
+            <div class="form-group">
+                <label for="dtExame">Dtexame:</label>
+                <input type="text" name="dtExame" id="dtExame">
+            </div>
+            <div class="form-group">
+                <label for="cnpjLab">Cnpjlab:</label>
+                <input type="text" name="cnpjLab" id="cnpjLab">
+            </div>
+            <div class="form-group">
+                <label for="codSeqExame">Codseqexame:</label>
+                <input type="text" name="codSeqExame" id="codSeqExame">
+            </div>
+            <div class="form-group">
+                <label for="nmMed">Nmmed:</label>
+                <input type="text" name="nmMed" id="nmMed">
+            </div>
+            <div class="form-group">
+                <label for="nrCRM">Nrcrm:</label>
+                <input type="text" name="nrCRM" id="nrCRM">
+            </div>
+            <div class="form-group">
+                <label for="ufCRM">Ufcrm:</label>
+                <input type="text" name="ufCRM" id="ufCRM">
+            </div>
+        </fieldset>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Gerar XML</button>
+            <button type="reset" class="btn btn-secondary">Limpar</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

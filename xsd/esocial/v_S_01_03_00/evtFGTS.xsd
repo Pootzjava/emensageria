@@ -106,10 +106,10 @@
                                                                         <xs:sequence>
                                                                             <xs:element name="basePerApur" minOccurs="0" maxOccurs="99">
                                                                                 <xs:annotation>
-                                                                                    <xs:documentation>Bases de cálculo e valores do FGTS, exceto se {tpAcConv} = [E, H]</xs:documentation>
-                                                                                    <xs:documentation>DESCRICAO_COMPLETA:Informações consolidadas das bases de cálculo e valores do FGTS do período de apuração e de períodos anteriores, exceto se {tpAcConv} = [E, H].</xs:documentation>
+                                                                                    <xs:documentation>Bases de cálculo e valores do FGTS, exceto se {tpAcConv} = [E, H, I]</xs:documentation>
+                                                                                    <xs:documentation>DESCRICAO_COMPLETA:Informações consolidadas das bases de cálculo e valores do FGTS do período de apuração e de períodos anteriores, exceto se {tpAcConv} = [E, H, I].</xs:documentation>
                                                                                     <xs:documentation>Evento de origem: S-1270 ou S-5003.</xs:documentation>
-                                                                                    <xs:documentation>CHAVE_GRUPO: {tpValor}, {indIncid}</xs:documentation>
+                                                                                    <xs:documentation>CHAVE_GRUPO: {tpValor}, {indIncid}, {notAFT}, {natRubr}</xs:documentation>
                                                                                     <xs:documentation>CONDICAO_GRUPO: OC</xs:documentation>
                                                                                 </xs:annotation>
                                                                                 <xs:complexType>
@@ -303,13 +303,25 @@
                                                                                                 <xs:documentation>Se {tpValor}(./tpValor) = [19], deve corresponder ao somatório dos valores informados no campo {baseFGTS}(./baseFGTS), e aplicar a alíquota de 8%.</xs:documentation>
                                                                                             </xs:annotation>
                                                                                         </xs:element>
+                                                                                        <xs:element name="notAFT" minOccurs="0" type="TS_notAFT">
+                                                                                            <xs:annotation>
+                                                                                                <xs:documentation>Número da notificação de FGTS que deu origem à confissão.</xs:documentation>
+                                                                                                <xs:documentation>Evento de origem: S-5003.</xs:documentation>
+                                                                                            </xs:annotation>
+                                                                                        </xs:element>
+                                                                                        <xs:element name="natRubr" minOccurs="0" type="TS_natRubr">
+                                                                                            <xs:annotation>
+                                                                                                <xs:documentation>Informar o código de classificação da rubrica.</xs:documentation>
+                                                                                                <xs:documentation>Evento de origem: S-5003.</xs:documentation>
+                                                                                            </xs:annotation>
+                                                                                        </xs:element>
                                                                                     </xs:sequence>
                                                                                 </xs:complexType>
                                                                             </xs:element>
                                                                             <xs:element name="infoBasePerAntE" minOccurs="0" maxOccurs="180">
                                                                                 <xs:annotation>
-                                                                                    <xs:documentation>Informações sobre bases de cálculo e valores do FGTS, quando {tpAcConv}(5013_infoFGTS_ideEstab_ideLotacao_infoBaseFGTS_infoBasePerAntE_tpAcConv) = [E, H]</xs:documentation>
-                                                                                    <xs:documentation>DESCRICAO_COMPLETA:Informações referentes a bases de cálculo e valores do FGTS de períodos anteriores quando {tpAcConv}(./tpAcConv) = [E, H].</xs:documentation>
+                                                                                    <xs:documentation>Informações sobre bases de cálculo e valores do FGTS, quando {tpAcConv}(5013_infoFGTS_ideEstab_ideLotacao_infoBaseFGTS_infoBasePerAntE_tpAcConv) = [E, H, I]</xs:documentation>
+                                                                                    <xs:documentation>DESCRICAO_COMPLETA:Informações referentes a bases de cálculo e valores do FGTS de períodos anteriores quando {tpAcConv}(./tpAcConv) = [E, H, I].</xs:documentation>
                                                                                     <xs:documentation>Evento de origem: S-5003.</xs:documentation>
                                                                                     <xs:documentation>CHAVE_GRUPO: {perRef}, {tpAcConv}</xs:documentation>
                                                                                     <xs:documentation>CONDICAO_GRUPO: OC</xs:documentation>
@@ -325,8 +337,8 @@
                                                                                         <xs:element name="tpAcConv" type="TS_tpAcConv_FGTS"/>
                                                                                         <xs:element name="basePerAntE" maxOccurs="99">
                                                                                             <xs:annotation>
-                                                                                                <xs:documentation>Bases de cálculo e valores do FGTS, quando {tpAcConv}(5013_infoFGTS_ideEstab_ideLotacao_infoBaseFGTS_infoBasePerAntE_tpAcConv) = [E, H]</xs:documentation>
-                                                                                                <xs:documentation>DESCRICAO_COMPLETA:Informações consolidadas das bases de cálculo e valores do FGTS de períodos anteriores quando {tpAcConv}(../tpAcConv) = [E, H].</xs:documentation>
+                                                                                                <xs:documentation>Bases de cálculo e valores do FGTS, quando {tpAcConv}(5013_infoFGTS_ideEstab_ideLotacao_infoBaseFGTS_infoBasePerAntE_tpAcConv) = [E, H, I]</xs:documentation>
+                                                                                                <xs:documentation>DESCRICAO_COMPLETA:Informações consolidadas das bases de cálculo e valores do FGTS de períodos anteriores quando {tpAcConv}(../tpAcConv) = [E, H, I].</xs:documentation>
                                                                                                 <xs:documentation>CHAVE_GRUPO: {tpValorE}, {indIncidE}</xs:documentation>
                                                                                             </xs:annotation>
                                                                                             <xs:complexType>

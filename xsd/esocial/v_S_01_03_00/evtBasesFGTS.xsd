@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns="http://www.esocial.gov.br/schema/evt/evtBasesFGTS/v_S_01_03_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtBasesFGTS/v_S_01_03_00" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
     <xs:include schemaLocation="tipos.xsd" />
     <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd" />
@@ -15,7 +15,28 @@
                     </xs:annotation>
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="ideEvento" type="T_ideEvento_retorno_trab" />
+                            <xs:element name="ideEvento">
+                                <xs:annotation>
+                                    <xs:documentation>Identificação do evento de retorno.</xs:documentation>
+                                    <xs:documentation>CHAVE_GRUPO: {indApuracao*}, {perApur*}</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="nrRecArqBase" type="TS_nrRecibo">
+                                            <xs:annotation>
+                                                <xs:documentation>Preencher com o número do recibo do arquivo que deu origem ao presente arquivo de retorno ao empregador.</xs:documentation>
+                                                <xs:documentation>Validação: Deve ser um recibo de entrega válido, correspondente ao arquivo que deu origem ao presente arquivo de retorno (S-1200, S-2299, S-2399 ou S-3000).</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="indApuracao" type="TS_indApuracao" />
+                                        <xs:element name="perApur" type="TS_perApur">
+                                            <xs:annotation>
+                                                <xs:documentation>Informar o mês/ano (formato AAAA-MM) de referência das informações, se {indApuracao}(./indApuracao) for igual a [1], ou apenas o ano (formato AAAA), se {indApuracao}(./indApuracao) for igual a [2].</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
                             <xs:element name="ideEmpregador" type="T_ideEmpregador" />
                             <xs:element name="ideTrabalhador">
                                 <xs:annotation>
@@ -39,7 +60,7 @@
                                         <xs:element name="dtVenc" minOccurs="0" type="xs:date">
                                             <xs:annotation>
                                                 <xs:documentation>Data de vencimento do FGTS mensal.</xs:documentation>
-                                                <xs:documentation>Validação: Preencher somente se houver informação no grupo {infoBaseFGTS}(./ideEstab_ideLotacao_infoTrabFGTS_infoBaseFGTS).</xs:documentation>
+                                                <xs:documentation>Validação: Preencher somente se houver informação no grupo {infoBaseFGTS}(./ideEstab_ideLotacao_infoTrabFGTS_infoBaseFGTS) e se {perApur}(5003_ideEvento_perApur) for anterior ao início do FGTS Digital.</xs:documentation>
                                                 <xs:documentation>Se informada, deve corresponder ao dia 7 (sete) do mês subsequente ao indicado em {perApur}(5003_ideEvento_perApur), se esse dia for útil. Caso não seja, deve corresponder ao dia útil imediatamente anterior.</xs:documentation>
                                                 <xs:documentation>Considera-se como dia não útil o sábado, o domingo e todo aquele constante do Calendário Nacional de feriados bancários divulgados pelo Banco Central do Brasil.</xs:documentation>
                                             </xs:annotation>
@@ -52,7 +73,16 @@
                                                     <xs:documentation>Validação: Retornar somente se for igual a [04, 22].</xs:documentation>
                                                 </xs:annotation>
                                                 <xs:restriction base="xs:string">
-                                                    <xs:pattern value="\d{2}" />
+                                                    <xs:enumeration value="04">
+                                                        <xs:annotation>
+                                                            <xs:documentation>Microempreendedor Individual - MEI</xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:enumeration>
+                                                    <xs:enumeration value="22">
+                                                        <xs:annotation>
+                                                            <xs:documentation>Segurado especial, inclusive quando for empregador doméstico</xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:enumeration>
                                                 </xs:restriction>
                                             </xs:simpleType>
                                         </xs:element>
@@ -132,7 +162,7 @@
                                                                     </xs:annotation>
                                                                     <xs:complexType>
                                                                         <xs:sequence>
-                                                                            <xs:element name="matricula" minOccurs="0" type="TS_matricula_retorno">
+                                                                            <xs:element name="matricula" minOccurs="0" type="TS_matricula">
                                                                                 <xs:annotation>
                                                                                     <xs:documentation>Matrícula atribuída ao trabalhador pela empresa ou, no caso de servidor público, a matrícula constante no Sistema de Administração de Recursos Humanos do órgão.</xs:documentation>
                                                                                     <xs:documentation>Evento de origem: S-1200, S-2299, S-2399 ou S-3000.</xs:documentation>
@@ -153,7 +183,7 @@
                                                                             <xs:element name="categOrig" minOccurs="0" type="TS_codCateg">
                                                                                 <xs:annotation>
                                                                                     <xs:documentation>Preencher com o código correspondente à categoria de origem do dirigente sindical ou do trabalhador cedido.</xs:documentation>
-                                                                                    <xs:documentation>Origem: campo {infoDirigenteSindical/categOrig}(2300_infoTSVInicio_infoComplementares_infoDirigenteSindical_categOrig) ou {infoTrabCedido/categOrig}(2300_infoTSVInicio_infoComplementares_infoTrabCedido_categOrig) de S-2300.</xs:documentation>
+                                                                                    <xs:documentation>Origem: campo {infoDirigenteSindical/categOrig}(2300_infoTSVInicio_infoComplementares_infoDirigenteSindical_categOrig), {infoTrabCedido/categOrig}(2300_infoTSVInicio_infoComplementares_infoTrabCedido_categOrig) ou {infoMandElet/categOrig}(2300_infoTSVInicio_infoComplementares_infoMandElet_categOrig) de S-2300.</xs:documentation>
                                                                                 </xs:annotation>
                                                                             </xs:element>
                                                                             <xs:element name="tpRegTrab" minOccurs="0" type="TS_tpRegTrab">
@@ -220,10 +250,10 @@
                                                                                     <xs:sequence>
                                                                                         <xs:element name="basePerApur" minOccurs="0" maxOccurs="99">
                                                                                             <xs:annotation>
-                                                                                                <xs:documentation>Bases de cálculo e valores, exceto se {tpAcConv} = [E, H]</xs:documentation>
-                                                                                                <xs:documentation>DESCRICAO_COMPLETA:Informações sobre bases de cálculo e valores do FGTS referentes à remuneração do período de apuração e de períodos anteriores, exceto se {tpAcConv} = [E, H].</xs:documentation>
+                                                                                                <xs:documentation>Bases de cálculo e valores, exceto se {tpAcConv} = [E, H, I]</xs:documentation>
+                                                                                                <xs:documentation>DESCRICAO_COMPLETA:Informações sobre bases de cálculo e valores do FGTS referentes à remuneração do período de apuração e de períodos anteriores, exceto se {tpAcConv} = [E, H, I].</xs:documentation>
                                                                                                 <xs:documentation>Evento de origem: S-1200, S-2299 ou S-2399.</xs:documentation>
-                                                                                                <xs:documentation>CHAVE_GRUPO: {tpValor}, {indIncid}</xs:documentation>
+                                                                                                <xs:documentation>CHAVE_GRUPO: {tpValor}, {indIncid}, {notAFT}, {natRubr}</xs:documentation>
                                                                                                 <xs:documentation>CONDICAO_GRUPO: OC</xs:documentation>
                                                                                             </xs:annotation>
                                                                                             <xs:complexType>
@@ -392,7 +422,7 @@
                                                                                                         <xs:annotation>
                                                                                                             <xs:documentation>Remuneração (valor da base de cálculo) do FGTS, conforme definido nos campos {tpValor}(./tpValor) e {indIncid}(./indIncid).</xs:documentation>
                                                                                                             <xs:documentation>Validação: Deve ser maior que 0 (zero).</xs:documentation>
-                                                                                                            <xs:documentation>Deve corresponder ao somatório dos valores informados no campo {vrRubr} em S-1200 e S-2299 (grupos {infoPerApur} e {infoPerAnt}, quando {tpAcConv} for diferente de [E, H]), e também em S-2399, devendo somar os valores das rubricas cujo {tpRubr}(1010_infoRubrica_inclusao_dadosRubrica_tpRubr) em S-1010 seja igual a [1, 3] e subtrair os valores das rubricas cujo {tpRubr}(1010_infoRubrica_inclusao_dadosRubrica_tpRubr) em S-1010 seja igual a [2, 4], observando a Tabela 23.</xs:documentation>
+                                                                                                            <xs:documentation>Deve corresponder ao somatório dos valores informados no campo {vrRubr} em S-1200 e S-2299 (grupos {infoPerApur} e {infoPerAnt}, quando {tpAcConv} for diferente de [E, H, I]), e também em S-2399, devendo somar os valores das rubricas cujo {tpRubr}(1010_infoRubrica_inclusao_dadosRubrica_tpRubr) em S-1010 seja igual a [1, 3] e subtrair os valores das rubricas cujo {tpRubr}(1010_infoRubrica_inclusao_dadosRubrica_tpRubr) em S-1010 seja igual a [2, 4], observando a Tabela 23.</xs:documentation>
                                                                                                         </xs:annotation>
                                                                                                     </xs:element>
                                                                                                     <xs:element name="dpsFGTS" minOccurs="0" type="TS_valorMonetario_positivo">
@@ -403,6 +433,19 @@
                                                                                                             <xs:documentation>a) Se {tpValor}(./tpValor) = [11, 12, 13, 14, 21, 22, 23, 24, 25, 26], alíquota de 8%;</xs:documentation>
                                                                                                             <xs:documentation>b) Se {tpValor}(./tpValor) = [15, 16, 17, 18, 27, 28, 29, 30, 31, 32], alíquota de 2%;</xs:documentation>
                                                                                                             <xs:documentation>c) Se {tpValor}(./tpValor) = [41, 42, 43, 44, 45, 46, 47, 48, 49, 50], alíquota de 3,2%.</xs:documentation>
+                                                                                                        </xs:annotation>
+                                                                                                    </xs:element>
+                                                                                                    <xs:element name="notAFT" minOccurs="0" type="TS_notAFT">
+                                                                                                        <xs:annotation>
+                                                                                                            <xs:documentation>Número da notificação de FGTS que deu origem à confissão.</xs:documentation>
+                                                                                                            <xs:documentation>Evento de origem: S-1200, S-2299 ou S-2399.</xs:documentation>
+                                                                                                        </xs:annotation>
+                                                                                                    </xs:element>
+                                                                                                    <xs:element name="natRubr" minOccurs="0" type="TS_natRubr">
+                                                                                                        <xs:annotation>
+                                                                                                            <xs:documentation>Informar o código de classificação da rubrica.</xs:documentation>
+                                                                                                            <xs:documentation>Evento de origem: S-1010.</xs:documentation>
+                                                                                                            <xs:documentation>Validação: Retornar somente se {notAFT}(./notAFT) for informado.</xs:documentation>
                                                                                                         </xs:annotation>
                                                                                                     </xs:element>
                                                                                                     <xs:element name="detRubrSusp" minOccurs="0" maxOccurs="unbounded" type="T_detRubrSusp">
@@ -418,8 +461,8 @@
                                                                                         </xs:element>
                                                                                         <xs:element name="infoBasePerAntE" minOccurs="0" maxOccurs="180">
                                                                                             <xs:annotation>
-                                                                                                <xs:documentation>Informações sobre bases e valores do FGTS quando {tpAcConv}(5003_infoFGTS_ideEstab_ideLotacao_infoTrabFGTS_infoBaseFGTS_infoBasePerAntE_tpAcConv) = [E, H]</xs:documentation>
-                                                                                                <xs:documentation>DESCRICAO_COMPLETA:Informações referentes a bases de cálculo e valores do FGTS de períodos anteriores quando {tpAcConv}(./tpAcConv) = [E, H].</xs:documentation>
+                                                                                                <xs:documentation>Informações sobre bases e valores do FGTS quando {tpAcConv}(5003_infoFGTS_ideEstab_ideLotacao_infoTrabFGTS_infoBaseFGTS_infoBasePerAntE_tpAcConv) = [E, H, I]</xs:documentation>
+                                                                                                <xs:documentation>DESCRICAO_COMPLETA:Informações referentes a bases de cálculo e valores do FGTS de períodos anteriores quando {tpAcConv}(./tpAcConv) = [E, H, I].</xs:documentation>
                                                                                                 <xs:documentation>CHAVE_GRUPO: {perRef}, {tpAcConv}</xs:documentation>
                                                                                                 <xs:documentation>CONDICAO_GRUPO: OC</xs:documentation>
                                                                                             </xs:annotation>
@@ -432,11 +475,11 @@
                                                                                                             <xs:documentation>Validação: Deve corresponder ao período informado no evento de origem.</xs:documentation>
                                                                                                         </xs:annotation>
                                                                                                     </xs:element>
-                                                                                                    <xs:element name="tpAcConv" type="TS_tpAcConv_FGTS"/>
+                                                                                                    <xs:element name="tpAcConv" type="TS_tpAcConv_FGTS" />
                                                                                                     <xs:element name="basePerAntE" maxOccurs="99">
                                                                                                         <xs:annotation>
-                                                                                                            <xs:documentation>Bases de cálculo e valores quando {tpAcConv}(5003_infoFGTS_ideEstab_ideLotacao_infoTrabFGTS_infoBaseFGTS_infoBasePerAntE_tpAcConv) = [E, H]</xs:documentation>
-                                                                                                            <xs:documentation>DESCRICAO_COMPLETA:Informações sobre bases de cálculo e valores do FGTS referentes à remuneração de períodos anteriores quando {tpAcConv}(../tpAcConv) = [E, H].</xs:documentation>
+                                                                                                            <xs:documentation>Bases de cálculo e valores quando {tpAcConv}(5003_infoFGTS_ideEstab_ideLotacao_infoTrabFGTS_infoBaseFGTS_infoBasePerAntE_tpAcConv) = [E, H, I]</xs:documentation>
+                                                                                                            <xs:documentation>DESCRICAO_COMPLETA:Informações sobre bases de cálculo e valores do FGTS referentes à remuneração de períodos anteriores quando {tpAcConv}(../tpAcConv) = [E, H, I].</xs:documentation>
                                                                                                             <xs:documentation>CHAVE_GRUPO: {tpValorE}, {indIncidE}</xs:documentation>
                                                                                                         </xs:annotation>
                                                                                                         <xs:complexType>
@@ -446,7 +489,13 @@
                                                                                                                         <xs:documentation>Tipo de valor que influi na apuração do FGTS.</xs:documentation>
                                                                                                                     </xs:annotation>
                                                                                                                 </xs:element>
-                                                                                                                <xs:element name="indIncidE" type="TS_indIncid" />
+                                                                                                                <xs:element name="indIncidE" type="TS_indIncid">
+                                                                                                                    <xs:annotation>
+                                                                                                                        <xs:documentation>Indicativo de incidência de FGTS.</xs:documentation>
+                                                                                                                        <xs:documentation>Validação: Se {codIncFGTS}(1010_infoRubrica_inclusao_dadosRubrica_codIncFGTS) em S-1010 for igual a [11, 12, 21], deve ser retornado [1].</xs:documentation>
+                                                                                                                        <xs:documentation>Se {codIncFGTS}(1010_infoRubrica_inclusao_dadosRubrica_codIncFGTS) em S-1010 for igual a [91, 92, 93], deve ser retornado [9].</xs:documentation>
+                                                                                                                    </xs:annotation>
+                                                                                                                </xs:element>
                                                                                                                 <xs:element name="remFGTSE" type="TS_valorMonetario_positivo">
                                                                                                                     <xs:annotation>
                                                                                                                         <xs:documentation>Remuneração (valor da base de cálculo) do FGTS, conforme definido nos campos {tpValorE}(./tpValorE) e {indIncidE}(./indIncidE).</xs:documentation>
@@ -498,6 +547,49 @@
                                                                                     </xs:sequence>
                                                                                 </xs:complexType>
                                                                             </xs:element>
+                                                                            <xs:element name="eConsignado" minOccurs="0" maxOccurs="unbounded">
+                                                                                <xs:complexType>
+                                                                                    <xs:annotation>
+                                                                                        <xs:documentation>Informações relativas ao desconto do eConsignado</xs:documentation>
+                                                                                        <xs:documentation>DESCRICAO_COMPLETA:Informações relativas ao desconto do eConsignado.</xs:documentation>
+                                                                                        <xs:documentation>DESCRICAO_COMPLETA:As inclusões, alterações ou exclusões dos dados que compõem este grupo não surtirão efeito se a guia já estiver paga ou vencida.</xs:documentation>
+                                                                                        <xs:documentation>CHAVE_GRUPO: {instFinanc}, {nrContrato}</xs:documentation>
+                                                                                        <xs:documentation>CONDICAO_GRUPO: O (se existir rubrica com {codIncFGTS}(1010_infoRubrica_inclusao_dadosRubrica_codIncFGTS) em S-1010 igual a [31] e {perApur}(5003_ideEvento_perApur) maior ou igual a data de início do eConsignado no eSocial); N (nos demais casos)</xs:documentation>
+                                                                                    </xs:annotation>
+                                                                                    <xs:sequence>
+                                                                                        <xs:element name="instFinanc">
+                                                                                            <xs:simpleType>
+                                                                                                <xs:annotation>
+                                                                                                    <xs:documentation>Código Bancário de Consignado concedente do empréstimo.</xs:documentation>
+                                                                                                    <xs:documentation>Origem: campo {descFolha/instFinanc} do evento remuneratório (S-1200, S-2299 ou S-2399).</xs:documentation>
+                                                                                                </xs:annotation>
+                                                                                                <xs:restriction base="xs:string">
+                                                                                                    <xs:pattern value="\d{3}" />
+                                                                                                </xs:restriction>
+                                                                                            </xs:simpleType>
+                                                                                        </xs:element>
+                                                                                        <xs:element name="nrContrato">
+                                                                                            <xs:simpleType>
+                                                                                                <xs:annotation>
+                                                                                                    <xs:documentation>Número do contrato do empréstimo eConsignado.</xs:documentation>
+                                                                                                    <xs:documentation>Origem: campo {descFolha/nrDoc} do evento remuneratório (S-1200, S-2299 ou S-2399).</xs:documentation>
+                                                                                                </xs:annotation>
+                                                                                                <xs:restriction base="xs:string">
+                                                                                                    <xs:minLength value="2" />
+                                                                                                    <xs:maxLength value="15" />
+                                                                                                    <xs:pattern value="[A-Za-z0-9][-_A-Za-z0-9/.//]{0,13}[A-Za-z0-9]" />
+                                                                                                </xs:restriction>
+                                                                                            </xs:simpleType>
+                                                                                        </xs:element>
+                                                                                        <xs:element name="vreConsignado" type="TS_valorMonetario_positivo">
+                                                                                            <xs:annotation>
+                                                                                                <xs:documentation>Valor do desconto do empréstimo eConsignado.</xs:documentation>
+                                                                                                <xs:documentation>Origem: soma das rubricas com {codIncFGTS}(1010_infoRubrica_inclusao_dadosRubrica_codIncFGTS) em S-1010 igual a [31].</xs:documentation>
+                                                                                            </xs:annotation>
+                                                                                        </xs:element>
+                                                                                    </xs:sequence>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
                                                                         </xs:sequence>
                                                                     </xs:complexType>
                                                                 </xs:element>
@@ -506,7 +598,7 @@
                                                     </xs:element>
                                                 </xs:sequence>
                                             </xs:complexType>
-                                        </xs:element>                                                    
+                                        </xs:element>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>

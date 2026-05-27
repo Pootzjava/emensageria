@@ -24,7 +24,7 @@
                                         <xs:element name="nrRecArqBase" type="TS_nrRecArqBase">
                                             <xs:annotation>
                                                 <xs:documentation>Preencher com o número do recibo do arquivo que deu origem ao presente arquivo de retorno.</xs:documentation>
-                                                <xs:documentation>Validação: Deve ser um recibo de entrega válido, correspondente ao arquivo que deu origem ao presente arquivo de retorno (S-2501 ou S-3500).</xs:documentation>
+                                                <xs:documentation>Validação: Deve ser um recibo de entrega válido, correspondente ao arquivo que deu origem ao presente arquivo de retorno (S-2501, S-2555 ou S-3500).</xs:documentation>
                                             </xs:annotation>
                                         </xs:element>
                                     </xs:sequence>
@@ -60,15 +60,15 @@
                                         <xs:element name="nrProcTrab" type="TS_nrProcTrab">
                                             <xs:annotation>
                                                 <xs:documentation>Número do processo trabalhista, da ata ou número de identificação da conciliação.</xs:documentation>
-                                                <xs:documentation>Validação: a) Se o evento de origem for S-2501, retornar o campo {nrProcTrab}(2501_ideProc_nrProcTrab) desse evento;</xs:documentation>
-                                                <xs:documentation>b) Se o evento de origem for S-3500, retornar o campo {nrProcTrab}(2501_ideProc_nrProcTrab) do evento S-2501 objeto da exclusão.</xs:documentation>
+                                                <xs:documentation>Validação: a) Se o evento de origem for S-2501 ou S-2555, retornar o campo {nrProcTrab} desse evento;</xs:documentation>
+                                                <xs:documentation>b) Se o evento de origem for S-3500, retornar o campo {nrProcTrab} do evento S-2501 ou S-2555 objeto da exclusão.</xs:documentation>
                                             </xs:annotation>
                                         </xs:element>
                                         <xs:element name="perApur" type="TS_periodo_mensal">
                                             <xs:annotation>
                                                 <xs:documentation>Mês/ano em que é devida a obrigação de pagar a parcela prevista no acordo/sentença.</xs:documentation>
-                                                <xs:documentation>Validação: a) Se o evento de origem for S-2501, retornar o campo {perApurPgto}(2501_ideProc_perApurPgto) desse evento;</xs:documentation>
-                                                <xs:documentation>b) Se o evento de origem for S-3500, retornar o campo {perApurPgto}(2501_ideProc_perApurPgto) do evento S-2501 objeto da exclusão.</xs:documentation>
+                                                <xs:documentation>Validação: a) Se o evento de origem for S-2501 ou S-2555, retornar o campo {perApurPgto} desse evento;</xs:documentation>
+                                                <xs:documentation>b) Se o evento de origem for S-3500, retornar o campo {perApurPgto} do evento S-2501 ou S-2555 objeto da exclusão.</xs:documentation>
                                             </xs:annotation>
                                         </xs:element>
                                         <xs:element name="infoTributos" minOccurs="0" maxOccurs="999">
@@ -82,7 +82,9 @@
                                                         <xs:annotation>
                                                             <xs:documentation>Informar o mês/ano (formato AAAA-MM) de referência das informações.</xs:documentation>
                                                             <xs:documentation>Validação: a) Se o evento de origem for S-2501, retornar o campo {perRef}(2501_ideTrab_calcTrib_perRef) desse evento;</xs:documentation>
-                                                            <xs:documentation>b) Se o evento de origem for S-3500, retornar o campo {perRef}(2501_ideTrab_calcTrib_perRef) do evento S-2501 objeto da exclusão.</xs:documentation>
+                                                            <xs:documentation>Validação: b) Se o evento de origem for S-2555, retornar o campo {perRef}(2501_ideTrab_calcTrib_perRef) dos eventos S-2501 abrangidos por esse evento;</xs:documentation>
+                                                            <xs:documentation>c) Se o evento de origem for S-3500 que exclua S-2501, retornar o campo {perRef}(2501_ideTrab_calcTrib_perRef) do evento S-2501 objeto da exclusão;</xs:documentation>
+                                                            <xs:documentation>d) Se o evento de origem for S-3500 que exclua S-2555, retornar o campo {perRef}(2501_ideTrab_calcTrib_perRef) dos eventos S-2501 abrangidos pelo evento S-2555 objeto da exclusão.</xs:documentation>
                                                         </xs:annotation>
                                                     </xs:element>
                                                     <xs:element name="infoCRContrib" minOccurs="0" maxOccurs="99">
@@ -138,19 +140,24 @@
                                                                         <xs:documentation>IRRF - Decisão da Justiça do Trabalho</xs:documentation>
                                                                     </xs:annotation>
                                                                 </xs:enumeration>
+                                                                <xs:enumeration value="056152">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation>IRRF - CCP/NINTER</xs:documentation>
+                                                                    </xs:annotation>
+                                                                </xs:enumeration>
                                                                 <xs:enumeration value="188951">
                                                                     <xs:annotation>
-                                                                        <xs:documentation>IRRF - RRA - Decisão da Justiça do Trabalho</xs:documentation>
+                                                                        <xs:documentation>IRRF - RRA</xs:documentation>
                                                                     </xs:annotation>
                                                                 </xs:enumeration>
                                                             </xs:restriction>
                                                         </xs:simpleType>
                                                     </xs:element>
-                                                    <xs:element name="vrCR" type="TS_valorMonetario_positivo">
+                                                    <xs:element name="vrCR" type="TS_valorMonetario">
                                                         <xs:annotation>
                                                             <xs:documentation>Valor correspondente ao Código de Receita - CR.</xs:documentation>
                                                             <xs:documentation>Validação: Deve ser apurado de acordo com a legislação em vigor na competência.</xs:documentation>
-                                                            <xs:documentation>Deve ser maior que 0 (zero).</xs:documentation>
+                                                            <xs:documentation>Deve ser maior ou igual a 0 (zero).</xs:documentation>
                                                         </xs:annotation>
                                                     </xs:element>
                                                 </xs:sequence>
