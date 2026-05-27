@@ -43,7 +43,7 @@ DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 # Application definition
 
 INSTALLED_APPS = [
-    'adminlteui',
+    'unfold',  # Interface moderna e responsiva (substituto do adminlte)
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -362,21 +362,22 @@ CONSTANCE_CONFIG = {
 }
 
 
-ADMINLTE_SETTINGS = {
-    # 'demo': True,
-    # 'search_form': True,
-    # 'skin': 'blue',
-    # 'copyright': '<a href="https://github.com/wuyue92tree/django-adminlte-ui/tree/'+version+'">django-adminlte-ui '+version+'</a>',
-    # 'navigation_expanded': True,
-
-    # if you are use custom menu, which will not effective below!
-
-    # 'show_apps': ['django_admin_settings', 'auth', 'main'],
-    # 'main_navigation_app': 'django_admin_settings',
-    'icons': {
-        'esocial': {
-            'arquivos': 'fa-circle',
-            'eventos': 'fa-circle',
-        }
-    }
+# Configuração do Django Unfold (Interface Moderna)
+UNFOLD = {
+    "SITE_TITLE": "eSocial Enterprise",
+    "SITE_HEADER": "eSocial v1.3",
+    "SITE_SYMBOL": "speed",
+    "SHOW_HISTORY": True,
+    "SHOW_VIEW_ON_SITE": False,
+    "THEME": "dark",
+    "COLORS": {
+        "primary": {"50": "#eff6ff", "100": "#dbeafe", "200": "#bfdbfe", "300": "#93c5fd", "400": "#60a5fa", "500": "#3b82f6", "600": "#2563eb", "700": "#1d4ed8", "800": "#1e40af", "900": "#1e3a8a", "950": "#172554"},
+    },
 }
+
+# Legacy AdminLTE (mantido apenas como referência, não ativo)
+# ADMINLTE_SETTINGS = {
+#     'demo': True,
+#     'search_form': True,
+# }
+

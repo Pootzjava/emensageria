@@ -1,68 +1,43 @@
-```
-# Python
+# Dependencies
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage/
+htmlcov/
 
 # Virtual environments
 venv/
+.venv/
 env/
 ENV/
-.venv/
-.env/
 
-# Django specific
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Logs
 *.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-media/
-staticfiles/
-.env
 
-# IDE and editor files
+# Environment variables
+.env
+.env.local
+*.env.*
+
+# Editor files
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
+*.tmp
+
+# OS files
 .DS_Store
 Thumbs.db
 
-# Coverage reports
-coverage/
-htmlcov/
-.coverage
-*.coveragerc
-
 # Testing
-.pytest_cache/
-.mypy_cache/
-.hypothesis/
-
-# Distribution / packaging
-.Python
-env/
-venv/
-ENV/
-.venv/
-.ENV/
-bin/
-```
+.testmondata/
