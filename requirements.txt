@@ -34,7 +34,7 @@ xmltodict==0.13.0
 dicttoxml==1.7.16
 untangle==1.2.1
 json2xml==3.5.0
-libesocial @ git+https://github.com/marcelomdevasconcellos/libesocial.git#egg=libesocial
+# libesocial @ git+https://github.com/marcelomdevasconcellos/libesocial.git#egg=libesocial
 
 # Digital Signature & Cryptography
 cryptography==42.0.5
