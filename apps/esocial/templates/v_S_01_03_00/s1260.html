@@ -1,0 +1,1683 @@
+
+{% load esocial_custom_tags %}
+{% with evtComProd=original.evento_json|readjson:'evtComProd' %}
+<form id="form_json">
+
+<div class="row">
+
+<div id="evtComProd__div">
+    <div class="col-md-12">
+        <h4>Evento Comercialização da Produção Rural Pessoa Física.
+Regras de validação:
+REGRA_ENVIO_PROC_FECHAMENTO
+REGRA_EVENTOS_EXTEMP
+REGRA_EVE_FOPAG_COMERC_PROD
+REGRA_EVE_FOPAG_IND_RETIFICACAO
+REGRA_EVE_FOPAG_INFO_COMPAT_CLASSTRIB
+REGRA_EVE_FOPAG_PERMITE_EXCLUSAO
+REGRA_EVE_FOPAG_SIMPLIFICADO
+REGRA_EXISTE_INFO_EMPREGADOR
+REGRA_MESMO_PROCEMI
+REGRA_VALIDA_EMPREGADOR</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideEvento__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do evento.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="indRetif__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informe [1] para arquivo original ou [2] para arquivo de retificação<a data-toggle="tooltip" title="Informe [1] para arquivo original ou [2] para arquivo de retificação.
+Valores válidos:
+1 - Original
+2 - Retificação"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtComProd__ideEvento__id__indRetif" name="[evtComProd][ideEvento][indRetif]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtComProd|readjson:'ideEvento.indRetif'|to_str '1' %}selected{% endifequal %}>1 - Original</option><option value='2' {% ifequal evtComProd|readjson:'ideEvento.indRetif'|to_str '2' %}selected{% endifequal %}>2 - Retificação</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrRecibo__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o número do recibo do arquivo a ser retificado<a data-toggle="tooltip" title="Preencher com o número do recibo do arquivo a ser retificado.
+Validação: O preenchimento é obrigatório se indRetif = [2].
+Deve ser um recibo de entrega válido, correspondente ao arquivo que está sendo retificado."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__ideEvento__id__nrRecibo" maxlength="23" value="{{evtComProd|readjson:'ideEvento.nrRecibo'}}" name="[evtComProd][ideEvento][nrRecibo]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="perApur__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o mês/ano (formato AAAA-MM) de referência das informações<a data-toggle="tooltip" title="Informar o mês/ano (formato AAAA-MM) de referência das informações.
+Validação: Deve ser um mês/ano válido, igual ou posterior ao início da obrigatoriedade dos eventos periódicos para o empregador."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__ideEvento__id__perApur" maxlength="7" value="{{evtComProd|readjson:'ideEvento.perApur'}}" name="[evtComProd][ideEvento][perApur]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="indGuia__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo do tipo de guia<a data-toggle="tooltip" title="Indicativo do tipo de guia.
+Valores válidos:
+1 - Documento de Arrecadação do eSocial - DAE"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtComProd__ideEvento__id__indGuia" name="[evtComProd][ideEvento][indGuia]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal evtComProd|readjson:'ideEvento.indGuia'|to_str '1' %}selected{% endifequal %}>1 - Documento de Arrecadação do eSocial - DAE</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="tpAmb__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Identificação do ambiente</label>
+            <select name="[evtComProd][ideEvento][tpAmb]" id="evtComProd__ideEvento__id__tpAmb_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpamb 1 %}selected{% endifequal %}>1 - Produção</option>
+                <option value="2" {% ifequal original.tpamb 2 %}selected{% endifequal %}>2 - Produção restrita.</option>
+            </select>
+            <input type="hidden" name="[evtComProd][ideEvento][tpAmb]" id="evtComProd__ideEvento__id__tpAmb" value="{{original.tpamb}}">
+        </div>
+    </div>
+</div>
+<div id="procEmi__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Processo de emissão do evento</label>
+            <select name="[evtComProd][ideEvento][procEmi]" id="evtComProd__ideEvento__id__procEmi_disabled" disabled="">
+                <option value="1" {% ifequal original.procemi 1 %}selected{% endifequal %}>1 - Aplicativo do empregador</option>
+                <option value="2" {% ifequal original.procemi 2 %}selected{% endifequal %}>2 - Aplicativo governamental - Empregador Doméstico</option>
+                <option value="3" {% ifequal original.procemi 3 %}selected{% endifequal %}>3 - Aplicativo governamental - Web Geral</option>
+                <option value="4" {% ifequal original.procemi 4 %}selected{% endifequal %}>4 - Aplicativo governamental - Simplificado Pessoa Jurídica</option>
+                <option value="5" {% ifequal original.procemi 5 %}selected{% endifequal %}>5 - Aplicativo governamental - Segurado Especial.</option>
+            </select>
+            <input type="hidden" name="[evtComProd][ideEvento][procEmi]" id="evtComProd__ideEvento__id__procEmi" value="{{original.procemi}}">
+        </div>
+    </div>
+</div>
+<div id="verProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Versão do processo de emissão do evento</label>
+            <input type="text" name="[evtComProd][ideEvento][verProc]" value="{{original.verproc}}" class="vTextField" maxlength="20" id="evtComProd__ideEvento__id__verProc_disabled" disabled="">
+            <input type="hidden" name="[evtComProd][ideEvento][verProc]" id="evtComProd__ideEvento__id__verProc" value="{{original.verproc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideEmpregador__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do empregador.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Preencher com o código correspondente ao tipo de inscrição</label>
+            <select name="[evtComProd][ideEmpregador][tpInsc]" id="evtComProd__ideEmpregador__id__tpInsc_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpinsc 1 %}selected{% endifequal %}>1 - CNPJ</option>
+                <option value="2" {% ifequal original.tpinsc 2 %}selected{% endifequal %}>2 - CPF</option>
+                <option value="3" {% ifequal original.tpinsc 3 %}selected{% endifequal %}>3 - CAEPF (Cadastro de Atividade Econômica de Pessoa Física)</option>
+                <option value="4" {% ifequal original.tpinsc 4 %}selected{% endifequal %}>4 - CNO (Cadastro Nacional de Obra)</option>
+                <option value="5" {% ifequal original.tpinsc 5 %}selected{% endifequal %}>5 - CGC</option>
+                <option value="6" {% ifequal original.tpinsc 6 %}selected{% endifequal %}>6 - CEI</option>
+            </select>
+            <input type="hidden" name="[evtComProd][ideEmpregador][tpInsc]" id="evtComProd__ideEmpregador__id__tpInsc" value="{{original.tpinsc}}">
+        </div>
+    </div>
+</div>
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000</label>
+            <input type="text" id="evtComProd__ideEmpregador__id__nrInsc_disabled" name="[evtComProd][ideEmpregador][nrInsc]" value="{{original.nrinsc}}" class="vTextField" maxlength="15" disabled="">
+            <input type="hidden" name="[evtComProd][ideEmpregador][nrInsc]" id="evtComProd__ideEmpregador__id__nrInsc" value="{{original.nrinsc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="infoComProd__div">
+    <div class="col-md-12">
+        <h4>Informação da comercialização de produção.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideEstabel__div">
+    <div class="col-md-12">
+        <h4>Identificação do estabelecimento que comercializou a produção.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="nrInscEstabRural__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o número de inscrição no CAEPF do estabelecimento rural<a data-toggle="tooltip" title="Preencher com o número de inscrição no CAEPF do estabelecimento rural.
+Validação: Deve ser um número de inscrição válido e existente na Tabela de Estabelecimentos (S-1005)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__id__nrInscEstabRural" maxlength="14" value="{{evtComProd|readjson:'infoComProd.ideEstabel.nrInscEstabRural'}}" name="[evtComProd][infoComProd][ideEstabel][nrInscEstabRural]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+{% for tpComerc in evtComProd|readjson:'infoComProd.ideEstabel.tpComerc' %}
+<div id="tpComerc__div">
+    <div class="col-md-12">
+        <h4>Valor total da comercialização por "tipo" de comercialização.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="indComerc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de comercialização<a data-toggle="tooltip" title="Indicativo de comercialização.
+Valores válidos:
+2 - Comercialização da produção efetuada diretamente no varejo a consumidor final ou a outro produtor rural pessoa física por produtor rural pessoa física, inclusive por segurado especial, ou por pessoa física não produtor rural
+3 - Comercialização da produção por prod. rural PF/seg. especial - Vendas a PJ (exceto entidade inscrita no Programa de Aquisição de Alimentos - PAA) ou a intermediário PF
+7 - Comercialização da produção isenta de acordo com a Lei 13.606/2018 efetuada diretamente no varejo a consumidor final ou a outro produtor rural pessoa física por produtor rural pessoa física, inclusive por segurado especial, ou por pessoa física não produtor rural
+8 - Comercialização da produção da pessoa física/segurado especial para entidade inscrita no PAA
+9 - Comercialização da produção no mercado externo"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtComProd__infoComProd__ideEstabel__tpComerc__id__indComerc" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][indComerc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='2' {% ifequal tpComerc|readjson:'indComerc'|to_str '2' %}selected{% endifequal %}>2 - Comercialização da produção efetuada diretamente no varejo a consumidor final ou a outro produtor rural pessoa física por produtor rural pessoa física, inclusive por segurado especial, ou por pessoa física não produtor rural</option><option value='3' {% ifequal tpComerc|readjson:'indComerc'|to_str '3' %}selected{% endifequal %}>3 - Comercialização da produção por prod. rural PF/seg. especial - Vendas a PJ (exceto entidade inscrita no Programa de Aquisição de Alimentos - PAA) ou a intermediário PF</option><option value='7' {% ifequal tpComerc|readjson:'indComerc'|to_str '7' %}selected{% endifequal %}>7 - Comercialização da produção isenta de acordo com a Lei 13.606/2018 efetuada diretamente no varejo a consumidor final ou a outro produtor rural pessoa física por produtor rural pessoa física, inclusive por segurado especial, ou por pessoa física não produtor rural</option><option value='8' {% ifequal tpComerc|readjson:'indComerc'|to_str '8' %}selected{% endifequal %}>8 - Comercialização da produção da pessoa física/segurado especial para entidade inscrita no PAA</option><option value='9' {% ifequal tpComerc|readjson:'indComerc'|to_str '9' %}selected{% endifequal %}>9 - Comercialização da produção no mercado externo</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="vrTotCom__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor total da comercialização<a data-toggle="tooltip" title="Preencher com o valor total da comercialização.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__id__vrTotCom" maxlength="14" value="{{tpComerc|readjson:'vrTotCom'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][vrTotCom]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+{% for ideAdquir in tpComerc|readjson:'ideAdquir' %}
+<div id="ideAdquir__div">
+    <div class="col-md-12">
+        <h4>Identificação dos adquirentes da produção.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de inscrição<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de inscrição, conforme Tabela 05.
+Valores válidos:
+1 - CNPJ
+2 - CPF
+Validação: Se indComerc for igual a [3, 7], deve ser igual a [1, 2]. Se indComerc for igual a [8], deve ser igual a [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__id__tpInsc" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][tpInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideAdquir|readjson:'tpInsc'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='2' {% ifequal ideAdquir|readjson:'tpInsc'|to_str '2' %}selected{% endifequal %}>2 - CPF</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000<a data-toggle="tooltip" title="Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideAdquir/tpInsc.
+Validação: A inscrição informada deve ser compatível com o ideAdquir/tpInsc e diferente da inscrição do declarante."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__id__nrInsc" maxlength="14" value="{{ideAdquir|readjson:'nrInsc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nrInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrComerc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor bruto da comercialização da produção<a data-toggle="tooltip" title="Valor bruto da comercialização da produção.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__id__vrComerc" maxlength="14" value="{{ideAdquir|readjson:'vrComerc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][vrComerc]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+{% for nfs in ideAdquir|readjson:'nfs' %}
+<div id="nfs__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das notas fiscais relativas à comercialização de produção com o adquirente identificado no grupo superior.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="serie__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de série da nota fiscal/fatura<a data-toggle="tooltip" title="Informar o número de série da nota fiscal/fatura."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__serie" maxlength="5" value="{{nfs|readjson:'serie'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][serie]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nrDocto__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número da nota fiscal/fatura<a data-toggle="tooltip" title="Número da nota fiscal/fatura."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__nrDocto" maxlength="20" value="{{nfs|readjson:'nrDocto'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][nrDocto]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dtEmisNF__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Data de emissão da nota fiscal/fatura<a data-toggle="tooltip" title="Data de emissão da nota fiscal/fatura.
+Validação: O mês/ano da emissão da nota fiscal deve ser igual ao mês/ano indicado no registro de abertura do arquivo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__dtEmisNF" value="{{nfs|readjson:'dtEmisNF'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][dtEmisNF]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vlrBruto__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor bruto da(s) nota(s) fiscal(is)<a data-toggle="tooltip" title="Preencher com o valor bruto da(s) nota(s) fiscal(is)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vlrBruto" maxlength="14" value="{{nfs|readjson:'vlrBruto'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vlrBruto]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrCPDescPR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor da contribuição previdenciária descontada pelo adquirente de produção de produtor rural - sub-rogação<a data-toggle="tooltip" title="Preencher com o valor da contribuição previdenciária descontada pelo adquirente na comercialização de produção. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrCPDescPR" maxlength="14" value="{{nfs|readjson:'vrCPDescPR'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrCPDescPR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRatDescPR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição destinada ao financiamento dos benefícios concedidos em razão do grau de incidência da incapacidade laborativa decorrente dos riscos ambientais do trabalho<a data-toggle="tooltip" title="Valor da contribuição destinada ao financiamento dos benefícios concedidos em razão do grau de incidência da incapacidade laborativa decorrente dos riscos ambientais do trabalho, incidente sobre a comercialização de produção rural de produtor rural. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrRatDescPR" maxlength="14" value="{{nfs|readjson:'vrRatDescPR'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrRatDescPR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrSenarDesc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição destinada ao SENAR<a data-toggle="tooltip" title="Valor da contribuição destinada ao SENAR, incidente sobre a comercialização de produção rural de produtor rural pessoa física/segurado especial. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrSenarDesc" maxlength="14" value="{{nfs|readjson:'vrSenarDesc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrSenarDesc]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="nfs__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das notas fiscais relativas à comercialização de produção com o adquirente identificado no grupo superior.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="serie__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de série da nota fiscal/fatura<a data-toggle="tooltip" title="Informar o número de série da nota fiscal/fatura."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__serie" maxlength="5" value="{{nfs|readjson:'serie'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][serie]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nrDocto__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número da nota fiscal/fatura<a data-toggle="tooltip" title="Número da nota fiscal/fatura."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__nrDocto" maxlength="20" value="{{nfs|readjson:'nrDocto'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][nrDocto]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dtEmisNF__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Data de emissão da nota fiscal/fatura<a data-toggle="tooltip" title="Data de emissão da nota fiscal/fatura.
+Validação: O mês/ano da emissão da nota fiscal deve ser igual ao mês/ano indicado no registro de abertura do arquivo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__dtEmisNF" value="{{nfs|readjson:'dtEmisNF'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][dtEmisNF]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vlrBruto__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor bruto da(s) nota(s) fiscal(is)<a data-toggle="tooltip" title="Preencher com o valor bruto da(s) nota(s) fiscal(is)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vlrBruto" maxlength="14" value="{{nfs|readjson:'vlrBruto'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vlrBruto]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrCPDescPR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor da contribuição previdenciária descontada pelo adquirente de produção de produtor rural - sub-rogação<a data-toggle="tooltip" title="Preencher com o valor da contribuição previdenciária descontada pelo adquirente na comercialização de produção. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrCPDescPR" maxlength="14" value="{{nfs|readjson:'vrCPDescPR'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrCPDescPR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRatDescPR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição destinada ao financiamento dos benefícios concedidos em razão do grau de incidência da incapacidade laborativa decorrente dos riscos ambientais do trabalho<a data-toggle="tooltip" title="Valor da contribuição destinada ao financiamento dos benefícios concedidos em razão do grau de incidência da incapacidade laborativa decorrente dos riscos ambientais do trabalho, incidente sobre a comercialização de produção rural de produtor rural. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrRatDescPR" maxlength="14" value="{{nfs|readjson:'vrRatDescPR'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrRatDescPR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrSenarDesc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição destinada ao SENAR<a data-toggle="tooltip" title="Valor da contribuição destinada ao SENAR, incidente sobre a comercialização de produção rural de produtor rural pessoa física/segurado especial. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrSenarDesc" maxlength="14" value="{{nfs|readjson:'vrSenarDesc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrSenarDesc]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="ideAdquir__div">
+    <div class="col-md-12">
+        <h4>Identificação dos adquirentes da produção.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de inscrição<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de inscrição, conforme Tabela 05.
+Valores válidos:
+1 - CNPJ
+2 - CPF
+Validação: Se indComerc for igual a [3, 7], deve ser igual a [1, 2]. Se indComerc for igual a [8], deve ser igual a [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__id__tpInsc" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][tpInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideAdquir|readjson:'tpInsc'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='2' {% ifequal ideAdquir|readjson:'tpInsc'|to_str '2' %}selected{% endifequal %}>2 - CPF</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000<a data-toggle="tooltip" title="Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideAdquir/tpInsc.
+Validação: A inscrição informada deve ser compatível com o ideAdquir/tpInsc e diferente da inscrição do declarante."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__id__nrInsc" maxlength="14" value="{{ideAdquir|readjson:'nrInsc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nrInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrComerc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor bruto da comercialização da produção<a data-toggle="tooltip" title="Valor bruto da comercialização da produção.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__id__vrComerc" maxlength="14" value="{{ideAdquir|readjson:'vrComerc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][vrComerc]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+{% for nfs in ideAdquir|readjson:'nfs' %}
+<div id="nfs__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das notas fiscais relativas à comercialização de produção com o adquirente identificado no grupo superior.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="serie__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de série da nota fiscal/fatura<a data-toggle="tooltip" title="Informar o número de série da nota fiscal/fatura."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__serie" maxlength="5" value="{{nfs|readjson:'serie'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][serie]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nrDocto__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número da nota fiscal/fatura<a data-toggle="tooltip" title="Número da nota fiscal/fatura."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__nrDocto" maxlength="20" value="{{nfs|readjson:'nrDocto'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][nrDocto]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dtEmisNF__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Data de emissão da nota fiscal/fatura<a data-toggle="tooltip" title="Data de emissão da nota fiscal/fatura.
+Validação: O mês/ano da emissão da nota fiscal deve ser igual ao mês/ano indicado no registro de abertura do arquivo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__dtEmisNF" value="{{nfs|readjson:'dtEmisNF'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][dtEmisNF]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vlrBruto__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor bruto da(s) nota(s) fiscal(is)<a data-toggle="tooltip" title="Preencher com o valor bruto da(s) nota(s) fiscal(is)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vlrBruto" maxlength="14" value="{{nfs|readjson:'vlrBruto'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vlrBruto]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrCPDescPR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor da contribuição previdenciária descontada pelo adquirente de produção de produtor rural - sub-rogação<a data-toggle="tooltip" title="Preencher com o valor da contribuição previdenciária descontada pelo adquirente na comercialização de produção. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrCPDescPR" maxlength="14" value="{{nfs|readjson:'vrCPDescPR'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrCPDescPR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRatDescPR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição destinada ao financiamento dos benefícios concedidos em razão do grau de incidência da incapacidade laborativa decorrente dos riscos ambientais do trabalho<a data-toggle="tooltip" title="Valor da contribuição destinada ao financiamento dos benefícios concedidos em razão do grau de incidência da incapacidade laborativa decorrente dos riscos ambientais do trabalho, incidente sobre a comercialização de produção rural de produtor rural. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrRatDescPR" maxlength="14" value="{{nfs|readjson:'vrRatDescPR'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrRatDescPR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrSenarDesc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição destinada ao SENAR<a data-toggle="tooltip" title="Valor da contribuição destinada ao SENAR, incidente sobre a comercialização de produção rural de produtor rural pessoa física/segurado especial. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrSenarDesc" maxlength="14" value="{{nfs|readjson:'vrSenarDesc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrSenarDesc]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="nfs__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das notas fiscais relativas à comercialização de produção com o adquirente identificado no grupo superior.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="serie__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de série da nota fiscal/fatura<a data-toggle="tooltip" title="Informar o número de série da nota fiscal/fatura."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__serie" maxlength="5" value="{{nfs|readjson:'serie'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][serie]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nrDocto__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número da nota fiscal/fatura<a data-toggle="tooltip" title="Número da nota fiscal/fatura."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__nrDocto" maxlength="20" value="{{nfs|readjson:'nrDocto'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][nrDocto]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dtEmisNF__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Data de emissão da nota fiscal/fatura<a data-toggle="tooltip" title="Data de emissão da nota fiscal/fatura.
+Validação: O mês/ano da emissão da nota fiscal deve ser igual ao mês/ano indicado no registro de abertura do arquivo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__dtEmisNF" value="{{nfs|readjson:'dtEmisNF'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][dtEmisNF]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vlrBruto__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor bruto da(s) nota(s) fiscal(is)<a data-toggle="tooltip" title="Preencher com o valor bruto da(s) nota(s) fiscal(is)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vlrBruto" maxlength="14" value="{{nfs|readjson:'vlrBruto'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vlrBruto]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrCPDescPR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor da contribuição previdenciária descontada pelo adquirente de produção de produtor rural - sub-rogação<a data-toggle="tooltip" title="Preencher com o valor da contribuição previdenciária descontada pelo adquirente na comercialização de produção. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrCPDescPR" maxlength="14" value="{{nfs|readjson:'vrCPDescPR'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrCPDescPR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRatDescPR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição destinada ao financiamento dos benefícios concedidos em razão do grau de incidência da incapacidade laborativa decorrente dos riscos ambientais do trabalho<a data-toggle="tooltip" title="Valor da contribuição destinada ao financiamento dos benefícios concedidos em razão do grau de incidência da incapacidade laborativa decorrente dos riscos ambientais do trabalho, incidente sobre a comercialização de produção rural de produtor rural. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrRatDescPR" maxlength="14" value="{{nfs|readjson:'vrRatDescPR'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrRatDescPR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrSenarDesc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição destinada ao SENAR<a data-toggle="tooltip" title="Valor da contribuição destinada ao SENAR, incidente sobre a comercialização de produção rural de produtor rural pessoa física/segurado especial. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrSenarDesc" maxlength="14" value="{{nfs|readjson:'vrSenarDesc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrSenarDesc]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}{% for infoProcJud in tpComerc|readjson:'infoProcJud' %}
+<div id="infoProcJud__div">
+    <div class="col-md-12">
+        <h4>Informações de processos judiciais com decisão/sentença favorável ao contribuinte e relativos à contribuição incidente sobre a comercialização.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de processo<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de processo.
+Valores válidos:
+1 - Administrativo
+2 - Judicial"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__tpProc" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][tpProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal infoProcJud|readjson:'tpProc'|to_str '1' %}selected{% endifequal %}>1 - Administrativo</option><option value='2' {% ifequal infoProcJud|readjson:'tpProc'|to_str '2' %}selected{% endifequal %}>2 - Judicial</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar um número de processo cadastrado através do evento S-1070, cujo indMatProc seja igual a [1].
+Validação: Deve ser um número de processo administrativo ou judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__nrProc" maxlength="21" value="{{infoProcJud|readjson:'nrProc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador em S-1070.
+Validação: A informação prestada deve estar de acordo com o que foi informado em S-1070."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__codSusp" maxlength="14" value="{{infoProcJud|readjson:'codSusp'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrCPSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição previdenciária com exigibilidade suspensa<a data-toggle="tooltip" title="Valor da contribuição previdenciária com exigibilidade suspensa.
+Validação: Preenchimento obrigatório se vrRatSusp e vrSenarSusp não tiverem sido preenchidos.
+Deve ser um valor maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__vrCPSusp" maxlength="14" value="{{infoProcJud|readjson:'vrCPSusp'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][vrCPSusp]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRatSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição para GILRAT com exigibilidade suspensa<a data-toggle="tooltip" title="Valor da contribuição para GILRAT com exigibilidade suspensa.
+Validação: Preenchimento obrigatório se vrCPSusp e vrSenarSusp não tiverem sido preenchidos.
+Deve ser um valor maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__vrRatSusp" maxlength="14" value="{{infoProcJud|readjson:'vrRatSusp'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][vrRatSusp]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrSenarSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição para o SENAR com exigibilidade suspensa<a data-toggle="tooltip" title="Valor da contribuição para o SENAR com exigibilidade suspensa.
+Validação: Preenchimento obrigatório se vrCPSusp e vrRatSusp não tiverem sido preenchidos.
+Deve ser um valor maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__vrSenarSusp" maxlength="14" value="{{infoProcJud|readjson:'vrSenarSusp'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][vrSenarSusp]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="infoProcJud__div">
+    <div class="col-md-12">
+        <h4>Informações de processos judiciais com decisão/sentença favorável ao contribuinte e relativos à contribuição incidente sobre a comercialização.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de processo<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de processo.
+Valores válidos:
+1 - Administrativo
+2 - Judicial"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__tpProc" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][tpProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal infoProcJud|readjson:'tpProc'|to_str '1' %}selected{% endifequal %}>1 - Administrativo</option><option value='2' {% ifequal infoProcJud|readjson:'tpProc'|to_str '2' %}selected{% endifequal %}>2 - Judicial</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar um número de processo cadastrado através do evento S-1070, cujo indMatProc seja igual a [1].
+Validação: Deve ser um número de processo administrativo ou judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__nrProc" maxlength="21" value="{{infoProcJud|readjson:'nrProc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador em S-1070.
+Validação: A informação prestada deve estar de acordo com o que foi informado em S-1070."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__codSusp" maxlength="14" value="{{infoProcJud|readjson:'codSusp'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrCPSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição previdenciária com exigibilidade suspensa<a data-toggle="tooltip" title="Valor da contribuição previdenciária com exigibilidade suspensa.
+Validação: Preenchimento obrigatório se vrRatSusp e vrSenarSusp não tiverem sido preenchidos.
+Deve ser um valor maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__vrCPSusp" maxlength="14" value="{{infoProcJud|readjson:'vrCPSusp'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][vrCPSusp]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRatSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição para GILRAT com exigibilidade suspensa<a data-toggle="tooltip" title="Valor da contribuição para GILRAT com exigibilidade suspensa.
+Validação: Preenchimento obrigatório se vrCPSusp e vrSenarSusp não tiverem sido preenchidos.
+Deve ser um valor maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__vrRatSusp" maxlength="14" value="{{infoProcJud|readjson:'vrRatSusp'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][vrRatSusp]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrSenarSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição para o SENAR com exigibilidade suspensa<a data-toggle="tooltip" title="Valor da contribuição para o SENAR com exigibilidade suspensa.
+Validação: Preenchimento obrigatório se vrCPSusp e vrRatSusp não tiverem sido preenchidos.
+Deve ser um valor maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__vrSenarSusp" maxlength="14" value="{{infoProcJud|readjson:'vrSenarSusp'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][vrSenarSusp]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="tpComerc__div">
+    <div class="col-md-12">
+        <h4>Valor total da comercialização por "tipo" de comercialização.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="indComerc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Indicativo de comercialização<a data-toggle="tooltip" title="Indicativo de comercialização.
+Valores válidos:
+2 - Comercialização da produção efetuada diretamente no varejo a consumidor final ou a outro produtor rural pessoa física por produtor rural pessoa física, inclusive por segurado especial, ou por pessoa física não produtor rural
+3 - Comercialização da produção por prod. rural PF/seg. especial - Vendas a PJ (exceto entidade inscrita no Programa de Aquisição de Alimentos - PAA) ou a intermediário PF
+7 - Comercialização da produção isenta de acordo com a Lei 13.606/2018 efetuada diretamente no varejo a consumidor final ou a outro produtor rural pessoa física por produtor rural pessoa física, inclusive por segurado especial, ou por pessoa física não produtor rural
+8 - Comercialização da produção da pessoa física/segurado especial para entidade inscrita no PAA
+9 - Comercialização da produção no mercado externo"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtComProd__infoComProd__ideEstabel__tpComerc__id__indComerc" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][indComerc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='2' {% ifequal tpComerc|readjson:'indComerc'|to_str '2' %}selected{% endifequal %}>2 - Comercialização da produção efetuada diretamente no varejo a consumidor final ou a outro produtor rural pessoa física por produtor rural pessoa física, inclusive por segurado especial, ou por pessoa física não produtor rural</option><option value='3' {% ifequal tpComerc|readjson:'indComerc'|to_str '3' %}selected{% endifequal %}>3 - Comercialização da produção por prod. rural PF/seg. especial - Vendas a PJ (exceto entidade inscrita no Programa de Aquisição de Alimentos - PAA) ou a intermediário PF</option><option value='7' {% ifequal tpComerc|readjson:'indComerc'|to_str '7' %}selected{% endifequal %}>7 - Comercialização da produção isenta de acordo com a Lei 13.606/2018 efetuada diretamente no varejo a consumidor final ou a outro produtor rural pessoa física por produtor rural pessoa física, inclusive por segurado especial, ou por pessoa física não produtor rural</option><option value='8' {% ifequal tpComerc|readjson:'indComerc'|to_str '8' %}selected{% endifequal %}>8 - Comercialização da produção da pessoa física/segurado especial para entidade inscrita no PAA</option><option value='9' {% ifequal tpComerc|readjson:'indComerc'|to_str '9' %}selected{% endifequal %}>9 - Comercialização da produção no mercado externo</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="vrTotCom__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor total da comercialização<a data-toggle="tooltip" title="Preencher com o valor total da comercialização.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__id__vrTotCom" maxlength="14" value="{{tpComerc|readjson:'vrTotCom'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][vrTotCom]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+{% for ideAdquir in tpComerc|readjson:'ideAdquir' %}
+<div id="ideAdquir__div">
+    <div class="col-md-12">
+        <h4>Identificação dos adquirentes da produção.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de inscrição<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de inscrição, conforme Tabela 05.
+Valores válidos:
+1 - CNPJ
+2 - CPF
+Validação: Se indComerc for igual a [3, 7], deve ser igual a [1, 2]. Se indComerc for igual a [8], deve ser igual a [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__id__tpInsc" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][tpInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideAdquir|readjson:'tpInsc'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='2' {% ifequal ideAdquir|readjson:'tpInsc'|to_str '2' %}selected{% endifequal %}>2 - CPF</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000<a data-toggle="tooltip" title="Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideAdquir/tpInsc.
+Validação: A inscrição informada deve ser compatível com o ideAdquir/tpInsc e diferente da inscrição do declarante."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__id__nrInsc" maxlength="14" value="{{ideAdquir|readjson:'nrInsc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nrInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrComerc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor bruto da comercialização da produção<a data-toggle="tooltip" title="Valor bruto da comercialização da produção.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__id__vrComerc" maxlength="14" value="{{ideAdquir|readjson:'vrComerc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][vrComerc]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+{% for nfs in ideAdquir|readjson:'nfs' %}
+<div id="nfs__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das notas fiscais relativas à comercialização de produção com o adquirente identificado no grupo superior.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="serie__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de série da nota fiscal/fatura<a data-toggle="tooltip" title="Informar o número de série da nota fiscal/fatura."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__serie" maxlength="5" value="{{nfs|readjson:'serie'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][serie]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nrDocto__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número da nota fiscal/fatura<a data-toggle="tooltip" title="Número da nota fiscal/fatura."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__nrDocto" maxlength="20" value="{{nfs|readjson:'nrDocto'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][nrDocto]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dtEmisNF__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Data de emissão da nota fiscal/fatura<a data-toggle="tooltip" title="Data de emissão da nota fiscal/fatura.
+Validação: O mês/ano da emissão da nota fiscal deve ser igual ao mês/ano indicado no registro de abertura do arquivo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__dtEmisNF" value="{{nfs|readjson:'dtEmisNF'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][dtEmisNF]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vlrBruto__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor bruto da(s) nota(s) fiscal(is)<a data-toggle="tooltip" title="Preencher com o valor bruto da(s) nota(s) fiscal(is)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vlrBruto" maxlength="14" value="{{nfs|readjson:'vlrBruto'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vlrBruto]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrCPDescPR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor da contribuição previdenciária descontada pelo adquirente de produção de produtor rural - sub-rogação<a data-toggle="tooltip" title="Preencher com o valor da contribuição previdenciária descontada pelo adquirente na comercialização de produção. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrCPDescPR" maxlength="14" value="{{nfs|readjson:'vrCPDescPR'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrCPDescPR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRatDescPR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição destinada ao financiamento dos benefícios concedidos em razão do grau de incidência da incapacidade laborativa decorrente dos riscos ambientais do trabalho<a data-toggle="tooltip" title="Valor da contribuição destinada ao financiamento dos benefícios concedidos em razão do grau de incidência da incapacidade laborativa decorrente dos riscos ambientais do trabalho, incidente sobre a comercialização de produção rural de produtor rural. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrRatDescPR" maxlength="14" value="{{nfs|readjson:'vrRatDescPR'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrRatDescPR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrSenarDesc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição destinada ao SENAR<a data-toggle="tooltip" title="Valor da contribuição destinada ao SENAR, incidente sobre a comercialização de produção rural de produtor rural pessoa física/segurado especial. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrSenarDesc" maxlength="14" value="{{nfs|readjson:'vrSenarDesc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrSenarDesc]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="nfs__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das notas fiscais relativas à comercialização de produção com o adquirente identificado no grupo superior.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="serie__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de série da nota fiscal/fatura<a data-toggle="tooltip" title="Informar o número de série da nota fiscal/fatura."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__serie" maxlength="5" value="{{nfs|readjson:'serie'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][serie]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nrDocto__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número da nota fiscal/fatura<a data-toggle="tooltip" title="Número da nota fiscal/fatura."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__nrDocto" maxlength="20" value="{{nfs|readjson:'nrDocto'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][nrDocto]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dtEmisNF__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Data de emissão da nota fiscal/fatura<a data-toggle="tooltip" title="Data de emissão da nota fiscal/fatura.
+Validação: O mês/ano da emissão da nota fiscal deve ser igual ao mês/ano indicado no registro de abertura do arquivo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__dtEmisNF" value="{{nfs|readjson:'dtEmisNF'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][dtEmisNF]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vlrBruto__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor bruto da(s) nota(s) fiscal(is)<a data-toggle="tooltip" title="Preencher com o valor bruto da(s) nota(s) fiscal(is)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vlrBruto" maxlength="14" value="{{nfs|readjson:'vlrBruto'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vlrBruto]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrCPDescPR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor da contribuição previdenciária descontada pelo adquirente de produção de produtor rural - sub-rogação<a data-toggle="tooltip" title="Preencher com o valor da contribuição previdenciária descontada pelo adquirente na comercialização de produção. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrCPDescPR" maxlength="14" value="{{nfs|readjson:'vrCPDescPR'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrCPDescPR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRatDescPR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição destinada ao financiamento dos benefícios concedidos em razão do grau de incidência da incapacidade laborativa decorrente dos riscos ambientais do trabalho<a data-toggle="tooltip" title="Valor da contribuição destinada ao financiamento dos benefícios concedidos em razão do grau de incidência da incapacidade laborativa decorrente dos riscos ambientais do trabalho, incidente sobre a comercialização de produção rural de produtor rural. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrRatDescPR" maxlength="14" value="{{nfs|readjson:'vrRatDescPR'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrRatDescPR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrSenarDesc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição destinada ao SENAR<a data-toggle="tooltip" title="Valor da contribuição destinada ao SENAR, incidente sobre a comercialização de produção rural de produtor rural pessoa física/segurado especial. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrSenarDesc" maxlength="14" value="{{nfs|readjson:'vrSenarDesc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrSenarDesc]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="ideAdquir__div">
+    <div class="col-md-12">
+        <h4>Identificação dos adquirentes da produção.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de inscrição<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de inscrição, conforme Tabela 05.
+Valores válidos:
+1 - CNPJ
+2 - CPF
+Validação: Se indComerc for igual a [3, 7], deve ser igual a [1, 2]. Se indComerc for igual a [8], deve ser igual a [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__id__tpInsc" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][tpInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal ideAdquir|readjson:'tpInsc'|to_str '1' %}selected{% endifequal %}>1 - CNPJ</option><option value='2' {% ifequal ideAdquir|readjson:'tpInsc'|to_str '2' %}selected{% endifequal %}>2 - CPF</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000<a data-toggle="tooltip" title="Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideAdquir/tpInsc.
+Validação: A inscrição informada deve ser compatível com o ideAdquir/tpInsc e diferente da inscrição do declarante."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__id__nrInsc" maxlength="14" value="{{ideAdquir|readjson:'nrInsc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nrInsc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrComerc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor bruto da comercialização da produção<a data-toggle="tooltip" title="Valor bruto da comercialização da produção.
+Validação: Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__id__vrComerc" maxlength="14" value="{{ideAdquir|readjson:'vrComerc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][vrComerc]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+{% for nfs in ideAdquir|readjson:'nfs' %}
+<div id="nfs__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das notas fiscais relativas à comercialização de produção com o adquirente identificado no grupo superior.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="serie__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de série da nota fiscal/fatura<a data-toggle="tooltip" title="Informar o número de série da nota fiscal/fatura."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__serie" maxlength="5" value="{{nfs|readjson:'serie'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][serie]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nrDocto__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número da nota fiscal/fatura<a data-toggle="tooltip" title="Número da nota fiscal/fatura."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__nrDocto" maxlength="20" value="{{nfs|readjson:'nrDocto'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][nrDocto]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dtEmisNF__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Data de emissão da nota fiscal/fatura<a data-toggle="tooltip" title="Data de emissão da nota fiscal/fatura.
+Validação: O mês/ano da emissão da nota fiscal deve ser igual ao mês/ano indicado no registro de abertura do arquivo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__dtEmisNF" value="{{nfs|readjson:'dtEmisNF'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][dtEmisNF]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vlrBruto__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor bruto da(s) nota(s) fiscal(is)<a data-toggle="tooltip" title="Preencher com o valor bruto da(s) nota(s) fiscal(is)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vlrBruto" maxlength="14" value="{{nfs|readjson:'vlrBruto'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vlrBruto]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrCPDescPR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor da contribuição previdenciária descontada pelo adquirente de produção de produtor rural - sub-rogação<a data-toggle="tooltip" title="Preencher com o valor da contribuição previdenciária descontada pelo adquirente na comercialização de produção. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrCPDescPR" maxlength="14" value="{{nfs|readjson:'vrCPDescPR'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrCPDescPR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRatDescPR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição destinada ao financiamento dos benefícios concedidos em razão do grau de incidência da incapacidade laborativa decorrente dos riscos ambientais do trabalho<a data-toggle="tooltip" title="Valor da contribuição destinada ao financiamento dos benefícios concedidos em razão do grau de incidência da incapacidade laborativa decorrente dos riscos ambientais do trabalho, incidente sobre a comercialização de produção rural de produtor rural. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrRatDescPR" maxlength="14" value="{{nfs|readjson:'vrRatDescPR'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrRatDescPR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrSenarDesc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição destinada ao SENAR<a data-toggle="tooltip" title="Valor da contribuição destinada ao SENAR, incidente sobre a comercialização de produção rural de produtor rural pessoa física/segurado especial. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrSenarDesc" maxlength="14" value="{{nfs|readjson:'vrSenarDesc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrSenarDesc]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="nfs__div">
+    <div class="col-md-12">
+        <h4>Detalhamento das notas fiscais relativas à comercialização de produção com o adquirente identificado no grupo superior.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="serie__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número de série da nota fiscal/fatura<a data-toggle="tooltip" title="Informar o número de série da nota fiscal/fatura."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__serie" maxlength="5" value="{{nfs|readjson:'serie'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][serie]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="nrDocto__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número da nota fiscal/fatura<a data-toggle="tooltip" title="Número da nota fiscal/fatura."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__nrDocto" maxlength="20" value="{{nfs|readjson:'nrDocto'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][nrDocto]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="dtEmisNF__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Data de emissão da nota fiscal/fatura<a data-toggle="tooltip" title="Data de emissão da nota fiscal/fatura.
+Validação: O mês/ano da emissão da nota fiscal deve ser igual ao mês/ano indicado no registro de abertura do arquivo."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__dtEmisNF" value="{{nfs|readjson:'dtEmisNF'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][dtEmisNF]" onchange="set_evento_json()" class="form-control automate-date" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vlrBruto__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor bruto da(s) nota(s) fiscal(is)<a data-toggle="tooltip" title="Preencher com o valor bruto da(s) nota(s) fiscal(is)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vlrBruto" maxlength="14" value="{{nfs|readjson:'vlrBruto'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vlrBruto]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrCPDescPR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o valor da contribuição previdenciária descontada pelo adquirente de produção de produtor rural - sub-rogação<a data-toggle="tooltip" title="Preencher com o valor da contribuição previdenciária descontada pelo adquirente na comercialização de produção. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrCPDescPR" maxlength="14" value="{{nfs|readjson:'vrCPDescPR'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrCPDescPR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRatDescPR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição destinada ao financiamento dos benefícios concedidos em razão do grau de incidência da incapacidade laborativa decorrente dos riscos ambientais do trabalho<a data-toggle="tooltip" title="Valor da contribuição destinada ao financiamento dos benefícios concedidos em razão do grau de incidência da incapacidade laborativa decorrente dos riscos ambientais do trabalho, incidente sobre a comercialização de produção rural de produtor rural. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrRatDescPR" maxlength="14" value="{{nfs|readjson:'vrRatDescPR'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrRatDescPR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrSenarDesc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição destinada ao SENAR<a data-toggle="tooltip" title="Valor da contribuição destinada ao SENAR, incidente sobre a comercialização de produção rural de produtor rural pessoa física/segurado especial. Se não houver informação, preencher com 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__ideAdquir__nfs__id__vrSenarDesc" maxlength="14" value="{{nfs|readjson:'vrSenarDesc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][ideAdquir][][nfs][][vrSenarDesc]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}{% for infoProcJud in tpComerc|readjson:'infoProcJud' %}
+<div id="infoProcJud__div">
+    <div class="col-md-12">
+        <h4>Informações de processos judiciais com decisão/sentença favorável ao contribuinte e relativos à contribuição incidente sobre a comercialização.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de processo<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de processo.
+Valores válidos:
+1 - Administrativo
+2 - Judicial"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__tpProc" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][tpProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal infoProcJud|readjson:'tpProc'|to_str '1' %}selected{% endifequal %}>1 - Administrativo</option><option value='2' {% ifequal infoProcJud|readjson:'tpProc'|to_str '2' %}selected{% endifequal %}>2 - Judicial</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar um número de processo cadastrado através do evento S-1070, cujo indMatProc seja igual a [1].
+Validação: Deve ser um número de processo administrativo ou judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__nrProc" maxlength="21" value="{{infoProcJud|readjson:'nrProc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador em S-1070.
+Validação: A informação prestada deve estar de acordo com o que foi informado em S-1070."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__codSusp" maxlength="14" value="{{infoProcJud|readjson:'codSusp'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrCPSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição previdenciária com exigibilidade suspensa<a data-toggle="tooltip" title="Valor da contribuição previdenciária com exigibilidade suspensa.
+Validação: Preenchimento obrigatório se vrRatSusp e vrSenarSusp não tiverem sido preenchidos.
+Deve ser um valor maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__vrCPSusp" maxlength="14" value="{{infoProcJud|readjson:'vrCPSusp'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][vrCPSusp]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRatSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição para GILRAT com exigibilidade suspensa<a data-toggle="tooltip" title="Valor da contribuição para GILRAT com exigibilidade suspensa.
+Validação: Preenchimento obrigatório se vrCPSusp e vrSenarSusp não tiverem sido preenchidos.
+Deve ser um valor maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__vrRatSusp" maxlength="14" value="{{infoProcJud|readjson:'vrRatSusp'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][vrRatSusp]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrSenarSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição para o SENAR com exigibilidade suspensa<a data-toggle="tooltip" title="Valor da contribuição para o SENAR com exigibilidade suspensa.
+Validação: Preenchimento obrigatório se vrCPSusp e vrRatSusp não tiverem sido preenchidos.
+Deve ser um valor maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__vrSenarSusp" maxlength="14" value="{{infoProcJud|readjson:'vrSenarSusp'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][vrSenarSusp]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="infoProcJud__div">
+    <div class="col-md-12">
+        <h4>Informações de processos judiciais com decisão/sentença favorável ao contribuinte e relativos à contribuição incidente sobre a comercialização.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o código correspondente ao tipo de processo<a data-toggle="tooltip" title="Preencher com o código correspondente ao tipo de processo.
+Valores válidos:
+1 - Administrativo
+2 - Judicial"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__tpProc" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][tpProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='1' {% ifequal infoProcJud|readjson:'tpProc'|to_str '1' %}selected{% endifequal %}>1 - Administrativo</option><option value='2' {% ifequal infoProcJud|readjson:'tpProc'|to_str '2' %}selected{% endifequal %}>2 - Judicial</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="nrProc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o número do processo<a data-toggle="tooltip" title="Informar um número de processo cadastrado através do evento S-1070, cujo indMatProc seja igual a [1].
+Validação: Deve ser um número de processo administrativo ou judicial válido e existente na Tabela de Processos (S-1070), com indMatProc = [1]."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__nrProc" maxlength="21" value="{{infoProcJud|readjson:'nrProc'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][nrProc]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="codSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código do indicativo da suspensão<a data-toggle="tooltip" title="Código do indicativo da suspensão, atribuído pelo empregador em S-1070.
+Validação: A informação prestada deve estar de acordo com o que foi informado em S-1070."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__codSusp" maxlength="14" value="{{infoProcJud|readjson:'codSusp'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][codSusp]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrCPSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição previdenciária com exigibilidade suspensa<a data-toggle="tooltip" title="Valor da contribuição previdenciária com exigibilidade suspensa.
+Validação: Preenchimento obrigatório se vrRatSusp e vrSenarSusp não tiverem sido preenchidos.
+Deve ser um valor maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__vrCPSusp" maxlength="14" value="{{infoProcJud|readjson:'vrCPSusp'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][vrCPSusp]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrRatSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição para GILRAT com exigibilidade suspensa<a data-toggle="tooltip" title="Valor da contribuição para GILRAT com exigibilidade suspensa.
+Validação: Preenchimento obrigatório se vrCPSusp e vrSenarSusp não tiverem sido preenchidos.
+Deve ser um valor maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__vrRatSusp" maxlength="14" value="{{infoProcJud|readjson:'vrRatSusp'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][vrRatSusp]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrSenarSusp__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor da contribuição para o SENAR com exigibilidade suspensa<a data-toggle="tooltip" title="Valor da contribuição para o SENAR com exigibilidade suspensa.
+Validação: Preenchimento obrigatório se vrCPSusp e vrRatSusp não tiverem sido preenchidos.
+Deve ser um valor maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtComProd__infoComProd__ideEstabel__tpComerc__infoProcJud__id__vrSenarSusp" maxlength="14" value="{{infoProcJud|readjson:'vrSenarSusp'}}" name="[evtComProd][infoComProd][ideEstabel][tpComerc][][infoProcJud][][vrSenarSusp]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+</div>
+
+</form>
+{% endwith %}
+{% if original.is_aberto %}
+<script type="text/javascript">
+function set_evento_json() {
+    var dst = document.getElementById("id_evento_json");
+    var dst_read = document.getElementById("id_evento_json_read");
+    var obj = $('#form_json').serializeJSON({useIntKeysAsArrayIndex: true});
+    dst.value = JSON.stringify(obj);
+    dst_read.value = JSON.stringify(obj);
+};
+$(document).ready(function(){
+    set_evento_json();
+});
+</script>
+{% endif %}

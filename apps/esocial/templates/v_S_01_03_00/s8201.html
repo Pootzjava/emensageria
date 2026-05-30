@@ -1,0 +1,127 @@
+{% extends "esocial/base.html" %}
+{% load static %}
+
+{% block title %}S8201 - Remuneração RPPS (v1.3){% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>S8201 - Remuneração RPPS</h1>
+    <p>Versão do Layout: v_S_01_03_00</p>
+    
+    <form method="post" action="{% url 'esocial:enviar_evento' %}">
+        {% csrf_token %}
+        
+        <fieldset>
+            <legend>Identificação do Evento</legend>
+            <div class="form-group">
+                <label for="tpAmb">Tipo de Ambiente:</label>
+                <select name="tpAmb" id="tpAmb" required>
+                    <option value="">Selecione...</option>
+                    <option value="1">Produção</option>
+                    <option value="2">Produção Restrita</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="procEmi">Processo de Emissão:</label>
+                <select name="procEmi" id="procEmi" required>
+                    <option value="">Selecione...</option>
+                    <option value="1">Aplicativo do empregador</option>
+                    <option value="2">Aplicativo governamental - Doméstico</option>
+                    <option value="3">Aplicativo governamental - Web Geral</option>
+                    <option value="4">Aplicativo governamental - Simplificado Pessoa Jurídica</option>
+                    <option value="5">Aplicativo governamental - Segurado Especial</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="verProc">Versão do Processo:</label>
+                <input type="text" name="verProc" id="verProc" value="1.3.0" required>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Identificação do Empregador</legend>
+            <div class="form-group">
+                <label for="tpInsc">Tipo de Inscrição:</label>
+                <select name="tpInsc" id="tpInsc" required>
+                    <option value="">Selecione...</option>
+                    <option value="1">CNPJ</option>
+                    <option value="2">CPF</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nrInsc">Número de Inscrição:</label>
+                <input type="text" name="nrInsc" id="nrInsc" required maxlength="14">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Informações do Evento</legend>
+            <div class="form-group">
+                <label for="evtRmnRPPS">Evtrmnrpps:</label>
+                <input type="text" name="evtRmnRPPS" id="evtRmnRPPS">
+            </div>
+            <div class="form-group">
+                <label for="cpfTrab">Cpftrab:</label>
+                <input type="text" name="cpfTrab" id="cpfTrab">
+            </div>
+            <div class="form-group">
+                <label for="infoComplem">Infocomplem:</label>
+                <input type="text" name="infoComplem" id="infoComplem">
+            </div>
+            <div class="form-group">
+                <label for="nmTrab">Nmtrab:</label>
+                <input type="text" name="nmTrab" id="nmTrab">
+            </div>
+            <div class="form-group">
+                <label for="dtNascto">Dtnascto:</label>
+                <input type="text" name="dtNascto" id="dtNascto">
+            </div>
+            <div class="form-group">
+                <label for="sucessaoVinc">Sucessaovinc:</label>
+                <input type="text" name="sucessaoVinc" id="sucessaoVinc">
+            </div>
+            <div class="form-group">
+                <label for="cnpjOrgaoAnt">Cnpjorgaoant:</label>
+                <input type="text" name="cnpjOrgaoAnt" id="cnpjOrgaoAnt">
+            </div>
+            <div class="form-group">
+                <label for="matricAnt">Matricant:</label>
+                <input type="text" name="matricAnt" id="matricAnt">
+            </div>
+            <div class="form-group">
+                <label for="dtExercicio">Dtexercicio:</label>
+                <input type="text" name="dtExercicio" id="dtExercicio">
+            </div>
+            <div class="form-group">
+                <label for="observacao">Observacao:</label>
+                <input type="text" name="observacao" id="observacao">
+            </div>
+            <div class="form-group">
+                <label for="dmDev">Dmdev:</label>
+                <input type="text" name="dmDev" id="dmDev">
+            </div>
+            <div class="form-group">
+                <label for="codCateg">Codcateg:</label>
+                <input type="text" name="codCateg" id="codCateg">
+            </div>
+            <div class="form-group">
+                <label for="indRRA">Indrra:</label>
+                <input type="text" name="indRRA" id="indRRA">
+            </div>
+            <div class="form-group">
+                <label for="infoRRA">Inforra:</label>
+                <input type="text" name="infoRRA" id="infoRRA">
+            </div>
+            <div class="form-group">
+                <label for="infoPerApur">Infoperapur:</label>
+                <input type="text" name="infoPerApur" id="infoPerApur">
+            </div>
+        </fieldset>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Gerar XML</button>
+            <button type="reset" class="btn btn-secondary">Limpar</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,148 @@
+{% extends "esocial/base.html" %}
+{% load static %}
+
+{% block title %}S-2190 - Registro Preliminar de Trabalhador (v1.3){% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>S-2190 - Registro Preliminar de Trabalhador</h1>
+    <p>Versão do Layout: v_S_01_03_00</p>
+    
+    <form method="post" action="{% url 'esocial:enviar_evento' %}">
+        {% csrf_token %}
+        
+        <!-- ideEvento -->
+        <fieldset>
+            <legend>Identificação do Evento</legend>
+            <div class="form-group">
+                <label for="tpAmb">Tipo de Ambiente:</label>
+                <select name="tpAmb" id="tpAmb" required>
+                    <option value="">Selecione...</option>
+                    <option value="1">Produção</option>
+                    <option value="2">Produção Restrita</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="procEmi">Processo de Emissão:</label>
+                <select name="procEmi" id="procEmi" required>
+                    <option value="">Selecione...</option>
+                    <option value="1">Aplicativo do empregador</option>
+                    <option value="2">Aplicativo governamental - Doméstico</option>
+                    <option value="3">Aplicativo governamental - Web Geral</option>
+                    <option value="4">Aplicativo governamental - Simplificado Pessoa Jurídica</option>
+                    <option value="5">Aplicativo governamental - Segurado Especial</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="verProc">Versão do Processo de Emissão:</label>
+                <input type="text" name="verProc" id="verProc" value="1.3.0" required>
+            </div>
+        </fieldset>
+
+        <!-- ideEmpregador -->
+        <fieldset>
+            <legend>Identificação do Empregador</legend>
+            <div class="form-group">
+                <label for="tpInsc">Tipo de Inscrição:</label>
+                <select name="tpInsc" id="tpInsc" required>
+                    <option value="">Selecione...</option>
+                    <option value="1">CNPJ</option>
+                    <option value="2">CPF</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nrInsc">Número de Inscrição:</label>
+                <input type="text" name="nrInsc" id="nrInsc" required maxlength="14">
+            </div>
+        </fieldset>
+
+        <!-- infoRegPrelim -->
+        <fieldset>
+            <legend>Informações do Registro Preliminar</legend>
+            <div class="form-group">
+                <label for="cpfTrab">CPF do Trabalhador:</label>
+                <input type="text" name="cpfTrab" id="cpfTrab" required maxlength="11">
+            </div>
+            <div class="form-group">
+                <label for="dtNascto">Data de Nascimento:</label>
+                <input type="date" name="dtNascto" id="dtNascto" required>
+            </div>
+            <div class="form-group">
+                <label for="dtAdm">Data de Admissão:</label>
+                <input type="date" name="dtAdm" id="dtAdm" required>
+            </div>
+            <div class="form-group">
+                <label for="matricula">Matrícula:</label>
+                <input type="text" name="matricula" id="matricula" required maxlength="30">
+            </div>
+            <div class="form-group">
+                <label for="codCateg">Código da Categoria:</label>
+                <input type="text" name="codCateg" id="codCateg" required maxlength="3">
+                <small>Categorias válidas: 1XX (Empregado), 2XX (Avulso), 3XX (Agente Público), 4XX (Cessão), 7XX (CI), 9XX (Bolsista)</small>
+            </div>
+            <div class="form-group">
+                <label for="natAtividade">Natureza da Atividade:</label>
+                <select name="natAtividade" id="natAtividade">
+                    <option value="">Selecione...</option>
+                    <option value="1">Urbana</option>
+                    <option value="2">Rural</option>
+                </select>
+            </div>
+
+            <!-- infoRegCTPS (opcional/condicional) -->
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="showInfoRegCTPS"> Preencher Informações CTPS Digital
+                </label>
+            </div>
+            
+            <div id="infoRegCTPS" style="display:none; border-left: 3px solid #007bff; padding-left: 15px; margin-top: 10px;">
+                <div class="form-group">
+                    <label for="CBOCargo">CBO do Cargo:</label>
+                    <input type="text" name="CBOCargo" id="CBOCargo" maxlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="vrSalFx">Valor do Salário Fixo:</label>
+                    <input type="number" step="0.01" name="vrSalFx" id="vrSalFx">
+                </div>
+                <div class="form-group">
+                    <label for="undSalFixo">Unidade do Salário Fixo:</label>
+                    <select name="undSalFixo" id="undSalFixo">
+                        <option value="">Selecione...</option>
+                        <option value="1">Hora</option>
+                        <option value="2">Dia</option>
+                        <option value="3">Semana</option>
+                        <option value="4">Mês</option>
+                        <option value="5">Quinzena</option>
+                        <option value="6">Tarefa</option>
+                        <option value="7">Outro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tpContr">Tipo de Contrato:</label>
+                    <select name="tpContr" id="tpContr">
+                        <option value="">Selecione...</option>
+                        <option value="1">Prazo indeterminado</option>
+                        <option value="2">Prazo determinado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dtTerm">Data de Término do Contrato:</label>
+                    <input type="date" name="dtTerm" id="dtTerm">
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Gerar XML</button>
+            <button type="reset" class="btn btn-secondary">Limpar</button>
+        </div>
+    </form>
+</div>
+
+<script>
+document.getElementById('showInfoRegCTPS').addEventListener('change', function() {
+    document.getElementById('infoRegCTPS').style.display = this.checked ? 'block' : 'none';
+});
+</script>
+{% endblock %}

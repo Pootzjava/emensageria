@@ -1,0 +1,527 @@
+
+{% load esocial_custom_tags %}
+{% with evtTribProcTrab=original.evento_json|readjson:'evtTribProcTrab' %}
+<form id="form_json">
+
+<div class="row">
+
+<div id="evtTribProcTrab__div">
+    <div class="col-md-12">
+        <h4>Evento Informações Consolidadas de Tributos Decorrentes de Processo Trabalhista.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="ideEvento__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do evento.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="nrRecArqBase__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Preencher com o número do recibo do arquivo que deu origem ao presente arquivo de retorno<a data-toggle="tooltip" title="Preencher com o número do recibo do arquivo que deu origem ao presente arquivo de retorno.
+Validação: Deve ser um recibo de entrega válido, correspondente ao arquivo que deu origem ao presente arquivo de retorno (S-2501 ou S-3500)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTribProcTrab__ideEvento__id__nrRecArqBase" maxlength="23" value="{{evtTribProcTrab|readjson:'ideEvento.nrRecArqBase'}}" name="[evtTribProcTrab][ideEvento][nrRecArqBase]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideEmpregador__div">
+    <div class="col-md-12">
+        <h4>Informações de identificação do empregador ou do contribuinte que prestou a informação.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Preencher com o código correspondente ao tipo de inscrição</label>
+            <select name="[evtTribProcTrab][ideEmpregador][tpInsc]" id="evtTribProcTrab__ideEmpregador__id__tpInsc_disabled" disabled="">
+                <option value="">---------</option>
+                <option value="1" {% ifequal original.tpinsc 1 %}selected{% endifequal %}>1 - CNPJ</option>
+                <option value="2" {% ifequal original.tpinsc 2 %}selected{% endifequal %}>2 - CPF</option>
+                <option value="3" {% ifequal original.tpinsc 3 %}selected{% endifequal %}>3 - CAEPF (Cadastro de Atividade Econômica de Pessoa Física)</option>
+                <option value="4" {% ifequal original.tpinsc 4 %}selected{% endifequal %}>4 - CNO (Cadastro Nacional de Obra)</option>
+                <option value="5" {% ifequal original.tpinsc 5 %}selected{% endifequal %}>5 - CGC</option>
+                <option value="6" {% ifequal original.tpinsc 6 %}selected{% endifequal %}>6 - CEI</option>
+            </select>
+            <input type="hidden" name="[evtTribProcTrab][ideEmpregador][tpInsc]" id="evtTribProcTrab__ideEmpregador__id__tpInsc" value="{{original.tpinsc}}">
+        </div>
+    </div>
+</div>
+<div id="nrInsc__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">Informar o número de inscrição do contribuinte de acordo com o tipo de inscrição indicado no campo ideEmpregador/tpInsc e conforme informado em S-1000</label>
+            <input type="text" id="evtTribProcTrab__ideEmpregador__id__nrInsc_disabled" name="[evtTribProcTrab][ideEmpregador][nrInsc]" value="{{original.nrinsc}}" class="vTextField" maxlength="15" disabled="">
+            <input type="hidden" name="[evtTribProcTrab][ideEmpregador][nrInsc]" id="evtTribProcTrab__ideEmpregador__id__nrInsc" value="{{original.nrinsc}}">
+        </div>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+<div id="ideProc__div">
+    <div class="col-md-12">
+        <h4>Identificação do processo.</h4>
+        {% if False %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="nrProcTrab__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Número que identifica o processo judicial onde a baixa do vínculo foi determinada<a data-toggle="tooltip" title="Número do processo trabalhista, da ata ou número de identificação da conciliação.
+Validação: a) Se o evento de origem for S-2501, retornar o campo nrProcTrab desse evento;
+b) Se o evento de origem for S-3500, retornar o campo nrProcTrab do evento S-2501 objeto da exclusão."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTribProcTrab__ideProc__id__nrProcTrab" maxlength="20" value="{{evtTribProcTrab|readjson:'ideProc.nrProcTrab'}}" name="[evtTribProcTrab][ideProc][nrProcTrab]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="perApur__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o mês/ano (formato AAAA-MM) de referência das informações<a data-toggle="tooltip" title="Mês/ano em que é devida a obrigação de pagar a parcela prevista no acordo/sentença.
+Validação: a) Se o evento de origem for S-2501, retornar o campo perApurPgto desse evento;
+b) Se o evento de origem for S-3500, retornar o campo perApurPgto do evento S-2501 objeto da exclusão."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTribProcTrab__ideProc__id__perApur" maxlength="7" value="{{evtTribProcTrab|readjson:'ideProc.perApur'}}" name="[evtTribProcTrab][ideProc][perApur]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+{% for infoTributos in evtTribProcTrab|readjson:'ideProc.infoTributos' %}
+<div id="infoTributos__div">
+    <div class="col-md-12">
+        <h4>Identificação do período e da base de cálculo dos tributos referentes ao processo trabalhista.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="perRef__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o mês/ano (formato AAAA-MM) de referência das informações<a data-toggle="tooltip" title="Informar o mês/ano (formato AAAA-MM) de referência das informações.
+Validação: a) Se o evento de origem for S-2501, retornar o campo perRef desse evento;
+b) Se o evento de origem for S-3500, retornar o campo perRef do evento S-2501 objeto da exclusão."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTribProcTrab__ideProc__infoTributos__id__perRef" maxlength="7" value="{{infoTributos|readjson:'perRef'}}" name="[evtTribProcTrab][ideProc][infoTributos][][perRef]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+{% for infoCRContrib in infoTributos|readjson:'infoCRContrib' %}
+<div id="infoCRContrib__div">
+    <div class="col-md-12">
+        <h4>Informações das contribuições sociais devidas à Previdência Social e Outras Entidades e Fundos, consolidadas por perRef e por Código de Receita - CR.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpCR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de Receita - CR relativo a Imposto de Renda Retido na Fonte<a data-toggle="tooltip" title="Código de Receita - CR relativo a contribuições sociais devidas à Previdência Social e a Outras Entidades e Fundos (Terceiros), conforme legislação em vigor na competência.
+Validação: Deve ser um código válido e existente na Tabela 29."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTribProcTrab__ideProc__infoTributos__infoCRContrib__id__tpCR" maxlength="6" value="{{infoCRContrib|readjson:'tpCR'}}" name="[evtTribProcTrab][ideProc][infoTributos][][infoCRContrib][][tpCR]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrCR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor correspondente ao Código de Receita - CR<a data-toggle="tooltip" title="Valor correspondente ao Código de Receita - CR.
+Validação: Deve ser apurado de acordo com a legislação em vigor na competência.
+Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTribProcTrab__ideProc__infoTributos__infoCRContrib__id__vrCR" maxlength="14" value="{{infoCRContrib|readjson:'vrCR'}}" name="[evtTribProcTrab][ideProc][infoTributos][][infoCRContrib][][vrCR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="infoCRContrib__div">
+    <div class="col-md-12">
+        <h4>Informações das contribuições sociais devidas à Previdência Social e Outras Entidades e Fundos, consolidadas por perRef e por Código de Receita - CR.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpCR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de Receita - CR relativo a Imposto de Renda Retido na Fonte<a data-toggle="tooltip" title="Código de Receita - CR relativo a contribuições sociais devidas à Previdência Social e a Outras Entidades e Fundos (Terceiros), conforme legislação em vigor na competência.
+Validação: Deve ser um código válido e existente na Tabela 29."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTribProcTrab__ideProc__infoTributos__infoCRContrib__id__tpCR" maxlength="6" value="{{infoCRContrib|readjson:'tpCR'}}" name="[evtTribProcTrab][ideProc][infoTributos][][infoCRContrib][][tpCR]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrCR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor correspondente ao Código de Receita - CR<a data-toggle="tooltip" title="Valor correspondente ao Código de Receita - CR.
+Validação: Deve ser apurado de acordo com a legislação em vigor na competência.
+Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTribProcTrab__ideProc__infoTributos__infoCRContrib__id__vrCR" maxlength="14" value="{{infoCRContrib|readjson:'vrCR'}}" name="[evtTribProcTrab][ideProc][infoTributos][][infoCRContrib][][vrCR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="infoTributos__div">
+    <div class="col-md-12">
+        <h4>Identificação do período e da base de cálculo dos tributos referentes ao processo trabalhista.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="perRef__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Informar o mês/ano (formato AAAA-MM) de referência das informações<a data-toggle="tooltip" title="Informar o mês/ano (formato AAAA-MM) de referência das informações.
+Validação: a) Se o evento de origem for S-2501, retornar o campo perRef desse evento;
+b) Se o evento de origem for S-3500, retornar o campo perRef do evento S-2501 objeto da exclusão."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTribProcTrab__ideProc__infoTributos__id__perRef" maxlength="7" value="{{infoTributos|readjson:'perRef'}}" name="[evtTribProcTrab][ideProc][infoTributos][][perRef]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+{% for infoCRContrib in infoTributos|readjson:'infoCRContrib' %}
+<div id="infoCRContrib__div">
+    <div class="col-md-12">
+        <h4>Informações das contribuições sociais devidas à Previdência Social e Outras Entidades e Fundos, consolidadas por perRef e por Código de Receita - CR.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpCR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de Receita - CR relativo a Imposto de Renda Retido na Fonte<a data-toggle="tooltip" title="Código de Receita - CR relativo a contribuições sociais devidas à Previdência Social e a Outras Entidades e Fundos (Terceiros), conforme legislação em vigor na competência.
+Validação: Deve ser um código válido e existente na Tabela 29."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTribProcTrab__ideProc__infoTributos__infoCRContrib__id__tpCR" maxlength="6" value="{{infoCRContrib|readjson:'tpCR'}}" name="[evtTribProcTrab][ideProc][infoTributos][][infoCRContrib][][tpCR]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrCR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor correspondente ao Código de Receita - CR<a data-toggle="tooltip" title="Valor correspondente ao Código de Receita - CR.
+Validação: Deve ser apurado de acordo com a legislação em vigor na competência.
+Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTribProcTrab__ideProc__infoTributos__infoCRContrib__id__vrCR" maxlength="14" value="{{infoCRContrib|readjson:'vrCR'}}" name="[evtTribProcTrab][ideProc][infoTributos][][infoCRContrib][][vrCR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="infoCRContrib__div">
+    <div class="col-md-12">
+        <h4>Informações das contribuições sociais devidas à Previdência Social e Outras Entidades e Fundos, consolidadas por perRef e por Código de Receita - CR.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpCR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de Receita - CR relativo a Imposto de Renda Retido na Fonte<a data-toggle="tooltip" title="Código de Receita - CR relativo a contribuições sociais devidas à Previdência Social e a Outras Entidades e Fundos (Terceiros), conforme legislação em vigor na competência.
+Validação: Deve ser um código válido e existente na Tabela 29."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTribProcTrab__ideProc__infoTributos__infoCRContrib__id__tpCR" maxlength="6" value="{{infoCRContrib|readjson:'tpCR'}}" name="[evtTribProcTrab][ideProc][infoTributos][][infoCRContrib][][tpCR]" onchange="set_evento_json()" class="form-control" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+<div id="vrCR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor correspondente ao Código de Receita - CR<a data-toggle="tooltip" title="Valor correspondente ao Código de Receita - CR.
+Validação: Deve ser apurado de acordo com a legislação em vigor na competência.
+Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTribProcTrab__ideProc__infoTributos__infoCRContrib__id__vrCR" maxlength="14" value="{{infoCRContrib|readjson:'vrCR'}}" name="[evtTribProcTrab][ideProc][infoTributos][][infoCRContrib][][vrCR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}{% for infoCRIRRF in evtTribProcTrab|readjson:'ideProc.infoCRIRRF' %}
+<div id="infoCRIRRF__div">
+    <div class="col-md-12">
+        <h4>Informações de Imposto de Renda Retido na Fonte, consolidadas por Código de Receita - CR.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpCR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de Receita - CR relativo a Imposto de Renda Retido na Fonte<a data-toggle="tooltip" title="Código de Receita - CR relativo a Imposto de Renda Retido na Fonte.
+Valores válidos:
+593656 - IRRF - Decisão da Justiça do Trabalho
+188951 - IRRF - RRA - Decisão da Justiça do Trabalho"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTribProcTrab__ideProc__infoCRIRRF__id__tpCR" name="[evtTribProcTrab][ideProc][infoCRIRRF][][tpCR]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='593656' {% ifequal infoCRIRRF|readjson:'tpCR'|to_str '593656' %}selected{% endifequal %}>593656 - IRRF - Decisão da Justiça do Trabalho</option><option value='188951' {% ifequal infoCRIRRF|readjson:'tpCR'|to_str '188951' %}selected{% endifequal %}>188951 - IRRF - RRA - Decisão da Justiça do Trabalho</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="vrCR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor correspondente ao Código de Receita - CR<a data-toggle="tooltip" title="Valor correspondente ao Código de Receita - CR.
+Validação: Deve ser apurado de acordo com a legislação em vigor na competência.
+Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTribProcTrab__ideProc__infoCRIRRF__id__vrCR" maxlength="14" value="{{infoCRIRRF|readjson:'vrCR'}}" name="[evtTribProcTrab][ideProc][infoCRIRRF][][vrCR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% empty %}
+<div id="infoCRIRRF__div">
+    <div class="col-md-12">
+        <h4>Informações de Imposto de Renda Retido na Fonte, consolidadas por Código de Receita - CR.</h4>
+        {% if True %}
+        <div class="btn-group">
+            <button type="button" onclick="duplicateDiv($(this))" 
+                    class="btn btn-success btn-flat">
+                    <i class="fa fa-plus-circle"></i>
+            </button>
+            <button type="button" onclick="removeDiv($(this))" 
+                    class="btn btn-danger btn-flat">
+                    <i class="fa fa-minus-circle"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-12">
+        <blockquote>
+            <div class="row">
+
+<div id="tpCR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Código de Receita - CR relativo a Imposto de Renda Retido na Fonte<a data-toggle="tooltip" title="Código de Receita - CR relativo a Imposto de Renda Retido na Fonte.
+Valores válidos:
+593656 - IRRF - Decisão da Justiça do Trabalho
+188951 - IRRF - RRA - Decisão da Justiça do Trabalho"><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <select id="evtTribProcTrab__ideProc__infoCRIRRF__id__tpCR" name="[evtTribProcTrab][ideProc][infoCRIRRF][][tpCR]" onchange="set_evento_json()" class="form-control" {{ original|disabled}}>
+            <option value="">---</option><option value='593656' {% ifequal infoCRIRRF|readjson:'tpCR'|to_str '593656' %}selected{% endifequal %}>593656 - IRRF - Decisão da Justiça do Trabalho</option><option value='188951' {% ifequal infoCRIRRF|readjson:'tpCR'|to_str '188951' %}selected{% endifequal %}>188951 - IRRF - RRA - Decisão da Justiça do Trabalho</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="vrCR__div">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Valor correspondente ao Código de Receita - CR<a data-toggle="tooltip" title="Valor correspondente ao Código de Receita - CR.
+Validação: Deve ser apurado de acordo com a legislação em vigor na competência.
+Deve ser maior que 0 (zero)."><i class="fa fa-fw fa-question-circle"></i></a></label>
+            <input type="text" id="evtTribProcTrab__ideProc__infoCRIRRF__id__vrCR" maxlength="14" value="{{infoCRIRRF|readjson:'vrCR'}}" name="[evtTribProcTrab][ideProc][infoCRIRRF][][vrCR]" onchange="set_evento_json()" class="form-control esocial-valor-2" {{ original|disabled}} />
+        </div>
+    </div>
+</div>
+
+            </div>
+        </blockquote>
+    </div>
+</div>{% endfor %}
+            </div>
+        </blockquote>
+    </div>
+</div>
+            </div>
+        </blockquote>
+    </div>
+</div>
+</div>
+
+</form>
+{% endwith %}
+{% if original.is_aberto %}
+<script type="text/javascript">
+function set_evento_json() {
+    var dst = document.getElementById("id_evento_json");
+    var dst_read = document.getElementById("id_evento_json_read");
+    var obj = $('#form_json').serializeJSON({useIntKeysAsArrayIndex: true});
+    dst.value = JSON.stringify(obj);
+    dst_read.value = JSON.stringify(obj);
+};
+$(document).ready(function(){
+    set_evento_json();
+});
+</script>
+{% endif %}
