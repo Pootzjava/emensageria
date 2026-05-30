@@ -7,8 +7,12 @@ import locale
 
 try:
     locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
-except:
-    locale.setlocale(locale.LC_ALL, 'pt_BR.utf8')
+except locale.Error:
+    try:
+        locale.setlocale(locale.LC_ALL, 'pt_BR.utf8')
+    except locale.Error:
+        # Fallback to C locale if pt_BR is not available
+        locale.setlocale(locale.LC_ALL, 'C')
 
 register = template.Library()
 
@@ -334,7 +338,7 @@ def validate_CPF(value):
     if value in EMPTY_VALUES:
         return False
     if not value.isdigit():
-        value = re.sub("[-\.]", "", value)
+        value = re.sub(r"[-\.]", "", value)
     orig_value = value[:]
     try:
         int(value)

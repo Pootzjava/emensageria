@@ -30,10 +30,8 @@ class Arquivos(BaseModelEsocial):
         'updated_at': 3,
         'updated_by': 3,
     }
-    fs_arquivo = FileSystemStorage(
-        location=os.path.join(settings.BASE_DIR, config.FILES_PATH))
     arquivo = models.FileField(
-        'Arquivo', storage=fs_arquivo)
+        'Arquivo', upload_to='arquivos_esocial')
     permite_recuperacao = models.IntegerField(
         'Permite recuperação',
         choices=SIM_NAO,
@@ -47,6 +45,11 @@ class Arquivos(BaseModelEsocial):
         verbose_name='Evento',
         related_name='%(class)s_evento',
         blank=True, )
+    
+    def get_storage(self):
+        from constance import config
+        return FileSystemStorage(
+            location=os.path.join(settings.BASE_DIR, config.FILES_PATH))
 
     def __str__(self):
         return self.arquivo.name

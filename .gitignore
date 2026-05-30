@@ -1,28 +1,15 @@
 ```
-# Python
-__pycache__/
+# Compiled Python files
 *.pyc
-*.pyo
-*.pyd
+__pycache__/
 
-# Environment
-.venv/
+# Database file
+db.sqlite3
+
+# Dependencies
 venv/
-.env
-.env.local
-*.env.*
+.venv/
 
-# Logs and temporary files
+# Logs
 *.log
-*.tmp
-*.swp
-
-# Editors
-.vscode/
-.idea/
-
-# Build artifacts
-dist/
-build/
-target/
 ```
