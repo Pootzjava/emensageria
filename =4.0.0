@@ -1,0 +1,10 @@
+Requirement already satisfied: django-constance[redis] in /usr/local/lib/python3.12/site-packages (3.1.0)
+Requirement already satisfied: django-picklefield in /usr/local/lib/python3.12/site-packages (from django-constance[redis]) (3.4.0)
+Requirement already satisfied: redis in /usr/local/lib/python3.12/site-packages (from django-constance[redis]) (8.0.0)
+Requirement already satisfied: Django>=4.2 in /usr/local/lib/python3.12/site-packages (from django-picklefield->django-constance[redis]) (6.0.5)
+Requirement already satisfied: asgiref>=3.9.1 in /usr/local/lib/python3.12/site-packages (from Django>=4.2->django-picklefield->django-constance[redis]) (3.11.1)
+Requirement already satisfied: sqlparse>=0.5.0 in /usr/local/lib/python3.12/site-packages (from Django>=4.2->django-picklefield->django-constance[redis]) (0.5.5)
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+
+[notice] A new release of pip is available: 25.0.1 -> 26.1.1
+[notice] To update, run: pip install --upgrade pip
