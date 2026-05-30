@@ -5,24 +5,40 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Environment
+# Dependencies
 .venv/
 venv/
+env/
 .env
 .env.local
-*.env.*
+.env.*
 
-# Logs and temporary files
+# Logs and temp files
 *.log
 *.tmp
-*.swp
 
 # Editors
 .vscode/
 .idea/
+*.swp
+*.swo
 
 # Build artifacts
 dist/
 build/
 target/
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+
+# Coverage
+.coverage
+coverage/
+htmlcov/
+
+# Testing
+.pytest_cache/
+.mypy_cache/
 ```
