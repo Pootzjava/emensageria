@@ -1,4 +1,15 @@
 ```
-__pycache__/
+# Compiled Python files
 *.pyc
+__pycache__/
+
+# Database file
+db.sqlite3
+
+# Dependencies
+venv/
+.venv/
+
+# Logs
+*.log
 ```
